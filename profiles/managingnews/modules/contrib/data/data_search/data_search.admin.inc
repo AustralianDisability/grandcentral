@@ -3,8 +3,8 @@
 /**
  * Views handler configuration form.
  */
-function data_search_admin_form(&$form_state, $table) {
-  drupal_set_title(check_plain($table->get('title')));
+function data_search_admin_form($form, &$form_state, $table) {
+  drupal_set_title($table->get('title'));
 
   $schema = $table->get('table_schema');
   $meta = $table->get('meta');
@@ -59,7 +59,8 @@ function data_search_admin_form_submit(&$form, &$form_state) {
 /**
  * Theme data_search_admin_form.
  */
-function theme_data_search_admin_form($form) {
+function theme_data_search_admin_form($variables) {
+  $form = $variables['form'];
 
   // Format existing fields.
   $rows = array();
@@ -72,7 +73,7 @@ function theme_data_search_admin_form($form) {
   }
 
   $header = array(t('Name'), t('Search index'));
-  $output = theme('table', $header, $rows);
-  $output .= drupal_render($form);
+  $output = theme('table', array('header' => $header, 'rows' => $rows));
+  $output .= drupal_render_children($form);
   return $output;
 }

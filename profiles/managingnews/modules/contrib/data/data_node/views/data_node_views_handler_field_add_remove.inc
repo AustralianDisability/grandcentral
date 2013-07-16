@@ -7,7 +7,9 @@
 class data_node_views_handler_field_add_remove extends views_handler_field {
   protected $table_name, $id;
 
-  function allow_advanced_render() { return FALSE; }
+  function allow_advanced_render() {
+    return FALSE;
+  }
 
   function query() {
     $this->ensure_my_table();

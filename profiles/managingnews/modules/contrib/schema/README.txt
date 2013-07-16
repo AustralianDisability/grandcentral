@@ -1,10 +1,9 @@
-$Id: README.txt,v 1.2 2008/05/08 03:25:05 bjaspan Exp $
 
 Schema module
 
 PREREQUISITES
 
-Drupal 6.x
+Drupal 7.x
 
 OVERVIEW
 
@@ -36,7 +35,7 @@ Install and activate Schema like every other Drupal module.
 
 ADMINISTRATOR USAGE
 
-Visit Administer >> Site building >> Schema to access Schema's UI
+Visit Administer >> Structure >> Schema to access Schema's UI
 functionality.
 
 AUTHOR

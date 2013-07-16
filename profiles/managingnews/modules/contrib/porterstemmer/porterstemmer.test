@@ -1,5 +1,5 @@
 <?php
-// $Id: porterstemmer.test,v 1.1.2.8 2010/08/13 16:12:52 jhodgdon Exp $
+// $Id: porterstemmer.test,v 1.5 2010/08/13 16:42:29 jhodgdon Exp $
 
 /**
  * @file
@@ -35,34 +35,37 @@ class PorterStemmerFunctionalTest extends DrupalWebTestCase {
 
     // Create some content to search, with the words walk, walking, and walked.
     $info = array(
-      'body' => 'I walk through the streets, looking around for trouble',
+      'body' => array(LANGUAGE_NONE => array(array('value' => 'I walk through the streets, looking around for trouble'))),
       'type' => 'page',
+      'language' => LANGUAGE_NONE,
       'title' => 'first page',
     );
     $node = $this->drupalCreateNode($info);
 
+    $this->drupalGet('node/' . $node->nid);
+    $this->assertText('walk');
+
     $info = array(
-      'body' => 'I walked home from work today.',
+      'body' => array(LANGUAGE_NONE => array(array('value' => 'I walked home from work today.'))),
       'type' => 'page',
+      'language' => LANGUAGE_NONE,
       'title' => 'second page',
     );
     $node = $this->drupalCreateNode($info);
+    $this->drupalGet('node/' . $node->nid);
+    $this->assertText('walked');
 
     $info = array(
-      'body' => 'I am always walking everywhere.',
+      'body' => array(LANGUAGE_NONE => array(array('value' => 'I am always walking everywhere.'))),
       'type' => 'page',
+      'language' => LANGUAGE_NONE,
       'title' => 'third page',
     );
     $node = $this->drupalCreateNode($info);
+    $this->drupalGet('node/' . $node->nid);
+    $this->assertText('walking');
 
-    // Run cron to ensure this content is indexed
-    // Note: Could use $this->cronRun(), but not available in 6.x SimpleTest,
-    // so using the body of cronRun() from Drupal 7 instead
-    $this->drupalGet($GLOBALS['base_url'] . '/cron.php',
-      array(
-        'external' => TRUE,
-        'query' => array('cron_key' => variable_get('cron_key', 'drupal'))
-      ));
+    $this->cronRun();
   }
 
   /**
@@ -767,10 +770,8 @@ class PorterStemmerInternalsUnitTest extends DrupalWebTestCase {
     $this->assertEqual($result3['where'], 22, 'Found match 3 in right place', 'Excerpt');
     $this->assertEqual($result3['keyword'], 'walk', 'Found right keyword for match 3', 'Excerpt');
 
-
   }
 }
-
 
 /**
  * Unit tests for Porter Stemmer - Stemming output part 1 PECL.

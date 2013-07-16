@@ -5,7 +5,7 @@
  */
 
 /**
- * Implementation of hook_views_default_views().
+ * Implements hook_views_default_views().
  */
 function data_ui_views_default_views() {
   $views = array();
@@ -49,7 +49,7 @@ function data_ui_views_default_views() {
     $meta_fields = $meta['fields'];
     foreach ($schema['fields'] as $field_name => $field) {
       $fields[$field_name] = array(
-        'label' => $meta_fields[$field_name]['label'] ? $meta_fields[$field_name]['label'] : $field_name,
+        'label' => isset($meta_fields[$field_name]['label']) ? $meta_fields[$field_name]['label'] : $field_name,
         'id' => $field_name,
         'table' => $table->get('name'),
         'field' => $field_name,
@@ -69,7 +69,7 @@ function data_ui_views_default_views() {
         'wildcard' => 'all',
         'wildcard_substitution' => 'All',
         // These correspond to user-entered data and so should not be escaped.
-        'title' => $table->get('title') .' %1',
+        'title' => $table->get('title') . ' %1',
         'id' => $first,
         'table' => $table->get('name'),
         'field' => $first,

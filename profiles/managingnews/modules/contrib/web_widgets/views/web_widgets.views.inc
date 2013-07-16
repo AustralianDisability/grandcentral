@@ -6,7 +6,7 @@
  */
 
 /**
- * Implementation of hook_views_plugins().
+ * Implements hook_views_plugins().
  */
 function web_widgets_views_plugins() {
   $data = array(
@@ -16,7 +16,7 @@ function web_widgets_views_plugins() {
         'help' => t('Display the view as a widget. Offer a snippet of code that users can copy and paste to another web site.'),
         'handler' => 'web_widgets_plugin_display_web_widgets',
         'parent' => 'page',
-        'path' => drupal_get_path('module', 'web_widgets') .'/views',
+        'path' => drupal_get_path('module', 'web_widgets') . '/views',
         'uses hook menu' => TRUE,
         'theme' => 'views_view',
         'use ajax' => FALSE,

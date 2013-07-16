@@ -5,9 +5,13 @@
  */
 
 class data_node_views_handler_field_node_list extends views_handler_field {
-  function allow_advanced_render() { return FALSE; }
+  function allow_advanced_render() {
+    return FALSE;
+  }
 
-  function query() { return; }
+  function query() {
+    return;
+  }
 
   function render($values) {
     if (user_access('manage data relations')) {

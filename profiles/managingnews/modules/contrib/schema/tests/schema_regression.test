@@ -1,5 +1,4 @@
 <?php
-// $Id: schema_regression.test,v 1.1.2.1 2009/08/03 21:04:01 mikeryan Exp $
 /**
  * @file
  * Regression tests for the Schema module
@@ -7,11 +6,11 @@
  */
 
 class SchemaRegressionTest extends DrupalWebTestCase {
-  function getInfo() {
+  public static function getInfo() {
     return array(
-      'name' => t('Schema Regression Tests'),
-      'description' => t('Schema Regression Tests'),
-      'group' => t('Schema'),
+      'name' => 'Schema Regression Tests',
+      'description' => 'Schema Regression Tests',
+      'group' => 'Schema',
     );
   }
 
@@ -20,9 +19,8 @@ class SchemaRegressionTest extends DrupalWebTestCase {
   }
 
   function tearDown() {
-    $ret = array();
-    db_drop_table($ret, 'schema_testtbl');
     db_query("DROP TABLE schema_testtbl");
+    db_drop_table('schema_testtbl');
     parent::tearDown();
   }
 
@@ -39,7 +37,6 @@ class SchemaRegressionTest extends DrupalWebTestCase {
     db_query($sql);
 
     // ...and a prefixed table, with a different column list
-    $ret = array();
     $schema = array(
       'fields' => array(
         'sourceid' => array(
@@ -52,19 +49,19 @@ class SchemaRegressionTest extends DrupalWebTestCase {
         ),
       ),
     );
-    db_create_table($ret, $tablename, $schema);
+    db_create_table($tablename, $schema);
 
     // Do the full inspection, and get our specified tablename
-    $inspect = schema_invoke('inspect');
+    $inspect = schema_dbobject()->inspect();
     $fields = $inspect[$tablename]['fields'];
 
     // We should see only the columns from the prefixed version
-    $this->assertFalse(isset($fields['fid']), t('fid does not exist'));
-    $this->assertTrue(isset($fields['sourceid']), t('sourceid exists'));
-    $this->assertTrue(isset($fields['destid']), t('destid exists'));
+    $this->assertFalse(isset($fields['fid']), 'Column fid does not exist');
+    $this->assertTrue(isset($fields['sourceid']), 'Column sourceid exists.');
+    $this->assertTrue(isset($fields['destid']), 'Column destid exists.');
 
     // Inspect the table by using schema_compare().
     $comparison = schema_compare_table($inspect[$tablename]);
-    $this->assertEqual($comparison['status'], 'same');
+    $this->assertEqual($comparison['status'], 'different', 'Table does not match its schema.');
   }
 }

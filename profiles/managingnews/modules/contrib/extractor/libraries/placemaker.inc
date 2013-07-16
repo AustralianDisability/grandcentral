@@ -8,7 +8,7 @@ function placemaker_extract($text, $config) {
   $term = _placemaker_send_text($text, $config);
   $tags = array();
   if ($term) {
-    $tags[$term['tid']] = $term;
+    $tags[] = $term;
   }
   return $tags;
 }
@@ -17,12 +17,15 @@ function placemaker_extract($text, $config) {
  * Sends items to Placemaker API.
  */
 function _placemaker_send_text($text, $config) {
+  // Default to English if no language is provided.
+  $config['language'] = empty($config['language']) ? 'en' : $config['language'];
+
   // Make placemaker request.
   $apiendpoint = 'http://wherein.yahooapis.com/v1/document';
   $inputType = 'text/html';
 
   $outputType = 'xml';
-  $post = 'appid='. $config['placemaker_key'] .'&documentContent='. $text .'&documentType='. $inputType .'&inputLanguage='. $config['language'] .'&outputType='. $outputType .'&autoDisambiguate=true';
+  $post = 'appid=' . $config['placemaker_key'] . '&documentContent=' . $text . '&documentType=' . $inputType . '&inputLanguage=' . $config['language'] . '&outputType=' . $outputType . '&autoDisambiguate=true';
   $ch = curl_init($apiendpoint);
 
   curl_setopt($ch, CURLOPT_POST, 1);
@@ -33,9 +36,9 @@ function _placemaker_send_text($text, $config) {
 
   // Parse results of placemaker request.
   $xml = simplexml_load_string($results);
-  $item['name'] = (string)$xml->document->placeDetails->place->name;
-  $item['lat'] = (string)$xml->document->placeDetails->place->centroid->latitude;
-  $item['lon'] = (string)$xml->document->placeDetails->place->centroid->longitude;
+  $item['name'] = (string) $xml->document->placeDetails->place->name;
+  $item['lat'] = (string) $xml->document->placeDetails->place->centroid->latitude;
+  $item['lon'] = (string) $xml->document->placeDetails->place->centroid->longitude;
 
   return $item;
 }

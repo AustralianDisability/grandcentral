@@ -13,7 +13,7 @@
  * Form for feeds integration.
  */
 function extractor_feeds_form($config) {
-  drupal_add_js(drupal_get_path('module', 'extractor') .'/extractor.js');
+  drupal_add_js(drupal_get_path('module', 'extractor') . '/extractor.js');
   $form = array();
   $form['extractors'] = array(
     '#type' => 'radios',
@@ -22,7 +22,7 @@ function extractor_feeds_form($config) {
     '#default_value' => $config['extractors'],
     '#options' => array(
       'extractor_simple' => t('Simple Extractor'),
-      'placemaker' => t('Yahoo Placemaker')
+      'placemaker' => t('Yahoo Placemaker'),
     ),
   );
   $form['placemaker_key'] = array(
@@ -72,10 +72,10 @@ function extractor_feeds_get_mapping_sources() {
  */
 function extractor_feeds_get_source_element($item, $element_key, $config) {
   if ($element_key == 'extracted_terms') {
-    return extractor_extract($item['title'] .' '. $item['description'], $config['extractors'], $config);
+    return extractor_extract($item['title'] . ' ' . $item['description'], $config['extractors'], $config);
   }
   elseif ($element_key == 'extracted_tids') {
-    $terms = extractor_extract($item['title'] .' '. $item['description'], $config['extractors'], $config);
+    $terms = extractor_extract($item['title'] . ' ' . $item['description'], $config['extractors'], $config);
     return array_keys($terms);
   }
 }

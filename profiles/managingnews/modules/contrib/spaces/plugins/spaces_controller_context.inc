@@ -1,5 +1,4 @@
 <?php
-// $Id: spaces_controller_context.inc,v 1.1.2.6 2010/08/05 03:55:48 yhahn Exp $
 
 /**
  * Context controller.
@@ -48,11 +47,15 @@ class spaces_controller_context extends spaces_controller {
       $result = db_query("
         SELECT object_id AS id, value
         FROM {spaces_overrides}
-        WHERE type = '%s'
-          AND id = '%s'
-          AND object_type = '%s'",
-        $this->space_type, $this->space_id, $this->controller);
-      while ($row = db_fetch_object($result)) {
+        WHERE type = :type
+          AND id = :id
+          AND object_type = :otype",
+        array(
+          ':type' => $this->space_type,
+          ':id' => $this->space_id,
+          ':otype' => $this->controller
+      ));
+      foreach ($result as $row) {
         $this->values['space'][$row->id] = unserialize($row->value);
       }
       $this->loaded_all['space'] = TRUE;

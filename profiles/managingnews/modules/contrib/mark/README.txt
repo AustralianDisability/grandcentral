@@ -1,12 +1,11 @@
-$Id: README.txt,v 1.3 2010/02/22 15:39:17 jmiccolis Exp $
+$Id: README.txt,v 1.3.4.2 2010/09/17 18:17:40 tristanoneil Exp $
 
 
 Mark module for Drupal
 ---------------------------------------
 
 The Mark module allows users to "mark" any kind of content that is accessible
-to Views. The module provides blocks to mark (and un-mark) nodes and users as
-well as a View field that can be used on any type of view.
+to Views. The module a View field that can be used on any type of view.
 
 Building Views-powered listing pages that show lists of "marked" pages does
 require familiarity with using views "relationships". Mark doesn't provide any
@@ -17,14 +16,14 @@ which can be difficult to understand at first but is very powerful.
 Usage
 ---------------------------------------
 
-Marks can be created at "Administer > Site Configuration > Mark" (aka 
-`admin/settings/mark`).  Each mark must declare what type of items it can
+Marks can be created at "Administer > Structure > Mark" (aka 
+`admin/structure/mark`).  Each mark must declare what type of items it can
 reference and what messages it should present to end users. Permission to
 assign marks is determined by whether a uses has the 'mark content'
 permission. 
 
 Once a mark has been created a UI to access it must be exposed to the user.
-Mark provides blocks(for nodes and uses) and views field(for any type) for this
+Mark provides views field (for any type) for this
 purpose.
 
 Mark is designed to be used by authenticated users. It's possible to assign the

@@ -3,15 +3,12 @@
 
 /**
  * @file
+ *
  * Main API functions.
- *
- * Variables:
- *
- * Name: extractor_engine
  */
 
 /**
- * Implementation of hook_plugins().
+ * Implements hook_plugins().
  */
 function extractor_feeds_plugins() {
   $info['ExtractorSyndicationParser'] = array(
@@ -50,7 +47,7 @@ function extractor_feeds_plugins() {
 }
 
 /**
- * Implementation of hook_form_taxonomy_form_vocabulary_alter().
+ * Implements hook_form_taxonomy_form_vocabulary_alter().
  */
 function extractor_form_taxonomy_form_vocabulary_alter(&$form, &$form_state) {
   $form['extractor'] = array(
@@ -60,7 +57,7 @@ function extractor_form_taxonomy_form_vocabulary_alter(&$form, &$form_state) {
   );
   $lookup = FALSE;
   $vocabularies = variable_get('extractor_simple_vocabularies', array());
-  if ($vocabularies[$form['vid']['#value']] || $vocabularies[$form['module']['#value']]) {
+  if ((!empty($form['vid']['#value']) && $vocabularies[$form['vid']['#value']]) || (!empty($form['module']['#value']) && $vocabularies[$form['module']['#value']])) {
     $lookup = TRUE;
   }
   $form['extractor']['extractor_lookup'] = array(
@@ -87,7 +84,7 @@ function extractor_form_vocabulary_submit($form, &$form_state) {
 }
 
 /**
- * Implementation of specific hook_form_alter().
+ * Implements hook_form_alter().
  */
 function extractor_form_taxonomy_form_term_alter(&$form, &$form_state) {
   $form['submit']['#weight'] = isset($form['submit']['#weight']) ? $form['submit']['#weight'] + 1 : 1;
@@ -98,7 +95,7 @@ function extractor_form_taxonomy_form_term_alter(&$form, &$form_state) {
     '#collapsible' => TRUE,
   );
 
-  if (extractor_use_vocabulary($form['vid']['#value'])) {
+  if (!empty($form['vid']['#value']) && extractor_use_vocabulary($form['vid']['#value'])) {
     $description = t('All terms of this vocabulary are used for term extraction. You can change this setting on the vocabulary form.');
     $default = $disabled = TRUE;
   }
@@ -117,27 +114,35 @@ function extractor_form_taxonomy_form_term_alter(&$form, &$form_state) {
 }
 
 /**
- * Implementation of hook_taxonomy().
+ * Implements hook_taxonomy_term_update().
  */
-function extractor_taxonomy($op = NULL, $type = NULL, $term = NULL){
-  if ($type =='term' && $term) {
-    switch ($op) {
-      case 'delete':
-        db_query("DELETE FROM {extractor_lookup} WHERE tid = %d", $term['tid']);
-        break;
-      case 'update':
-        db_query("DELETE FROM {extractor_lookup} WHERE tid = %d", $term['tid']);
-      case 'insert':
-        if (!empty($term['extractor_lookup'])) {
-          drupal_write_record('extractor_lookup', $term);
-        }
-        break;
-    }
+function extractor_taxonomy_term_insert($term) {
+  if (!empty($term->extractor_lookup)) {
+    drupal_write_record('extractor_lookup', $term);
   }
 }
 
 /**
- * Implementation of hook_feeds_term_processor_targets_alter().
+ * Implements hook_taxonomy_term_update().
+ *
+ * @todo - In the D6 version, the record in {extractor_lookup} was deleted when
+ *   a term was simply updated... is that desirable?
+ */
+function extractor_taxonomy_term_update($term) {
+  // TODO - See todo above.
+}
+
+/**
+ * Implements hook_taxonomy_term_delete().
+ */
+function extractor_taxonomy_term_delete($term) {
+  db_delete('extractor_lookup')
+    ->condition('tid', $term->tid)
+    ->execute();
+}
+
+/**
+ * Implements hook_feeds_term_processor_targets_alter().
  */
 function extractor_feeds_term_processor_targets_alter(&$targets, $vid) {
   $targets['extractor_lookup'] = array(
@@ -150,7 +155,7 @@ function extractor_feeds_term_processor_targets_alter(&$targets, $vid) {
  * Determine whether a term should be used for term extraction or not.
  */
 function extractor_use_term($tid) {
-  return db_result(db_query("SELECT tid FROM {extractor_lookup} WHERE tid = %d", $tid));
+  return db_query("SELECT tid FROM {extractor_lookup} WHERE tid = :tid", array(':tid' => $tid))->fetchField();
 }
 
 /**
@@ -189,7 +194,7 @@ function extractor_extract($text, $library = 'extractor_simple', $config = array
 function extractor_include($name) {
   static $included;
   if (!$included[$name]) {
-    include drupal_get_path('module', 'extractor') .'/libraries/'. $name .'.inc';
+    include DRUPAL_ROOT . '/' . drupal_get_path('module', 'extractor') . '/libraries/' . $name . '.inc';
     $included[$name] = TRUE;
   }
 }

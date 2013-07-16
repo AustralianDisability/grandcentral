@@ -1,5 +1,4 @@
 <?php
-// $Id: views_plugin_style_kml.inc,v 1.1.2.3 2010/10/02 21:09:24 tmcw Exp $
 
 /**
  * @file
@@ -14,8 +13,7 @@ class views_plugin_style_kml extends views_plugin_style {
    */
   function init(&$view, &$display, $options = NULL) {
     parent::init($view, $display, $options = NULL);
-    $this->feed_image = drupal_get_path('module', 'views_kml') . 
-      '/images/kml.png';
+    $this->feed_image = drupal_get_path('module', 'kml') . '/images/kml.png';
   }
 
   /**
@@ -26,33 +24,39 @@ class views_plugin_style_kml extends views_plugin_style {
    */
   function attach_to($display_id, $path, $title) {
     $url_options = array('html' => TRUE);
-    $image = theme('image', $this->feed_image);
-    $this->view->feed_icon .= l($image, $path, $url_options);
+
+    // Include exposed filters
+    $query = $this->view->get_exposed_input();
+    if ($query) {
+      $url_options['query'] = $query;
+    }
+
+    $image = theme('image', array('path' => $this->feed_image));
+    $this->view->feed_icon .= l($image, $this->view->get_url(NULL, $path), $url_options);
   }
 
   function option_definition() {
     $options = parent::option_definition();
-    
+
     $field_options = array(
       'name' => t('Name'),
       'description' => t('Description'),
       'longitude' => t('Longitude'),
       'latitude' => t('Latitude'),
     );
-    
+
     foreach ($field_options as $k => $v) {
       $fields[$k] = array('default' => '');
     }
-    
+
     $options['fields'] = array(
       'contains' => $fields,
     );
     $options['filename'] = array(
-      'default' => $this->filename,
+      'default' => isset($this->filename) ? $this->filename : '',
       'translatable' => FALSE,
     );
-    
-    
+
     return $options;
   }
 
@@ -63,14 +67,14 @@ class views_plugin_style_kml extends views_plugin_style {
    * @param array $form
    * @param array $form_state
    */
-  function options_form(&$form, &$form_state) { 
-    parent::options_form($form, $form_state);                  
+  function options_form(&$form, &$form_state) {
+    parent::options_form($form, $form_state);
     $options = parent::option_definition();
 
     $handlers = $this->display->handler->get_handlers('field');
     if (empty($handlers)) {
       $form['error_markup'] = array(
-        '#value' => t('You need at least one field before you can 
+        '#value' => t('You need at least one field before you can
         configure your field settings'),
         '#prefix' => '<div class="error form-item description">',
         '#suffix' => '</div>',
@@ -97,14 +101,15 @@ class views_plugin_style_kml extends views_plugin_style {
         '#title' => t('Filename'),
         '#default_value' => $this->options['filename'],
         '#description' => t('The filename that will be suggested to the browser
-        for downloading purposes.'),
+        for downloading purposes. Leave empty to use the view title. ".kml"
+        will be automatically appended.'),
       );
       $form['fields'] = array(
         '#type' => 'fieldset',
         '#title' => 'Field usage',
         '#description' => t('Select the fields that contain the latitude,
-        longitude and title of each point. 
-        Remaining fields will be available in the 
+        longitude and title of each point.
+        Remaining fields will be available in the
         "content" region of the point.'),
         '#weight' => -10,
       );
@@ -121,16 +126,12 @@ class views_plugin_style_kml extends views_plugin_style {
   }
 
   function map_rows($rows) {
-    // Fields must be rendered in order as of Views 2.3, 
+    // Fields must be rendered in order as of Views 2.3,
     // so we will pre-render everything.
     $renders = array();
     $keys = array_keys($this->view->field);
 
-    foreach ($rows as $count => $row) {
-      foreach ($keys as $id) {
-        $renders[$count][$id] = $this->view->field[$id]->theme($row);
-      }
-    }  
+    $renders = $this->render_fields($rows);
 
     $points = array();
     foreach ($renders as $id => $row) {
@@ -154,7 +155,7 @@ class views_plugin_style_kml extends views_plugin_style {
       unset($point['lat']);
       unset($point['lon']);
 
-      if ($this->options['linestring']['enable']) {
+      if (isset($this->options['linestring']) && $this->options['linestring']['enable']) {
         $points[$point['group']][] = $point;
       }
       else {

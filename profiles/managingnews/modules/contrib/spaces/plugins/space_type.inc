@@ -1,5 +1,4 @@
 <?php
-// $Id: space_type.inc,v 1.1.2.2 2010/01/10 20:46:16 yhahn Exp $
 
 /**
  * Common functionality for space types that implement access, routing,
@@ -99,8 +98,8 @@ class space_type extends space {
    */
   function access_feature($op = 'view', $feature, $account = NULL) {
     $usable = spaces_features($this->type);
-    $features = variable_get('spaces_features', array());
-    return user_access('access content') && isset($usable[$feature]) && !empty($features[$feature]);
+    $features = $this->controllers->variable->get('spaces_features');
+    return user_access('access content', $account) && isset($usable[$feature]) && !empty($features[$feature]);
   }
 
   /**

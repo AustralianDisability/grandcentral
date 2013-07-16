@@ -31,7 +31,7 @@ class views_handler_field_data_markup extends views_handler_field {
     $value = $values->{$this->field_alias};
     if ($value) {
       $format = is_numeric($this->options['format']) ? $this->options['format'] : variable_get('filter_default_format', 1);
-      return check_markup($value, $format, FALSE);
+      return check_markup($value, $format, $langcode = '' /* TODO Set this variable. */, FALSE);
     }
   }
 }

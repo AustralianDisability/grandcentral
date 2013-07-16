@@ -2,11 +2,7 @@
 name = Extractor
 description = "API for extracting terms from text"
 dependencies[] = taxonomy
-core = 6.x
-
-; Information added by drupal.org packaging script on 2010-09-21
-version = "6.x-1.0-alpha7"
-core = "6.x"
-project = "extractor"
-datestamp = "1285033561"
-
+core = 7.x
+files[] = ExtractorSimplePieParser.inc
+files[] = ExtractorSyndicationParser.inc
+files[] = ExtractorTermProcessor.inc

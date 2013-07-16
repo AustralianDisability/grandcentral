@@ -1,20 +1,19 @@
-// $Id: CHANGELOG.txt,v 1.1.2.13 2010/08/30 16:40:44 jhodgdon Exp $
+// $Id: CHANGELOG.txt,v 1.6 2010/12/03 19:37:19 jhodgdon Exp $
 
 Porter Stemmer x.x-x.x, xxxx-xx-xx
 ----------------------------------
 
-Porter Stemmer 6.x-2.x, xxxx-xx-xx
+Porter Stemmer 7.x-1.x, xxxx-xx-xx
 ----------------------------------
 
 
-
-Porter Stemmer 6.x-2.6, 2010-08-30
+Porter Stemmer 7.x-1.0, 2010-12-03
 ----------------------------------
 #850950 by jhodgdon, gpk: Fix problems in excerpt matching function.
 
-#699170 by jhodgdon: Clean up a few Coder warnings (no functionality change)
+#699170 by jhodgdon: Address coder warnings.
 
-by jhodgdon: Fix the hook_help() implementation (help was broken).
+#674064 by jhodgdon: Get Porter Stemmer working with Drupal 7.x.
 
 
 Porter Stemmer 6.x-2.5, 2009-12-07

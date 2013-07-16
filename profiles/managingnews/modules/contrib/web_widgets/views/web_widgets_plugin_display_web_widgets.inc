@@ -45,20 +45,22 @@ class web_widgets_plugin_display_web_widgets extends views_plugin_display_page {
     // Ensure that the embed style functions are available
     $current_style = $this->get_option('embed_style');
     $current_style = empty($current_style) ? 'iframe' : $current_style;
-    require_once web_widgets_get_style_inc($current_style);
+    require_once DRUPAL_ROOT . '/' . web_widgets_get_style_inc($current_style);
 
     // See if the render() function is "overloaded" or not
     web_widgets_inside_widget(TRUE);
-    $render_func = 'web_widgets_'. $current_style .'_render';
+    $render_func = 'web_widgets_' . $current_style . '_render';
     if (function_exists($render_func)) {
       $output = $render_func($this);
     }
     else {
       // Fallback to default way
-      $content = theme($this->theme_functions(), $this->view);
+      // TODO Please change this theme call to use an associative array for the $variables parameter.
+      $content = theme($this->theme_functions(), array('view' => $this->view));
       $code = '';
       $track = $this->get_option('track');
       if (!empty($track)) {
+        // TODO Please change this theme call to use an associative array for the $variables parameter.
         $code = theme('web_widgets_tracking_code', $track);
       }
       $title = $this->view->get_title();
@@ -75,13 +77,22 @@ class web_widgets_plugin_display_web_widgets extends views_plugin_display_page {
 
     // Overrides for standard stuff:
     $options['style_plugin']['default'] = 'rss';
-    $options['style_options']['default']  = array('mission_description' => FALSE, 'description' => '');
+    $options['style_options']['default']  = array(
+      'mission_description' => FALSE,
+      'description' => '',
+    );
     $options['sitename_title']['default'] = FALSE;
     $options['row_plugin']['default'] = '';
     $options['defaults']['default']['style_plugin'] = 'views_plugin_style_list';
     $options['defaults']['default']['style_options'] = FALSE;
     $options['defaults']['default']['row_plugin'] = 'views_plugin_row_fields';
     $options['defaults']['default']['row_options'] = FALSE;
+
+    // Extra display options:
+    $options['embed_style']['default'] = 'iframe';
+    $options['width']['default'] = 200;
+    $options['height']['default'] = 200;
+    $options['track']['default'] = NULL;
 
     return $options;
   }
@@ -136,7 +147,7 @@ class web_widgets_plugin_display_web_widgets extends views_plugin_display_page {
         $form['track'] = array(
           '#type' => 'textfield',
           '#default_value' => $this->get_option('track'),
-          '#description' => t('Supply a valid Analytics domain ID if you want to track the usage of the widget in the Google Analytics ecosystem. If the field is empty, the tracking is turned off.')
+          '#description' => t('Supply a valid Analytics domain ID if you want to track the usage of the widget in the Google Analytics ecosystem. If the field is empty, the tracking is turned off.'),
         );
         break;
     }
@@ -236,10 +247,10 @@ class web_widgets_plugin_display_web_widgets extends views_plugin_display_page {
     if ($attach_to[$display_id]) {
       $current_style = $this->get_option('embed_style');
       $current_style = empty($current_style) ? 'iframe' : $current_style;
-      $path = url($this->view->get_url(NULL, $this->get_path()), array('absolute' => TRUE));
-      $width = $this->get_option('width');
-      $height = $this->get_option('height');
-      $this->view->attachment_after .= web_widgets_render_embed_code($current_style, $path, $width, $height);
+      $variables['path'] = url($this->view->get_url(NULL, $this->get_path()), array('absolute' => TRUE));
+      $variables['width'] = $this->get_option('width');
+      $variables['height'] = $this->get_option('height');
+      $this->view->attachment_after .= web_widgets_render_embed_code($current_style, $variables);
     }
   }
 

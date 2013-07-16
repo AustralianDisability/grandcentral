@@ -1,3 +1,4 @@
+(function($) {
 
 /**
  * Context plugin form.
@@ -89,7 +90,7 @@ function DrupalContextPlugins(form) {
   this.setState();
 }
 
-Drupal.behaviors.context_ui = function(context) {
+Drupal.behaviors.context_ui = { attach: function(context) {
   // Initialize context plugin form.
   $('form div.context-plugins:not(.context-ui-processed)').each(function() {
     $(this).addClass('context-ui-processed');
@@ -143,4 +144,5 @@ Drupal.behaviors.context_ui = function(context) {
         });
       });
   }
-};
+}};
+})(jQuery);

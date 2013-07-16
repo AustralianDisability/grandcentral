@@ -1,10 +1,9 @@
 <?php
-// $Id: spaces_presets.inc,v 1.1.2.1 2010/08/06 16:44:46 yhahn Exp $
 
 $plugin = array(
   'schema' => 'spaces_presets',
   'menu' => array(
-    'menu prefix' => 'admin/build',
+    'menu prefix' => 'admin/structure',
     'menu item' => 'spaces',
     'menu title' => 'Spaces',
     'menu description' => 'Settings for Spaces.',

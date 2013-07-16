@@ -5,7 +5,7 @@
  */
 
 /**
- * Implementation of hook_ctools_plugin_api().
+ * Implements hook_ctools_plugin_api().
  */
 function data_ui_test_ctools_plugin_api($module, $api) {
   if ($module == 'data' && $api == 'data_default') {
@@ -16,7 +16,7 @@ function data_ui_test_ctools_plugin_api($module, $api) {
 }
 
 /**
- * Implementation of hook_data_default().
+ * Implements hook_data_default().
  */
 function data_ui_test_data_default() {
   $data_table = new stdClass;

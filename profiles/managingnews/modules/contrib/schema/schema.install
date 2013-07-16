@@ -1,6 +1,11 @@
 <?php
 
 /**
+* @file
+* Install, update and uninstall functions for the schema module.
+*/
+
+/**
  * Implementation of hook_requirements().
  * Checks installation requirements and do status reporting.
  * @param phase 'install': ignored (no installation requirements)
@@ -19,8 +24,8 @@ function schema_requirements($phase) {
       'same' => array(REQUIREMENT_OK, 'Consistent', '@count modules with matching tables'),
       'extra' => array(REQUIREMENT_OK, 'Extra tables', '@count extra tables'),
       'warn' => array(REQUIREMENT_WARNING, 'Warning', '@count warnings'),
-      'missing' => array(REQUIREMENT_ERROR, 'Inconsistent', '@count module with missing tables'),
-      'different' => array(REQUIREMENT_ERROR, 'Inconsistent', '@count module with mis-matching tables'),
+      'missing' => array(REQUIREMENT_ERROR, 'Inconsistent', '@count modules with missing tables'),
+      'different' => array(REQUIREMENT_ERROR, 'Inconsistent', '@count modules with mis-matching tables'),
       );
 
     $notes = array();
@@ -32,16 +37,27 @@ function schema_requirements($phase) {
         $notes[] = $t($data[2], array('@count' => count($info[$key])));
       }
     }
+
     $desc = ''; // if there is only one note, it is for 'same'
     if (count($notes) > 1) {
-      $desc = $t('The Schema comparison report shows: ') . theme('item_list', $notes);
+      $desc = $t('The Schema comparison report shows: ') .
+        theme('item_list', array('items' => $notes));
     }
     if ($severity != REQUIREMENT_OK) {
       $sys_reqs = system_requirements($phase);
       if ($sys_reqs['update']['severity'] != REQUIREMENT_OK) {
-        $desc .= $t('You should follow the instructions under <strong>@title</strong> now or run the <a href="@compare">database schema comparison report</a> for more details.', array('@title' => $sys_reqs['update']['title'], '@compare' => url('admin/build/schema/compare')));
-      } else {
-        $desc .= $t('The <a href="@compare">database schema comparison report</a> provides more details.', array('@compare' => url('admin/build/schema/compare')));
+        $desc .= $t('You should follow the instructions under <strong>@title</strong>
+            now or run the <a href="@compare">database schema comparison report</a>
+            for more details.',
+          array(
+            '@title' => $sys_reqs['update']['title'],
+            '@compare' => url('admin/structure/schema/compare')
+          ));
+      }
+      else {
+        $desc .= $t('The <a href="@compare">database schema comparison report</a>
+            provides more details.',
+          array('@compare' => url('admin/structure/schema/compare')));
       }
     }
     $reqs['schema'] = array(
@@ -61,4 +77,11 @@ function schema_requirements($phase) {
 function schema_uninstall() {
   variable_del('schema_status_report');
   variable_del('schema_suppress_type_warnings');
+}
+
+/**
+ * Moved menu callbacks to include files.
+ */
+function schema_update_7100() {
+  variable_set('menu_rebuild_needed', TRUE);
 }

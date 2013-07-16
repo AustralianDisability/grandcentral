@@ -1,4 +1,3 @@
-$Id: README.txt,v 1.3.2.2 2010/06/03 14:17:08 tmcw Exp $
 
 # KML Module
 

@@ -1,5 +1,4 @@
 <?php
-// $Id: kml.views.inc,v 1.1.2.1 2010/03/05 19:06:22 tmcw Exp $
 
 /**
  * @file
@@ -7,7 +6,7 @@
  */
 
 /**
- * Implementation of hook_views_style_plugins(). 
+ * Implements hook_views_style_plugins().
  * Adds view types to views UI interface.
  */
 function kml_views_plugins() {
@@ -19,8 +18,8 @@ function kml_views_plugins() {
         'handler' => 'views_plugin_style_kml',
         'theme' => 'views_view_kml',
         'theme file' => 'kml_views.theme.inc',
-        'theme path' => drupal_get_path('module', 'kml') .'/views',
-        'path' => drupal_get_path('module', 'kml') .'/views',
+        'theme path' => drupal_get_path('module', 'kml') . '/views',
+        'path' => drupal_get_path('module', 'kml') . '/views',
         'uses row plugin' => FALSE,
         'uses fields' => TRUE,
         'uses options' => TRUE,

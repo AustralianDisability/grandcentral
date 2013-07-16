@@ -1,12 +1,11 @@
-; $Id: flot.info,v 1.1 2008/09/29 01:05:04 jmiccolis Exp $
 name = Flot
 description = Provides an API for the flot js graphing library.
-core = 6.x
-
-
-; Information added by drupal.org packaging script on 2009-09-23
-version = "6.x-1.2"
-core = "6.x"
+core = 7.x
+package = Charts
+files[] = flot.module
+; Information added by drupal.org packaging script on 2012-05-30
+version = "7.x-1.0"
+core = "7.x"
 project = "flot"
-datestamp = "1253715632"
+datestamp = "1338361272"
 

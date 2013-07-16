@@ -6,37 +6,34 @@
  */
 
 /**
- * Implementation of hook_feeds_node_processor_targets_alter().
+ * Implements hook_feeds_processor_targets_alter().
  *
  * @see FeedsNodeProcessor::getMappingTargets().
  *
  * @todo Only provides "end date" target if field allows it.
  */
-function date_feeds_node_processor_targets_alter(&$targets, $content_type) {
-  $info = content_types($content_type);
-  if (isset($info['fields']) && count($info['fields'])) {
-    foreach ($info['fields'] as $field_name => $field) {
-      if (in_array($field['type'], array('date', 'datestamp', 'datetime'))) {
-        $name = isset($field['widget']['label']) ? $field['widget']['label'] : $field_name;
-        $targets[$field_name .':start'] = array(
-          'name' => t('@name: Start', array('@name' => $name)),
-          'callback' => 'date_feeds_set_target',
-          'description' => t('The start date for the @name field. Also use if mapping both start and end.', array('@name' => $name)),
-          'real_target' => $field_name,
-        );
-        $targets[$field_name .':end'] = array(
-          'name' => t('@name: End', array('@name' => $name)),
-          'callback' => 'date_feeds_set_target',
-          'description' => t('The end date for the @name field.', array('@name' => $name)),
-          'real_target' => $field_name,
-        );
-      }
+function date_feeds_processor_targets_alter(&$targets, $entity_type, $bundle_name) {
+  foreach (field_info_instances($entity_type, $bundle_name) as $name => $instance) {
+    $info = field_info_field($name);
+    if (in_array($info['type'], array('date', 'datestamp', 'datetime'))) {
+      $targets[$name . ':start'] = array(
+        'name' => t('@name: Start', array('@name' => $instance['label'])),
+        'callback' => 'date_feeds_set_target',
+        'description' => t('The start date for the @name field. Also use if mapping both start and end.', array('@name' => $instance['label'])),
+        'real_target' => $name,
+      );
+      $targets[$name . ':end'] = array(
+        'name' => t('@name: End', array('@name' => $instance['label'])),
+        'callback' => 'date_feeds_set_target',
+        'description' => t('The end date for the @name field.', array('@name' => $instance['label'])),
+        'real_target' => $name,
+      );
     }
   }
 }
 
 /**
- * Implementation of hook_feeds_set_target().
+ * Implements hook_feeds_set_target().
  *
  * @param $node
  *   The target node.
@@ -46,26 +43,26 @@ function date_feeds_node_processor_targets_alter(&$targets, $content_type) {
  *   The value to be mapped. Should be either a (flexible) date string
  *   or a FeedsDateTimeElement object.
  *
- * @todo Support array of values for dates.
  */
-function date_feeds_set_target($node, $target, $feed_element) {
-  list($field_name, $sub_field) = explode(':', $target);
+function date_feeds_set_target($source, $entity, $target, $feed_element) {
+  list($field_name, $sub_field) = explode(':', $target, 2);
   if (!($feed_element instanceof FeedsDateTimeElement)) {
-    if (is_array($feed_element)) {
-      $feed_element = $feed_element[0];
+    if (!is_array($feed_element)) {
+      $feed_element = array($feed_element);
     }
-
-    // Empty string means no time - so do not set any!
-    if (!is_numeric($feed_element) && !strtotime($feed_element)) {
-      return ;
-    }
-
-    if ($sub_field == 'end') {
-      $feed_element = new FeedsDateTimeElement(NULL, $feed_element);
-    }
-    else {
-      $feed_element = new FeedsDateTimeElement($feed_element, NULL);
+    $delta = 0;
+    foreach ($feed_element as $f) {
+      if (empty($f) || !is_numeric($f) && !date_create($f)) {
+        $array_element = new FeedsDateTimeElement(NULL, NULL);
+      }
+      elseif ($sub_field == 'end') {
+        $array_element = new FeedsDateTimeElement(NULL, $f);
+      }
+      else {
+        $array_element = new FeedsDateTimeElement($f, NULL);
+      }
+      $array_element->buildDateField($entity, $field_name, $delta);
+      $delta++;
     }
   }
-  $feed_element->buildDateField($node, $field_name);
 }

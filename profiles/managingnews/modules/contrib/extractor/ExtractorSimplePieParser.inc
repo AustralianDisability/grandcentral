@@ -1,7 +1,7 @@
 <?php
 // $Id: ExtractorSimplePieParser.inc,v 1.3 2010/09/08 03:04:03 alexb Exp $
 
-require_once 'extractor.feeds.inc';
+require_once DRUPAL_ROOT . '/' . 'extractor.feeds.inc';
 
 /**
  * Extend simplepie parser and add term extraction.
@@ -27,15 +27,15 @@ class ExtractorSimplePieParser extends FeedsSimplePieParser {
   }
 
   /**
-    * Config Form Defaults
-    */
+   * Config Form Defaults
+   */
   public function configDefaults() {
     return extractor_feeds_defaults();
   }
 
   /**
-    * Config Form
-    */
+   * Config Form
+   */
   public function configForm(&$form_state) {
     return extractor_feeds_form($this->config);
   }

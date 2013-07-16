@@ -1,7 +1,7 @@
 <?php
-// $Id: DiffEngine.php,v 1.4.2.1.2.2 2009/11/19 15:40:33 yhahn Exp $
 
 /**
+ * @file
  * A PHP diff engine for phpwiki. (Taken from phpwiki-1.3.3)
  *
  * Copyright (C) 2000, 2001 Geoffrey T. Dairiki <dairiki@dairiki.org>
@@ -238,8 +238,8 @@ class _DiffEngine {
    * Returns the whole line if it's small enough, or the MD5 hash otherwise.
    */
   function _line_hash($line) {
-    if (strlen($line) > $this->MAX_XREF_LENGTH()) {
-      return md5( line);
+    if (drupal_strlen($line) > $this->MAX_XREF_LENGTH()) {
+      return md5($line);
     }
     else {
       return $line;
@@ -485,7 +485,7 @@ class _DiffEngine {
       while (++$i < $len && $changed[$i]) {
         continue;
       }
-      
+
       do {
         /*
          * Record the length of this run of changes, so that
@@ -701,7 +701,7 @@ class Diff {
     }
 
     $lcs = $this->lcs();
-    trigger_error('Diff okay: LCS = '. $lcs, E_USER_NOTICE);
+    trigger_error('Diff okay: LCS = ' . $lcs, E_USER_NOTICE);
   }
 }
 
@@ -774,7 +774,7 @@ class DiffFormatter {
    * Should a block header be shown?
    */
   var $show_header = TRUE;
-  
+
   /**
    * Number of leading context "lines" to preserve.
    *
@@ -798,7 +798,6 @@ class DiffFormatter {
    * @return string The formatted output.
    */
   function format($diff) {
-
     $xi = $yi = 1;
     $block = FALSE;
     $context = array();
@@ -850,6 +849,14 @@ class DiffFormatter {
       $this->_block($x0, $xi - $x0, $y0, $yi - $y0, $block);
     }
     $end = $this->_end_diff();
+
+    if (!empty($xi)) {
+      $this->line_stats['counter']['x'] += $xi;
+    }
+    if (!empty($yi)) {
+      $this->line_stats['counter']['y'] += $yi;
+    }
+
     return $end;
   }
 
@@ -953,7 +960,7 @@ class _HWLDF_WordAccumulator {
   function _flushGroup($new_tag) {
     if ($this->_group !== '') {
       if ($this->_tag == 'mark') {
-        $this->_line .= '<span class="diffchange">'. check_plain($this->_group) .'</span>';
+        $this->_line .= '<span class="diffchange">' . check_plain($this->_group) . '</span>';
       }
       else {
         $this->_line .= check_plain($this->_group);
@@ -986,7 +993,7 @@ class _HWLDF_WordAccumulator {
       }
       if ($word[0] == "\n") {
         $this->_flushLine($tag);
-        $word = substr($word, 1);
+        $word = drupal_substr($word, 1);
       }
       assert(!strstr($word, "\n"));
       $this->_group .= $word;
@@ -1030,7 +1037,7 @@ class WordLevelDiff extends MappedDiff {
         $words[] = "\n";
         $stripped[] = "\n";
       }
-      if ( strlen( $line ) > $this->MAX_LINE_LENGTH() ) {
+      if ( drupal_strlen( $line ) > $this->MAX_LINE_LENGTH() ) {
         $words[] = $line;
         $stripped[] = $line;
       }
@@ -1083,10 +1090,14 @@ class WordLevelDiff extends MappedDiff {
 class DrupalDiffFormatter extends DiffFormatter {
 
   var $rows;
+  var $line_stats = array(
+    'counter' => array('x' => 0, 'y' => 0),
+    'offset' => array('x' => 0, 'y' => 0),
+  );
 
   function DrupalDiffFormatter() {
-    $this->leading_context_lines = 2;
-    $this->trailing_context_lines = 2;
+    $this->leading_context_lines = variable_get('diff_context_lines_leading', 2);
+    $this->trailing_context_lines = variable_get('diff_context_lines_trailing', 2);
   }
 
   function _start_diff() {
@@ -1100,11 +1111,11 @@ class DrupalDiffFormatter extends DiffFormatter {
   function _block_header($xbeg, $xlen, $ybeg, $ylen) {
     return array(
       array(
-        'data' => theme('diff_header_line', $xbeg),
+        'data' => theme('diff_header_line', array('lineno' => $xbeg + $this->line_stats['offset']['x'])),
         'colspan' => 2,
       ),
       array(
-        'data' => theme('diff_header_line', $ybeg),
+        'data' => theme('diff_header_line', array('lineno' => $ybeg + $this->line_stats['offset']['y'])),
         'colspan' => 2,
       )
     );
@@ -1127,10 +1138,13 @@ class DrupalDiffFormatter extends DiffFormatter {
    */
   function addedLine($line) {
     return array(
-      '+',
       array(
-        'data' => theme('diff_content_line', $line),
-        'class' => 'diff-addedline',
+        'data' => '+',
+        'class' => 'diff-marker',
+      ),
+      array(
+        'data' => theme('diff_content_line', array('line' => $line)),
+        'class' => 'diff-context diff-addedline',
       )
     );
   }
@@ -1140,10 +1154,13 @@ class DrupalDiffFormatter extends DiffFormatter {
    */
   function deletedLine($line) {
     return array(
-      '-',
       array(
-        'data' => theme('diff_content_line', $line),
-        'class' => 'diff-deletedline',
+        'data' => '-',
+        'class' => 'diff-marker',
+      ),
+      array(
+        'data' => theme('diff_content_line', array('line' => $line)),
+        'class' => 'diff-context diff-deletedline',
       )
     );
   }
@@ -1155,7 +1172,7 @@ class DrupalDiffFormatter extends DiffFormatter {
     return array(
       '&nbsp;',
       array(
-        'data' => theme('diff_content_line', $line),
+        'data' => theme('diff_content_line', array('line' => $line)),
         'class' => 'diff-context',
       )
     );
@@ -1164,7 +1181,7 @@ class DrupalDiffFormatter extends DiffFormatter {
   function emptyLine() {
     return array(
       '&nbsp;',
-      theme('diff_empty_line', '&nbsp;'),
+      theme('diff_empty_line', array('line' => '&nbsp;')),
     );
   }
 
@@ -1196,10 +1213,137 @@ class DrupalDiffFormatter extends DiffFormatter {
 
     while ($line = array_shift($del)) {
       $aline = array_shift( $add );
-      $this->rows[] = array_merge($this->deletedLine($line), $this->addedLine($aline));
+      $this->rows[] = array_merge($this->deletedLine($line), isset($aline) ? $this->addedLine($aline) : $this->emptyLine());
     }
     foreach ($add as $line) {  // If any leftovers
       $this->rows[] = array_merge($this->emptyLine(), $this->addedLine($line));
     }
+  }
+}
+
+/**
+ * Drupal inline Diff formatter.
+ * @private
+ * @subpackage DifferenceEngine
+ */
+class DrupalDiffInline {
+  var $a;
+  var $b;
+
+  /**
+   * Constructor.
+   */
+  function __construct($a, $b) {
+    $this->a = $a;
+    $this->b = $b;
+  }
+
+  /**
+   * Render differences inline using HTML markup.
+   */
+  function render() {
+    $a = preg_split('/(<[^>]+?>| )/', $this->a, -1, PREG_SPLIT_DELIM_CAPTURE);
+    $b = preg_split('/(<[^>]+?>| )/', $this->b, -1, PREG_SPLIT_DELIM_CAPTURE);
+    $diff = new Diff($a, $b);
+    $diff->edits = $this->process_edits($diff->edits);
+
+    // Assemble highlighted output
+    $output = '';
+    foreach ($diff->edits as $chunk) {
+      switch ($chunk->type) {
+        case 'copy':
+          $output .= implode('', $chunk->closing);
+          break;
+        case 'delete':
+          foreach ($chunk->orig as $i => $piece) {
+            if (strpos($piece, '<') === 0 && drupal_substr($piece, drupal_strlen($piece) - 1) === '>') {
+              $output .= $piece;
+            }
+            else {
+              $output .= theme('diff_inline_chunk', array('text' => $piece, 'type' => $chunk->type));
+            }
+          }
+          break;
+        default:
+          $chunk->closing = $this->process_chunk($chunk->closing);
+          foreach ($chunk->closing as $i => $piece) {
+            if ($piece === ' ' || (strpos($piece, '<') === 0 && drupal_substr($piece, drupal_strlen($piece) - 1) === '>' && drupal_strtolower(drupal_substr($piece, 1, 3)) != 'img')) {
+              $output .= $piece;
+            }
+            else {
+              $output .= theme('diff_inline_chunk', array('text' => $piece, 'type' => $chunk->type));
+            }
+          }
+          break;
+      }
+    }
+    return $output;
+  }
+
+  /**
+   * Merge chunk segments between tag delimiters.
+   */
+  function process_chunk($chunk) {
+    $processed = array();
+    $j = 0;
+    foreach ($chunk as $i => $piece) {
+      $next = isset($chunk[$i+1]) ? $chunk[$i+1] : NULL;
+      if (!isset($processed[$j])) {
+        $processed[$j] = '';
+      }
+      if (strpos($piece, '<') === 0 && drupal_substr($piece, drupal_strlen($piece) - 1) === '>') {
+        $processed[$j] = $piece;
+        $j++;
+      }
+      elseif (isset($next) && strpos($next, '<') === 0 && drupal_substr($next, drupal_strlen($next) - 1) === '>') {
+        $processed[$j] .= $piece;
+        $j++;
+      }
+      else {
+        $processed[$j] .= $piece;
+      }
+    }
+    return $processed;
+  }
+
+  /**
+   * Merge copy and equivalent edits into intelligible chunks.
+   */
+  function process_edits($edits) {
+    $processed = array();
+    $current = array_shift($edits);
+
+    // Make two passes -- first merge space delimiter copies back into their originals.
+    while ($chunk = array_shift($edits)) {
+      if ($chunk->type == 'copy' && $chunk->orig === array(' ')) {
+        $current->orig = array_merge((array) $current->orig, (array) $chunk->orig);
+        $current->closing = array_merge((array) $current->closing, (array) $chunk->closing);
+      }
+      else {
+        $processed[] = $current;
+        $current = $chunk;
+      }
+    }
+    $processed[] = $current;
+
+    // Initial setup
+    $edits = $processed;
+    $processed = array();
+    $current = array_shift($edits);
+
+    // Second, merge equivalent chunks into each other.
+    while ($chunk = array_shift($edits)) {
+      if ($current->type == $chunk->type) {
+        $current->orig = array_merge((array) $current->orig, (array) $chunk->orig);
+        $current->closing = array_merge((array) $current->closing, (array) $chunk->closing);
+      }
+      else {
+        $processed[] = $current;
+        $current = $chunk;
+      }
+    }
+    $processed[] = $current;
+
+    return $processed;
   }
 }

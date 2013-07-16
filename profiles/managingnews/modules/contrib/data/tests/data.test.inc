@@ -8,7 +8,7 @@
  * Base class for Data module test cases.
  */
 class DataTestCase extends DrupalWebTestCase {
-  
+
   /**
    * Return a test schema.
    */
@@ -35,7 +35,7 @@ class DataTestCase extends DrupalWebTestCase {
       ),
       'indexes' => array(
         'id' => array('id'),
-       ),
+      ),
     );
   }
 

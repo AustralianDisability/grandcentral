@@ -35,9 +35,9 @@ function extractor_simple_extract($text) {
     while (!$sorted) {
       $sorted = TRUE;
       for ($i = 0; $i < count($sorted_terms) - 1; $i++) {
-        if (strlen($sorted_terms[$i]) < strlen($sorted_terms[$i+1])) {
-          $tmp = $sorted_terms[$i+1];
-          $sorted_terms[$i+1] = $sorted_terms[$i];
+        if (strlen($sorted_terms[$i]) < strlen($sorted_terms[$i + 1])) {
+          $tmp = $sorted_terms[$i + 1];
+          $sorted_terms[$i + 1] = $sorted_terms[$i];
           $sorted_terms[$i] = $tmp;
           $sorted = FALSE;
         }
@@ -53,7 +53,7 @@ function extractor_simple_extract($text) {
       // Iterate through tag words backwards, skip to the start of the outmost loop
       // if we find a mismatch.
       for ($i = count($term_words) - 1; $i >= 0; $i--) {
-        if (strtolower($term_words[$i]) != strtolower($words[$pos+$i])) {
+        if (strtolower($term_words[$i]) != strtolower($words[$pos + $i])) {
           continue 2; // Skips to start of foreach ($terms as $term) {
         }
       }
@@ -77,6 +77,8 @@ function _extractor_simple_split($text) {
 
 /**
  * Look up terms for a given word. Supports up to 2000 terms.
+ *
+ * @todo - Convert to Drupal 7 static caching methods.
  */
 function _extractor_simple_lookup($word) {
   static $term_cache = array();
@@ -95,12 +97,12 @@ function _extractor_simple_lookup($word) {
   }
   if (!$loaded) {
     if (empty($vid)) {
-      $result = db_query_range("SELECT td.tid, td.name FROM {term_data} td JOIN {extractor_lookup} e ON td.tid = e.tid", 0, 2000);
+      $result = db_query_range("SELECT td.tid, td.name FROM {taxonomy_term_data} td JOIN {extractor_lookup} e ON td.tid = e.tid", 0, 2000);
     }
     else {
-      $result = db_query_range("SELECT td.tid, td.name FROM {term_data} td LEFT JOIN {extractor_lookup} e ON td.tid = e.tid WHERE td.vid IN (%s) OR e.tid IS NOT NULL", implode(', ', $vids), 0, 2000);
+      $result = db_query_range("SELECT td.tid, td.name FROM {taxonomy_term_data} td LEFT JOIN {extractor_lookup} e ON td.tid = e.tid WHERE td.vid IN (%s) OR e.tid IS NOT NULL", implode(', ', $vids), 0, 2000);
     }
-    while ($term = db_fetch_object($result)) {
+    foreach ($result as $term) {
       $term_cache[strtolower($term->name[0])][$term->name] = $term;
     }
     $loaded = TRUE;

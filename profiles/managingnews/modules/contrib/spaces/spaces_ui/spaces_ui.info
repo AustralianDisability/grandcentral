@@ -1,12 +1,15 @@
-; $Id: spaces_ui.info,v 1.1.2.1 2009/12/14 23:19:16 yhahn Exp $
-core = "6.x"
+core = 7.x
 dependencies[] = "spaces"
 description = "Provides an administrative UI for managing Spaces settings."
 name = "Spaces UI"
 package = "Spaces"
-; Information added by drupal.org packaging script on 2010-08-23
-version = "6.x-3.0"
-core = "6.x"
+files[] = spaces_ui.module
+files[] = export_ui/spaces_presets.inc
+files[] = export_ui/spaces_presets_export_ui.class.php
+
+; Information added by drupal.org packaging script on 2012-03-06
+version = "7.x-3.0-alpha1"
+core = "7.x"
 project = "spaces"
-datestamp = "1282589208"
+datestamp = "1331005546"
 

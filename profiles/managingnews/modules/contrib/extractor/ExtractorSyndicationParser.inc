@@ -1,7 +1,7 @@
 <?php
 // $Id: ExtractorSyndicationParser.inc,v 1.3 2010/09/08 03:04:08 alexb Exp $
 
-require_once 'extractor.feeds.inc';
+require_once DRUPAL_ROOT . '/' . 'extractor.feeds.inc';
 
 /**
  * Extend common syndication parser and add term extraction.

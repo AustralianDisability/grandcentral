@@ -1,5 +1,4 @@
 <?php
-// $Id: views-view-kml.tpl.php,v 1.1 2009/09/08 14:49:10 geodan Exp $
   print "<?xml"; ?> version="1.0" encoding="utf-8" <?php print "?>";
 ?>
 

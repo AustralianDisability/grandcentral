@@ -1,8 +1,14 @@
 <?php
+/**
+ * @file
+ * Install, update and uninstall functions for the data_search module.
+ *
+ */
+
 
 /**
- * Implementation of hook_install().
- * 
+ * Implements hook_install().
+ *
  * @todo: Should use db_change_field()
  * @todo: What happens if data_search and search are installed at the same time?
  */

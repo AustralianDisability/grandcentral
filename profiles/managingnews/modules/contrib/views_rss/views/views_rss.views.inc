@@ -6,7 +6,7 @@
  */
 
 /**
- * Implementation of hook_views_style_plugins().
+ * Implements hook_views_style_plugins().
  * Adds view types to views UI interface.
  */
 function views_rss_views_plugins() {
@@ -25,14 +25,13 @@ function views_rss_views_plugins() {
         'uses fields' => TRUE,
         'uses options' => TRUE,
         'uses grouping' => FALSE,
-        'help topic' => 'style-rss-fields',
       ),
     ),
   );
 }
 
 /**
- * Implementation of hook_views_handlers().
+ * Implements hook_views_handlers().
  */
 function views_rss_views_handlers() {
   return array(
@@ -46,26 +45,14 @@ function views_rss_views_handlers() {
       'views_rss_handler_field_term_node_tid' => array(
         'parent' => 'views_handler_field_term_node_tid',
       ),
-      'views_rss_handler_field_multiple' => array(
-        'parent' => 'content_handler_field_multiple',
-      ),
     ),
   );
 }
 
 /**
- * Implementation of hook_views_data_alter().
+ * Implements hook_views_data_alter().
  */
 function views_rss_views_data_alter(&$data) {
   $data['users']['mail']['field']['handler'] = 'views_rss_handler_field_user_mail';
-  $data['term_node']['tid']['field']['handler'] = 'views_rss_handler_field_term_node_tid';
-  // Replace content_handler_field_multiple field handler with its extended
-  // version so we could use array values returned by Views RSS formatters.
-  foreach ($data as $group => $fields) {
-    foreach ($fields as $field_id => $field) {
-      if (!empty($field['field']['handler']) && $field['field']['handler'] == 'content_handler_field_multiple') {
-        $data[$group][$field_id]['field']['handler'] = 'views_rss_handler_field_multiple';
-      }
-    }
-  }
+  $data['node']['term_node_tid']['field']['handler'] = 'views_rss_handler_field_term_node_tid';
 }

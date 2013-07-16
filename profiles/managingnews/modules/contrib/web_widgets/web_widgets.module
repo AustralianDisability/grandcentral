@@ -1,36 +1,35 @@
 <?php
-// $Id: web_widgets.module,v 1.1.2.5 2010/06/24 21:44:22 yhahn Exp $
 /**
  * @file
  *   web_widgets module main. Contains the views api hook and theming functions.
  */
 
 /**
- * Implementation of hook_views_api().
+ * Implements hook_views_api().
  */
 function web_widgets_views_api() {
   return array(
     'api' => 2,
-    'path' => drupal_get_path('module', 'web_widgets') .'/views',
+    'path' => drupal_get_path('module', 'web_widgets') . '/views',
   );
 }
 
 /**
- * Implementation of hook_theme().
+ * Implements hook_theme().
  */
-function web_widgets_theme() {
+function web_widgets_theme($existing, $type, $theme, $path) {
   $theme = array(
     'web_widgets_embed_code' => array(
-      'arguments' => array('code' => NULL),
+      'variables' => array('code' => NULL, 'style' => NULL),
     ),
     'web_widgets_tracking_code' => array(
-      'arguments' => array('id' => NULL),
+      'variables' => array('id' => NULL),
     ),
   );
   $style_files = array_keys(web_widgets_get_styles());
   foreach ($style_files as $style) {
-    require_once web_widgets_get_style_inc($style);
-    $definition = call_user_func('web_widgets_style_'. $style);
+    require_once DRUPAL_ROOT . '/' . web_widgets_get_style_inc($style);
+    $definition = call_user_func('web_widgets_style_' . $style);
     if (is_array($definition['theme'])) {
       $theme += $definition['theme'];
     }
@@ -50,9 +49,9 @@ function web_widgets_get_styles() {
   $module_main = drupal_get_path('module', 'web_widgets');
   $dir = opendir($module_main);
   while (($style = readdir($dir)) !== FALSE) {
-    if (is_dir($module_main .'/'. $style) && is_file(web_widgets_get_style_inc($style))) {
-      require_once web_widgets_get_style_inc($style);
-      $def = 'web_widgets_style_'. $style;
+    if (is_dir($module_main . '/' . $style) && is_file(web_widgets_get_style_inc($style))) {
+      require_once DRUPAL_ROOT . '/' . web_widgets_get_style_inc($style);
+      $def = 'web_widgets_style_' . $style;
       $definition = $def();
       $styles[$style] = isset($definition['human_readable']) ? $definition['human_readable'] : $style;
     }
@@ -74,10 +73,13 @@ function web_widgets_get_styles() {
  * @return
  *   HTML that displays the widget embed code.
  */
-function web_widgets_render_embed_code($style, $path, $width, $height) {
-  require_once web_widgets_get_style_inc($style);
-  $code = theme('web_widgets_'. $style, $path, $width, $height);
-  return theme('web_widgets_embed_code', $code, $style);
+function web_widgets_render_embed_code($style, $variables) {
+  require_once DRUPAL_ROOT . '/' . web_widgets_get_style_inc($style);
+  // TODO Please change this theme call to use an associative array for the $variables parameter.
+  $code = theme('web_widgets_' . $style, $variables);
+
+  // TODO Please change this theme call to use an associative array for the $variables parameter.
+  return theme('web_widgets_embed_code', array('code' => $code, 'style' => $style));
 }
 
 /**
@@ -95,13 +97,19 @@ function web_widgets_render_embed_code($style, $path, $width, $height) {
  * @return
  *   HTML wrapped in style specific markup.
  */
-function web_widgets_render_widget($style, $content, $title, $add_target = TRUE) {
-  require_once web_widgets_get_style_inc($style);
+function web_widgets_render_widget($style, $content, $title, $add_target = TRUE, $scripts = array(), $styles = array()) {
+  require_once DRUPAL_ROOT . '/' . web_widgets_get_style_inc($style);
   if ($add_target === TRUE) {
     $content = _web_widgets_rewrite_anchors($content);
   }
   module_invoke_all('web_widgets_render_widget', $content, $title);
-  return theme('web_widgets_'. $style .'_wrapper', $content, $title);
+
+  return theme('web_widgets_' . $style . '_wrapper', array(
+    'content' => $content,
+    'title' => $title,
+    'scripts' => $scripts,
+    'styles' => $styles
+  ));
 }
 
 /**
@@ -116,6 +124,7 @@ function web_widgets_inside_widget($in = NULL) {
       'absolute' => TRUE,
       'purl' => array('disabled' => TRUE),
     );
+    // TODO The second parameter to this function call should be an array.
     $GLOBALS['base_path'] = url('', $options);
   }
   elseif ($in === FALSE) {
@@ -139,12 +148,12 @@ function web_widgets_inside_widget($in = NULL) {
  *   Path to widget style .inc file relative to Drupal's root directory.
  */
 function web_widgets_get_style_inc($style) {
-  return drupal_get_path('module', 'web_widgets') .'/'. $style .'/web_widgets_style_'. $style .'.inc';
+  return drupal_get_path('module', 'web_widgets') . '/' . $style . '/web_widgets_style_' . $style . '.inc';
 }
 
 /**
  * Extend all anchor tags by target attribute.
- * 
+ *
  * @content
  *   HTML code.
  */
@@ -176,20 +185,26 @@ function _web_widgets_add_attrib($matches) {
  * @return
  *   HTML that displays the widget embed code.
  */
-function theme_web_widgets_embed_code($code, $style) {
+function theme_web_widgets_embed_code($variables) {
+  $code = $variables['code'];
+  $style = $variables['style'];
+
   $styles = web_widgets_get_styles();
   $style_name = $styles[$style];
-
+  
   static $num = 0;
   $form = array(
-    '#type' => 'textfield',
+    '#type' => 'textarea',
     '#title' => t('Embed code'),
     '#description' => t('Copy and paste this code to your website.'),
-    '#id' => 'web_widgets_'. $num++,
+    '#id' => 'web_widgets_' . $num++,
     '#name' => 'web_widgets',
     '#value' => $code,
     '#parents' => array('none'),
     '#maxlength' => FALSE,
+    '#attributes' => array('onclick' => 'this.focus(); this.select();'),
+    '#cols' => 30,
+    '#rows' => 5
   );
   if ($style == 'uwa') {
     $form['#type'] = 'item';
@@ -205,12 +220,13 @@ function theme_web_widgets_embed_code($code, $style) {
 }
 
 /**
- * Enables the tracking of the 
+ * Enables the tracking of the
  *
  * @param $id
  *   Web Property ID from Google Analytics
  */
 function theme_web_widgets_tracking_code($id) {
+  // TODO: Should this theme web_widgets_tracking_code be declared in hook_theme()?
   return '
 <script type="text/javascript">
     var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
@@ -218,7 +234,7 @@ function theme_web_widgets_tracking_code($id) {
 </script>
 <script type="text/javascript">
   try {
-    var pageTracker = _gat._getTracker("'. $id .'");
+    var pageTracker = _gat._getTracker("' . $id . '");
     pageTracker._trackPageview();
   } catch(err) {}
 </script>';

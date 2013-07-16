@@ -1,5 +1,5 @@
 <?php
-// $Id: mark.admin.inc,v 1.2 2010/03/12 15:46:50 jmiccolis Exp $
+// $Id: mark.admin.inc,v 1.2.4.4 2010/09/17 18:17:40 tristanoneil Exp $
 /**
  * @file
  * Administrative functions for the mark module.
@@ -68,11 +68,10 @@ function mark_settings_create($form, &$form_state) {
   $mark = new stdClass();
   $mark->basetable = $form_state['values']['new']['basetable'];
   $mark->name = $form_state['values']['new']['name'];
-  $mark->tag = $form_state['values']['new']['tag'];
 
   if (drupal_write_record('mark', $mark) == SAVED_NEW) {
     drupal_set_message(t('Create new mark: %name', array('%name' => $mark->name)));
-    $form_state['redirect'] = 'admin/settings/mark/' . $mark->name;
+    $form_state['redirect'] = 'admin/structure/mark/' . $mark->name;
   }
   else {
     drupal_set_message(t('Failed to write new mark to the database.'), 'error');
@@ -82,7 +81,7 @@ function mark_settings_create($form, &$form_state) {
 /**
  * Mark edit form
  */
-function mark_edit_form($form_state, $mark) {
+function mark_edit_form($form, $form_state, $mark) {
   $form = array();
   $form['export_type'] = array(
     '#type' => 'value',
@@ -133,7 +132,7 @@ function mark_edit_form($form_state, $mark) {
   $form['settings']['global'] = array(
     '#title' => t('Global'),
     '#type' => 'checkbox',
-    '#default_value' => $mark->settings['global'],
+    '#default_value' => isset($mark->settings['global']) ? $mark->settings['global'] : FALSE,
     '#description' => t('By default a mark is specific to a particular user. Making a mark global shares the same mark among all users'),
   );
   $form['new']['submit'] = array(
@@ -172,7 +171,7 @@ function mark_edit_form_submit($form, $form_state) {
 /**
  * Mark delete/revert form
  */
-function mark_delete_form($form_state, $mark) {
+function mark_delete_form($form, &$form_state, $mark) {
   if ($mark->export_type & EXPORT_IN_CODE) {
     $action = t('revert');
     $message = '';
@@ -187,7 +186,7 @@ function mark_delete_form($form_state, $mark) {
   $form['action'] = array('#type' => 'value', '#value' => $action);
   $form = confirm_form($form,
     t('Are you sure you want to !action the mark: %title?', array('%title' => $mark->name, '!action' => $action)),
-    'admin/settings/mark',
+    'admin/structure/mark',
     $message,
     drupal_ucfirst($action), t('Cancel')
   );
@@ -198,14 +197,14 @@ function mark_delete_form($form_state, $mark) {
  * Submission handler for mark deletion/reversion.
  */
 function mark_delete_form_submit($form, &$form_state) {
-  db_query("DELETE FROM {mark} WHERE name = '%s'", $form_state['values']['mark']->name);
+  db_query("DELETE FROM {mark} WHERE name = :name", array(':name' => $form_state['values']['mark']->name));
   if ($form_state['values']['action'] == t('revert')) {
     drupal_set_message(t('%mark has been reverted', array('%mark' => $form_state['values']['mark']->name)));
   }
   else {
     drupal_set_message(t('%mark has been deleted', array('%mark' => $form_state['values']['mark']->name)));
   }
-  $form_state['redirect'] = 'admin/settings/mark';
+  $form_state['redirect'] = 'admin/structure/mark';
 }
 
 /**
@@ -225,7 +224,7 @@ function mark_status_form($form_state, $mark) {
   $form['action'] = array('#type' => 'value', '#value' => $action);
   $form = confirm_form($form,
     t('Are you sure you want to !action the mark: %title?', array('%title' => $mark->name, '!action' => $action)),
-    'admin/settings/mark',
+    'admin/structure/mark',
     $message,
     drupal_ucfirst($action), t('Cancel')
   );
@@ -244,5 +243,5 @@ function mark_status_form_submit($form, &$form_state) {
     ctools_export_set_object_status($context);
     drupal_set_message(t('%mark has been enabled', array('%mark' => $form_state['values']['mark']->name)));
   }
-  $form_state['redirect'] = 'admin/settings/mark';
+  $form_state['redirect'] = 'admin/structure/mark';
 }

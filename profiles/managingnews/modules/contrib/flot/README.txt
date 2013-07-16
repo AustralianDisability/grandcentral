@@ -1,4 +1,3 @@
-// $Id: README.txt,v 1.1.2.2 2009/03/10 16:09:51 jmiccolis Exp $
 
 CONTENTS OF THIS FILE
 ---------------------
@@ -13,6 +12,8 @@ INTRODUCTION
 
 Authors: 
 * Jeff Miccolis (jmiccolis)
+* Jelle Sebreghts (Jelle_S)
+* Peter Droogmans (attiks)
 
 Support was provided by Development Seed and the New America Foundation.
 

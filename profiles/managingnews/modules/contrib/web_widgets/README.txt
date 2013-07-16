@@ -1,5 +1,3 @@
-$Id: README.txt,v 1.1.2.1 2009/07/10 08:40:41 aronnovak Exp $
-
 Web Widgets
 ===========
 
@@ -37,7 +35,8 @@ $style can be google_gadgets, iframe, inline or uwa
 
 1) Get the code what you can paste into the external site, for example:
 
-$embed_code = web_widgets_render_embed_code('inline', 'mywidget', 100, 500);
+$variables = array('path' => 'mywidget', 'width' => 100, 'height' => 500);
+$embed_code = web_widgets_render_embed_code('inline', $variables);
 
 2) In hook_menu(), define the path that you exposed in the widget embedding code, for example:
 

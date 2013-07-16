@@ -9,7 +9,7 @@
  * Implementation of hook_schema().
  */
 function geotaxonomy_schema() {
-  $schema['term_geo'] = array(
+  $schema['taxonomy_term_geo'] = array(
     'description' => 'Taxonomy term geo data.',
     'fields' => array(
       'tid' => array(
@@ -17,7 +17,7 @@ function geotaxonomy_schema() {
         'unsigned' => TRUE,
         'not null' => TRUE,
         'default' => 0,
-        'description' => 'The {term_data}.tid of the term to which this geo data maps.',
+        'description' => 'The {taxonomy_term_data}.tid of the term to which this geo data maps.',
       ),
       'lat' => array(
         'type' => 'float',
@@ -103,7 +103,6 @@ function geotaxonomy_uninstall() {
 
 function geotaxonomy_update_1() {
   drupal_install_schema('geotaxonomy');
-  return array();
 }
 
 function geotaxonomy_update_2() {
@@ -122,9 +121,8 @@ function geotaxonomy_update_2() {
 
   foreach ($fields as $key => $desc) {
     $new_field['description'] = $desc;
-    db_add_field($ret, 'term_geo', $key, $new_field);
+    db_add_field($ret, 'taxonomy_term_geo', $key, $new_field);
   }
-  return $ret;
 }
 
 /**
@@ -134,15 +132,14 @@ function geotaxonomy_update_2() {
  */
 function geotaxonomy_update_6001() {
   $schema = geotaxonomy_schema();
-  $fields = $schema['term_geo']['fields'];
-  $indexes = $schema['term_geo']['indexes'];
+  $fields = $schema['taxonomy_term_geo']['fields'];
+  $indexes = $schema['taxonomy_term_geo']['indexes'];
 
   $ret = array();
   foreach (array('parent_name', 'external_id', 'parent_external_id') as $name) {
-    db_add_field($ret, 'term_geo', $name, $fields[$name]);
-    db_add_index($ret, 'term_geo', $name, $indexes[$name]);
+    db_add_field($ret, 'taxonomy_term_geo', $name, $fields[$name]);
+    db_add_index($ret, 'taxonomy_term_geo', $name, $indexes[$name]);
   }
-  return $ret;
 }
 
 /**
@@ -158,8 +155,6 @@ function geotaxonomy_update_6002() {
     variable_del("geotaxonomy_$voc->vid");
   }
   variable_set('geotaxonomy_vocabularies', $vocabulary_settings);
-  
-  return array();
 }
 
 /**
@@ -171,6 +166,5 @@ function geotaxonomy_update_6003() {
     'type' => 'text',
     'description' => 'Geometry.',
   );
-  db_add_field($ret, 'term_geo', 'geometry', $geometry);
-  return $ret;
+  db_add_field($ret, 'taxonomy_term_geo', 'geometry', $geometry);
 }

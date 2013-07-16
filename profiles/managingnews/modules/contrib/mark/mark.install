@@ -1,20 +1,5 @@
 <?php
-// $Id: mark.install,v 1.1 2010/02/22 15:22:05 jmiccolis Exp $
-
-/**
- * Implementation of hook_install().
- */
-function mark_install() {
-  drupal_install_schema('mark');
-}
-
-/**
- * Implementation of hook_uninstall().
- */
-function mark_uninstall() {
-  drupal_uninstall_schema('mark');
-  // TODO remove votes from votingapi tables.
-}
+// $Id: mark.install,v 1.1.4.1 2010/10/01 18:17:41 yhahn Exp $
 
 /**
  * Implementation of hook_schema().

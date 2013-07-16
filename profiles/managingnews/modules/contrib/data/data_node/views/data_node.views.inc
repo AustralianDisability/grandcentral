@@ -5,7 +5,7 @@
  */
 
 /**
- * Implementation of hook_views_data().
+ * Implements hook_views_data().
  */
 function data_node_views_data() {
   $data = array();
@@ -74,12 +74,12 @@ function data_node_views_data() {
 }
 
 /**
- * Implementation of hook_views_handlers().
+ * Implements hook_views_handlers().
  */
 function data_node_views_handlers() {
   return array(
     'info' => array(
-      'path' => drupal_get_path('module', 'data_node') .'/views',
+      'path' => drupal_get_path('module', 'data_node') . '/views',
     ),
     'handlers' => array(
       // field handlers
