@@ -1,6 +1,7 @@
 <?php
 
 /**
+ * @file
  * @defgroup mapbox MapBox: Provides MapBox layers to OpenLayers
  * This module has no UI; it only implements hooks in OpenLayers 2.x
  * and Gmap
@@ -28,7 +29,7 @@ function mapbox_openlayers_styles_info() {
 }
 
 /**
- * Implementation of hook_openlayers_styles()
+ * Implementation of hook_openlayers_styles().
  */
 function mapbox_openlayers_styles() {
   module_load_include('inc', 'mapbox', 'includes/mapbox.styles');
@@ -36,105 +37,29 @@ function mapbox_openlayers_styles() {
 }
 
 /**
- * @file
- * MapBox Layer Type Definition
- *
- * This file holds the main Drupal hook functions,
- * and the openlayers API functions for the openlayers module.
+ * OpenLayers pre-alpha3 compatibility
  */
-
-function mapbox_layers_info() {
-  $info = array();
-    // Define info array
-  $info['MapBox_world-print'] = array(
-    'name' => t('MapBox World Print'),
-    'description' => t('Printable World Map'),
-    'projection' => array('900913'),
-    'baselayer' => TRUE,
-    'minzoom' => 0,
-    'maxzoom' => 19,
-  );
-  // Define info array
-  $info['MapBox_world-dark'] = array(
-    'name' => t('MapBox World Dark'),
-    'description' => t('Dark World Map'),
-    'projection' => array('900913'),
-    'baselayer' => TRUE,
-    'minzoom' => 0,
-    'maxzoom' => 11,
-  );
-  $info['MapBox_dc-nightvision'] = array(
-    'name' => t('MapBox DC Nightvision'),
-    'description' => t('DC Nightvision'),
-    'projection' => array('900913'),
-    'baselayer' => TRUE,
-    'minzoom' => 0,
-    'maxzoom' => 17,
-  );
-  $info['MapBox_world-light'] = array(
-    'name' => t('World Light'),
-    'description' => t('World Light'),
-    'projection' => array('900913'),
-    'baselayer' => TRUE,
-    'minzoom' => 0,
-    'maxzoom' => 13,
-  );
-  $info['MapBox_afghanistan-summer'] = array(
-    'name' => t('Afghanistan Summer'),
-    'description' => t('Afghanistan Summer'),
-    'projection' => array('900913'),
-    'baselayer' => TRUE,
-    'minzoom' => 5,
-    'maxzoom' => 13,
-  );
-  $info['MapBox_afghanistan-winter'] = array(
-    'name' => t('Afghanistan Winter'),
-    'description' => t('Afghanistan Winter'),
-    'projection' => array('900913'),
-    'baselayer' => TRUE,
-    'minzoom' => 5,
-    'maxzoom' => 13,
-  );
-  $info['MapBox_afghanistan-grey'] = array(
-    'name' => t('Afghanistan Grey'),
-    'description' => t('Afghanistan Grey'),
-    'projection' => array('900913'),
-    'baselayer' => TRUE,
-    'minzoom' => 5,
-    'maxzoom' => 13,
-  );
-  return $info;
+function mapbox_openlayers_layers_info() {
+  return mapbox_openlayers_layers();
 }
 
 /**
- * Implementation of openlayers_layer_type
+ * Implements hook_openlayers_layers().
  */
-function mapbox_openlayers_layer_types() {
-  return array(
-    'openlayers_layer_type_mapbox' => array(
-      'title' => t('MapBox'),
-      'description' => t('MapBox Maps'),
-      'type' => 'layer',
-      'path' => drupal_get_path('module', 'mapbox') .'/includes/layer_types',
-      'file' => 'mapbox.inc',
-      'layer_type' => array(
-        'class' => 'openlayers_layer_type_mapbox',
-        'parent' => 'openlayers_layer_type',
-      ),
-    ),
-  );
+function mapbox_openlayers_layers() {
+  module_load_include('inc', 'mapbox', 'includes/mapbox.layers');
+  return _mapbox_openlayers_layers();
 }
 
-
-
 /**
- * Implementation of hook_gmap()
+ * Implementation of hook_gmap().
  */
 function mapbox_gmap($op, &$map) {
-  $info = mapbox_layers_info();
+  module_load_include('inc', 'mapbox', 'includes/mapbox.layers');
+  $info = _mapbox_layers_info();
   $layers = array();
   foreach ($info as $name => $layer) {
-    $layers['Mapbox'][str_replace('MapBox_', '', $name)] = array(
+    $layers['Mapbox'][$layer['layername']] = array(
       'title' => $layer['name'],
       'default' => TRUE,
       'help' => $layer['description'],
@@ -153,4 +78,23 @@ function mapbox_gmap($op, &$map) {
       $map = array_merge($map, $layers);
       break;
   }
+}
+
+/**
+ * Implementation of openlayers_layer_types().
+ */
+function mapbox_openlayers_layer_types() {
+  return array(
+    'openlayers_layer_type_mapbox' => array(
+      'title' => t('MapBox'),
+      'description' => t('MapBox Maps'),
+      'type' => 'layer',
+      'path' => drupal_get_path('module', 'mapbox') .'/includes/layer_types',
+      'file' => 'mapbox.inc',
+      'layer_type' => array(
+        'class' => 'openlayers_layer_type_mapbox',
+        'parent' => 'openlayers_layer_type',
+      ),
+    ),
+  );
 }

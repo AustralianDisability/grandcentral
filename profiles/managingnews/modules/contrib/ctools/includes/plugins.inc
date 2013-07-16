@@ -1,5 +1,4 @@
 <?php
-// $Id: plugins.inc,v 1.18.2.27 2010/07/25 19:01:02 merlinofchaos Exp $
 
 /**
  * @file
@@ -129,14 +128,18 @@ function ctools_plugin_api_include($owner, $api, $minimum_version, $current_vers
   static $already_done = array();
 
   $info = ctools_plugin_api_info($owner, $api, $minimum_version, $current_version);
-  foreach ($info as $module => $plugin_info) {
-    if (!isset($already_done[$owner][$api][$module])) {
-      $file = isset($plugin_info['file']) ? $plugin_info['file'] : "$module.$api.inc";
-      if (file_exists("./$plugin_info[path]/$file")) {
-        require_once "./$plugin_info[path]/$file";
+  if (!isset($already_done[$owner][$api])) {
+    foreach ($info as $module => $plugin_info) {
+      if (!isset($plugin_info['file'])) {
+        $plugin_info['file'] = "$module.$api.inc";
       }
-      $already_done[$owner][$api][$module] = TRUE;
+      if (file_exists("./$plugin_info[path]/$plugin_info[file]")) {
+        $plugin_info[$module]['included'] = TRUE;
+        require_once "./$plugin_info[path]/$plugin_info[file]";
+      }
+      $info[$module] = $plugin_info;
     }
+    $already_done[$owner][$api] = TRUE;
   }
 
   return $info;
@@ -294,6 +297,9 @@ function ctools_plugin_load_includes($info, $filename = NULL) {
   // Keep a static array so we don't hit drupal_system_listing more than necessary.
   $all_files = &ctools_static(__FUNCTION__, array());
 
+  // store static of plugin arrays for reference because they can't be reincluded.
+  static $plugin_arrays = array();
+
   // If we're being asked for all plugins of a type, skip any caching
   // we may have done because this is an admin task and it's ok to
   // spend the extra time.
@@ -342,16 +348,29 @@ function ctools_plugin_load_includes($info, $filename = NULL) {
       else {
         // Parse a hook.
         $plugin = NULL; // ensure that we don't have something leftover from earlier.
-        require_once './' . $file->filename;
-        // .inc files have a special format for the hook identifier.
-        // For example, 'foo.inc' in the module 'mogul' using the plugin
-        // whose hook is named 'borg_type' should have a function named (deep breath)
-        // mogul_foo_borg_type()
 
-        // If, however, the .inc file set the quasi-global $plugin array, we
-        // can use that and not even call a function. Set the $identifier
-        // appropriately and ctools_plugin_process() will handle it.
-        $identifier = isset($plugin) ? $plugin : $module . '_' . $file->name;
+        if (isset($plugin_arrays[$file->filename])) {
+          $identifier = $plugin_arrays[$file->filename];
+        }
+        else {
+
+          require_once './' . $file->filename;
+          // .inc files have a special format for the hook identifier.
+          // For example, 'foo.inc' in the module 'mogul' using the plugin
+          // whose hook is named 'borg_type' should have a function named (deep breath)
+          // mogul_foo_borg_type()
+
+          // If, however, the .inc file set the quasi-global $plugin array, we
+          // can use that and not even call a function. Set the $identifier
+          // appropriately and ctools_plugin_process() will handle it.
+          if (isset($plugin)) {
+            $plugin_arrays[$file->filename] = $plugin;
+            $identifier = $plugin;
+          }
+          else {
+            $identifier = $module . '_' . $file->name;
+          }
+        }
         $result = ctools_plugin_process($info, $module, $identifier, dirname($file->filename), basename($file->filename), $file->name);
       }
       if (is_array($result)) {
@@ -788,4 +807,31 @@ function ctools_plugin_get_class($plugin_definition, $class_name, $abstract = FA
 function ctools_plugin_load_class($module, $type, $id, $class_name, $abstract = FALSE) {
   $plugin = ctools_get_plugins($module, $type, $id);
   return ctools_plugin_get_class($plugin, $class_name, $abstract);
+}
+
+/**
+ * Sort callback for sorting plugins naturally.
+ *
+ * Sort first by weight, then by title.
+ */
+function ctools_plugin_sort($a, $b) {
+  if (is_object($a)) {
+    $a = (array) $a;
+  }
+  if (is_object($b)) {
+    $b = (array) $b;
+  }
+
+  if (empty($a['weight'])) {
+    $a['weight'] = 0;
+  }
+
+  if (empty($b['weight'])) {
+    $b['weight'] = 0;
+  }
+
+  if ($a['weight'] == $b['weight']) {
+    return strnatcmp(strtolower($a['title']), strtolower($b['title']));
+  }
+  return ($a['weight'] < $b['weight']) ? -1 : 1;
 }

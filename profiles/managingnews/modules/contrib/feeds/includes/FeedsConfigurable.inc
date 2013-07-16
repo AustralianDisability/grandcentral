@@ -1,5 +1,4 @@
 <?php
-// $Id: FeedsConfigurable.inc,v 1.14.2.2 2010/10/28 20:07:59 alexb Exp $
 
 /**
  * @file
@@ -74,6 +73,13 @@ abstract class FeedsConfigurable {
     // Make sure configuration is populated.
     $this->config = $this->configDefaults();
     $this->disabled = FALSE;
+  }
+
+  /**
+   * Override magic method __isset(). This is needed due to overriding __get().
+   */
+  public function __isset($name) {
+    return isset($this->$name) ? TRUE : FALSE;
   }
 
   /**

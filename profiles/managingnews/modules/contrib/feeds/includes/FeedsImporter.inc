@@ -1,5 +1,4 @@
 <?php
-// $Id: FeedsImporter.inc,v 1.23.2.1 2010/09/17 13:50:04 alexb Exp $
 
 /**
  * @file
@@ -104,14 +103,20 @@ class FeedsImporter extends FeedsConfigurable {
     $save = new stdClass();
     $save->id = $this->id;
     $save->config = $this->getConfig();
-    if (db_result(db_query_range("SELECT 1 FROM {feeds_importer} WHERE id = '%s'", $this->id, 0, 1))) {
+
+    if ($config = db_result(db_query("SELECT config FROM {feeds_importer} WHERE id = '%s'", $this->id))) {
       drupal_write_record('feeds_importer', $save, 'id');
+      // Only rebuild menu if content_type has changed. Don't worry about
+      // rebuilding menus when creating a new importer since it will default
+      // to the standalone page.
+      $config = unserialize($config);
+      if ($config['content_type'] != $save->config['content_type']) {
+        variable_set('menu_rebuild_needed', TRUE);
+      }
     }
     else {
       drupal_write_record('feeds_importer', $save);
     }
-    // Clear menu cache, changes to importer can change menu items.
-    menu_rebuild();
   }
 
   /**
@@ -176,7 +181,7 @@ class FeedsImporter extends FeedsConfigurable {
    * @param FeedsImporter $importer
    *   The feeds importer object to copy from.
    */
-  public function copy(FeedsImporter $importer) {
+  public function copy(FeedsConfigurable $importer) {
     $this->setConfig($importer->config);
 
     // Instantiate new fetcher, parser and processor and initialize their

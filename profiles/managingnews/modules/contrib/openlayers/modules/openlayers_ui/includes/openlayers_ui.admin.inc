@@ -1,5 +1,4 @@
 <?php
-// $Id: openlayers_ui.admin.inc,v 1.1.2.4 2010/09/09 20:28:08 strk Exp $
 
 /**
  * @file
@@ -20,7 +19,9 @@ function openlayers_ui_admin_settings() {
     array('@ol_api_url' => 'http://openlayers.org/api/2.9/OpenLayers.js'))
     . t('Alternately, you can <a href="!ol_url">download OpenLayers</a>,
     add it to your Drupal installation, and use a relative path like
-    <code>@suggested_path</code>',
+    <code>@suggested_path</code> . You can also use a double backslash
+    before the domain name (eg. //www.example.com/OpenLayers.js) which
+    then respects the use of both HTTPS and HTTP protocols.',
       array(
         '!ol_url' => 'http://openlayers.org/',
         '@suggested_path' => drupal_get_path('module', 'openlayers') . '/OpenLayers-2.7/OpenLayers.js',

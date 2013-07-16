@@ -1,19 +1,26 @@
 <?php
-// $Id: mapbox.inc,v 1.13 2010/04/29 22:05:20 tmcw Exp $
 
 /**
  * @file MapBox layer type definition for OpenLayers
  */
 class openlayers_layer_type_mapbox extends openlayers_layer_type {
+
   /**
    * Provide initial values for options.
    */
   function options_init() {
     return array(
+      'urls' => array(
+        'http://a.tiles.mapbox.com/mapbox/',
+        'http://b.tiles.mapbox.com/mapbox/',
+        'http://c.tiles.mapbox.com/mapbox/',
+        'http://d.tiles.mapbox.com/mapbox/',
+      ),
       'serverResolutions' => openlayers_get_resolutions('900913'),
       'maxExtent' => openlayers_get_extent('900913'),
       'projection' => array('900913'),
       'osm' => FALSE,
+      'layername' => '',
       'baselayer' => TRUE,
       'layer_handler' => 'MapBox',
       'type' => 'png',
@@ -24,31 +31,42 @@ class openlayers_layer_type_mapbox extends openlayers_layer_type {
    * Options form which generates layers
    */
   function options_form() {
-    if (!$this->data) {
+    if (!isset($this->data)) {
       $this->data = $this->options_init();
     }
     return array(
+      'urls' => array(
+        '#type' => 'textarea',
+        '#title' => t('Base URLs'),
+        '#description' => t('The list of base URLs specified on !tiles (with trailing "/"). For details, visit the !support site.', array(
+          '!tiles' => l(t('TileStream'), 'http://tiles.mapbox.com/'),
+          '!support' => l(t('MapBox Support'), 'http://support.mapbox.com/kb/tilestream/using-tilestream-with-drupal'),
+        )),
+        '#default_value' => !empty($this->data['urls']) ? implode("\n", $this->data['urls']) : '',
+      ),
       'layername' => array(
         '#type' => 'textfield',
         '#title' => t('MapBox Layer Name'),
-        '#description' => t('The layer name specified on MapBox.com'),
+        '#description' => t('The layer name specified on !tiles.', array(
+          '!tiles' => l(t('TileStream'), 'http://tiles.mapbox.com/'),
+        )),
         '#default_value' => $this->data['layername']
       ),
       'layer_type' => array(
         '#type' => 'hidden',
-        '#value' => 'openlayers_layer_type_mapbox'
+        '#value' => 'openlayers_layer_type_mapbox',
       ),
       'osm' => array(
         '#type' => 'checkbox',
         '#default_value' => $this->data['osm'],
         '#title' => t('OSM Attribution'),
-        '#description' => t('Required if OpenStreetMap data is used')
+        '#description' => t('Required if OpenStreetMap data is used.'),
       ),
       'baselayer' => array(
         '#type' => 'checkbox',
         '#default_value' => $this->data['baselayer'],
         '#title' => t('BaseLayer'),
-        '#description' => t('Uncheck to make this map an overlay')
+        '#description' => t('Uncheck to make this map an overlay.'),
       ),
       'type' => array(
         '#title' => t('File extension'),
@@ -56,36 +74,39 @@ class openlayers_layer_type_mapbox extends openlayers_layer_type {
         '#default_value' => $this->data['type'],
         '#options' => drupal_map_assoc(array('png', 'jpg')),
       ),
-      /*
-      'mini_attribution' => array(
-        '#type' => 'checkbox',
-        '#default_value' => $this->data['mini_attribution'] ? 
-          $this->data['mini_attribution'] : FALSE,
-        '#title' => t('Mini Attribution'),
-        '#description' => t('Use small logo and text, for mini maps.')
-      ),
-       */
       'resolutions' => array(
         '#type' => 'select',
         '#multiple' => TRUE,
-        '#options' => array_combine(
-          array_map('strval', openlayers_get_resolutions('900913')), 
-          range(0, 18)
-        ),
+        '#options' => array_combine(array_map('strval', openlayers_get_resolutions('900913')), range(0, 18)),
         '#title' => t('Zoom Level Range'),
-        '#default_value' => $this->data['resolutions'],
+        '#default_value' => isset($this->data['resolutions']) ? array_map('strval', $this->data['resolutions']) : array(),
       ),
-      'projection' =>
-        array(
-         '0' => array(
+      'projection' => array(
+        '0' => array(
           '#type' => 'hidden',
           '#value' => '900913',
         ),
       ),
-      '#default_value' => ($this->data['resolutions']) ? 
-        $this->data['resolutions'] : 
-        array_map('strval', openlayers_get_resolutions('900913'))
     );
+  }
+
+  /**
+   * Override to_record().
+   */
+  function to_record() {
+    // Convert urls.
+    if (!empty($this->data['urls'])) {
+      $urls = explode("\n", $this->data['urls']);
+      $this->data['urls'] = array();
+      foreach ($urls as $url) {
+        $url = trim($url);
+        if (!empty($url) && strrpos($url, '/') === (strlen($url) - 1)) {
+          $this->data['urls'][] = $url;
+        }
+      }
+    }
+
+    return parent::to_record();
   }
 
   /**
@@ -97,4 +118,3 @@ class openlayers_layer_type_mapbox extends openlayers_layer_type {
     return $this->options;
   }
 }
-

@@ -1,5 +1,4 @@
 <?php
-// $Id: FeedsSource.inc,v 1.21.2.1 2010/09/26 17:39:45 alexb Exp $
 
 /**
  * @file
@@ -41,12 +40,12 @@ interface FeedsSourceInterface {
   public function sourceFormValidate(&$source_config);
 
   /**
-   * A source is being deleted.
+   * A source is being saved.
    */
   public function sourceSave(FeedsSource $source);
 
   /**
-   * A source is being saved.
+   * A source is being deleted.
    */
   public function sourceDelete(FeedsSource $source);
 }
@@ -91,7 +90,7 @@ class FeedsSource extends FeedsConfigurable {
    * Instantiate a unique object per class/id/feed_nid. Don't use
    * directly, use feeds_source() instead.
    */
-  public static function instance($importer_id, $feed_nid = 0) {
+  public static function instance($importer_id, $feed_nid) {
     $class = variable_get('feeds_source_class', 'FeedsSource');
     static $instances = array();
     if (!isset($instances[$class][$importer_id][$feed_nid])) {
@@ -209,7 +208,7 @@ class FeedsSource extends FeedsConfigurable {
       'type' => $this->id,
       'id' => $this->feed_nid,
       // Schedule as soon as possible if a batch is active.
-      'period' => $this->batch ? 0 : $period,
+      'period' => !empty($this->batch) ? 0 : $period,
       'periodic' => TRUE,
     );
     if ($job['period'] != FEEDS_SCHEDULE_NEVER) {
@@ -314,7 +313,8 @@ class FeedsSource extends FeedsConfigurable {
    *   An array stored for $client.
    */
   public function getConfigFor(FeedsSourceInterface $client) {
-    return $this->config[get_class($client)];
+    $class = get_class($client);
+    return isset($this->config[$class]) ? $this->config[$class] : $client->sourceDefaults();
   }
 
   /**

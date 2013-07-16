@@ -237,3 +237,20 @@ ini_set('url_rewriter.tags',        '');
 #   'forum'      => 'Discussion board',
 #   '@count min' => '@count minutes',
 # );
+
+$databases = array (
+  'default' => 
+  array (
+    'default' => 
+    array (
+      'driver' => 'mysql',
+      'database' => 'db_mnews_migrate',
+      'username' => 'mnewser',
+      'password' => 'mnewsmnews',
+      'host' => 'localhost',
+      'port' => '',
+      'prefix' => '',
+    ),
+  ),
+);
+$drupal_hash_salt = '8cwAO8cwLlg3XTuXJXL6qJf9PihkiaLSpObSD4rTdDo';

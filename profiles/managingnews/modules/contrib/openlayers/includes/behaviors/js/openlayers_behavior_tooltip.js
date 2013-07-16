@@ -1,4 +1,3 @@
-// $Id: openlayers_behavior_tooltip.js,v 1.1.2.2 2010/06/27 13:55:25 zzolo Exp $
 
 /**
  * Javascript Drupal Theming function for inside of Tooltips
@@ -43,6 +42,11 @@ Drupal.behaviors.openlayers_behavior_tooltip = function(context) {
           layers.push(selectedLayer[0]);
         }
       }
+    }
+
+    // if only 1 layer exists, do not add as an array
+    if (layers.length == 1) {
+      layers = layers[0];
     }
 
     // Define feature select events for selected layers.

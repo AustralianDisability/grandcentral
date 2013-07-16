@@ -1,5 +1,4 @@
 <?php
-// $Id: FeedsBatch.inc,v 1.15.2.1 2010/10/25 22:43:03 alexb Exp $
 
 // Batch stages.
 define('FEEDS_FETCHING', 'fetching');
@@ -79,7 +78,7 @@ class FeedsBatch {
       $total = array_sum($this->total);
     }
     $progress = (1.0 / $total) * $progress;
-    return $progress == FEEDS_BATCH_COMPLETE ? 0.999 : $progress;
+    return $progress >= FEEDS_BATCH_COMPLETE ? 0.999 : $progress;
   }
 }
 
@@ -158,6 +157,11 @@ class FeedsImportBatch extends FeedsBatch {
       FEEDS_PARSING => FEEDS_BATCH_COMPLETE,
       FEEDS_PROCESSING => FEEDS_BATCH_COMPLETE,
     );
+    $this->total = array(
+      FEEDS_FETCHING => 0,
+      FEEDS_PARSING => 0,
+      FEEDS_PROCESSING => 0,
+    );
     $this->title = '';
     $this->description = '';
     $this->link = '';
@@ -194,7 +198,7 @@ class FeedsImportBatch extends FeedsBatch {
       }
       $dest = file_destination($dir . '/' . get_class($this) .'_'. drupal_get_token($this->url) .'_'. time(), FILE_EXISTS_RENAME);
       $this->file_path = file_save_data($this->getRaw(), $dest);
-      if($this->file_path === 0) {
+      if ($this->file_path === 0) {
         throw new Exception(t('Cannot write content to %dest', array('%dest' => $dest)));
       }
     }
@@ -353,6 +357,9 @@ class FeedsClearBatch extends FeedsBatch {
     parent::__construct();
     $this->progress = array(
       FEEDS_CLEARING => FEEDS_BATCH_COMPLETE,
+    );
+    $this->total = array(
+      FEEDS_CLEARING => 0,
     );
     $this->deleted = 0;
   }

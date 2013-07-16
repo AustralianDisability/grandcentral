@@ -1,5 +1,4 @@
 <?php
-// $Id: FeedsDataProcessor.inc,v 1.24.2.2 2010/10/28 19:58:22 alexb Exp $
 
 /**
  * @file
@@ -54,10 +53,10 @@ class FeedsDataProcessor extends FeedsProcessor {
     if ($inserted) {
       drupal_set_message(format_plural($inserted, 'Created @number item.', 'Created @number items.', array('@number' => $inserted)));
     }
-    elseif ($updated) {
+    if ($updated) {
       drupal_set_message(format_plural($updated, 'Updated @number item.', 'Updated @number items.', array('@number' => $updated)));
     }
-    else {
+    if (!$inserted && !$updated) {
       drupal_set_message(t('There are no new items.'));
     }
   }
@@ -175,18 +174,18 @@ class FeedsDataProcessor extends FeedsProcessor {
    * Set target element, bring element in a FeedsDataHandler format.
    */
   public function setTargetElement(&$target_item, $target_element, $value) {
-    if (empty($value)) {
+    if ($value === NULL) {
       return;
     }
     if (strpos($target_element, '.')) {
       /**
-      Add field in FeedsDataHandler format.
-
-      This is the tricky part, FeedsDataHandler expects an *array* of records
-      at #[joined_table_name]. We need to iterate over the $value that has
-      been mapped to this element and create a record array from each of
-      them.
-      */
+       *  Add field in FeedsDataHandler format.
+       *
+       *  This is the tricky part, FeedsDataHandler expects an *array* of records
+       *  at #[joined_table_name]. We need to iterate over the $value that has
+       *  been mapped to this element and create a record array from each of
+       *  them.
+       */
       list($table, $field) = explode('.', $target_element);
 
       $values = array();
@@ -205,7 +204,9 @@ class FeedsDataProcessor extends FeedsProcessor {
       }
     }
     else {
-      if (is_array($target_item[$target_element]) && is_array($value)) {
+      if (isset($target_item[$target_element]) && 
+        is_array($target_item[$target_element]) &&
+        is_array($value)) {
         $target_item[$target_element] = array_merge($target_item[$target_element], $value);
       }
       else {
@@ -260,7 +261,7 @@ class FeedsDataProcessor extends FeedsProcessor {
     $form['delete_with_source'] = array(
       '#type' => 'checkbox',
       '#title' => t('Delete items with source'),
-      '#description' => t('If enabled, any feed items associated with a source node will removed along with the node. Not available for standalone importers.'),
+      '#description' => t('If enabled, any feed items associated with a source node will be removed along with the node. Not available for standalone importers.'),
       '#default_value' => $this->config['delete_with_source'],
       '#disabled' => empty(feeds_importer($this->id)->config['content_type']) ? TRUE : FALSE,
     );
@@ -386,10 +387,10 @@ class FeedsDataProcessor extends FeedsProcessor {
           if (!isset($schema['fields'][$field_name])) {
             $mapping['target'] = $this->table()->addField($field_name, $type);
             // Let the user know.
-            drupal_set_message(t('Created new field "!name".', array('!name' => $field_name)));
+            drupal_set_message(t('Created new field "@name".', array('@name' => $field_name)));
           }
           else {
-            throw new Exception(t('Field !field_name already exists as a mapping target. Remove it from mapping if you would like to map another source to it. Remove it from !data_table table if you would like to change its definition.', array('!field_name' => $field_name, '!data_table' => l($this->table()->get('name'), 'admin/content/data'))));
+            throw new Exception(t('Field @field_name already exists as a mapping target. Remove it from mapping if you would like to map another source to it. Remove it from !data_table table if you would like to change its definition.', array('@field_name' => $field_name, '!data_table' => l($this->table()->get('name'), 'admin/content/data'))));
           }
         }
       }

@@ -1,5 +1,4 @@
 <?php
-// $Id: ParserCSV.inc,v 1.4 2010/07/10 23:45:36 alexb Exp $
 
 /**
  * Contains CSV Parser.
@@ -82,6 +81,7 @@ class ParserCSV {
     $this->startByte = 0;
     $this->lineLimit = 0;
     $this->lastLinePos = 0;
+    ini_set('auto_detect_line_endings', TRUE);
   }
 
   /**

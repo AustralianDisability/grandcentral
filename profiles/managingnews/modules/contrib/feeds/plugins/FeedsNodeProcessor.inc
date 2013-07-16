@@ -1,5 +1,4 @@
 <?php
-// $Id: FeedsNodeProcessor.inc,v 1.51.2.2 2010/10/25 22:43:03 alexb Exp $
 
 /**
  * @file
@@ -27,6 +26,7 @@ class FeedsNodeProcessor extends FeedsProcessor {
 
     // Keep track of processed items in this pass, set total number of items.
     $processed = 0;
+    $batch_size = variable_get('feeds_node_batch_size', FEEDS_NODE_BATCH_SIZE);
     if (!$batch->getTotal(FEEDS_PROCESSING)) {
       $batch->setTotal(FEEDS_PROCESSING, count($batch->items));
     }
@@ -47,6 +47,18 @@ class FeedsNodeProcessor extends FeedsProcessor {
         // Map and save node. If errors occur don't stop but report them.
         try {
           $this->map($batch, $node);
+          if ($this->config['authorize']) {
+            if (empty($node->nid)) {
+              $op = 'create';
+            }
+            else {
+              $op = 'update';
+            }
+            $account = user_load($node->uid);
+            if (!node_access($op, $node, $account)) {
+              throw new Exception('User ' . $account->uid . ' not authorized to ' . $op . ' content type ' . $node->type);
+            }
+          }
           node_save($node);
           if (!empty($nid)) {
             $batch->updated++;
@@ -62,8 +74,9 @@ class FeedsNodeProcessor extends FeedsProcessor {
       }
 
       $processed++;
-      if ($processed >= variable_get('feeds_node_batch_size', FEEDS_NODE_BATCH_SIZE)) {
-        $batch->setProgress(FEEDS_PROCESSING, $batch->created + $batch->updated);
+      if ($processed >= $batch_size) {
+        $total = $batch->getTotal(FEEDS_PROCESSING);
+        $batch->setProgress(FEEDS_PROCESSING, $total - count($batch->items));
         return;
       }
     }
@@ -72,10 +85,10 @@ class FeedsNodeProcessor extends FeedsProcessor {
     if ($batch->created) {
       drupal_set_message(format_plural($batch->created, 'Created @number @type node.', 'Created @number @type nodes.', array('@number' => $batch->created, '@type' => node_get_types('name', $this->config['content_type']))));
     }
-    elseif ($batch->updated) {
+    if ($batch->updated) {
       drupal_set_message(format_plural($batch->updated, 'Updated @number @type node.', 'Updated @number @type nodes.', array('@number' => $batch->updated, '@type' => node_get_types('name', $this->config['content_type']))));
     }
-    else {
+    if (!$batch->created && !$batch->updated) {
       drupal_set_message(t('There is no new content.'));
     }
     $batch->setProgress(FEEDS_PROCESSING, FEEDS_BATCH_COMPLETE);
@@ -150,6 +163,7 @@ class FeedsNodeProcessor extends FeedsProcessor {
       'expire' => FEEDS_EXPIRE_NEVER,
       'mappings' => array(),
       'author' => 0,
+      'authorize' => 0,
     );
   }
 
@@ -168,9 +182,9 @@ class FeedsNodeProcessor extends FeedsProcessor {
     );
     $format_options = array(FILTER_FORMAT_DEFAULT => t('Default format'));
     $formats = filter_formats();
-      foreach ($formats as $format) {
-        $format_options[$format->format] = $format->name;
-      }
+    foreach ($formats as $format) {
+      $format_options[$format->format] = $format->name;
+    }
     $form['input_format'] = array(
       '#type' => 'select',
       '#title' => t('Input format'),
@@ -185,6 +199,12 @@ class FeedsNodeProcessor extends FeedsProcessor {
       '#description' => t('Select the author of the nodes to be created - leave empty to assign "anonymous".'),
       '#autocomplete_path' => 'user/autocomplete',
       '#default_value' => empty($author->name) ?  'anonymous' : check_plain($author->name),
+    );
+    $form['authorize'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Authorize'),
+      '#description' => t('Check that the author has permission to create the node.'),
+      '#default_value' => $this->config['authorize'],
     );
     $period = drupal_map_assoc(array(FEEDS_EXPIRE_NEVER, 3600, 10800, 21600, 43200, 86400, 259200, 604800, 604800 * 4, 604800 * 12, 604800 * 24, 31536000), 'feeds_format_expire');
     $form['expire'] = array(
@@ -233,16 +253,33 @@ class FeedsNodeProcessor extends FeedsProcessor {
   /**
    * Override setTargetElement to operate on a target item that is a node.
    */
-  public function setTargetElement($target_node, $target_element, $value) {
-    if (in_array($target_element, array('url', 'guid'))) {
-      $target_node->feeds_node_item->$target_element = $value;
-    }
-    elseif ($target_element == 'body') {
-      $target_node->teaser = node_teaser($value);
-      $target_node->body = $value;
-    }
-    elseif (in_array($target_element, array('title', 'status', 'created', 'nid', 'uid'))) {
-      $target_node->$target_element = $value;
+  public function setTargetElement(&$target_node, $target_element, $value) {
+    switch ($target_element) {
+      case 'url':
+      case 'guid':
+        $target_node->feeds_node_item->$target_element = $value;
+        break;
+      case 'body':
+        $target_node->teaser = node_teaser($value);
+        $target_node->body = $value;
+        break;
+      case 'title':
+      case 'status':
+      case 'created':
+      case 'nid':
+      case 'uid':
+        $target_node->$target_element = $value;
+        break;
+      case 'user_name':
+        if ($user = user_load(array('name' => $value))) {
+          $target_node->uid = $user->uid;
+        }
+        break;
+      case 'user_mail':
+        if ($user = user_load(array('mail' => $value))) {
+          $target_node->uid = $user->uid;
+        }
+        break;
     }
   }
 
@@ -274,6 +311,14 @@ class FeedsNodeProcessor extends FeedsProcessor {
       'uid' => array(
         'name' => t('User ID'),
         'description' => t('The Drupal user ID of the node author.'),
+      ),
+      'user_name' => array(
+        'name' => t('Username'),
+        'description' => t('The Drupal username of the node author.'),
+      ),
+      'user_mail' => array(
+        'name' => t('User email'),
+        'description' => t('The email address of the node author.'),
       ),
       'status' => array(
         'name' => t('Published status'),
@@ -333,8 +378,10 @@ class FeedsNodeProcessor extends FeedsProcessor {
    * Creates a new node object in memory and returns it.
    */
   protected function buildNode($nid, $feed_nid) {
-    $node = new stdClass();
+    $populate = FALSE;
+
     if (empty($nid)) {
+      $node = new stdClass();
       $node->created = FEEDS_REQUEST_TIME;
       $populate = TRUE;
     }
@@ -343,8 +390,7 @@ class FeedsNodeProcessor extends FeedsProcessor {
         $node = node_load($nid, NULL, TRUE);
       }
       else {
-        $node->nid = $nid;
-        $node->vid = db_result(db_query("SELECT vid FROM {node} WHERE nid = %d", $nid));
+        $node = db_fetch_object(db_query("SELECT created, nid, vid, status FROM {node} WHERE nid = %d", $nid));
         $populate = TRUE;
       }
     }
@@ -413,23 +459,23 @@ class FeedsNodeProcessor extends FeedsProcessor {
  * Used for batch deletion.
  */
 function _feeds_node_delete($nid) {
+  if ($node = node_load($nid, NULL, TRUE)) {
+    db_query('DELETE FROM {node} WHERE nid = %d', $node->nid);
+    db_query('DELETE FROM {node_revisions} WHERE nid = %d', $node->nid);
+    db_query('DELETE FROM {node_access} WHERE nid = %d', $node->nid);
 
-  $node = node_load($nid);
+    // Call the node-specific callback (if any):
+    node_invoke($node, 'delete');
+    node_invoke_nodeapi($node, 'delete');
 
-  db_query("DELETE FROM {node} WHERE nid = %d", $node->nid);
-  db_query("DELETE FROM {node_revisions} WHERE nid = %d", $node->nid);
+    // Clear the page and block caches.
+    cache_clear_all();
 
-  // Call the node-specific callback (if any):
-  node_invoke($node, 'delete');
-  node_invoke_nodeapi($node, 'delete');
-
-  // Clear the page and block caches.
-  cache_clear_all();
-
-  // Remove this node from the search index if needed.
-  if (function_exists('search_wipe')) {
-    search_wipe($node->nid, 'node');
+    // Remove this node from the search index if needed.
+    if (function_exists('search_wipe')) {
+      search_wipe($node->nid, 'node');
+    }
+    watchdog('content', '@type: deleted %title.', array('@type' => $node->type, '%title' => $node->title));
+    drupal_set_message(t('@type %title has been deleted.', array('@type' => node_get_types('name', $node), '%title' => $node->title)));
   }
-  watchdog('content', '@type: deleted %title.', array('@type' => $node->type, '%title' => $node->title));
-  drupal_set_message(t('@type %title has been deleted.', array('@type' => node_get_types('name', $node), '%title' => $node->title)));
 }

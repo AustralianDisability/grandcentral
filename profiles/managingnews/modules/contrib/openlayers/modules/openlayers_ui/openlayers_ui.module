@@ -1,5 +1,4 @@
 <?php
-// $Id: openlayers_ui.module,v 1.1.2.40 2010/09/05 14:35:10 zzolo Exp $
 
 /**
  * Implementation of hook_help
@@ -134,8 +133,7 @@ function openlayers_ui_menu() {
     'page arguments' => array('openlayers_ui_layers_form', 4),
     'access arguments' => array('administer openlayers'),
     'file' => 'includes/openlayers_ui.layers.inc',
-    'type' => MENU_LOCAL_TASK,
-    'tab_parent' => 'admin/build/openlayers/layers',
+    'type' => MENU_NORMAL_ITEM,
   );
   $items['admin/build/openlayers/layers/%openlayers_layer_export/delete'] = array(
     'title' => 'Delete layer',
@@ -324,6 +322,14 @@ function openlayers_ui_menu() {
     'file' => 'includes/openlayers_ui.presets.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['openlayers/ahah/style_plugin/%'] = array(
+    'title' => 'OpenLayers Style Plugin AHAH',
+    'page callback' => 'openlayers_ui_style_plugin_ahah',
+    'page arguments' => array(3), // 3rd url item (the '%') is first arg
+    'access callback' => TRUE,
+    'file' => 'includes/openlayers_ui.styles.inc',
+    'type' => MENU_CALLBACK, 
+  );
 
   return $items;
 }
@@ -400,24 +406,24 @@ function openlayers_ui_object_list($type) {
     $links = array();
     switch ($object->export_type) {
       case (EXPORT_IN_DATABASE | EXPORT_IN_CODE):
-        $row[] = $object->title .' <em><small>(' . t('Overridden') . ')</small></em>';
+        $row[] = filter_xss_admin($object->title) .' <em><small>(' . t('Overridden') . ')</small></em>';
         break;
       case EXPORT_IN_DATABASE:
-        $row[] = $object->title .' <em><small>(' . t('Normal') . ')</small></em>';
+        $row[] = filter_xss_admin($object->title) .' <em><small>(' . t('Normal') . ')</small></em>';
         break;
       case EXPORT_IN_CODE:
-        $row[] = $object->title .' <em><small>(' . t('Default') . ')</small></em>';
+        $row[] = filter_xss_admin($object->title) .' <em><small>(' . t('Default') . ')</small></em>';
         break;
     }
 
     if ($type == 'layers') {
-      $row[] = $layer_types[$object->data['layer_type']]['title'];
+      $row[] = filter_xss_admin($layer_types[$object->data['layer_type']]['title']);
     }
     elseif ($type == 'presets') {
       if (!empty($object->data['layers'])) {
         $layer_names = array();
         foreach ($object->data['layers'] as $layer) {
-          $layer_names[] = empty($layers[$layer]->title) ? $layer : $layers[$layer]->title;
+          $layer_names[] = empty($layers[$layer]->title) ? $layer : filter_xss_admin($layers[$layer]->title);
         }
         $row[] = '<small>' . implode(', ', $layer_names) . '</small>';
       }
@@ -426,7 +432,7 @@ function openlayers_ui_object_list($type) {
       }
     }
 
-    $row[] = $object->description;
+    $row[] = filter_xss_admin($object->description);
 
     // Check preset type and create links accordingly.
     if ($object->export_type == (EXPORT_IN_CODE | EXPORT_IN_DATABASE)) {
