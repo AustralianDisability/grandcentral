@@ -1,0 +1,132 @@
+<?php
+/**
+ * @file
+ *
+ * Very simple integration to post stuff to fb and twitter
+ */
+
+/* Implements hook_permission().
+  */
+
+function simpleshare_permission() {
+  return array(
+    'share content' => array(
+      'title' => t('share content'),
+      'description' => t('Designate which roles are allowed to share content'),
+    ),
+    'administer simpleshare' => array(
+      'title' => t('administer simpleshare'),
+      'description' => t('Administration of simpleshare settings'),
+    ),
+  );
+}
+
+
+/**
+ * Implements hook_form_alter().
+ *
+ * Adds a checkbox to node edit and comment forms.  This checkbox lets
+ * facebook users know that content may be published to their Wall,
+ * and gives them a chance to prevent that.
+ */
+function simpleshare_form_alter(&$form, $form_state, $form_id) {
+  // Add simpleshare option.
+  if (!empty($form['#node_edit_form'])) {
+    $node = $form['#node'];
+    $simpletypes = array_values(variable_get('simpleshare_node_types', array()));
+    $simpleservices = array_values(variable_get('simpleshare_services', array()));
+    if (in_array("twitter", $simpleservices, TRUE) OR in_array("facebook", $simpleservices, TRUE)) {
+      if (in_array($node->type, $simpletypes, TRUE)) {
+        $form['simpleshare'] = array(
+          '#type' => 'fieldset',
+          '#title' => 'Share',
+          '#attributes' => array('class' => array('simpleshare')),
+          '#description' => 'After submitting this content you will be be given the opportunity to share it on social networks if you check this box',
+          '#access' => user_access('share content'),
+        );
+
+        $form['simpleshare']['ss_share'] = array(
+          '#type' => 'checkbox',
+          '#title' => 'Share This',
+          '#default_value' => FALSE,
+        );
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function simpleshare_theme($existing, $type, $theme, $path) {
+  return array(
+    'simpleshare_modal' => array(
+      'template' => 'simpleshare-modal',
+      'variables' => array('node' => NULL),
+      'file' => 'simpleshare.modal.inc',
+    ),
+  );
+}
+
+
+/**
+ * Implements hook_node_insert().
+ */
+function simpleshare_node_insert($node) {
+  if ($node->ss_share == 1) {
+    $_SESSION['simpleshare'] = TRUE;
+  }
+}
+
+/**
+ * Implements hook_node_update().
+ */
+function simpleshare_node_update($node) {
+  if ($node->ss_share == 1) {
+    $_SESSION['simpleshare'] = TRUE;
+  }
+}
+
+/**
+ * Implements hook_node_view().
+ */
+function simpleshare_node_view($node) {
+  if (isset($_SESSION['simpleshare']) && $_SESSION['simpleshare'] == 'true') {
+    $simpletypes = array_values(variable_get('simpleshare_node_types', array()));
+    //don't share unless it's an allowed type
+    if (in_array($node->type, $simpletypes, TRUE)) {
+      if ($node->status == 1) {
+        drupal_add_js(drupal_get_path('module', 'simpleshare') . '/simpleshare.js');
+        drupal_add_css(drupal_get_path('module', 'simpleshare') . '/simpleshare.css');
+        print theme('simpleshare_modal', array('node' => $node));
+        unset($_SESSION['simpleshare']);
+      }
+      else {
+        drupal_set_message(t('Sorry, you cannot share unpublished content. Mark it as published and try sharing again.', 'warning'));
+      }
+    }
+  }
+
+  if (isset($_GET['simpleshare']) && $_GET['simpleshare'] == 'success') {
+    //close the facebook window
+    $output = '<script language="javascript">window.close();</script>';
+    print $output;
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function simpleshare_menu() {
+  $items['admin/config/system/simpleshare'] = array(
+    'title' => 'Simpleshare',
+    'description' => 'Settings for Simpleshare',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('simpleshare_admin_settings'),
+    'access arguments' => array('administer simpleshare'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'simpleshare.admin.inc'
+  );
+
+  return $items;
+}

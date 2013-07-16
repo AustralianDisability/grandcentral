@@ -1,0 +1,398 @@
+diff --git a/ExtractorSimplePieParser.inc b/ExtractorSimplePieParser.inc
+index d5d6b16..a116ecc 100644
+--- a/ExtractorSimplePieParser.inc
++++ b/ExtractorSimplePieParser.inc
+@@ -1,6 +1,6 @@
+ <?php
+ 
+-require_once 'extractor.feeds.inc';
++require_once DRUPAL_ROOT . '/' . 'extractor.feeds.inc';
+ 
+ /**
+  * Extend simplepie parser and add term extraction.
+@@ -26,16 +26,16 @@ class ExtractorSimplePieParser extends FeedsSimplePieParser {
+   }
+ 
+   /**
+-    * Config Form Defaults
+-    */
++   * Config Form Defaults
++   */
+   public function configDefaults() {
+     return extractor_feeds_defaults();
+   }
+ 
+   /**
+-    * Config Form
+-    */
++   * Config Form
++   */
+   public function configForm(&$form_state) {
+     return extractor_feeds_form($this->config);
+   }
+-}
+\ No newline at end of file
++}
+diff --git a/ExtractorSyndicationParser.inc b/ExtractorSyndicationParser.inc
+index 39b8895..a5105fd 100644
+--- a/ExtractorSyndicationParser.inc
++++ b/ExtractorSyndicationParser.inc
+@@ -1,6 +1,6 @@
+ <?php
+ 
+-require_once 'extractor.feeds.inc';
++require_once DRUPAL_ROOT . '/' . 'extractor.feeds.inc';
+ 
+ /**
+  * Extend common syndication parser and add term extraction.
+@@ -38,4 +38,4 @@ class ExtractorSyndicationParser extends FeedsSyndicationParser {
+   public function configForm(&$form_state) {
+     return extractor_feeds_form($this->config);
+   }
+-}
+\ No newline at end of file
++}
+diff --git a/extractor.feeds.inc b/extractor.feeds.inc
+index 3be1047..18c2491 100644
+--- a/extractor.feeds.inc
++++ b/extractor.feeds.inc
+@@ -12,7 +12,7 @@
+  * Form for feeds integration.
+  */
+ function extractor_feeds_form($config) {
+-  drupal_add_js(drupal_get_path('module', 'extractor') .'/extractor.js');
++  drupal_add_js(drupal_get_path('module', 'extractor') . '/extractor.js');
+   $form = array();
+   $form['extractors'] = array(
+     '#type' => 'radios',
+@@ -21,7 +21,7 @@ function extractor_feeds_form($config) {
+     '#default_value' => $config['extractors'],
+     '#options' => array(
+       'extractor_simple' => t('Simple Extractor'),
+-      'placemaker' => t('Yahoo Placemaker')
++      'placemaker' => t('Yahoo Placemaker'),
+     ),
+   );
+   $form['placemaker_key'] = array(
+@@ -71,10 +71,10 @@ function extractor_feeds_get_mapping_sources() {
+  */
+ function extractor_feeds_get_source_element($item, $element_key, $config) {
+   if ($element_key == 'extracted_terms') {
+-    return extractor_extract($item['title'] .' '. $item['description'], $config['extractors'], $config);
++    return extractor_extract($item['title'] . ' ' . $item['description'], $config['extractors'], $config);
+   }
+   elseif ($element_key == 'extracted_tids') {
+-    $terms = extractor_extract($item['title'] .' '. $item['description'], $config['extractors'], $config);
++    $terms = extractor_extract($item['title'] . ' ' . $item['description'], $config['extractors'], $config);
+     return array_keys($terms);
+   }
+-}
+\ No newline at end of file
++}
+diff --git a/extractor.info b/extractor.info
+index 89dec03..cc2b1fc 100644
+--- a/extractor.info
++++ b/extractor.info
+@@ -1,4 +1,8 @@
+ name = Extractor
+ description = "API for extracting terms from text"
+ dependencies[] = taxonomy
+-core = 6.x
++core = 7.x
++
++files[] = ExtractorSimplePieParser.inc
++files[] = ExtractorSyndicationParser.inc
++files[] = ExtractorTermProcessor.inc
+diff --git a/extractor.install b/extractor.install
+index 4ea2c0f..c1b127b 100644
+--- a/extractor.install
++++ b/extractor.install
+@@ -1,7 +1,13 @@
+ <?php
+ 
+ /**
+- * Implementation of hook_schema().
++ * @file
++ * Install, update and uninstall functions for the extractor module.
++ *
++ */
++
++/**
++ * Implements hook_schema().
+  */
+ function extractor_schema() {
+   $schema = array();
+@@ -21,44 +27,3 @@ function extractor_schema() {
+   return $schema;
+ }
+ 
+-/**
+- * Implementation of hook_install().
+- */
+-function extractor_install() {
+-  drupal_install_schema('extractor');
+-}
+-
+-/**
+- * Implementation of hook_uninstall().
+- */
+-function extractor_uninstall() {
+-  drupal_uninstall_schema('extractor');
+-}
+-
+-/**
+- * Install lookup flag.
+- */
+-function extractor_update_6100() {
+-  $ret = array();
+-  $schema = array(
+-    'description' => 'Flags terms that should be used for lookup.',
+-    'fields' => array(
+-      'tid' => array(
+-        'type' => 'int',
+-        'unsigned' => TRUE,
+-        'not null' => TRUE,
+-        'default' => 0,
+-        'description' => 'Use this term for lookup.',
+-      ),
+-    ),
+-    'primary key' => array('tid'),
+-  );
+-  db_create_table($ret, 'extractor_lookup', $schema);
+-  if ($vocabulary = variable_get('extractor_simple_vid', FALSE)) {
+-    $vocabulary = taxonomy_vocabulary_load($vocabulary);
+-    $id = strpos($vocabulary->module, 'features_') === 0 ? $vocabuarly->module : $vocabulary->vid;
+-    variable_set('extractor_simple_vocabularies', array($id));
+-  }
+-  variable_del('extractor_simple_vid');
+-  return $ret;
+-}
+diff --git a/extractor.module b/extractor.module
+index 41f3377..9a23a94 100644
+--- a/extractor.module
++++ b/extractor.module
+@@ -2,15 +2,12 @@
+ 
+ /**
+  * @file
+- * Main API functions.
+- *
+- * Variables:
+  *
+- * Name: extractor_engine
++ * Main API functions.
+  */
+ 
+ /**
+- * Implementation of hook_plugins().
++ * Implements hook_plugins().
+  */
+ function extractor_feeds_plugins() {
+   $info['ExtractorSyndicationParser'] = array(
+@@ -49,7 +46,7 @@ function extractor_feeds_plugins() {
+ }
+ 
+ /**
+- * Implementation of hook_form_taxonomy_form_vocabulary_alter().
++ * Implements hook_form_taxonomy_form_vocabulary_alter().
+  */
+ function extractor_form_taxonomy_form_vocabulary_alter(&$form, &$form_state) {
+   $form['extractor'] = array(
+@@ -59,7 +56,7 @@ function extractor_form_taxonomy_form_vocabulary_alter(&$form, &$form_state) {
+   );
+   $lookup = FALSE;
+   $vocabularies = variable_get('extractor_simple_vocabularies', array());
+-  if ($vocabularies[$form['vid']['#value']] || $vocabularies[$form['module']['#value']]) {
++  if ((!empty($form['vid']['#value']) && $vocabularies[$form['vid']['#value']]) || (!empty($form['module']['#value']) && $vocabularies[$form['module']['#value']])) {
+     $lookup = TRUE;
+   }
+   $form['extractor']['extractor_lookup'] = array(
+@@ -86,7 +83,7 @@ function extractor_form_vocabulary_submit($form, &$form_state) {
+ }
+ 
+ /**
+- * Implementation of specific hook_form_alter().
++ * Implements hook_form_alter().
+  */
+ function extractor_form_taxonomy_form_term_alter(&$form, &$form_state) {
+   $form['submit']['#weight'] = isset($form['submit']['#weight']) ? $form['submit']['#weight'] + 1 : 1;
+@@ -97,7 +94,7 @@ function extractor_form_taxonomy_form_term_alter(&$form, &$form_state) {
+     '#collapsible' => TRUE,
+   );
+ 
+-  if (extractor_use_vocabulary($form['vid']['#value'])) {
++  if (!empty($form['vid']['#value']) && extractor_use_vocabulary($form['vid']['#value'])) {
+     $description = t('All terms of this vocabulary are used for term extraction. You can change this setting on the vocabulary form.');
+     $default = $disabled = TRUE;
+   }
+@@ -116,27 +113,35 @@ function extractor_form_taxonomy_form_term_alter(&$form, &$form_state) {
+ }
+ 
+ /**
+- * Implementation of hook_taxonomy().
++ * Implements hook_taxonomy_term_update().
+  */
+-function extractor_taxonomy($op = NULL, $type = NULL, $term = NULL){
+-  if ($type =='term' && $term) {
+-    switch ($op) {
+-      case 'delete':
+-        db_query("DELETE FROM {extractor_lookup} WHERE tid = %d", $term['tid']);
+-        break;
+-      case 'update':
+-        db_query("DELETE FROM {extractor_lookup} WHERE tid = %d", $term['tid']);
+-      case 'insert':
+-        if (!empty($term['extractor_lookup'])) {
+-          drupal_write_record('extractor_lookup', $term);
+-        }
+-        break;
+-    }
++function extractor_taxonomy_term_insert($term) {
++  if (!empty($term->extractor_lookup)) {
++    drupal_write_record('extractor_lookup', $term);
+   }
+ }
+ 
+ /**
+- * Implementation of hook_feeds_term_processor_targets_alter().
++ * Implements hook_taxonomy_term_update().
++ *
++ * @todo - In the D6 version, the record in {extractor_lookup} was deleted when
++ *   a term was simply updated... is that desirable?
++ */
++function extractor_taxonomy_term_update($term) {
++  // TODO - See todo above.
++}
++
++/**
++ * Implements hook_taxonomy_term_delete().
++ */
++function extractor_taxonomy_term_delete($term) {
++  db_delete('extractor_lookup')
++    ->condition('tid', $term->tid)
++    ->execute();
++}
++
++/**
++ * Implements hook_feeds_term_processor_targets_alter().
+  */
+ function extractor_feeds_term_processor_targets_alter(&$targets, $vid) {
+   $targets['extractor_lookup'] = array(
+@@ -149,7 +154,7 @@ function extractor_feeds_term_processor_targets_alter(&$targets, $vid) {
+  * Determine whether a term should be used for term extraction or not.
+  */
+ function extractor_use_term($tid) {
+-  return db_result(db_query("SELECT tid FROM {extractor_lookup} WHERE tid = %d", $tid));
++  return db_query("SELECT tid FROM {extractor_lookup} WHERE tid = :tid", array(':tid' => $tid))->fetchField();
+ }
+ 
+ /**
+@@ -188,7 +193,7 @@ function extractor_extract($text, $library = 'extractor_simple', $config = array
+ function extractor_include($name) {
+   static $included;
+   if (!$included[$name]) {
+-    include drupal_get_path('module', 'extractor') .'/libraries/'. $name .'.inc';
++    include DRUPAL_ROOT . '/' . drupal_get_path('module', 'extractor') . '/libraries/' . $name . '.inc';
+     $included[$name] = TRUE;
+   }
+ }
+diff --git a/libraries/extractor_simple.inc b/libraries/extractor_simple.inc
+index 842ec45..66e8c56 100644
+--- a/libraries/extractor_simple.inc
++++ b/libraries/extractor_simple.inc
+@@ -34,9 +34,9 @@ function extractor_simple_extract($text) {
+     while (!$sorted) {
+       $sorted = TRUE;
+       for ($i = 0; $i < count($sorted_terms) - 1; $i++) {
+-        if (strlen($sorted_terms[$i]) < strlen($sorted_terms[$i+1])) {
+-          $tmp = $sorted_terms[$i+1];
+-          $sorted_terms[$i+1] = $sorted_terms[$i];
++        if (strlen($sorted_terms[$i]) < strlen($sorted_terms[$i + 1])) {
++          $tmp = $sorted_terms[$i + 1];
++          $sorted_terms[$i + 1] = $sorted_terms[$i];
+           $sorted_terms[$i] = $tmp;
+           $sorted = FALSE;
+         }
+@@ -52,7 +52,7 @@ function extractor_simple_extract($text) {
+       // Iterate through tag words backwards, skip to the start of the outmost loop
+       // if we find a mismatch.
+       for ($i = count($term_words) - 1; $i >= 0; $i--) {
+-        if (strtolower($term_words[$i]) != strtolower($words[$pos+$i])) {
++        if (strtolower($term_words[$i]) != strtolower($words[$pos + $i])) {
+           continue 2; // Skips to start of foreach ($terms as $term) {
+         }
+       }
+@@ -76,6 +76,8 @@ function _extractor_simple_split($text) {
+ 
+ /**
+  * Look up terms for a given word. Supports up to 2000 terms.
++ *
++ * @todo - Convert to Drupal 7 static caching methods.
+  */
+ function _extractor_simple_lookup($word) {
+   static $term_cache = array();
+@@ -94,12 +96,12 @@ function _extractor_simple_lookup($word) {
+   }
+   if (!$loaded) {
+     if (empty($vid)) {
+-      $result = db_query_range("SELECT td.tid, td.name FROM {term_data} td JOIN {extractor_lookup} e ON td.tid = e.tid", 0, 2000);
++      $result = db_query_range("SELECT td.tid, td.name FROM {taxonomy_term_data} td JOIN {extractor_lookup} e ON td.tid = e.tid", 0, 2000);
+     }
+     else {
+-      $result = db_query_range("SELECT td.tid, td.name FROM {term_data} td LEFT JOIN {extractor_lookup} e ON td.tid = e.tid WHERE td.vid IN (%s) OR e.tid IS NOT NULL", implode(', ', $vids), 0, 2000);
++      $result = db_query_range("SELECT td.tid, td.name FROM {taxonomy_term_data} td LEFT JOIN {extractor_lookup} e ON td.tid = e.tid WHERE td.vid IN (%s) OR e.tid IS NOT NULL", implode(', ', $vids), 0, 2000);
+     }
+-    while ($term = db_fetch_object($result)) {
++    foreach ($result as $term) {
+       $term_cache[strtolower($term->name[0])][$term->name] = $term;
+     }
+     $loaded = TRUE;
+@@ -124,4 +126,4 @@ function _extractor_simple_lookup($word) {
+  */
+ function _extractor_simple_stopwords() {
+   return array('a', 'able', 'about', 'across', 'after', 'all', 'almost', 'also', 'am', 'among', 'an', 'and', 'any', 'are', 'as', 'at', 'be', 'because', 'been', 'but', 'by', 'can', 'cannot', 'could', 'dear', 'did', 'do', 'does', 'either', 'else', 'ever', 'every', 'for', 'from', 'get', 'got', 'had', 'has', 'have', 'he', 'her', 'hers', 'him', 'his', 'how', 'however', 'i', 'if', 'in', 'into', 'is', 'it', 'its', 'just', 'least', 'let', 'like', 'likely', 'may', 'me', 'might', 'most', 'must', 'my', 'neither', 'no', 'nor', 'not', 'of', 'off', 'often', 'on', 'only', 'or', 'other', 'our', 'own', 'rather', 'said', 'say', 'says', 'she', 'should', 'since', 'so', 'some', 'than', 'that', 'the', 'their', 'them', 'then', 'there', 'these', 'they', 'this', 'tis', 'to', 'too', 'twas', 'us', 'wants', 'was', 'we', 'were', 'what', 'when', 'where', 'which', 'while', 'who', 'whom', 'why', 'will', 'with', 'would', 'yet', 'you', 'your');
+-}
+\ No newline at end of file
++}
+diff --git a/libraries/placemaker.inc b/libraries/placemaker.inc
+index 5c202bd..787c31b 100644
+--- a/libraries/placemaker.inc
++++ b/libraries/placemaker.inc
+@@ -7,7 +7,7 @@ function placemaker_extract($text, $config) {
+   $term = _placemaker_send_text($text, $config);
+   $tags = array();
+   if ($term) {
+-    $tags[$term['tid']] = $term;
++    $tags[] = $term;
+   }
+   return $tags;
+ }
+@@ -16,12 +16,15 @@ function placemaker_extract($text, $config) {
+  * Sends items to Placemaker API.
+  */
+ function _placemaker_send_text($text, $config) {
++  // Default to English if no language is provided.
++  $config['language'] = empty($config['language']) ? 'en' : $config['language'];
++
+   // Make placemaker request.
+   $apiendpoint = 'http://wherein.yahooapis.com/v1/document';
+   $inputType = 'text/html';
+ 
+   $outputType = 'xml';
+-  $post = 'appid='. $config['placemaker_key'] .'&documentContent='. $text .'&documentType='. $inputType .'&inputLanguage='. $config['language'] .'&outputType='. $outputType .'&autoDisambiguate=true';
++  $post = 'appid=' . $config['placemaker_key'] . '&documentContent=' . $text . '&documentType=' . $inputType . '&inputLanguage=' . $config['language'] . '&outputType=' . $outputType . '&autoDisambiguate=true';
+   $ch = curl_init($apiendpoint);
+ 
+   curl_setopt($ch, CURLOPT_POST, 1);
+@@ -32,9 +35,9 @@ function _placemaker_send_text($text, $config) {
+ 
+   // Parse results of placemaker request.
+   $xml = simplexml_load_string($results);
+-  $item['name'] = (string)$xml->document->placeDetails->place->name;
+-  $item['lat'] = (string)$xml->document->placeDetails->place->centroid->latitude;
+-  $item['lon'] = (string)$xml->document->placeDetails->place->centroid->longitude;
++  $item['name'] = (string) $xml->document->placeDetails->place->name;
++  $item['lat'] = (string) $xml->document->placeDetails->place->centroid->latitude;
++  $item['lon'] = (string) $xml->document->placeDetails->place->centroid->longitude;
+ 
+   return $item;
+ }
