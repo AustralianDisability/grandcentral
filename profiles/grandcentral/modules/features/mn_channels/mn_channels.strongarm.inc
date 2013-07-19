@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implementation of hook_strongarm().
+ * Implements hook_strongarm().
  */
 function mn_channels_strongarm() {
   $export = array();

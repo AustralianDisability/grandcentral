@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implementation of hook_views_default_views().
+ * Implements hook_views_default_views().
  */
 function mn_channels_views_default_views() {
   $views = array();
@@ -1159,7 +1159,7 @@ function mn_channels_views_default_views() {
       'link_to_taxonomy' => 0,
       'exclude' => 0,
       'id' => 'name',
-      'table' => 'term_data',
+      'table' => 'taxonomy_term_data',
       'field' => 'name',
       'relationship' => 'tid',
       'override' => array(
@@ -1914,7 +1914,7 @@ function mn_channels_views_default_views() {
       'link_to_taxonomy' => 0,
       'exclude' => 0,
       'id' => 'name',
-      'table' => 'term_data',
+      'table' => 'taxonomy_term_data',
       'field' => 'name',
       'relationship' => 'tid',
       'override' => array(
@@ -2173,7 +2173,7 @@ function mn_channels_views_default_views() {
       'label' => 'Relate term data to geo data.',
       'required' => 1,
       'id' => 'tid_geo',
-      'table' => 'term_data',
+      'table' => 'taxonomy_term_data',
       'field' => 'tid_geo',
       'relationship' => 'tid',
       'override' => array(
@@ -2436,7 +2436,7 @@ function mn_channels_views_default_views() {
       'link_to_taxonomy' => 0,
       'exclude' => 0,
       'id' => 'name',
-      'table' => 'term_data',
+      'table' => 'taxonomy_term_data',
       'field' => 'name',
       'relationship' => 'tid',
       'override' => array(
@@ -2593,7 +2593,7 @@ function mn_channels_views_default_views() {
       'label' => 'Relate term data to geo data.',
       'required' => 1,
       'id' => 'tid_geo',
-      'table' => 'term_data',
+      'table' => 'taxonomy_term_data',
       'field' => 'tid_geo',
       'relationship' => 'tid',
       'override' => array(
@@ -2856,7 +2856,7 @@ function mn_channels_views_default_views() {
       'link_to_taxonomy' => 0,
       'exclude' => 0,
       'id' => 'name',
-      'table' => 'term_data',
+      'table' => 'taxonomy_term_data',
       'field' => 'name',
       'relationship' => 'tid',
       'override' => array(
@@ -3171,7 +3171,7 @@ function mn_channels_views_default_views() {
       'label' => 'Relate term data to geo data.',
       'required' => 1,
       'id' => 'tid_geo',
-      'table' => 'term_data',
+      'table' => 'taxonomy_term_data',
       'field' => 'tid_geo',
       'relationship' => 'tid',
       'override' => array(

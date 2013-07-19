@@ -58,21 +58,21 @@ class mn_core_behavior_scalepoints extends openlayers_behavior {
       );
       // @TODO: Handle color gradation using API functions in color module
       /*
-      $form[$key]['fillColor'] = array(
-        '#title' => t('Fill color'),
-        '#type' => 'textfield',
-        '#size' => 7,
-        '#maxlength' => 7,
-        '#default_value' => $this->options[$key]['fillColor'],
-      );
-      $form[$key]['strokeColor'] = array(
-        '#title' => t('Stroke color'),
-        '#type' => 'textfield',
-        '#size' => 7,
-        '#maxlength' => 7,
-        '#default_value' => $this->options[$key]['strokeColor'],
-      );
-      */
+       $form[$key]['fillColor'] = array(
+       '#title' => t('Fill color'),
+       '#type' => 'textfield',
+       '#size' => 7,
+       '#maxlength' => 7,
+       '#default_value' => $this->options[$key]['fillColor'],
+       );
+       $form[$key]['strokeColor'] = array(
+       '#title' => t('Stroke color'),
+       '#type' => 'textfield',
+       '#size' => 7,
+       '#maxlength' => 7,
+       '#default_value' => $this->options[$key]['strokeColor'],
+       );
+       */
     }
     $form['distinct'] = array(
       '#title' => t('Number of distinct sizes'),
@@ -106,7 +106,7 @@ class mn_core_behavior_scalepoints extends openlayers_behavior {
     $weights = array_values($this->get_weights());
     $styles = array();
     foreach (array_keys($this->options['min']) as $key) {
-      if (!empty($this->options['min'][$key]) ||  !empty($this->options['max'][$key])) {
+      if (!empty($this->options['min'][$key]) ||    !empty($this->options['max'][$key])) {
         $pointdiff = ($this->options['max'][$key] - $this->options['min'][$key]) / $this->options['distinct'];
         $pointdiff = number_format($pointdiff, 2);
         foreach ($weights as $weight) {
@@ -146,7 +146,7 @@ class mn_core_behavior_scalepoints extends openlayers_behavior {
                 if ($max == 1) {
                   $map['layers'][$k]['features'][$j]['attributes']['weight'] = 1;
                 }
-                else if (($count/$max) <= $percentile) {
+                else if (($count / $max) <= $percentile) {
                   $map['layers'][$k]['features'][$j]['attributes']['weight'] = $weight;
                   break;
                 }
@@ -157,7 +157,7 @@ class mn_core_behavior_scalepoints extends openlayers_behavior {
       }
     }
 
-    drupal_add_js(drupal_get_path('module', 'mn_core') .'/behaviors/mn_core_behavior_scalepoints.js');
+    drupal_add_js(drupal_get_path('module', 'mn_core') . '/behaviors/mn_core_behavior_scalepoints.js');
     $options = array();
     $options['styles'] = $this->get_styles();
 

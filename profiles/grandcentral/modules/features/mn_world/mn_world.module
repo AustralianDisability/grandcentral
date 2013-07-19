@@ -1,16 +1,16 @@
 <?php
 
-include_once('mn_world.features.inc');
+include_once DRUPAL_ROOT . '/' . 'mn_world.features.inc';
 
 /**
- * Implementation of hook_enable().
+ * Implements hook_enable().
  *
  * @todo: move this to a features_rebuild() callback.
  */
 function mn_world_enable() {
   $file = 'mn_world.csv';
   $path = file_directory_path() . '/locations';
-  if (file_check_directory($path, TRUE)) {
+  if (file_prepare_directory($path, TRUE)) {
     $filepath = "{$path}/{$file}";
 
     // Copy locations csv to file directory, avoid using shell_exec() for
@@ -40,12 +40,13 @@ function mn_world_enable() {
       $source = feeds_source('terms');
       $source->addConfig(
         array(
-          'FeedsFileFetcher' => array(
-            'source' => $filepath
-          ),
-        )
+        'FeedsFileFetcher' => array(
+          'source' => $filepath,
+        ),
+      )
       );
-      while (FEEDS_BATCH_COMPLETE != $source->import());
+      while (FEEDS_BATCH_COMPLETE != $source->import()) {
+      }
     }
     catch (Exception $e) {
       drupal_set_message(t('Could not import geo terms. Please import them manually from mn_world.csv in files directory.'));
@@ -54,7 +55,7 @@ function mn_world_enable() {
 }
 
 /**
- * Implementation of hook_disable().
+ * Implements hook_disable().
  *
  * @todo: move this to a features_rebuild() callback.
  */
@@ -65,11 +66,11 @@ function mn_world_disable() {
 }
 
 /**
- * Implementation of hook_mn_openlayers_map_alter().
+ * Implements hook_mn_openlayers_map_alter().
  */
 function mn_world_openlayers_map_preprocess_alter(&$map) {
   // Ensure that default map preset has interface icons in the admin pages.
-  if(empty($map['image_path'])) {
+  if (empty($map['image_path'])) {
     $map['image_path'] = 'http://js.mapbox.com/theme/dark/';
   }
   // Change the map for print views.

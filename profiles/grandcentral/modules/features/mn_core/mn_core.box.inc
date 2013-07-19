@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implementation of hook_default_box().
+ * Implements hook_default_box().
  */
 function mn_core_default_box() {
   $export = array();

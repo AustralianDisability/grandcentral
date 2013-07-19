@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implementation of hook_ctools_plugin_api().
+ * Implements hook_ctools_plugin_api().
  */
 function mn_boxes_ctools_plugin_api($module, $api) {
   if ($module == 'boxes' && $api == 'plugins') {
@@ -10,7 +10,7 @@ function mn_boxes_ctools_plugin_api($module, $api) {
 }
 
 /**
- * Implementation of hook_boxes_plugins().
+ * Implements hook_boxes_plugins().
  */
 function mn_boxes_boxes_plugins() {
   $info = array();
@@ -19,7 +19,7 @@ function mn_boxes_boxes_plugins() {
     'handler' => array(
       'class' => 'mn_boxes_default',
       'file' => 'mn_boxes_default.inc',
-      'path' => drupal_get_path('module', 'mn_boxes') .'/boxes',
+      'path' => drupal_get_path('module', 'mn_boxes') . '/boxes',
       'parent' => 'box',
     ),
   );
@@ -28,7 +28,7 @@ function mn_boxes_boxes_plugins() {
     'handler' => array(
       'class' => 'mn_boxes_feed',
       'file' => 'mn_boxes_feed.inc',
-      'path' => drupal_get_path('module', 'mn_boxes') .'/boxes',
+      'path' => drupal_get_path('module', 'mn_boxes') . '/boxes',
       'parent' => 'mn_boxes_default',
     ),
   );
@@ -37,7 +37,7 @@ function mn_boxes_boxes_plugins() {
     'handler' => array(
       'class' => 'mn_boxes_channel',
       'file' => 'mn_boxes_channel.inc',
-      'path' => drupal_get_path('module', 'mn_boxes') .'/boxes',
+      'path' => drupal_get_path('module', 'mn_boxes') . '/boxes',
       'parent' => 'mn_boxes_default',
     ),
   );
@@ -46,7 +46,7 @@ function mn_boxes_boxes_plugins() {
     'handler' => array(
       'class' => 'mn_boxes_search',
       'file' => 'mn_boxes_search.inc',
-      'path' => drupal_get_path('module', 'mn_boxes') .'/boxes',
+      'path' => drupal_get_path('module', 'mn_boxes') . '/boxes',
       'parent' => 'mn_boxes_default',
     ),
   );

@@ -1,4 +1,9 @@
 name = "MN Boxes"
 description = "Provides custom boxes plugins for Managing News."
-core = "6.x"
+core = 7.x
 dependencies[] = "boxes"
+
+files[] = boxes/mn_boxes_channel.inc
+files[] = boxes/mn_boxes_default.inc
+files[] = boxes/mn_boxes_feed.inc
+files[] = boxes/mn_boxes_search.inc

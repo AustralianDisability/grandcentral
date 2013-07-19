@@ -1,7 +1,7 @@
 <?php
 
 //require_once drupal_get_path('module', 'mn_test');
-require_once drupal_get_path('module', 'simpletest') . '/drupal_web_test_case.php';
+require_once DRUPAL_ROOT . '/' . drupal_get_path('module', 'simpletest') . '/drupal_web_test_case.php';
 
 /**
  * Test case for typical Drupal tests.
@@ -36,12 +36,12 @@ class MnWebTestCase extends DrupalWebTestCase {
     $profile = $this->install_profile;
 
     // include_once DRUPAL_ROOT . '/includes/install.inc';
-    include_once './includes/install.inc';
+    include_once DRUPAL_ROOT . '/' . './includes/install.inc';
     drupal_install_system();
 
     // Add the specified modules to the list of modules in the default profile.
     $args = func_get_args();
-    
+
     // Install modules
     $modules = array_unique(array_merge(drupal_verify_profile($this->install_profile, 'en'), $args));
     drupal_install_modules($modules);
@@ -56,7 +56,7 @@ class MnWebTestCase extends DrupalWebTestCase {
       // Install more modules
       $modules = managingnews_profile_modules();
       drupal_install_modules($modules);
-      
+
       // Install even more modules
       $modules = _managingnews_core_modules();
       drupal_install_modules($modules);
@@ -78,7 +78,7 @@ class MnWebTestCase extends DrupalWebTestCase {
     // drupal_save_session(FALSE);
     // $user = user_load(1);
     session_save_session(FALSE);
-    $user = user_load(array('uid' => 1));
+    $user = user_load(1);
 
     // Restore necessary variables.
     variable_set('install_profile', $this->install_profile);
@@ -93,9 +93,31 @@ class MnWebTestCase extends DrupalWebTestCase {
     variable_set('comment_book', 0);
 
     _managingnews_system_theme_data();
-    db_query("UPDATE {system} SET status = 0 WHERE type = 'theme'");
-    db_query("UPDATE {system} SET status = 1 WHERE type = 'theme' AND name = 'jake'");
-    db_query("UPDATE {blocks} SET region = '' WHERE theme = 'jake'");
+    // TODO Please review the conversion of this statement to the D7 database API syntax.
+    /* db_query("UPDATE {system} SET status = 0 WHERE type = 'theme'") */
+    db_update('system')
+  ->fields(array(
+    'status' =>  0,
+  ))
+  ->condition('type', 'theme')
+  ->execute();
+    // TODO Please review the conversion of this statement to the D7 database API syntax.
+    /* db_query("UPDATE {system} SET status = 1 WHERE type = 'theme' AND name = 'jake'") */
+    db_update('system')
+  ->fields(array(
+    'status' =>  1,
+  ))
+  ->condition('type', 'theme')
+  ->condition('name', 'jake')
+  ->execute();
+    // TODO Please review the conversion of this statement to the D7 database API syntax.
+    /* db_query("UPDATE {block} SET region = '' WHERE theme = 'jake'") */
+    db_update('block')
+  ->fields(array(
+    'region' =>  '',
+  ))
+  ->condition('theme', 'jake')
+  ->execute();
     variable_set('theme_default', 'jake');
 
     // Use temporary files directory with the same prefix as database.
@@ -103,9 +125,9 @@ class MnWebTestCase extends DrupalWebTestCase {
     variable_set('file_directory_path', file_directory_path() . '/' . $db_prefix);
     $directory = file_directory_path();
     // Create the files directory.
-    file_check_directory($directory, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS);
+    file_prepare_directory($directory, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS);
 
-    set_time_limit($this->timeLimit);
+    drupal_set_time_limit($this->timeLimit);
   }
 
   /**
@@ -164,20 +186,24 @@ class MnWebTestCase extends DrupalWebTestCase {
       );
     }
     if (!empty($rows)) {
-      return theme('table', array(), $rows);
+      return theme('table', array('header' => array(), 'rows' => $rows));
     }
     else {
       return 'No properties';
     }
   }
 
-	function loginAdmin() {
+  function loginAdmin() {
     $this->drupalLogin(
       $this->drupalCreateUser(array(
-        'administer feeds', 'administer nodes', 'administer content types', 'administer mn', 'mark items'
-      ))
+      'administer feeds',
+      'administer nodes',
+      'administer content types',
+      'administer mn',
+      'mark items',
+    ))
     );
-	}
+  }
 
   /**
    * Override of refreshVariables().

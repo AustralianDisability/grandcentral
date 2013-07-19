@@ -35,9 +35,9 @@ class stored_views_views_handler_field_title extends views_handler_field {
 
     // Merge in defaults.
     $options += array(
-        'attributes' => array(),
-        'html' => FALSE,
-      );
+      'attributes' => array(),
+      'html' => FALSE,
+    );
 
     // Append active class.
     $matches = TRUE;
@@ -64,7 +64,8 @@ class stored_views_views_handler_field_title extends views_handler_field {
       $options['attributes']['title'] = strip_tags($options['attributes']['title']);
     }
 
-    return '<a href="'. check_url(url($path, $options)) .'"'. drupal_attributes($options['attributes']) .'>'. ($options['html'] ? $text : check_plain($text)) .'</a>';
+    // TODO The second parameter to this function call should be an array.
+    return '<a href="' . check_url(url($path, $options)) . '"' . drupal_attributes($options['attributes']) . '>' . ($options['html'] ? $text : check_plain($text)) . '</a>';
   }
 
   function render($values) {
@@ -73,7 +74,7 @@ class stored_views_views_handler_field_title extends views_handler_field {
     $filters = unserialize($values->{$this->aliases['filters']});
 
     if (is_array($arguments) && count($arguments)) {
-      $path .= '/'. implode('/', $arguments);
+      $path .= '/' . implode('/', $arguments);
     }
 
     return $this->l($values->{$this->field_alias}, $path, array('query' => $filters));

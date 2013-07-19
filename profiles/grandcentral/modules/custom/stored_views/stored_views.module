@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implementation of hook_menu().
+ * Implements hook_menu().
  */
 function stored_views_menu() {
   $items = array();
@@ -16,66 +16,79 @@ function stored_views_menu() {
 }
 
 /**
- * Implementation of hook_perm().
+ * Implements hook_permission().
  */
-function stored_views_perm() {
-  return array('manage stored views');
-}
-
-/**
- * Implementation of hook_views_api().
- */
-function stored_views_views_api() {
+function stored_views_permission() {
   return array(
-    'api' => '2.0',
-    'path' => drupal_get_path('module', 'stored_views') .'/views',
+    'manage stored views' => array(
+      'title' => t('manage stored views'),
+      'description' => t('TODO Add a description for \'manage stored views\''),
+    ),
   );
 }
 
 /**
- * Implementation of hook_block().
+ * Implements hook_views_api().
  */
-function stored_views_block($op = 'list', $delta = 0) {
-  switch ($op) {
-    case 'list':
-      $blocks = array();
-      $blocks['save']['info'] = t('Save current view block');
-      $blocks['save']['cache'] = BLOCK_CACHE_GLOBAL;
-      return $blocks;
-    case 'view':
-      if ($delta == 'save') {
-         return _stored_views_block_save();
-      }
+function stored_views_views_api() {
+  return array(
+    'api' => '2.0',
+    'path' => drupal_get_path('module', 'stored_views') . '/views',
+  );
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function stored_views_block_info() {
+  $blocks = array();
+  $blocks['save']['info'] = t('Save current view block');
+  $blocks['save']['cache'] = BLOCK_CACHE_GLOBAL;
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function stored_views_block_view($delta) {
+  if ($delta == 'save') {
+    return _stored_views_block_save();
   }
 }
 
 /**
- * Implementation of hook_theme().
+ * Implements hook_block().
+ */
+function stored_views_block_OLD($op = 'list', $delta = 0) { }
+
+/**
+ * Implements hook_theme().
  */
 function stored_views_theme() {
   return array(
     'stored_views_form' => array(
-      'arguments' => array('form' => array()),
-    )
+      'render element' => 'form',
+    ),
   );
 }
 
 /**
  * Theme function for stored_views_form().
  */
-function theme_stored_views_form($form) {
-  return drupal_render($form);
+function theme_stored_views_form($variables) {
+  $form = $variables['form'];
+  return drupal_render_children($form);
 }
 
 /**
  * Create a save form.
  */
-function stored_views_form($form_state) {
+function stored_views_form($form, $form_state) {
   $form = array();
   $page_view = _stored_views_get_page_view();
   if ($stored = stored_views_load($page_view)) {
     $form['#delete'] = $stored;
-    $form['description']['#value'] = '<div class="description">'. t('This view is in the list.') .'</div>';
+    $form['description']['#value'] = '<div class="description">' . t('This view is in the list.') . '</div>';
     $form['submit'] = array(
       '#type' => 'submit',
       '#value' => t('Remove'),
@@ -83,7 +96,7 @@ function stored_views_form($form_state) {
   }
   else {
     $form['#save'] = $page_view;
-    $form['description']['#value'] = '<div class="description">'. t('Add this view to the list') .'</div>';
+    $form['description']['#value'] = '<div class="description">' . t('Add this view to the list') . '</div>';
     $form['status'] = array(
       '#type' => 'checkbox',
       '#title' => t('Promote'),
@@ -93,7 +106,7 @@ function stored_views_form($form_state) {
       '#value' => t('Add'),
     );
   }
-  $form['#redirect'] = FALSE;
+  $form_state['#redirect'] = FALSE;
   return $form;
 }
 
@@ -103,7 +116,7 @@ function stored_views_form($form_state) {
 function stored_views_form_submit($form, &$form_state) {
   if ($form['#save']) {
     $save = $form['#save'];
-    $save['created'] = time();
+    $save['created'] = REQUEST_TIME;
     $save['status'] = $form_state['values']['status'];
     stored_views_save($save);
   }
@@ -119,14 +132,18 @@ function stored_views_form_submit($form, &$form_state) {
       $query[] = "$k=$v";
     }
   }
-  drupal_goto($_GET['q'], implode('&', $query));
+  // TODO implode('&', $query) needs to be an array of keys and values instead of a string.
+  drupal_goto($_GET['q'], array('query' => implode('&', $query)));
 }
 
 /**
  * Stored view delete confirmation form.
  */
-function stored_views_delete_confirm($form_state, $stored_view) {
-  $form = array('stored_view' => array('#type' => 'value', '#value' => $stored_view));
+function stored_views_delete_confirm($form, $form_state, $stored_view) {
+  $form = array('stored_view' => array(
+      '#type' => 'value',
+      '#value' => $stored_view,
+    ));
   $dest = drupal_get_destination();
   if ($dest) {
     $dest = explode('=', $dest);
@@ -168,7 +185,7 @@ function stored_views_save($save) {
 
 /**
  * Load a stored view.
- * 
+ *
  * @param $load
  *   array in the format
  *   array(
@@ -178,15 +195,19 @@ function stored_views_save($save) {
  *     'filters' => 'the=views&fil=ters',
  *   )
  */
-function stored_views_load($load) {
-  $load = db_fetch_array(db_query('SELECT * FROM {stored_views} WHERE view = "%s" AND path = "%s" AND arguments = "%s" AND filters = "%s"',
-    $load['view'], $load['path'], serialize($load['arguments']), serialize($load['filters'])));
-  if ($load) {
-    $load['arguments'] = unserialize($load['arguments']);
-    $load['filters'] = unserialize($load['filters']);
-    return $load;
+function stored_views_load($loads) {
+  foreach ($loads as $nid => &$load) {
+    $load = db_fetch_array(db_query('SELECT * FROM {stored_views} WHERE view = :view AND path = :path AND arguments = :arguments AND filters = :filters', array(':view' => $load['view'], ':path' => $load['path'], ':arguments' => serialize($load['arguments']), ':filters' => serialize($load['filters']))));
+    if ($load) {
+      $load['arguments'] = unserialize($load['arguments']);
+      $load['filters'] = unserialize($load['filters']);
+      return $load;
+    }
+    $node_additions = FALSE;
+    foreach ($node_additions as $property => &$value) {
+      $load->$property = $value;
+    }
   }
-  return FALSE;
 }
 
 /**
@@ -197,7 +218,7 @@ function stored_views_load($load) {
  */
 function stored_views_id_load($id) {
   if (is_numeric($id)) {
-    $load = db_fetch_array(db_query('SELECT * FROM {stored_views} WHERE id = %d', $id));
+    $load = db_fetch_array(db_query('SELECT * FROM {stored_views} WHERE id = :id', array(':id' => $id)));
     if ($load) {
       $load['arguments'] = unserialize($load['arguments']);
       $load['filters'] = unserialize($load['filters']);
@@ -209,7 +230,7 @@ function stored_views_id_load($id) {
 
 /**
  * Remove a stored view.
- * 
+ *
  * @param $delete
  *   array in the format
  *   array(
@@ -220,8 +241,14 @@ function stored_views_id_load($id) {
  *   )
  */
 function stored_views_delete($delete) {
-  db_query('DELETE FROM {stored_views} WHERE view = "%s" AND path = "%s" AND arguments = "%s" AND filters = "%s"',
-    $delete['view'], $delete['path'], serialize($delete['arguments']), serialize($delete['filters']));
+  // TODO Please review the conversion of this statement to the D7 database API syntax.
+  /* db_query('DELETE FROM {stored_views} WHERE view = "%s" AND path = "%s" AND arguments = "%s" AND filters = "%s"', $delete['view'], $delete['path'], serialize($delete['arguments']), serialize($delete['filters'])) */
+  db_delete('stored_views')
+  ->condition('view', $delete['view'])
+  ->condition('path', $delete['path'])
+  ->condition('arguments', serialize($delete['arguments']))
+  ->condition('filters', serialize($delete['filters']))
+  ->execute();
 }
 
 /**

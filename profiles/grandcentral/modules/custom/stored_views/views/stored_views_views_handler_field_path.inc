@@ -30,7 +30,7 @@ class stored_views_views_handler_field_path extends views_handler_field {
     $filters = unserialize($values->{$this->filters});
 
     if (is_array($arguments) && count($arguments)) {
-      $path .= '/'. implode('/', $arguments);
+      $path .= '/' . implode('/', $arguments);
     }
 
     $query = array();
@@ -39,7 +39,7 @@ class stored_views_views_handler_field_path extends views_handler_field {
         $query[] = "$k=$v";
       }
     }
-   
-    return $path .'?'. implode('&', $query);
+
+    return $path . '?' . implode('&', $query);
   }
 }

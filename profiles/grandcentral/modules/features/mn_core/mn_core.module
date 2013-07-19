@@ -1,26 +1,34 @@
 <?php
+/**
+ * @file
+ * GrandCentral core module
+ * Based on ManagingNews by Seed Development
+ */
 
-include_once('mn_core.features.inc');
+include_once DRUPAL_ROOT . '/' . 'mn_core.features.inc';
 
 /**
- * Implementation of hook_help().
+ * Implements hook_help().
  */
 function mn_core_help($path, $arg) {
   switch ($path) {
     case 'dashboard':
       $actions = '';
       $output = "<p>";
-      $output .= t("Welcome to !site_name.", array('!site_name' => variable_get('site_name', 'Drupal')));
+      $output .= t("Welcome to !site_name.",
+        array('!site_name' => variable_get('site_name', 'Drupal')
+        )
+      );
       $output .= "</p>";
       if (user_access('administer site configuration')) {
-        $actions .= "<li>". t("Configure !home by using edit links on blocks and the 'Dashboard' button on the bottom right.", array('!home' => l(t('Home'), ''))) ."</li>";
+        $actions .= "<li>" . t("Configure !home by using edit links on blocks and the 'Dashboard' button on the bottom right.", array('!home' => l(t('Home'), ''))) . "</li>";
       }
-      $actions .= "<li>". t("Use the !feeds page to browse news by their source.", array('!feeds' => l(t('Feeds'), 'feeds'))) ."</li>";
+      $actions .= "<li>" . t("Use the !feeds page to browse news by their source.", array('!feeds' => l(t('Feeds'), 'feeds'))) . "</li>";
       if (module_exists('mn_search')) {
-        $actions .= "<li>". t("Use the !search page to search all articles.", array('!search' => l(t('Search'), 'search'))) ."</li>";
+        $actions .= "<li>" . t("Use the !search page to search all articles.", array('!search' => l(t('Search'), 'search'))) . "</li>";
       }
       if (module_exists('mn_channels')) {
-        $actions .= "<li>". t("Use the !channels page to see a moderated selection of news.", array('!channels' => l(t('Channels'), 'channels'))) ."</li>";
+        $actions .= "<li>" . t("Use the !channels page to see a moderated selection of news.", array('!channels' => l(t('Channels'), 'channels'))) . "</li>";
       }
       $output .= "<ul>{$actions}</ul>";
       return $output;
@@ -30,42 +38,56 @@ function mn_core_help($path, $arg) {
       $output .= "</p>";
       $actions = '';
       if (node_access('create', 'feed')) {
-        $actions .= "<li>". t("!add new RSS/Atom feeds to the site.", array('!add' => l(t('Add'), 'node/add/feed'))) ."</li>";
+        $actions .= "<li>" . t("!add new RSS/Atom feeds to the site.", array('!add' => l(t('Add'), 'node/add/feed'))) . "</li>";
       }
       if (user_access('manage stored views')) {
-        $actions .= "<li>". t("!search the news and highlight saved searches on the frontpage.", array('!search' => l(t('Search'), 'search'))) ."</li>";
+        $actions .= "<li>" . t("!search the news and highlight saved searches on the frontpage.", array('!search' => l(t('Search'), 'search'))) . "</li>";
       }
       if (user_access('edit data taxonomy relations')) {
-        $actions .= "<li>". t("Organize items by tagging them and using the same tag on a !channel_node.", array('!channel_node' => l(t('Channel node'), 'channels'))) ."</li>";
+        $actions .= "<li>" . t("Organize items by tagging them and using the same tag on a !channel_node.", array('!channel_node' => l(t('Channel node'), 'channels'))) . "</li>";
       }
       if (!empty($actions)) {
         $output .= "<ul>{$actions}</ul>";
       }
       return $output;
     case 'import/opml':
-      return '<p>'. t('Import feeds from other aggregators via !opml format.', array('!opml' => l(t('OPML'), 'http://en.wikipedia.org/wiki/OPML'))) .'</p>';
+      return '<p>' . t('Import feeds from other aggregators via !opml format.', array('!opml' => l(t('OPML'), 'http://en.wikipedia.org/wiki/OPML'))) . '</p>';
     case 'import/terms':
-      return '<p>'. t('Terms imported through this form will be used for automatic term extraction. Every incoming item will be automatically tagged with a term from this import if it occurs in the item\'s title or description.') .'</p>';
+      return '<p>' . t('Terms imported through this form will be used for automatic term extraction. Every incoming item will be automatically tagged with a term from this import if it occurs in the item\'s title or description.') . '</p>';
   }
 }
 
 /**
- * Implementation of hook_enable().
+ * Implements hook_enable().
  */
 function mn_core_enable() {
   // Increased weight allows altering the title of 'dashboard' menu item.
-  db_query("UPDATE {system} SET weight = 25 WHERE name = 'mn_core'");
+  // TODO Please review the conversion of this statement to the D7 database API syntax.
+  /* db_query("UPDATE {system} SET weight = 25 WHERE name = 'mn_core'") */
+  db_update('system')
+  ->fields(array(
+    'weight' =>  25,
+  ))
+  ->condition('name', 'mn_core')
+  ->execute();
 }
 
 /**
- * Implementation of hook_cron().
+ * Implements hook_cron().
  */
 function mn_core_cron() {
   // Make sure jake is enabled and caches are cleared. This toggle was
   // introduced after various problems with uncleared caches with drush and
   // update.php were discovered in the beta6 -> beta7 upgrade path.
   if (variable_get('mn_core_clear_all_caches', FALSE) == TRUE) {
-    db_query("UPDATE {system} SET status = 1 WHERE type = 'theme' and name = 'jake'");
+    // TODO Please review the conversion of this statement to the D7 database API syntax.
+    /* db_query("UPDATE {system} SET status = 1 WHERE type = 'theme' and name = 'jake'") */
+    db_update('system')
+  ->fields(array(
+    'status' =>  1,
+  ))
+  ->condition('type', 'theme' and name)
+  ->execute();
     drupal_flush_all_caches();
     variable_del('mn_core_clear_all_caches');
   }
@@ -73,15 +95,15 @@ function mn_core_cron() {
 }
 
 /**
- * Implementation of hook_form_alter().
+ * Implements hook_form_alter().
  *
  * The hook_form_[form_id]_alter() syntax is not used here as it will
  * get called prior to Feeds.
  */
 function mn_core_form_alter(&$form, $form_state, $form_id) {
   if ($form_id == 'feed_node_form') {
-    $vid = db_result(db_query("SELECT vid FROM vocabulary WHERE module = 'features_tags'"));
-    if($vid) {
+    $vid = db_query("SELECT vid FROM vocabulary WHERE module = :module", array(':module' => 'features_tags'))->fetchField();
+    if ($vid) {
       $form['taxonomy']['tags'][$vid]['#required'] = FALSE;
       $form['taxonomy']['tags'][$vid]['#description'] = t('These tags will be automatically applied to all new stories on this feed.');
     }
@@ -152,7 +174,7 @@ function mn_core_form_alter(&$form, $form_state, $form_id) {
 }
 
 /**
- * Implementation of hook_openlayers_alter().
+ * Implements hook_openlayers_alter().
  *
  * Add js file for openlayers translation if it exists the openlayers_lang
  * libraries directory.
@@ -168,14 +190,14 @@ function mn_core_openlayers_alter() {
 }
 
 /**
- * Implementation of hook_imagecache_default_presets().
+ * Implements hook_imagecache_default_presets().
  */
 function mn_core_imagecache_default_presets_alter($default_presets) {
   $default_presets['designkit-image-wallpaper'] = array();
 }
 
 /**
- * Implementation of hook_form_alter() for node_delete_confirm.
+ * Implements hook_form_alter() for node_delete_confirm().
  */
 function mn_core_form_node_delete_confirm_alter(&$form, $form_state) {
   if (isset($form['nid']['#value']) && $node = node_load($form['nid']['#value'])) {
@@ -185,6 +207,10 @@ function mn_core_form_node_delete_confirm_alter(&$form, $form_state) {
   }
 }
 
+/**
+ * @todo Please document this function.
+ * @see http://drupal.org/node/1354
+ */
 function mn_core_form_spaces_dashboard_editor_alter(&$form, $form_state) {
   // Remove the dashboard selction box for the context editor form on dashboard
   // pages.
@@ -212,7 +238,7 @@ function mn_core_preprocess_context_block_browser(&$vars) {
 }
 
 /**
- * Implementation of hook_form_alter() for data_node_active_form.
+ * Implements hook_form_alter() for data_node_active_form().
  *
  * Remove extra form item label.
  */
@@ -221,7 +247,7 @@ function mn_core_form_data_node_active_form_alter(&$form, $form_state) {
 }
 
 /**
- * Implementation of hook_context_default_contexts_alter().
+ * Implements hook_context_default_contexts_alter().
  */
 function mn_core_context_default_contexts_alter(&$contexts) {
   // Alter default spaces_dashboard context to set the layout. Custom
@@ -235,7 +261,7 @@ function mn_core_context_default_contexts_alter(&$contexts) {
 }
 
 /**
- * Implementation of hook_openlayers_behaviors().
+ * Implements hook_openlayers_behaviors().
  *
  * This is a ctools plugins hook.
  */
@@ -247,7 +273,7 @@ function mn_core_openlayers_behaviors() {
       'behavior' => array(
         'class' => 'mn_core_behavior_popup',
         'parent' => 'openlayers_behavior',
-        'path' => drupal_get_path('module', 'mn_core') .'/behaviors',
+        'path' => drupal_get_path('module', 'mn_core') . '/behaviors',
         'file' => 'mn_core_behavior_popup.inc',
       ),
     ),
@@ -257,7 +283,7 @@ function mn_core_openlayers_behaviors() {
       'behavior' => array(
         'class' => 'mn_core_behavior_scalepoints',
         'parent' => 'openlayers_behavior',
-        'path' => drupal_get_path('module', 'mn_core') .'/behaviors',
+        'path' => drupal_get_path('module', 'mn_core') . '/behaviors',
         'file' => 'mn_core_behavior_scalepoints.inc',
       ),
     ),
@@ -265,127 +291,133 @@ function mn_core_openlayers_behaviors() {
 }
 
 /**
- * Implementation of hook_block().
+ * Implements hook_block_info().
  */
-function mn_core_block($op = 'list', $delta = 0) {
-  switch ($op) {
-    case 'list':
-      $blocks = array();
-      $blocks['admin']['info'] = t('MN: Admin menu');
-      $blocks['formats']['info'] = t('MN: Alternative formats');
-      $blocks['print']['info'] = t('MN: Print controls');
-      $blocks['clock']['info'] = t('MN: Clock');
-      $blocks['user']['info'] = t('MN: User controls');
-      $blocks['bookmarklet']['info'] = t('MN: Bookmarklet help');
-      return $blocks;
-    case 'view':
-      switch ($delta) {
-        case 'user':
-          global $user;
-          if ($user->uid) {
-            $links = array(
-              'user' => array(
-                'title' => t('Account settings'),
-                'href' => "user/{$user->uid}/edit",
-              ),
-              'logout' => array(
-                'title' => t('Log out'),
-                'href' => 'logout',
-              ),
-            );
-            return array(
-              'subject' => check_plain($user->name),
-              'content' => theme('links', $links, array('class' => 'menu')),
-            );
-          }
-          break;
-        case 'clock':
-          // If dateAPI exists, use a timezone location.
-          if (module_exists('date_api')) {
-            $time = date_format_date(date_now(), 'custom', 'g:ia F j');
-            $tz = str_replace('_', ' ', date_default_timezone_name());
-          }
-          // Otherwise fallback to a GMT offset display.
-          else {
-            $time = format_date(time(), 'custom', 'g:ia F j');
-            $offset = variable_get('date_default_timezone', 0);
-            $hours = floor(abs($offset / 3600));
-            $minutes = str_pad(abs($offset % 3600) / 60, 2, 0, STR_PAD_LEFT);
-            $tz = $offset >= 0 ? "+{$hours}:{$minutes} GMT" : "-{$hours}:{$minutes} GMT";
-          }
-          return array('content' => "<strong class='time'>{$time}</strong><small class='timezone'>{$tz}</small>");
-        case 'print':
-          $block = array();
-          if (isset($_GET['print'])) {
-            $block['content'] = "<div class='back-link'>";
-            $block['content'] .= l(t('Back to site'), $_GET['q'], array('query' => drupal_query_string_encode($_GET, array('q', 'print'))));
-            $block['content'] .= "</div>";
-            $block['content'] .= drupal_get_form('mn_core_print_controls');
-          }
-          return $block;
-        case 'admin':
-          $links = array();
-          $paths = mn_core_admin_paths();
-          foreach (array_keys($paths) as $path) {
-            $item = menu_get_item($path);
-            if ($item['access']) {
-              $class = module_exists('seed') ? seed_id_safe($item['title']) : str_replace('/', '-', $path);
-              $links[$class] = $item;
-            }
-          }
-          $output = theme('links', $links, array('class' => 'menu'));
-          return array('subject' => t('Admin'), 'content' => $output);
-        case 'formats':
-          if ($view = views_get_page_view()) {
-            // Prepare a page query string to passthru alt. format links.
-            $query = $_GET;
-            if (isset($query['q'])) {
-              unset($query['q']);
-            }
-            if (isset($query['page'])) {
-              unset($query['page']);
-            }
+function mn_core_block_info() {
+  $blocks = array();
+  $blocks['admin']['info'] = t('MN: Admin menu');
+  $blocks['formats']['info'] = t('MN: Alternative formats');
+  $blocks['print']['info'] = t('MN: Print controls');
+  $blocks['clock']['info'] = t('MN: Clock');
+  $blocks['user']['info'] = t('MN: User controls');
+  $blocks['bookmarklet']['info'] = t('MN: Bookmarklet help');
+  return $blocks;
+}
 
-            $links = array();
-            $view = $view->view;
-            foreach ($view->display as $display_id => $display) {
-              // For each feed that is attached to current display, add link
-              if ($display->display_plugin == 'feed') {
-                $displays = $display->handler->get_option('displays');
-                if (!empty($displays[$view->current_display])) {
-                  // Clone the view and use the ->get_url() method to preserve/replace args correctly.
-                  $feed_view = $view->clone_view();
-                  $feed_view->set_display($display_id);
-                  $path = $feed_view->get_url();
-                  $feed_view->destroy();
-
-                  $links[$display_id] = array(
-                    'title' => '<span class="icon"></span>'. t($display->display_title),
-                    'href' => $path,
-                    'html' => TRUE,
-                    'query' => $query,
-                  );
-                }
-              }
-            }
-            $links['print'] = array(
-              'title' => '<span class="icon"></span>'. t('Print'),
-              'href' => $_GET['q'],
-              'html' => TRUE,
-              'query' => $query + array('print' => 1),
-            );
-            $output = theme('links', $links, array('class' => 'links formats'));
-            return array('content' => $output);
-          }
-          break;
-        case 'bookmarklet':
-          $output = _mn_core_block_bookmarklet();
-          return array('subject' => t('Bookmarklet'), 'content' => $output);
-          break;
+/**
+ * Implements hook_block_view().
+ */
+function mn_core_block_view($delta) {
+  switch ($delta) {
+    case 'user':
+      global $user;
+      if ($user->uid) {
+        $links = array(
+          'user' => array(
+            'title' => t('Account settings'),
+            'href' => "user/{$user->uid}/edit",
+          ),
+          'logout' => array(
+            'title' => t('Log out'),
+            'href' => 'logout',
+          ),
+        );
+        return array(
+          'subject' => check_plain($user->name),
+          'content' => theme('links', array('links' => $links, 'attributes' => array('class' => 'menu'))),
+        );
       }
+      break;
+    case 'clock':
+      // If dateAPI exists, use a timezone location.
+      if (module_exists('date_api')) {
+        $time = date_format_date(date_now(), 'custom', 'g:ia F j');
+        $tz = str_replace('_', ' ', date_default_timezone_name());
+      }
+      // Otherwise fallback to a GMT offset display.
+      else {
+        $time = format_date(REQUEST_TIME, 'custom', 'g:ia F j');
+        $offset = variable_get('date_default_timezone', 0);
+        $hours = floor(abs($offset / 3600));
+        $minutes = str_pad(abs($offset % 3600) / 60, 2, 0, STR_PAD_LEFT);
+        $tz = $offset >= 0 ? "+{$hours}:{$minutes} GMT" : "-{$hours}:{$minutes} GMT";
+      }
+      return array('content' => "<strong class='time'>{$time}</strong><small class='timezone'>{$tz}</small>");
+    case 'print':
+      $block = array();
+      if (isset($_GET['print'])) {
+        $block['content'] = "<div class='back-link'>";
+        $block['content'] .= l(t('Back to site'), $_GET['q'], array('query' => drupal_query_string_encode($_GET, array('q', 'print'))));
+        $block['content'] .= "</div>";
+        $block['content'] .= drupal_get_form('mn_core_print_controls');
+      }
+      return $block;
+    case 'admin':
+      $links = array();
+      $paths = mn_core_admin_paths();
+      foreach (array_keys($paths) as $path) {
+        $item = menu_get_item($path);
+        if ($item['access']) {
+          $class = module_exists('seed') ? seed_id_safe($item['title']) : str_replace('/', '-', $path);
+          $links[$class] = $item;
+        }
+      }
+      $output = theme('links', array('links' => $links, 'attributes' => array('class' => 'menu')));
+      return array('subject' => t('Admin'), 'content' => $output);
+    case 'formats':
+      if ($view = views_get_page_view()) {
+        // Prepare a page query string to passthru alt. format links.
+        $query = $_GET;
+        if (isset($query['q'])) {
+          unset($query['q']);
+        }
+        if (isset($query['page'])) {
+          unset($query['page']);
+        }
+
+        $links = array();
+        $view = $view->view;
+        foreach ($view->display as $display_id => $display) {
+          // For each feed that is attached to current display, add link
+          if ($display->display_plugin == 'feed') {
+            $displays = $display->handler->get_option('displays');
+            if (!empty($displays[$view->current_display])) {
+              // Clone the view and use the ->get_url() method to preserve/replace args correctly.
+              $feed_view = $view->clone_view();
+              $feed_view->set_display($display_id);
+              $path = $feed_view->get_url();
+              $feed_view->destroy();
+
+              $links[$display_id] = array(
+                'title' => '<span class="icon"></span>' . t($display->display_title),
+                'href' => $path,
+                'html' => TRUE,
+                'query' => $query,
+              );
+            }
+          }
+        }
+        $links['print'] = array(
+          'title' => '<span class="icon"></span>' . t('Print'),
+          'href' => $_GET['q'],
+          'html' => TRUE,
+          'query' => $query + array('print' => 1),
+        );
+        $output = theme('links', array('links' => $links, 'attributes' => array('class' => 'links formats')));
+        return array('content' => $output);
+      }
+      break;
+    case 'bookmarklet':
+      $output = _mn_core_block_bookmarklet();
+      return array('subject' => t('Bookmarklet'), 'content' => $output);
       break;
   }
 }
+
+/**
+ * Implements hook_block().
+ */
+function mn_core_block_OLD($op = 'list', $delta = 0) { }
 
 /**
  * Block with instructions for using the bookmarklet.
@@ -401,24 +433,34 @@ function _mn_core_block_bookmarklet() {
 }
 
 /**
- * Implementation of hook_perm().
+ * Implements hook_permission().
  */
-function mn_core_perm() {
-  return array('administer mn');
+function mn_core_permission() {
+  return array(
+    'administer mn' => array(
+      'title' => t('administer mn'),
+      'description' => t('TODO Add a description for \'administer mn\''),
+    ),
+  );
 }
 
 /**
- * Implementation of hook_user().
- * Add a flag for displaying the initial MN welcome message for new users.
+ * Implements hook_user_insert().
  */
-function mn_core_user($op, &$edit, &$account, $category = NULL) {
-  if ($op === 'insert') {
+function mn_core_user_insert(&$edit, $account, $category) {
+  if (TRUE) {
     $edit['mn_welcome'] = TRUE;
   }
 }
 
 /**
- * Implementation of hook_data_views_handlers_alter().
+ * Implements hook_user().
+ * Add a flag for displaying the initial MN welcome message for new users.
+ */
+function mn_core_user_OLD($op, &$edit, &$account, $category = NULL) { }
+
+/**
+ * Implements hook_data_views_handlers_alter().
  */
 function mn_core_data_views_handlers_alter(&$handlers) {
   $handlers['field']['mn_core_handler_field'] = 'mn_core_handler_field';
@@ -432,12 +474,12 @@ function mn_core_data_views_handlers_alter(&$handlers) {
  */
 function mn_core_admin_paths() {
   $paths = array(
-    'admin/settings/site-information' => '',
-    'admin/settings/date-time' => '',
-    'admin/build/themes/settings/jake' => 'Theme settings',
+    'admin/config/site-information' => '',
+    'admin/config/date-time' => '',
+    'admin/appearance/settings/jake' => 'Theme settings',
     'admin/user/user' => '',
-    'admin/build/features' => '',
-    'admin/settings/openlayers' => '',
+    'admin/structure/features' => '',
+    'admin/config/openlayers' => '',
     'import/opml' => 'Import OPML',
     'import/terms' => 'Automatic term extraction',
   );
@@ -448,7 +490,7 @@ function mn_core_admin_paths() {
 }
 
 /**
- * Implementation of hook_menu_alter().
+ * Implements hook_menu_alter().
  */
 function mn_core_menu_alter(&$items) {
   // Rename Dashboard menu item to 'Home.'
@@ -464,7 +506,7 @@ function mn_core_menu_alter(&$items) {
   $admin_paths = mn_core_admin_paths();
   foreach ($items as $path => $item) {
     foreach ($admin_paths as $admin_path => $title) {
-      if ($path == $admin_path || strpos($path, $admin_path .'/') === 0) {
+      if ($path == $admin_path || strpos($path, $admin_path . '/') === 0) {
         if (!empty($title) && $path == $admin_path) {
           $items[$path]['title'] = $title;
         }
@@ -485,7 +527,7 @@ function mn_core_menu_alter(&$items) {
 }
 
 /**
- * Implementation of hook_spaces_dashboard_block_access_alter().
+ * Implements hook_spaces_dashboard_block_access_alter().
  */
 function mn_core_spaces_dashboard_block_access_alter(&$access) {
   // Hide custom trash box from trash menu
@@ -524,9 +566,12 @@ function mn_core_node_page_view($node, $cid) {
 /**
  * Print controls block.
  */
-function mn_core_print_controls(&$form_state) {
+function mn_core_print_controls($form, &$form_state) {
   $form = array();
-  $form['query'] = array('#type' => 'value', '#value' => $_GET);
+  $form['query'] = array(
+    '#type' => 'value',
+    '#value' => $_GET,
+  );
   $form['title'] = array(
     '#type' => 'textfield',
     '#title' => t('Page title'),
@@ -553,11 +598,12 @@ function mn_core_print_controls_submit(&$form, &$form_state) {
   $query = $form_state['values']['query'];
   $query['title'] = $form_state['values']['title'];
   $query['items_per_page'] = $form_state['values']['items_per_page'];
-  drupal_goto($query['q'], drupal_query_string_encode($query, array('q')));
+  // TODO drupal_query_string_encode($query, array('q')) needs to be an array of keys and values instead of a string.
+  drupal_goto($query['q'], array('query' => drupal_query_string_encode($query, array('q'))));
 }
 
 /**
- * Implementation of hook_views_pre_execute().
+ * Implements hook_views_pre_execute().
  */
 function mn_core_views_pre_execute(&$view) {
   if (isset($_GET['print']) && $view->display_handler->display->display_plugin == 'page') {
@@ -576,10 +622,10 @@ function mn_core_views_pre_execute(&$view) {
 function mn_core_403() {
   global $user;
   if ($user->uid) {
-    return "<div class='access-denied'>". t('You are not authorized to access this page. Ask the site administrator for the appropriate permissions to view this page.') ."</div>";
+    return "<div class='access-denied'>" . t('You are not authorized to access this page. Ask the site administrator for the appropriate permissions to view this page.') . "</div>";
   }
   else {
-    return "<div class='access-denied'>". t('You are not authorized to access this page. If you have a user account on the site !login. If you !forgotpassword.', array('!login' => l(t('please login'), 'user/login'), '!forgotpassword' => l(t('forgot your password go here'), 'user/password'))) ."</div>";
+    return "<div class='access-denied'>" . t('You are not authorized to access this page. If you have a user account on the site !login. If you !forgotpassword.', array('!login' => l(t('please login'), 'user/login'), '!forgotpassword' => l(t('forgot your password go here'), 'user/password'))) . "</div>";
   }
 }
 
@@ -615,7 +661,7 @@ function mn_core_preprocess_views_view(&$vars) {
 /**
  * Alter default syndication importer if Placemaker is being used for geotagging.
  */
-function mn_core_feeds_importer_default_alter($importer){
+function mn_core_feeds_importer_default_alter($importer) {
   $placemaker_options = variable_get('placemaker', '');
   if (!empty($placemaker_options['enabled'])) {
     $importer['syndication']->config['parser']['config']['extractors'] = 'placemaker';
@@ -641,7 +687,7 @@ function mn_core_preprocess_views_view_fields(&$vars) {
         if ($domain = mn_core_get_domain($url)) {
           $domain = explode('-', $domain);
           while (count($domain) > 1) {
-            $vars['template_files'][] = "mn-feeditem-". implode('-', $domain);
+            $vars['template_files'][] = "mn-feeditem-" . implode('-', $domain);
             array_shift($domain);
           }
         }
@@ -677,7 +723,7 @@ function mn_core_cron_log() {
 }
 
 /**
- * Implementation of hook_theme_registry_alter().
+ * Implements hook_theme_registry_alter().
  */
 function mn_core_theme_registry_alter(&$theme_registry) {
   $theme_registry['textfield']['function'] = 'mn_core_textfield';
@@ -696,29 +742,29 @@ function mn_core_textfield($element) {
     $element['#attributes']['class'] = isset($element['#attributes']['class']) ? "{$element['#attributes']['class']} fluid" : "fluid";
   }
 
-  $size = empty($element['#size']) ? '' : ' size="'. $element['#size'] .'"';
-  $maxlength = empty($element['#maxlength']) ? '' : ' maxlength="'. $element['#maxlength'] .'"';
+  $size = empty($element['#size']) ? '' : ' size="' . $element['#size'] . '"';
+  $maxlength = empty($element['#maxlength']) ? '' : ' maxlength="' . $element['#maxlength'] . '"';
   $class = array('form-text');
   $extra = '';
   $output = '';
 
-  if ($element['#autocomplete_path'] && menu_valid_path(array('link_path' => $element['#autocomplete_path']))) {
+  if ($element['#autocomplete_path'] && drupal_valid_path($element['#autocomplete_path'])) {
     drupal_add_js('misc/autocomplete.js');
     $class[] = 'form-autocomplete';
 
     // Disabled PURL by adding option into url() call below.
-    $extra =  '<input class="autocomplete" type="hidden" id="'. $element['#id'] .'-autocomplete" value="'. check_url(url($element['#autocomplete_path'], array('absolute' => TRUE, 'purl' => array('disabled' => TRUE)))) .'" disabled="disabled" />';
+    $extra =  '<input class="autocomplete" type="hidden" id="' . $element['#id'] . '-autocomplete" value="' . check_url(url($element['#autocomplete_path'], array('absolute' => TRUE, 'purl' => array('disabled' => TRUE)))) . '" disabled="disabled" />';
   }
   _form_set_class($element, $class);
 
   if (isset($element['#field_prefix'])) {
-    $output .= '<span class="field-prefix">'. $element['#field_prefix'] .'</span> ';
+    $output .= '<span class="field-prefix">' . $element['#field_prefix'] . '</span> ';
   }
 
-  $output .= '<input type="text"'. $maxlength .' name="'. $element['#name'] .'" id="'. $element['#id'] .'"'. $size .' value="'. check_plain($element['#value']) .'"'. drupal_attributes($element['#attributes']) .' />';
+  $output .= '<input type="text"' . $maxlength . ' name="' . $element['#name'] . '" id="' . $element['#id'] . '"' . $size . ' value="' . check_plain($element['#value']) . '"' . drupal_attributes($element['#attributes']) . ' />';
 
   if (isset($element['#field_suffix'])) {
-    $output .= ' <span class="field-suffix">'. $element['#field_suffix'] .'</span>';
+    $output .= ' <span class="field-suffix">' . $element['#field_suffix'] . '</span>';
   }
 
   return theme('form_element', $element, $output) . $extra;
@@ -726,7 +772,7 @@ function mn_core_textfield($element) {
 
 
 /**
- * Implementation of hook_views_pre_build().
+ * Implements hook_views_pre_build().
  */
 function mn_core_views_pre_build(&$view) {
   if (!module_exists('simpleshare')) {

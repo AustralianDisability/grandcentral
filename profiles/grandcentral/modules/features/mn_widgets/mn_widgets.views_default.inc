@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implementation of hook_views_default_views().
+ * Implements hook_views_default_views().
  */
 function mn_widgets_views_default_views() {
   $views = array();
@@ -304,7 +304,7 @@ function mn_widgets_views_default_views() {
       'add_table' => 0,
       'require_value' => 0,
       'id' => 'name',
-      'table' => 'term_data',
+      'table' => 'taxonomy_term_data',
       'field' => 'name',
       'relationship' => 'tid',
       'validate_user_argument_type' => 'uid',

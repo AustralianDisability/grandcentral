@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implementation of hook_views_handlers()
+ * Implements hook_views_handlers().
  */
 function mn_core_views_handlers() {
   return array(
@@ -23,7 +23,7 @@ function mn_core_views_handlers() {
 }
 
 /**
- * Implementation of hook_views_data_alter().
+ * Implements hook_views_data_alter().
  */
 function mn_core_views_data_alter(&$data) {
   $tables = data_get_all_tables();
@@ -36,7 +36,7 @@ function mn_core_views_data_alter(&$data) {
         if (_geotaxonomy_vocabulary_enabled($vocab->vid)) {
           // use module name as identifier if features is behind this.
           $usevid = strpos($vocab->module, 'features_') === 0 ? $vocab->module : $vocab->vid;
-          $data[$table->get('name')]['term_geo_Lat_'.$usevid] = array(
+          $data[$table->get('name')]['term_geo_Lat_' . $usevid] = array(
             'field' => array(
               'title' => t('Geo term lat for %vid', array('%vid' => $usevid)),
               'help' => t('Retrieve geo data if it exists.'),
@@ -44,7 +44,7 @@ function mn_core_views_data_alter(&$data) {
               'real field' => 'lat',
             ),
           );
-          $data[$table->get('name')]['term_geo_Lon_'.$usevid] = array(
+          $data[$table->get('name')]['term_geo_Lon_' . $usevid] = array(
             'field' => array(
               'title' => t('Geo term lon for %vid', array('%vid' => $usevid)),
               'help' => t('Retrieve geo data if it exists.'),
@@ -52,7 +52,7 @@ function mn_core_views_data_alter(&$data) {
               'real field' => 'lon',
             ),
           );
-          $data[$table->get('name')]['term_geo_Feat_'.$usevid] = array(
+          $data[$table->get('name')]['term_geo_Feat_' . $usevid] = array(
             'field' => array(
               'title' => t('Geo term feature name for %vid', array('%vid' => $usevid)),
               'help' => t('Retrieve geo data if it exists.'),

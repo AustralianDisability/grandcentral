@@ -17,7 +17,7 @@ class mn_boxes_search extends mn_boxes_default {
     $form['search_terms'] = array(
       '#type' => 'textfield',
       '#title' => t('Search terms'),
-      '#default_value' => $this->options['search_terms']
+      '#default_value' => $this->options['search_terms'],
     );
     $form += parent::options_form();
     return $form;

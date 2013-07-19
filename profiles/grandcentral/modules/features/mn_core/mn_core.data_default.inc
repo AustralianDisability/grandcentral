@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implementation of hook_data_default().
+ * Implements hook_data_default().
  */
 function mn_core_data_default() {
   $export = array();
@@ -157,7 +157,7 @@ function mn_core_data_default() {
       ),
     ),
     'data_taxonomy' => array(
-      'vocabulary' => array(
+      'taxonomy_vocabulary' => array(
         1 => 1,
       ),
       'id' => 'id',

@@ -1,4 +1,4 @@
-core = "6.x"
+core = 7.x
 dependencies[] = "context"
 dependencies[] = "data_taxonomy"
 dependencies[] = "features"
@@ -32,3 +32,5 @@ features[views_api][] = "api:2"
 name = "MN Channels"
 package = "Managing News"
 project = "mn_channels"
+
+files[] = views/mn_channels_views_handler_field_item_count.inc

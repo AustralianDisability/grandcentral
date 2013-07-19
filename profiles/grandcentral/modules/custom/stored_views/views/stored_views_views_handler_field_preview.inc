@@ -6,14 +6,17 @@
 class stored_views_views_handler_field_preview extends views_handler_field {
 
   protected $view_name, $arguments, $filters;
-  
+
   /**
    * Options definitions.
    */
   function option_definition() {
     $options = parent::option_definition();
 
-    $options['displays'] = array('default' => 'preview', 'translatable' => FALSE);
+    $options['displays'] = array(
+      'default' => 'preview',
+      'translatable' => FALSE,
+    );
 
     return $options;
   }
@@ -60,7 +63,7 @@ class stored_views_views_handler_field_preview extends views_handler_field {
         $view = views_get_view($view_name);
         foreach ($view->display as $id => $display) {
           if ($display->display_title == $display_title) {
-            $view->set_exposed_input($filters); 
+            $view->set_exposed_input($filters);
             $output .= $view->preview($id, $arguments);
             unset($view);
             break;

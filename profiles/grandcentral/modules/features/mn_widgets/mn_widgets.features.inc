@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implementation of hook_context_default_contexts().
+ * Implements hook_context_default_contexts().
  */
 function mn_widgets_context_default_contexts() {
   $export = array();
@@ -35,7 +35,6 @@ function mn_widgets_context_default_contexts() {
   $context->condition_mode = 0;
 
   $translatables['mn-widgets'] = array(
-
   );
 
   $export['mn-widgets'] = $context;
@@ -43,7 +42,7 @@ function mn_widgets_context_default_contexts() {
 }
 
 /**
- * Implementation of hook_ctools_plugin_api().
+ * Implements hook_ctools_plugin_api().
  */
 function mn_widgets_ctools_plugin_api() {
   list($module, $api) = func_get_args();
@@ -53,7 +52,7 @@ function mn_widgets_ctools_plugin_api() {
 }
 
 /**
- * Implementation of hook_views_api().
+ * Implements hook_views_api().
  */
 function mn_widgets_views_api() {
   return array(

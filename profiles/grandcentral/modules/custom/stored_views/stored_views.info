@@ -1,10 +1,14 @@
 name = Stored views
 description = Save a view and its arguments for later display.
 dependencies[] = views
-core = 6.x
+core = 7.x
 ; Information added by fserver
-core = "6.x"
+core = 7.x
 datestamp = "1258646137"
 project = "stored_views"
 project status url = "http://code.developmentseed.org/fserver"
 version = "6.x-1.0-beta2"
+files[] = views/stored_views_views_handler_field_link_delete.inc
+files[] = views/stored_views_views_handler_field_path.inc
+files[] = views/stored_views_views_handler_field_preview.inc
+files[] = views/stored_views_views_handler_field_title.inc

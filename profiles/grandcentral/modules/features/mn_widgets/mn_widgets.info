@@ -1,4 +1,4 @@
-core = "6.x"
+core = 7.x
 dependencies[] = "context"
 dependencies[] = "data"
 dependencies[] = "data_taxonomy"
@@ -14,3 +14,4 @@ features[views_api][] = "api:2"
 name = "MN Widgets"
 package = "Managing News"
 project = "mn_widgets"
+

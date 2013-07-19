@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implementation of hook_context_default_contexts().
+ * Implements hook_context_default_contexts().
  */
 function mn_channels_context_default_contexts() {
   $export = array();

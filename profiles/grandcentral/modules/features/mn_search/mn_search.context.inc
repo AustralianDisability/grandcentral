@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implementation of hook_context_default_contexts().
+ * Implements hook_context_default_contexts().
  */
 function mn_search_context_default_contexts() {
   $export = array();
@@ -64,7 +64,6 @@ function mn_search_context_default_contexts() {
   $context->condition_mode = 0;
 
   $translatables['mn-section-search'] = array(
-
   );
 
   $export['mn-section-search'] = $context;
@@ -114,7 +113,6 @@ function mn_search_context_default_contexts() {
   $context->condition_mode = 1;
 
   $translatables['mn-section-search-notrash'] = array(
-
   );
 
   $export['mn-section-search-notrash'] = $context;

@@ -1,4 +1,4 @@
-core = "6.x"
+core = 7.x
 dependencies[] = "mapbox"
 dependencies[] = "mn_core"
 dependencies[] = "openlayers"
@@ -22,3 +22,4 @@ features[openlayers_styles][] = "mn_red"
 name = "MN World"
 package = "Managing News"
 project = "mn_world"
+

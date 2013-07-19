@@ -1,7 +1,7 @@
 <?php
 // $Id: mn_feeds.test,v 1.1.2.1 2010/10/10 03:35:20 diggersf Exp $
 
-require_once drupal_get_path('module', 'mn_test') . '/mn_web_test_case.php';
+require_once DRUPAL_ROOT . '/' . drupal_get_path('module', 'mn_test') . '/mn_web_test_case.php';
 
 class MNFeedsTestCase extends MnWebTestCase {
   /**
@@ -32,7 +32,7 @@ class MNFeedsTestCase extends MnWebTestCase {
       'taxonomy[tags][1]' => 'Managing News Test, Washington D.C.',
     );
     $this->drupalPost('node/add/feed', $edit, 'Save');
-    $this->assertText('Created 10 items.', t('Succesfully imported items from first feed.'));    
+    $this->assertText('Created 10 items.', t('Succesfully imported items from first feed.'));
 
     $edit = array(
       'title' => 'Development Seed',
@@ -40,7 +40,7 @@ class MNFeedsTestCase extends MnWebTestCase {
       'taxonomy[tags][1]' => 'Earthquake, USGS, Managing News Test',
     );
     $this->drupalPost('node/add/feed', $edit, 'Save');
-    $this->assertText('Created 25 items.', t('Succesfully imported items from second feed.'));    
+    $this->assertText('Created 25 items.', t('Succesfully imported items from second feed.'));
   }
 
 }

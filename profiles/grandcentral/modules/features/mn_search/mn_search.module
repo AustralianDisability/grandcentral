@@ -1,6 +1,6 @@
 <?php
 
-include_once('mn_search.features.inc');
+include_once DRUPAL_ROOT . '/' . 'mn_search.features.inc';
 
 /**
  * Clear search status cache.
@@ -14,7 +14,7 @@ function mn_search_cron() {
  */
 function mn_search_get_search_status($reset = FALSE) {
   $cache = cache_get('mn_search_status');
-  if ($reset || !$cache || (!empty($cache->data['expires']) && time() > $cache->data['expires'])) {
+  if ($reset || !$cache || (!empty($cache->data['expires']) && REQUEST_TIME > $cache->data['expires'])) {
     // Only invoke data_search... we don't care about nodes, users, etc.
     $status = module_invoke('data_search', 'search', 'status');
     $status['expires'] = strtotime('+1 hours');
@@ -25,40 +25,46 @@ function mn_search_get_search_status($reset = FALSE) {
 }
 
 /**
- * Implementation of hook_block().
+ * Implements hook_block_info().
  */
-function mn_search_block($op = 'list', $delta = 0) {
-  switch ($op) {
-    case 'list':
-      $blocks = array();
-      $blocks['status']['info'] = t('Search index status');
-      return $blocks;
-    case 'view':
-      switch ($delta) {
-        case 'status':
-          if (user_access('administer mn')) {
-            $status = mn_search_get_search_status();
-            $remaining = isset($status['remaining']) ? $status['remaining'] : 0;
-            $total = isset($status['total']) ? $status['total'] : 0;
+function mn_search_block_info() {
+  $blocks = array();
+  $blocks['status']['info'] = t('Search index status');
+  return $blocks;
+}
 
-            // Only show the block if there are items to be indexed.
-            if ($remaining > 0) {
-              $percentage = ((int)min(100, 100 * ($total - $remaining) / max(1, $total))) .'%';
-              $label = t('Search index');
-              $suffix = t('complete');
-              $output = "<label>{$label}</label> <strong>{$percentage}</strong> {$suffix}";
-              $output .= "<div class='description'>". l(t('Update now'), 'admin/reports/status/run-cron', array('query' => drupal_get_destination())) ."</div>";
-              return array('content' => $output);
-            }
-          }
-          break;
+/**
+ * Implements hook_block_view().
+ */
+function mn_search_block_view($delta) {
+  switch ($delta) {
+    case 'status':
+      if (user_access('administer mn')) {
+        $status = mn_search_get_search_status();
+        $remaining = isset($status['remaining']) ? $status['remaining'] : 0;
+        $total = isset($status['total']) ? $status['total'] : 0;
+
+        // Only show the block if there are items to be indexed.
+        if ($remaining > 0) {
+          $percentage = ((int) min(100, 100 * ($total - $remaining) / max(1, $total))) . '%';
+          $label = t('Search index');
+          $suffix = t('complete');
+          $output = "<label>{$label}</label> <strong>{$percentage}</strong> {$suffix}";
+          $output .= "<div class='description'>" . l(t('Update now'), 'admin/reports/status/run-cron', array('query' => drupal_get_destination())) . "</div>";
+          return array('content' => $output);
+        }
       }
       break;
   }
 }
 
 /**
- * Implementation of hook_help().
+ * Implements hook_block().
+ */
+function mn_search_block_OLD($op = 'list', $delta = 0) { }
+
+/**
+ * Implements hook_help().
  */
 function mn_search_help($path, $arg) {
   switch ($path) {
@@ -68,16 +74,16 @@ function mn_search_help($path, $arg) {
       $output .= "</p>";
       if (user_access('manage stored views')) {
         $output .= "<ul>";
-        $output .= "<li>". t("After doing a search you can save it by clicking the <em>Save this search</em> button. You can optionally highlight the search to display on the frontpage of the site.") ."</li>";
+        $output .= "<li>" . t("After doing a search you can save it by clicking the <em>Save this search</em> button. You can optionally highlight the search to display on the frontpage of the site.") . "</li>";
         $output .= "</ul>";
       }
       return $output;
-    break;
+      break;
   }
 }
 
 /**
- * Implementation of hook_menu_alter().
+ * Implements hook_menu_alter().
  *
  * Hiding search local tasks ('content', 'user', etc.)
  */
@@ -90,7 +96,7 @@ function mn_search_menu_alter(&$items) {
 }
 
 /**
- * Implementation of hook_form_alter() for views_exposed_form.
+ * Implements hook_form_alter() for views_exposed_form().
  *
  * Alter the filter button label to say "Search"
  */
@@ -117,18 +123,22 @@ function mn_search_form_stored_views_form_alter(&$form, $form_state) {
 }
 
 /**
- * Implementation of hook_views_pre_render().
+ * Implements hook_views_pre_render().
  */
 function mn_search_views_pre_render(&$view) {
   if ($view->display_handler->display->display_plugin === 'page') {
     $input = $view->get_exposed_input();
     if (!empty($input['search'])) {
-      drupal_set_title(check_plain($input['search']));
+      drupal_set_title($input['search']);
     }
   }
 }
 
 
+/**
+ * @todo Please document this function.
+ * @see http://drupal.org/node/1354
+ */
 function mn_search_openlayers_behaviors_info() {
   $info = array();
 
@@ -136,7 +146,7 @@ function mn_search_openlayers_behaviors_info() {
     'name' => t('Add a semi-fullscreen button'),
     'description' => t('View map semi-fullscreen'),
     'callback' => 'mn_search_behaviors_process_semi_fullscreen',
-    'js_file' => drupal_get_path('module', 'mn_search') .'/js/behaviors.js',
+    'js_file' => drupal_get_path('module', 'mn_search') . '/js/behaviors.js',
     'js_callback' => 'semi_fullscreen',
   );
 
@@ -154,7 +164,7 @@ function mn_search_openlayers_behaviors_info() {
  *   Behavior array
  */
 function mn_search_behaviors_process_semi_fullscreen($behavior, &$map) {
-  drupal_add_css(drupal_get_path('module', 'mn_search') .'/mn_search.css', 'module');
+  drupal_add_css(drupal_get_path('module', 'mn_search') . '/mn_search.css');
   return $behavior;
 }
 

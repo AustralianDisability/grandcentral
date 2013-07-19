@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implementation of hook_ctools_plugin_api().
+ * Implements hook_ctools_plugin_api().
  */
 function mn_core_ctools_plugin_api() {
   list($module, $api) = func_get_args();
@@ -29,7 +29,7 @@ function mn_core_ctools_plugin_api() {
 }
 
 /**
- * Implementation of hook_imagecache_default_presets().
+ * Implements hook_imagecache_default_presets().
  */
 function mn_core_imagecache_default_presets() {
   $items = array(
@@ -68,13 +68,13 @@ function mn_core_imagecache_default_presets() {
 }
 
 /**
- * Implementation of hook_node_info().
+ * Implements hook_node_info().
  */
 function mn_core_node_info() {
   $items = array(
     'feed' => array(
       'name' => t('Feed'),
-      'module' => 'features',
+      'base' => 'features',
       'description' => t('A feed for aggregating RSS/Atom sources.'),
       'has_title' => '1',
       'title_label' => t('Title'),
@@ -88,7 +88,7 @@ function mn_core_node_info() {
 }
 
 /**
- * Implementation of hook_views_api().
+ * Implements hook_views_api().
  */
 function mn_core_views_api() {
   return array(

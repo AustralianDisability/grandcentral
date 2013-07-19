@@ -33,7 +33,7 @@ class mn_core_handler_field extends views_handler_field {
       $patterns = array();
       $replacements = array();
       foreach (explode(' ', $search) as $word) {
-        $patterns[] = '/([^<]*)('. preg_quote($word) .')([^>*])/i';
+        $patterns[] = '/([^<]*)(' . preg_quote($word) . ')([^>*])/i';
         $replacements[] = '${1}<span class="search-found">${2}</span>${3}';
       }
       $value = preg_replace($patterns, $replacements, $value);
@@ -69,11 +69,11 @@ class mn_core_handler_field extends views_handler_field {
       foreach ($segments as $index => $segment) {
         if (strlen($segment) > 100) {
           $output = "<p>{$segment}</p>";
-          if (isset($segments[$index+1], $segments[$index+2])) {
+          if (isset($segments[$index + 1], $segments[$index + 2])) {
             $output .= '<cite><em>';
-            $output .= $segments[$index+1];
+            $output .= $segments[$index + 1];
             $output .= '</em> - ';
-            $output .= $segments[$index+2];
+            $output .= $segments[$index + 2];
             $output .= '</cite>';
           }
           return $output;
@@ -115,10 +115,10 @@ class mn_core_handler_field extends views_handler_field {
   }
 
   /**
-  * Taken from the twitter module by walkah.
-  * This helper function converts Twitter-style @usernames and #hashtags into
-  * actual links.
-  */
+   * Taken from the twitter module by walkah.
+   * This helper function converts Twitter-style @usernames and #hashtags into
+   * actual links.
+   */
   protected function twitter_link_filter($text, $prefix = '@', $destination = 'http://twitter.com/') {
     $matches = array(
       '/\>' . $prefix . '([a-zA-Z0-9_]{0,15})/i',

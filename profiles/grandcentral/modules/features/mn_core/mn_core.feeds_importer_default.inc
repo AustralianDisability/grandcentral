@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implementation of hook_feeds_importer_default().
+ * Implements hook_feeds_importer_default().
  */
 function mn_core_feeds_importer_default() {
   $export = array();
@@ -154,7 +154,7 @@ function mn_core_feeds_importer_default() {
     'processor' => array(
       'plugin_key' => 'ExtractorTermProcessor',
       'config' => array(
-        'vocabulary' => 'features_tags',
+        'taxonomy_vocabulary' => 'features_tags',
         'update_existing' => 0,
         'mappings' => array(
           0 => array(

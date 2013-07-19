@@ -1,9 +1,9 @@
 <?php
 
-include_once('mn_about.features.inc');
+include_once DRUPAL_ROOT . '/' . 'mn_about.features.inc';
 
 /**
- * Implementation of hook_help().
+ * Implements hook_help().
  */
 function mn_about_help($path, $arg) {
   if (context_get('mn', 'section') === 'about' && node_access('create', 'book')) {
@@ -15,12 +15,12 @@ function mn_about_help($path, $arg) {
 }
 
 /**
- * Implementation of hook_enable().
+ * Implements hook_enable().
  */
 function mn_about_enable() {
   // Create a new book node if there is no existing one (feature may be
   // disabled and enabled again).
-  if (!variable_get('mn_about_nid', 0) || !db_result(db_query('SELECT nid FROM {node} WHERE nid = %d', variable_get('mn_about_nid', 0)))) {
+  if (!variable_get('mn_about_nid', 0) || !db_query('SELECT nid FROM {node} WHERE nid = :nid', array(':nid' => variable_get('mn_about_nid', 0)))->fetchField()) {
     global $user;
     $node = new stdClass();
     $node->uid = $user->uid;
@@ -36,7 +36,7 @@ function mn_about_enable() {
   if (!variable_get('mn_about_mlid', 0)) {
 
     $item = array();
-    $item['link_path'] = 'node/'. variable_get('mn_about_nid', 0);
+    $item['link_path'] = 'node/' . variable_get('mn_about_nid', 0);
     $item['link_title'] = 'About';
     $item['menu_name'] = 'features';
     $item['weight'] = 20;
@@ -51,7 +51,7 @@ function mn_about_enable() {
 }
 
 /**
- * Implementation of hook_disable().
+ * Implements hook_disable().
  */
 function mn_about_disable() {
   // Disable menu link.

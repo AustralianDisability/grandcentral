@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implementation of hook_strongarm().
+ * Implements hook_strongarm().
  */
 function mn_core_strongarm() {
   $export = array();

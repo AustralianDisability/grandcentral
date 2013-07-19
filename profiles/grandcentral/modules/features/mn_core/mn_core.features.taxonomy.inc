@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implementation of hook_taxonomy_default_vocabularies().
+ * Implements hook_taxonomy_default_vocabularies().
  */
 function mn_core_taxonomy_default_vocabularies() {
   return array(

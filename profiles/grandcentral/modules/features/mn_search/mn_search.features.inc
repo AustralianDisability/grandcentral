@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implementation of hook_ctools_plugin_api().
+ * Implements hook_ctools_plugin_api().
  */
 function mn_search_ctools_plugin_api() {
   list($module, $api) = func_get_args();
@@ -11,7 +11,7 @@ function mn_search_ctools_plugin_api() {
 }
 
 /**
- * Implementation of hook_views_api().
+ * Implements hook_views_api().
  */
 function mn_search_views_api() {
   return array(

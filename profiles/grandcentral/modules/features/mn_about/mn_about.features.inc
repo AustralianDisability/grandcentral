@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implementation of hook_ctools_plugin_api().
+ * Implements hook_ctools_plugin_api().
  */
 function mn_about_ctools_plugin_api() {
   list($module, $api) = func_get_args();
@@ -14,13 +14,13 @@ function mn_about_ctools_plugin_api() {
 }
 
 /**
- * Implementation of hook_node_info().
+ * Implements hook_node_info().
  */
 function mn_about_node_info() {
   $items = array(
     'book' => array(
       'name' => t('Book page'),
-      'module' => 'features',
+      'base' => 'features',
       'description' => t('A <em>book page</em> is a page of content, organized into a collection of related entries collectively known as a <em>book</em>. A <em>book page</em> automatically displays links to adjacent pages, providing a simple navigation system for organizing and reviewing structured content.'),
       'has_title' => '1',
       'title_label' => t('Title'),

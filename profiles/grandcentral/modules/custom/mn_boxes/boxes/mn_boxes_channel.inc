@@ -14,6 +14,7 @@ class mn_boxes_channel extends mn_boxes_default {
    * Implementation of boxes_content::options_form().
    */
   public function options_form() {
+    // TODO Please convert this statement to the D7 database API syntax.
     $result = db_query(db_rewrite_sql("SELECT nid, title FROM {node} WHERE type = 'channel' ORDER BY title"));
     while ($row = db_fetch_array($result)) {
       $channels[$row['nid']] = $row['title'];

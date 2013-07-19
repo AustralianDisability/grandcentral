@@ -1,9 +1,9 @@
 <?php
 
-include_once('mn_widgets.features.inc');
+include_once DRUPAL_ROOT . '/' . 'mn_widgets.features.inc';
 
 /**
- * Implementation of hook_views_query_alter().
+ * Implements hook_views_query_alter().
  *
  * Sets a context with the display plugin is 'web_widgets.'
  */
@@ -16,61 +16,69 @@ function mn_widgets_views_query_alter($view) {
 }
 
 /**
- * Implementation of hook_block().
+ * Implements hook_block_info().
  */
-function mn_widgets_block($op = 'list', $delta = 0) {
-  switch ($op) {
-    case 'list':
-      $blocks = array();
-      $blocks['embed']['info'] = t('MN: Embed widget');
-      return $blocks;
-    case 'view':
-      drupal_add_css(drupal_get_path('module', 'mn_widgets') . '/mn_widgets.css');
-      switch ($delta) {
-        case 'embed':
-          // Prepare embed code
-          $display_mode = '';
-          $height = 300;
-          if (isset($_GET['display']) && $_GET['display'] == 'views-mode-map') {
-            $display_mode = "map/";
-            $height = 225;
-          }
+function mn_widgets_block_info() {
+  $blocks = array();
+  $blocks['embed']['info'] = t('MN: Embed widget');
+  return $blocks;
+}
 
-          $style = 'iframe';
-          $query = $_GET;
-          unset($query['q']);
-          unset($query['display']);
-
-          $path_q = $_GET['q'];
-          $path_q = str_replace('node', 'channel', $path_q);
-
-          $path = url('widget/' . $display_mode . $path_q, array('absolute' => TRUE, 'query' => $query, 'purl' => array('disabled' => TRUE)));
-          $width = 300;
-          $output = web_widgets_render_embed_code($style, $path, $width, $height);
-          $output .= '<div id="mn_widgets_preview"></div>';
-
-          // Prepare widget preview
-          $query['preview'] = 1;
-          $preview_path = url('widget/' . $display_mode . $path_q, array('absolute' => TRUE, 'query' => $query, 'purl' => array('disabled' => TRUE)));
-          $widget_preview['mn_widgets_preview'] = theme('web_widgets_' . $style, $preview_path, $width, $height);
-          drupal_add_js($widget_preview, 'setting');
-
-          return array('subject' => t('Embed'), 'content' => $output);
+/**
+ * Implements hook_block_view().
+ */
+function mn_widgets_block_view($delta) {
+  drupal_add_css(drupal_get_path('module', 'mn_widgets') . '/mn_widgets.css');
+  switch ($delta) {
+    case 'embed':
+      // Prepare embed code
+      $display_mode = '';
+      $height = 300;
+      if (isset($_GET['display']) && $_GET['display'] == 'views-mode-map') {
+        $display_mode = "map/";
+        $height = 225;
       }
+
+      $style = 'iframe';
+      $query = $_GET;
+      unset($query['q']);
+      unset($query['display']);
+
+      $path_q = $_GET['q'];
+      $path_q = str_replace('node', 'channel', $path_q);
+
+      $path = url('widget/' . $display_mode . $path_q, array('absolute' => TRUE, 'query' => $query, 'purl' => array('disabled' => TRUE)));
+      $width = 300;
+      $output = web_widgets_render_embed_code($style, $path, $width, $height);
+      $output .= '<div id="mn_widgets_preview"></div>';
+
+      // Prepare widget preview
+      $query['preview'] = 1;
+      $preview_path = url('widget/' . $display_mode . $path_q, array('absolute' => TRUE, 'query' => $query, 'purl' => array('disabled' => TRUE)));
+      // TODO Please change this theme call to use an associative array for the $variables parameter.
+      $widget_preview['mn_widgets_preview'] = theme('web_widgets_' . $style, $preview_path, $width, $height);
+      drupal_add_js($widget_preview, array('type' => 'setting', 'scope' => JS_DEFAULT));
+
+      return array('subject' => t('Embed'), 'content' => $output);
   }
 }
 
 /**
- * Implementation of hook_web_widgets_render_widget().
+ * Implements hook_block().
+ */
+function mn_widgets_block_OLD($op = 'list', $delta = 0) { }
+
+/**
+ * Implements hook_web_widgets_render_widget().
  *
  * Adds relevent stylesheets.
  */
 function mn_widgets_web_widgets_render_widget() {
-  drupal_add_css(drupal_get_path('module', 'mn_widgets') . '/mn_widgets.css', 'widget');
+  drupal_add_css(drupal_get_path('module', 'mn_widgets') . '/mn_widgets.css', array('type' => 'widget'));
 }
 
 /**
- * Implementation of hook_openlayers_alter().
+ * Implements hook_openlayers_alter().
  *
  * Set the width of the map to 300 when the mn_widgets context is active.
  */
@@ -89,7 +97,7 @@ function mn_widgets_openlayers_alter(&$map) {
 }
 
 /**
- * Implementation of hook_theme_registry_alter().
+ * Implements hook_theme_registry_alter().
  */
 function mn_widgets_theme_registry_alter(&$theme_registry) {
   $path = drupal_get_path("module", "mn_widgets") . '/theme';

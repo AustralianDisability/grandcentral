@@ -20,7 +20,11 @@ abstract class mn_boxes_default extends boxes_box {
         '#type' => 'radios',
         '#title' => t('Type'),
         '#default_value' => $this->options['type'],
-        '#options' => array('listing' => t('Listing'), 'map' => t('Map'), 'graph' => t('Graph')),
+        '#options' => array(
+          'listing' => t('Listing'),
+          'map' => t('Map'),
+          'graph' => t('Graph'),
+        ),
       );
       $form['number_of_items'] = array(
         '#type' => 'textfield',

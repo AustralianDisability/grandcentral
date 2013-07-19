@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implementation of hook_views_data().
+ * Implements hook_views_data().
  */
 function stored_views_views_data() {
   $data = array();
@@ -123,12 +123,12 @@ function stored_views_views_data() {
 }
 
 /**
- * Implementation of hook_views_handlers().
+ * Implements hook_views_handlers().
  */
 function stored_views_views_handlers() {
   return array(
     'info' => array(
-      'path' => drupal_get_path('module', 'stored_views') .'/views',
+      'path' => drupal_get_path('module', 'stored_views') . '/views',
     ),
     'handlers' => array(
       // field handlers

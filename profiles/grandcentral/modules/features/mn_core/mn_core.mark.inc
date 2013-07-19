@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implementation of hook_mark_default_marks().
+ * Implements hook_mark_default_marks().
  */
 function mn_core_mark_default_marks() {
   $export = array();

@@ -1,8 +1,14 @@
 <?php
+/**
+ * @file
+ * Install, update and uninstall functions for the stored_views module.
+ *
+ */
+
 // $Id$
 
 /**
- * Implementation of hook_schema().
+ * Implements hook_schema().
  */
 function stored_views_schema() {
   $schema['stored_views'] = array(
@@ -12,12 +18,14 @@ function stored_views_schema() {
         'description' => 'The primary id for a stored view.',
         'type' => 'serial',
         'unsigned' => TRUE,
-        'not null' => TRUE),
+        'not null' => TRUE,
+      ),
       'created' => array(
         'description' => 'The Unix timestamp when the stored view was created.',
         'type' => 'int',
         'not null' => TRUE,
-        'default' => 0),
+        'default' => 0,
+      ),
       'title' => array(
         'type' => 'varchar',
         'length' => '255',
@@ -39,26 +47,26 @@ function stored_views_schema() {
         'default' => '',
         'description' => 'Display name.',
       ),
-      'path' => array( 
+      'path' => array(
         'type' => 'varchar',
         'length' => '255',
         'not null' => TRUE,
         'default' => '',
         'description' => 'Path of the view including query arguments.',
       ),
-      'arguments' => array( 
+      'arguments' => array(
         'type' => 'text',
         'not null' => FALSE,
         'serialize' => TRUE,
         'description' => 'Arguments.',
       ),
-      'filters' => array( 
+      'filters' => array(
         'type' => 'text',
         'not null' => FALSE,
         'serialize' => TRUE,
         'description' => 'Filters.',
       ),
-      'status' => array( 
+      'status' => array(
         'type' => 'int',
         'unsigned' => TRUE,
         'not null' => TRUE,
@@ -76,19 +84,21 @@ function stored_views_schema() {
 }
 
 /**
- * Implementation of hook_install().
+ * Implements hook_install().
  */
 function stored_views_install() {
   // Create tables.
-  drupal_install_schema('stored_views');
+  // TODO The drupal_(un)install_schema functions are called automatically in D7.
+  // drupal_install_schema('stored_views')
 }
 
 /**
- * Implementation of hook_uninstall().
+ * Implements hook_uninstall().
  */
 function stored_views_uninstall() {
   // Remove tables.
-  drupal_uninstall_schema('stored_views');
+  // TODO The drupal_(un)install_schema functions are called automatically in D7.
+  // drupal_uninstall_schema('stored_views')
 }
 
 /**
@@ -96,14 +106,17 @@ function stored_views_uninstall() {
  */
 function stored_views_update_6001() {
   $ret = array();
-  $spec = array( 
+  $spec = array(
     'type' => 'int',
     'unsigned' => TRUE,
     'not null' => TRUE,
     'default' => 0,
     'description' => 'Status (promoted, not promoted).',
   );
-  db_add_field($ret, 'stored_views', 'status', $spec);
-  db_add_index($ret, 'stored_views', 'status', array('status'));
-  return $ret;
+  db_add_field('stored_views', 'status', $spec);
+  db_add_index('stored_views', 'status', array('status'));
+  // hook_update_N() no longer returns a $ret array. Instead, return
+  // nothing or a translated string indicating the update ran successfully.
+  // See http://drupal.org/node/224333#update_sql.
+  return t('TODO Add a descriptive string here to show in the UI.') /* $ret */;
 }

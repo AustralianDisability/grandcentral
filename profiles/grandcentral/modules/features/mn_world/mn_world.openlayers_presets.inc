@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implementation of hook_openlayers_presets().
+ * Implements hook_openlayers_presets().
  */
 function mn_world_openlayers_presets() {
   $export = array();

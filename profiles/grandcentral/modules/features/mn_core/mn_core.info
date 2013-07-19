@@ -1,4 +1,4 @@
-core = "6.x"
+core = 7.x
 dependencies[] = "boxes"
 dependencies[] = "context"
 dependencies[] = "data"
@@ -15,11 +15,10 @@ dependencies[] = "search"
 dependencies[] = "spaces_dashboard"
 dependencies[] = "stored_views"
 dependencies[] = "strongarm"
-dependencies[] = "upload"
 dependencies[] = "views_modes"
 dependencies[] = "views_rss"
 dependencies[] = "votingapi"
-description = "Basic Managing News functionality: aggregation, shared functions, basic tweaks to Drupal."
+description = "Basic Grand Central functionality: aggregation, shared functions, basic tweaks to Drupal."
 features[box][] = "mn_latest_news"
 features[box][] = "mn_latest_news_map"
 features[box][] = "mn_welcome"
@@ -109,3 +108,8 @@ features[views_api][] = "api:2"
 name = "MN Core"
 package = "Managing News"
 project = "mn_core"
+
+files[] = behaviors/mn_core_behavior_popup.inc
+files[] = behaviors/mn_core_behavior_scalepoints.inc
+files[] = views/mn_core_handler_field.inc
+files[] = views/mn_core_handler_field_geodata.inc

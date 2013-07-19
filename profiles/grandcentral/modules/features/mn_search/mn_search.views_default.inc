@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implementation of hook_views_default_views().
+ * Implements hook_views_default_views().
  */
 function mn_search_views_default_views() {
   $views = array();
