@@ -1,6 +1,6 @@
 <?php
 
-include_once DRUPAL_ROOT . '/' . 'mn_widgets.features.inc';
+include_once dirname(__FILE__) . '/mn_widgets.features.inc';
 
 /**
  * Implements hook_views_query_alter().
@@ -55,8 +55,8 @@ function mn_widgets_block_view($delta) {
       // Prepare widget preview
       $query['preview'] = 1;
       $preview_path = url('widget/' . $display_mode . $path_q, array('absolute' => TRUE, 'query' => $query, 'purl' => array('disabled' => TRUE)));
-      // TODO Please change this theme call to use an associative array for the $variables parameter.
-      $widget_preview['mn_widgets_preview'] = theme('web_widgets_' . $style, $preview_path, $width, $height);
+
+      $widget_preview['mn_widgets_preview'] = theme('web_widgets_' . $style, array($preview_path, $width, $height));
       drupal_add_js($widget_preview, array('type' => 'setting', 'scope' => JS_DEFAULT));
 
       return array('subject' => t('Embed'), 'content' => $output);
