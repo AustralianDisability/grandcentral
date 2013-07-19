@@ -1,20 +1,22 @@
 <?php
-// $Id: managingnews.profile,v 1.1.2.41 2010/10/10 02:57:49 diggersf Exp $
+/**
+ * GrandCentral profile based on Managing News for Drupal 6 by Development Seed
+ */
 
 /**
  * Implementation of hook_profile_details().
  */
-function managingnews_profile_details() {
+function grandcentral_profile_details() {
   return array(
-    'name' => 'Managing News',
-    'description' => 'A news aggregator by Development Seed.'
+    'name' => 'GrandCentral',
+    'description' => 'A news aggregator by tentwentyfour based on Managing News.'
   );
 }
 
 /**
  * Implementation of hook_profile_modules().
  */
-function managingnews_profile_modules() {
+function grandcentral_profile_modules() {
   // Drupal core
   $modules = array(
     'block',
@@ -37,7 +39,6 @@ function managingnews_profile_modules() {
     'context',
     'context_ui',
     'context_layouts',
-    'designkit',
     'features',
     // data must be installed before feeds so the FeedsDataProcessor plugin is enabled properly.
     'data',
@@ -75,7 +76,7 @@ function managingnews_profile_modules() {
 /**
  * Returns an array list of core mn modules.
  */
-function _managingnews_core_modules() {
+function _grandcentral_core_modules() {
   return array(
     'mapbox',
     'openlayers',
@@ -99,7 +100,7 @@ function _managingnews_core_modules() {
 /**
  * Implementation of hook_profile_task_list().
  */
-function managingnews_profile_task_list() {
+function grandcentral_profile_task_list() {
   return array(
     'mn-configure' => st('Managing News configuration'),
   );
@@ -108,12 +109,12 @@ function managingnews_profile_task_list() {
 /**
  * Implementation of hook_profile_tasks().
  */
-function managingnews_profile_tasks(&$task, $url) {
+function grandcentral_profile_tasks(&$task, $url) {
   // Just in case some of the future tasks adds some output
   $output = '';
 
   if ($task == 'profile') {
-    $modules = _managingnews_core_modules();
+    $modules = _grandcentral_core_modules();
     $files = module_rebuild_cache();
     $operations = array();
     foreach ($modules as $module) {
@@ -121,7 +122,7 @@ function managingnews_profile_tasks(&$task, $url) {
     }
     $batch = array(
       'operations' => $operations,
-      'finished' => '_managingnews_profile_batch_finished',
+      'finished' => '_grandcentral_profile_batch_finished',
       'title' => st('Installing @drupal', array('@drupal' => drupal_install_profile_name())),
       'error_message' => st('The installation has encountered an error.'),
     );
@@ -147,7 +148,8 @@ function managingnews_profile_tasks(&$task, $url) {
     // Enable the right theme. This must be handled after drupal_flush_all_caches()
     // which rebuilds the system table based on a stale static cache,
     // blowing away our changes.
-    _managingnews_system_theme_data();
+    _grandcentral_system_theme_data();
+
     db_query("UPDATE {system} SET status = 0 WHERE type = 'theme'");
     db_query("UPDATE {system} SET status = 1 WHERE type = 'theme' AND name = 'jake'");
     db_query("UPDATE {blocks} SET region = '' WHERE theme = 'jake'");
@@ -172,16 +174,16 @@ function managingnews_profile_tasks(&$task, $url) {
  *
  * Advance installer task to language import.
  */
-function _managingnews_profile_batch_finished($success, $results) {
+function _grandcentral_profile_batch_finished($success, $results) {
   variable_set('install_task', 'mn-configure');
 }
 
 /**
  * Implementation of hook_form_alter().
  */
-function managingnews_form_alter(&$form, $form_state, $form_id) {
+function grandcentral_form_alter(&$form, $form_state, $form_id) {
   if ($form_id == 'install_configure') {
-    $form['site_information']['site_name']['#default_value'] = 'Managing News';
+    $form['site_information']['site_name']['#default_value'] = 'GrandCentral';
     $form['site_information']['site_mail']['#default_value'] = 'admin@'. $_SERVER['HTTP_HOST'];
     $form['admin_account']['account']['name']['#default_value'] = 'admin';
     $form['admin_account']['account']['mail']['#default_value'] = 'admin@'. $_SERVER['HTTP_HOST'];
@@ -191,11 +193,11 @@ function managingnews_form_alter(&$form, $form_state, $form_id) {
 /**
  * Reimplementation of system_theme_data(). The core function's static cache
  * is populated during install prior to active install profile awareness.
- * This workaround makes enabling themes in profiles/managingnews/themes possible.
+ * This workaround makes enabling themes in profiles/grandcentral/themes possible.
  */
-function _managingnews_system_theme_data() {
+function _grandcentral_system_theme_data() {
   global $profile;
-  $profile = 'managingnews';
+  $profile = 'grandcentral';
 
   $themes = drupal_system_listing('\.info$', 'themes');
   $engines = drupal_system_listing('\.engine$', 'themes/engines');
@@ -270,6 +272,17 @@ function _managingnews_system_theme_data() {
   db_query("DELETE FROM {system} WHERE type = 'theme'");
   foreach ($themes as $theme) {
     $theme->owner = !isset($theme->owner) ? '' : $theme->owner;
-    db_query("INSERT INTO {system} (name, owner, info, type, filename, status, throttle, bootstrap) VALUES ('%s', '%s', '%s', '%s', '%s', %d, %d, %d)", $theme->name, $theme->owner, serialize($theme->info), 'theme', $theme->filename, isset($theme->status) ? $theme->status : 0, 0, 0);
+    db_insert('system')->fields(
+      array(
+        'name' => $theme->name,
+        'owner' => $theme->owner,
+        'info' => serialize($theme->info),
+        'type' => 'theme',
+        'filename' => $theme->filename,
+        'status' => isset($theme->status) ? $theme->status : 0,
+        'throttle' => 0,
+        'bootstrap' => 0
+      )
+    )->execute();
   }
 }

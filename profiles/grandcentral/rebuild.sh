@@ -1,6 +1,8 @@
 #!/bin/bash
 #
-# This command expects to be run within the Managing News profile directory. To
+# Based on the Managing News rebuild.sh
+#
+# This command expects to be run within the GrandCentral profile directory. To
 # generate a full distribution for you it must be a CVS checkout.
 #
 # To use this command you must have `drush make`, `cvs` and `git` installed.
@@ -8,35 +10,36 @@
 # Original script by Jeff Miccolis for Open Atrium.
 #
 
-if [ -f managingnews.make ]; then
+if [ -f grandcentral.make ]; then
   echo -e "\nThis command can be used to run managingnews.make in place, or to generate"
-  echo -e "a complete distribution of Managing News.\n\nWhich would you like?"
-  echo "  [1] Rebuild Managing News in place (overwrites any changes!)."
-  echo "  [2] Build a full Managing News distribution"
+  echo -e "a complete distribution of GrandCentral.\n\nWhich would you like?"
+  echo "  [1] Rebuild GrandCentral in place (overwrites any changes!)."
+  echo "  [2] Build a full GrandCentral distribution"
   echo -e "Selection: \c"
   read SELECTION
 
   if [ $SELECTION = "1" ]; then
 
-    # Run managingnews.make only.
-    echo "Building Managing News install profile..."
+    # Run grandcentral.make only.
+    echo "Building GrandCentral install profile..."
     rm -Rf modules/ themes/ libraries/
-    cvs checkout -d modules -r DRUPAL-6--1 contributions/profiles/managingnews/modules
+    echo "skipping cvs checkout"
+    #cvs checkout -d modules -r DRUPAL-6--1 contributions/profiles/managingnews/modules
     drush -y make --working-copy --no-core --contrib-destination=. managingnews.make
 
   elif [ $SELECTION = "2" ]; then
 
-    # Generate a complete tar.gz of Drupal + Managing News.
-    echo "Building Managing News distribution..."
+    # Generate a complete tar.gz of Drupal + GrandCentral.
+    echo "Building GrandCentral distribution..."
 
 MAKE=$(cat <<EOF
-core = "6.x"\n
+core = "7.x"\n
 api = 2\n
-projects[drupal][version] = "6.19"\n
-projects[managingnews][type] = "profile"\n
-projects[managingnews][download][type] = "cvs"\n
-projects[managingnews][download][module] = "contributions/profiles/managingnews"\n
-projects[managingnews][download][revision] =
+projects[drupal][version] = "7.22"\n
+projects[grandcentral][type] = "profile"\n
+projects[grandcentral][download][type] = "cvs"\n
+projects[grandcentral][download][module] = "contributions/profiles/managingnews"\n
+projects[grandcentral][download][revision] =
 EOF
 )
 
