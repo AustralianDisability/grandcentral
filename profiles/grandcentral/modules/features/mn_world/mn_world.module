@@ -1,6 +1,6 @@
 <?php
 
-include_once DRUPAL_ROOT . '/' . 'mn_world.features.inc';
+include_once dirname(__FILE__) . '/mn_world.features.inc';
 
 /**
  * Implements hook_enable().

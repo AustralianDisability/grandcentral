@@ -1,10 +1,11 @@
 name = "Jake"
 description = "Theme for MN3. Jake is a little dog."
-core = "6.x"
+core = "7.x"
 engine = "phptemplate"
 base theme = "rubik"
 
 project = "jake"
+version = "7.x-0.1-beta1"
 
 scripts[] = "js/theme.js"
 
@@ -97,10 +98,3 @@ layouts[twocolumn][regions][] = "page_title"
 layouts[twocolumn][regions][] = "right"
 layouts[twocolumn][regions][] = "content"
 layouts[twocolumn][regions][] = "header"
-
-; Information added by fserver
-core = "6.x"
-datestamp = "1288379198"
-project = "jake"
-project status url = "http://code.developmentseed.org/fserver"
-version = "6.x-1.0-beta15"

@@ -14,8 +14,6 @@ function mn_core_install() {
   $location_vocab = variable_get('mn_aggregator_location_vocab', 1);
   $location_vocab = variable_set('mn_core_location_vocab', $location_vocab);
   variable_del('mn_aggregator_location_vocab');
-  // TODO The drupal_(un)install_schema functions are called automatically in D7.
-  // drupal_install_schema('mn_core')
 
   // On install of MN profile, mn_core is installed after the creation
   // of user 1. Set the mn_welcome flag for user 1 by hand, rather than
@@ -29,7 +27,7 @@ function mn_core_install() {
  */
 function mn_core_schema() {
   // Install data tables.
-  include_once DRUPAL_ROOT . '/' . 'mn_core.data_default.inc';
+  include_once dirname(__FILE__) . '/mn_core.data_default.inc';
   $tables = mn_core_data_default();
   $schema = array();
   foreach ($tables as $name => $table) {
@@ -72,9 +70,11 @@ function mn_core_update_6002() {
   $result  = db_query('SELECT id, tid FROM  {data_table_term}');
   $data = $result->fetchObject();
   db_insert('data_taxonomy')->fields(
-    'id' => $data['id'],
-    'data_table_name' => 'feeds_data_syndication',
-    'tid' => $data['tid']
+    array(
+      'id' => $data['id'],
+      'data_table_name' => 'feeds_data_syndication',
+      'tid' => $data['tid']
+    )
   )->execute();
   db_drop_table('data_table_term');
 

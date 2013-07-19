@@ -90,6 +90,7 @@ function filter_features_rebuild($module) {
   if ($defaults = features_get_default('filter', $module)) {
     foreach ($defaults as $format) {
       $format = (object) $format;
+      $format->format = 'Some format';
       filter_format_save($format);
     }
   }
