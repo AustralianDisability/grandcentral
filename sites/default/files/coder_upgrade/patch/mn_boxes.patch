@@ -1,0 +1,81 @@
+diff -up -r boxes/mn_boxes_channel.inc boxes/mn_boxes_channel.inc
+--- boxes/mn_boxes_channel.inc	2013-07-19 12:43:16.191754027 +0200
++++ boxes/mn_boxes_channel.inc	2013-07-19 12:46:54.845052274 +0200
+@@ -14,6 +14,7 @@ class mn_boxes_channel extends mn_boxes_
+    * Implementation of boxes_content::options_form().
+    */
+   public function options_form() {
++    // TODO Please convert this statement to the D7 database API syntax.
+     $result = db_query(db_rewrite_sql("SELECT nid, title FROM {node} WHERE type = 'channel' ORDER BY title"));
+     while ($row = db_fetch_array($result)) {
+       $channels[$row['nid']] = $row['title'];
+diff -up -r boxes/mn_boxes_feed.inc boxes/mn_boxes_feed.inc
+--- boxes/mn_boxes_feed.inc	2013-07-19 12:43:16.271754502 +0200
++++ boxes/mn_boxes_feed.inc	2013-07-19 12:46:54.913052678 +0200
+@@ -14,6 +14,7 @@ class mn_boxes_feed extends mn_boxes_def
+    * Implementation of boxes_content::options_form().
+    */
+   public function options_form() {
++    // TODO Please convert this statement to the D7 database API syntax.
+     $result = db_query(db_rewrite_sql("SELECT nid, title FROM {node} WHERE type = 'feed' ORDER BY title"));
+     $feeds = array(0 => '<' . t('All feeds') . '>');
+     while ($row = db_fetch_array($result)) {
+diff -up -r mn_boxes.info mn_boxes.info
+--- mn_boxes.info	2013-07-19 12:43:16.303754692 +0200
++++ mn_boxes.info	2013-07-19 12:46:54.993053153 +0200
+@@ -1,4 +1,9 @@
+ name = "MN Boxes"
+ description = "Provides custom boxes plugins for Managing News."
+-core = "6.x"
++core = 7.x
+ dependencies[] = "boxes"
++
++files[] = boxes/mn_boxes_channel.inc
++files[] = boxes/mn_boxes_default.inc
++files[] = boxes/mn_boxes_feed.inc
++files[] = boxes/mn_boxes_search.inc
+diff -up -r mn_boxes.install mn_boxes.install
+--- mn_boxes.install	2013-07-19 12:43:16.303754692 +0200
++++ mn_boxes.install	2013-07-19 12:46:54.961052963 +0200
+@@ -1,4 +1,10 @@
+ <?php
++/**
++ * @file
++ * Install, update and uninstall functions for the mn_boxes module.
++ *
++ */
++
+ 
+ /**
+  * Migrate box type storage property from 'type' to 'display_type' to avoid
+@@ -14,5 +20,8 @@ function mn_boxes_update_6000() {
+     }
+   }
+ 
+-  return $ret;
++  // hook_update_N() no longer returns a $ret array. Instead, return
++  // nothing or a translated string indicating the update ran successfully.
++  // See http://drupal.org/node/224333#update_sql.
++  return t('TODO Add a descriptive string here to show in the UI.') /* $ret */;
+ }
+diff -up -r mn_boxes.module mn_boxes.module
+--- mn_boxes.module	2013-07-19 12:43:16.355755000 +0200
++++ mn_boxes.module	2013-07-19 12:46:54.989053129 +0200
+@@ -1,7 +1,7 @@
+ <?php
+ 
+ /**
+- * Implementation of hook_ctools_plugin_api().
++ * Implements hook_ctools_plugin_api().
+  */
+ function mn_boxes_ctools_plugin_api($module, $api) {
+   if ($module == 'boxes' && $api == 'plugins') {
+@@ -10,7 +10,7 @@ function mn_boxes_ctools_plugin_api($mod
+ }
+ 
+ /**
+- * Implementation of hook_boxes_plugins().
++ * Implements hook_boxes_plugins().
+  */
+ function mn_boxes_boxes_plugins() {
+   $info = array();

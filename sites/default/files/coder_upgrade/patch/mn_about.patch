@@ -1,0 +1,112 @@
+diff -up -r mn_about.context.inc mn_about.context.inc
+--- mn_about.context.inc	2013-07-19 12:43:17.323760747 +0200
++++ mn_about.context.inc	2013-07-19 12:46:54.673051253 +0200
+@@ -1,7 +1,7 @@
+ <?php
+ 
+ /**
+- * Implementation of hook_context_default_contexts().
++ * Implements hook_context_default_contexts().
+  */
+ function mn_about_context_default_contexts() {
+   $export = array();
+diff -up -r mn_about.features.inc mn_about.features.inc
+--- mn_about.features.inc	2013-07-19 12:43:17.323760747 +0200
++++ mn_about.features.inc	2013-07-19 12:46:54.697051396 +0200
+@@ -1,7 +1,7 @@
+ <?php
+ 
+ /**
+- * Implementation of hook_ctools_plugin_api().
++ * Implements hook_ctools_plugin_api().
+  */
+ function mn_about_ctools_plugin_api() {
+   list($module, $api) = func_get_args();
+@@ -14,13 +14,13 @@ function mn_about_ctools_plugin_api() {
+ }
+ 
+ /**
+- * Implementation of hook_node_info().
++ * Implements hook_node_info().
+  */
+ function mn_about_node_info() {
+   $items = array(
+     'book' => array(
+       'name' => t('Book page'),
+-      'module' => 'features',
++      'base' => 'features',
+       'description' => t('A <em>book page</em> is a page of content, organized into a collection of related entries collectively known as a <em>book</em>. A <em>book page</em> automatically displays links to adjacent pages, providing a simple navigation system for organizing and reviewing structured content.'),
+       'has_title' => '1',
+       'title_label' => t('Title'),
+diff -up -r mn_about.features.user_permission.inc mn_about.features.user_permission.inc
+--- mn_about.features.user_permission.inc	2013-07-19 12:43:17.343760867 +0200
++++ mn_about.features.user_permission.inc	2013-07-19 12:46:54.717051514 +0200
+@@ -1,7 +1,7 @@
+ <?php
+ 
+ /**
+- * Implementation of hook_user_default_permissions().
++ * Implements hook_user_default_permissions().
+  */
+ function mn_about_user_default_permissions() {
+   $permissions = array();
+diff -up -r mn_about.info mn_about.info
+--- mn_about.info	2013-07-19 12:43:17.363760985 +0200
++++ mn_about.info	2013-07-19 12:46:54.717051514 +0200
+@@ -1,4 +1,4 @@
+-core = "6.x"
++core = 7.x
+ dependencies[] = "book"
+ dependencies[] = "context"
+ dependencies[] = "ctools"
+diff -up -r mn_about.module mn_about.module
+--- mn_about.module	2013-07-19 12:43:17.407761247 +0200
++++ mn_about.module	2013-07-19 12:46:54.773051848 +0200
+@@ -1,9 +1,9 @@
+ <?php
+ 
+-include_once('mn_about.features.inc');
++include_once DRUPAL_ROOT . '/' . 'mn_about.features.inc';
+ 
+ /**
+- * Implementation of hook_help().
++ * Implements hook_help().
+  */
+ function mn_about_help($path, $arg) {
+   if (context_get('mn', 'section') === 'about' && node_access('create', 'book')) {
+@@ -15,12 +15,12 @@ function mn_about_help($path, $arg) {
+ }
+ 
+ /**
+- * Implementation of hook_enable().
++ * Implements hook_enable().
+  */
+ function mn_about_enable() {
+   // Create a new book node if there is no existing one (feature may be
+   // disabled and enabled again).
+-  if (!variable_get('mn_about_nid', 0) || !db_result(db_query('SELECT nid FROM {node} WHERE nid = %d', variable_get('mn_about_nid', 0)))) {
++  if (!variable_get('mn_about_nid', 0) || !db_query('SELECT nid FROM {node} WHERE nid = :nid', array(':nid' => variable_get('mn_about_nid', 0)))->fetchField()) {
+     global $user;
+     $node = new stdClass();
+     $node->uid = $user->uid;
+@@ -51,7 +51,7 @@ function mn_about_enable() {
+ }
+ 
+ /**
+- * Implementation of hook_disable().
++ * Implements hook_disable().
+  */
+ function mn_about_disable() {
+   // Disable menu link.
+diff -up -r mn_about.strongarm.inc mn_about.strongarm.inc
+--- mn_about.strongarm.inc	2013-07-19 12:43:17.407761247 +0200
++++ mn_about.strongarm.inc	2013-07-19 12:46:54.781051894 +0200
+@@ -1,7 +1,7 @@
+ <?php
+ 
+ /**
+- * Implementation of hook_strongarm().
++ * Implements hook_strongarm().
+  */
+ function mn_about_strongarm() {
+   $export = array();

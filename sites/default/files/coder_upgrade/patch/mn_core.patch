@@ -1,0 +1,1174 @@
+diff -up -r behaviors/mn_core_behavior_scalepoints.inc behaviors/mn_core_behavior_scalepoints.inc
+--- behaviors/mn_core_behavior_scalepoints.inc	2013-07-19 12:43:19.959776398 +0200
++++ behaviors/mn_core_behavior_scalepoints.inc	2013-07-19 12:46:57.853070134 +0200
+@@ -106,7 +106,7 @@ class mn_core_behavior_scalepoints exten
+     $weights = array_values($this->get_weights());
+     $styles = array();
+     foreach (array_keys($this->options['min']) as $key) {
+-      if (!empty($this->options['min'][$key]) ||   !empty($this->options['max'][$key])) {
++      if (!empty($this->options['min'][$key]) ||    !empty($this->options['max'][$key])) {
+         $pointdiff = ($this->options['max'][$key] - $this->options['min'][$key]) / $this->options['distinct'];
+         $pointdiff = number_format($pointdiff, 2);
+         foreach ($weights as $weight) {
+diff -up -r mn_core.box.inc mn_core.box.inc
+--- mn_core.box.inc	2013-07-19 12:43:19.959776398 +0200
++++ mn_core.box.inc	2013-07-19 12:46:57.901070419 +0200
+@@ -1,7 +1,7 @@
+ <?php
+ 
+ /**
+- * Implementation of hook_default_box().
++ * Implements hook_default_box().
+  */
+ function mn_core_default_box() {
+   $export = array();
+diff -up -r mn_core.context.inc mn_core.context.inc
+--- mn_core.context.inc	2013-07-19 12:43:20.003776660 +0200
++++ mn_core.context.inc	2013-07-19 12:46:58.101071608 +0200
+@@ -1,7 +1,7 @@
+ <?php
+ 
+ /**
+- * Implementation of hook_context_default_contexts().
++ * Implements hook_context_default_contexts().
+  */
+ function mn_core_context_default_contexts() {
+   $export = array();
+diff -up -r mn_core.data_default.inc mn_core.data_default.inc
+--- mn_core.data_default.inc	2013-07-19 12:43:20.199777823 +0200
++++ mn_core.data_default.inc	2013-07-19 12:46:58.181072083 +0200
+@@ -1,7 +1,7 @@
+ <?php
+ 
+ /**
+- * Implementation of hook_data_default().
++ * Implements hook_data_default().
+  */
+ function mn_core_data_default() {
+   $export = array();
+@@ -157,7 +157,7 @@ function mn_core_data_default() {
+       ),
+     ),
+     'data_taxonomy' => array(
+-      'vocabulary' => array(
++      'taxonomy_vocabulary' => array(
+         1 => 1,
+       ),
+       'id' => 'id',
+diff -up -r mn_core.features.filter.inc mn_core.features.filter.inc
+--- mn_core.features.filter.inc	2013-07-19 12:43:20.275778275 +0200
++++ mn_core.features.filter.inc	2013-07-19 12:46:58.197072178 +0200
+@@ -1,7 +1,7 @@
+ <?php
+ 
+ /**
+- * Implementation of hook_filter_default_formats().
++ * Implements hook_filter_default_formats().
+  */
+ function mn_core_filter_default_formats() {
+   $formats = array();
+diff -up -r mn_core.features.inc mn_core.features.inc
+--- mn_core.features.inc	2013-07-19 12:43:20.287778347 +0200
++++ mn_core.features.inc	2013-07-19 12:46:58.253072509 +0200
+@@ -1,7 +1,7 @@
+ <?php
+ 
+ /**
+- * Implementation of hook_ctools_plugin_api().
++ * Implements hook_ctools_plugin_api().
+  */
+ function mn_core_ctools_plugin_api() {
+   list($module, $api) = func_get_args();
+@@ -29,7 +29,7 @@ function mn_core_ctools_plugin_api() {
+ }
+ 
+ /**
+- * Implementation of hook_imagecache_default_presets().
++ * Implements hook_imagecache_default_presets().
+  */
+ function mn_core_imagecache_default_presets() {
+   $items = array(
+@@ -68,13 +68,13 @@ function mn_core_imagecache_default_pres
+ }
+ 
+ /**
+- * Implementation of hook_node_info().
++ * Implements hook_node_info().
+  */
+ function mn_core_node_info() {
+   $items = array(
+     'feed' => array(
+       'name' => t('Feed'),
+-      'module' => 'features',
++      'base' => 'features',
+       'description' => t('A feed for aggregating RSS/Atom sources.'),
+       'has_title' => '1',
+       'title_label' => t('Title'),
+@@ -88,7 +88,7 @@ function mn_core_node_info() {
+ }
+ 
+ /**
+- * Implementation of hook_views_api().
++ * Implements hook_views_api().
+  */
+ function mn_core_views_api() {
+   return array(
+diff -up -r mn_core.features.taxonomy.inc mn_core.features.taxonomy.inc
+--- mn_core.features.taxonomy.inc	2013-07-19 12:43:20.339778655 +0200
++++ mn_core.features.taxonomy.inc	2013-07-19 12:46:58.265072581 +0200
+@@ -1,7 +1,7 @@
+ <?php
+ 
+ /**
+- * Implementation of hook_taxonomy_default_vocabularies().
++ * Implements hook_taxonomy_default_vocabularies().
+  */
+ function mn_core_taxonomy_default_vocabularies() {
+   return array(
+diff -up -r mn_core.features.user_permission.inc mn_core.features.user_permission.inc
+--- mn_core.features.user_permission.inc	2013-07-19 12:43:20.351778727 +0200
++++ mn_core.features.user_permission.inc	2013-07-19 12:46:58.341073033 +0200
+@@ -1,7 +1,7 @@
+ <?php
+ 
+ /**
+- * Implementation of hook_user_default_permissions().
++ * Implements hook_user_default_permissions().
+  */
+ function mn_core_user_default_permissions() {
+   $permissions = array();
+diff -up -r mn_core.features.user_role.inc mn_core.features.user_role.inc
+--- mn_core.features.user_role.inc	2013-07-19 12:43:20.419779130 +0200
++++ mn_core.features.user_role.inc	2013-07-19 12:46:58.345073056 +0200
+@@ -1,7 +1,7 @@
+ <?php
+ 
+ /**
+- * Implementation of hook_user_default_roles().
++ * Implements hook_user_default_roles().
+  */
+ function mn_core_user_default_roles() {
+   $roles = array();
+diff -up -r mn_core.feeds_importer_default.inc mn_core.feeds_importer_default.inc
+--- mn_core.feeds_importer_default.inc	2013-07-19 12:43:20.423779153 +0200
++++ mn_core.feeds_importer_default.inc	2013-07-19 12:46:58.465073768 +0200
+@@ -1,7 +1,7 @@
+ <?php
+ 
+ /**
+- * Implementation of hook_feeds_importer_default().
++ * Implements hook_feeds_importer_default().
+  */
+ function mn_core_feeds_importer_default() {
+   $export = array();
+@@ -154,7 +154,7 @@ function mn_core_feeds_importer_default(
+     'processor' => array(
+       'plugin_key' => 'ExtractorTermProcessor',
+       'config' => array(
+-        'vocabulary' => 'features_tags',
++        'taxonomy_vocabulary' => 'features_tags',
+         'update_existing' => 0,
+         'mappings' => array(
+           0 => array(
+diff -up -r mn_core.info mn_core.info
+--- mn_core.info	2013-07-19 12:43:20.527779772 +0200
++++ mn_core.info	2013-07-19 12:47:01.841093813 +0200
+@@ -1,4 +1,4 @@
+-core = "6.x"
++core = 7.x
+ dependencies[] = "boxes"
+ dependencies[] = "context"
+ dependencies[] = "data"
+@@ -109,3 +109,8 @@ features[views_api][] = "api:2"
+ name = "MN Core"
+ package = "Managing News"
+ project = "mn_core"
++
++files[] = behaviors/mn_core_behavior_popup.inc
++files[] = behaviors/mn_core_behavior_scalepoints.inc
++files[] = views/mn_core_handler_field.inc
++files[] = views/mn_core_handler_field_geodata.inc
+diff -up -r mn_core.install mn_core.install
+--- mn_core.install	2013-07-19 12:43:20.663780578 +0200
++++ mn_core.install	2013-07-19 12:46:58.661074933 +0200
+@@ -1,14 +1,21 @@
+ <?php
++/**
++ * @file
++ * Install, update and uninstall functions for the mn_core module.
++ *
++ */
++
+ 
+ /**
+- * Implementation of hook_install().
++ * Implements hook_install().
+  */
+ function mn_core_install() {
+   // mn_core replaces mn_aggregator, migrate variable.
+   $location_vocab = variable_get('mn_aggregator_location_vocab', 1);
+   $location_vocab = variable_set('mn_core_location_vocab', $location_vocab);
+   variable_del('mn_aggregator_location_vocab');
+-  drupal_install_schema('mn_core');
++  // TODO The drupal_(un)install_schema functions are called automatically in D7.
++  // drupal_install_schema('mn_core')
+ 
+   // On install of MN profile, mn_core is installed after the creation
+   // of user 1. Set the mn_welcome flag for user 1 by hand, rather than
+@@ -18,18 +25,19 @@ function mn_core_install() {
+ }
+ 
+ /**
+- * Implementation of hook_uninstall();
++ * Implements hook_uninstall();().
+  */
+ function mn_core_uninstall() {
+-  drupal_uninstall_schema('mn_core');
++  // TODO The drupal_(un)install_schema functions are called automatically in D7.
++  // drupal_uninstall_schema('mn_core')
+ }
+ 
+ /**
+- * Implementation of hook_schema().
++ * Implements hook_schema().
+  */
+ function mn_core_schema() {
+   // Install data tables.
+-  include_once('mn_core.data_default.inc');
++  include_once DRUPAL_ROOT . '/' . 'mn_core.data_default.inc';
+   $tables = mn_core_data_default();
+   $schema = array();
+   foreach ($tables as $name => $table) {
+@@ -39,23 +47,26 @@ function mn_core_schema() {
+ }
+ 
+ /**
+- * Implementation of hook_update_N().
++ * Implements hook_update_N().
+  */
+ function mn_core_update_6001() {
+   _drupal_install_module('purl');
+   module_enable(array('purl'));
+-  return array();
++  // hook_update_N() no longer returns a $ret array. Instead, return
++  // nothing or a translated string indicating the update ran successfully.
++  // See http://drupal.org/node/224333#update_sql.
++  return t('TODO Add a descriptive string here to show in the UI.') /* array() */;
+ }
+ 
+ /**
+- * Implementation of hook_update_N().
++ * Implements hook_update_N().
+  */
+ function mn_core_update_6002() {
+   // Remove variable that might still be in place from MN Channels.
+   variable_del('feeds_data_syndication_handler');
+   // Disable mn_share in favor of new simpleshare
+   module_disable(array('mn_share'));
+-  drupal_uninstall_module('mn_share');
++  drupal_uninstall_modules(array('mn_share'));
+   _drupal_install_module('simpleshare');
+   module_enable(array('simpleshare'));
+   _drupal_install_module('mapbox');
+@@ -69,8 +80,10 @@ function mn_core_update_6002() {
+     _drupal_install_module('data_taxonomy');
+     module_enable(array('data_taxonomy'));
+   }
+-  db_query("INSERT INTO {data_taxonomy}(id, data_table_name, tid) SELECT id, 'feeds_data_syndication', tid FROM {data_table_term}");
+-  db_drop_table($ret, 'data_table_term');
++  // TODO Please convert this statement to the D7 database API syntax.
++  /* db_query("INSERT INTO {data_taxonomy}(id, data_table_name, tid) SELECT id, 'feeds_data_syndication', tid FROM {data_table_term}") */
++  NULL;
++  db_drop_table('data_table_term');
+ 
+   // Migrate item-channel relations from data_node to data_taxonomy.
+   $data = array(
+@@ -81,27 +94,31 @@ function mn_core_update_6002() {
+     'nodes' => array('channel' => 1),
+     'help' => 'Articles with these tags will appear in this channel.',
+   );
+-  taxonomy_save_vocabulary($data);
++  taxonomy_vocabulary_save($vocabulary /* TODO Vocabulary object replaces array $data */);
+   variable_set('mn_core_tags_vocab', $data['vid']);
+   if (db_table_exists('data_table_node') && module_exists('data_taxonomy')) {
+-    $result = db_query("SELECT nid, vid, title FROM {node} WHERE type = 'channel'");
++    $result = db_query("SELECT nid, vid, title FROM {node} WHERE type = :type", array(':type' => 'channel'));
+     while ($node = db_fetch_object($result)) {
+       $edit = array(
+         'name' => strtolower($node->title),
+         'vid' => $data['vid'],
+       );
+-      taxonomy_save_term($edit);
+-      db_query("INSERT INTO {data_taxonomy}(id, data_table_name, tid) SELECT id, 'feeds_data_syndication', %d FROM {data_table_node} WHERE nid = %d", $edit['tid'], $node->nid);
+-      db_query("INSERT INTO {term_node}(nid, vid, tid) VALUES(%d, %d, %d)", $node->nid, $node->vid, $edit['tid']);
++      taxonomy_term_save($term /* TODO Term object replaces array $edit */);
++      // TODO Please convert this statement to the D7 database API syntax.
++      /* db_query("INSERT INTO {data_taxonomy}(id, data_table_name, tid) SELECT id, 'feeds_data_syndication', %d FROM {data_table_node} WHERE nid = %d", $edit['tid'], $node->nid) */
++      NULL;
++      // TODO Please convert this statement to the D7 database API syntax.
++      /* db_query("INSERT INTO {taxonomy_term_node}(nid, vid, tid) VALUES(%d, %d, %d)", $node->nid, $node->vid, $edit['tid']) */
++      NULL;
+     }
+   }
+   if (module_exists('data_node')) {
+     module_disable(array('data_node'));
+-    drupal_uninstall_module('data_node');
++    drupal_uninstall_modules(array('data_node'));
+   }
+ 
+   // Add "edit data taxonomy relations" to authenticated user role.
+-  $permissions = db_fetch_object(db_query("SELECT pid, perm FROM {permission} WHERE rid = 2"));
++  $permissions = db_fetch_object(db_query("SELECT pid, perm FROM {permission} WHERE rid = :rid", array(':rid' => 2)));
+   $perm = explode(', ', $permissions->perm);
+   $perm[] = 'edit data taxonomy relations';
+   $permissions->perm = implode(', ', $perm);
+@@ -110,11 +127,14 @@ function mn_core_update_6002() {
+   // Flip toggle for a cache clear on cron later. See mn_core_cron().
+   variable_set('mn_core_clear_all_caches', TRUE);
+ 
+-  return array();
++  // hook_update_N() no longer returns a $ret array. Instead, return
++  // nothing or a translated string indicating the update ran successfully.
++  // See http://drupal.org/node/224333#update_sql.
++  return t('TODO Add a descriptive string here to show in the UI.') /* array() */;
+ }
+ 
+ /**
+- * Implementation of hook_update_N().
++ * Implements hook_update_N().
+  * Changes for beta 9 release
+  */
+ function mn_core_update_6003() {
+@@ -138,7 +158,7 @@ function mn_core_update_6003() {
+   module_enable(array('jquery_ui'));
+ 
+   // Add "mark items" to admins.
+-  $permissions = db_fetch_object(db_query("SELECT pid, perm FROM {permission} WHERE rid = 3"));
++  $permissions = db_fetch_object(db_query("SELECT pid, perm FROM {permission} WHERE rid = :rid", array(':rid' => 3)));
+   $perm = explode(', ', $permissions->perm);
+   $perm[] = 'mark items';
+   $permissions->perm = implode(', ', $perm);
+@@ -150,16 +170,33 @@ function mn_core_update_6003() {
+   drupal_flush_all_caches();
+   // We need to flush the theme cache though, because we add a new CSS file and change the info.
+   // So, we call the avoided function anyway.
+-  system_theme_data();
++  system_rebuild_theme_data();
+   // All themes are now disabled, as warned by the comments in drupal_flush_all_caches(). We thus
+   // reenable the default theme. If an overridden theme was in use it should just be reenabled
+   // manually.
+-  db_query("UPDATE {system} SET status = 1 WHERE type = 'theme' and name = 'jake'");
++  // TODO Please review the conversion of this statement to the D7 database API syntax.
++  /* db_query("UPDATE {system} SET status = 1 WHERE type = 'theme' and name = 'jake'") */
++  db_update('system')
++  ->fields(array(
++    'status' =>  1,
++  ))
++  ->condition('type', 'theme' and name)
++  ->execute();
+ 
+   // Increased weight allows altering the title of 'dashboard' menu item.
+-  db_query("UPDATE {system} SET weight = 25 WHERE name = 'mn_core'");
+-
+-  return array();
++  // TODO Please review the conversion of this statement to the D7 database API syntax.
++  /* db_query("UPDATE {system} SET weight = 25 WHERE name = 'mn_core'") */
++  db_update('system')
++  ->fields(array(
++    'weight' =>  25,
++  ))
++  ->condition('name', 'mn_core')
++  ->execute();
++
++  // hook_update_N() no longer returns a $ret array. Instead, return
++  // nothing or a translated string indicating the update ran successfully.
++  // See http://drupal.org/node/224333#update_sql.
++  return t('TODO Add a descriptive string here to show in the UI.') /* array() */;
+ }
+ 
+ /**
+@@ -167,9 +204,12 @@ function mn_core_update_6003() {
+  */
+ function mn_core_update_6004() {
+   module_disable(array('spaces'));
+-  drupal_uninstall_module('spaces');
++  drupal_uninstall_modules(array('spaces'));
+ 
+-  return array();
++  // hook_update_N() no longer returns a $ret array. Instead, return
++  // nothing or a translated string indicating the update ran successfully.
++  // See http://drupal.org/node/224333#update_sql.
++  return t('TODO Add a descriptive string here to show in the UI.') /* array() */;
+ }
+ 
+ /**
+@@ -179,19 +219,48 @@ function mn_core_update_6005() {
+   $location_vid = variable_get('mn_core_location_vocab', 1);
+   $channels_vid = variable_get('mn_core_tags_vocab', 2);
+   // Mark all terms from location vocabulary as lookup terms.
+-  db_query("INSERT INTO {extractor_lookup} (tid) SELECT td.tid FROM {term_data} td WHERE td.vid = %d", $location_vid);
++  // TODO Please convert this statement to the D7 database API syntax.
++  /* db_query("INSERT INTO {extractor_lookup} (tid) SELECT td.tid FROM {taxonomy_term_data} td WHERE td.vid = %d", $location_vid) */
++  NULL;
+   // Move all terms to channel tags to location vocabulary, remove it.
+-  db_query("UPDATE {term_data} SET vid = %d WHERE vid = %d", $location_vid, $channels_vid);
+-  db_query("DELETE FROM {vocabulary} WHERE vid = %d", $channels_vid);
++  // TODO Please review the conversion of this statement to the D7 database API syntax.
++  /* db_query("UPDATE {taxonomy_term_data} SET vid = %d WHERE vid = %d", $location_vid, $channels_vid) */
++  db_update('taxonomy_term_data')
++  ->fields(array(
++    'vid' => $location_vid,
++  ))
++  ->condition('vid', $channels_vid)
++  ->execute();
++  // TODO Please review the conversion of this statement to the D7 database API syntax.
++  /* db_query("DELETE FROM {taxonomy_vocabulary} WHERE vid = %d", $channels_vid) */
++  db_delete('taxonomy_vocabulary')
++  ->condition('vid', $channels_vid)
++  ->execute();
+   // Make the location vocabulary the new tags vocabulary.
+-  db_query("DELETE FROM {vocabulary} WHERE module = 'features_tags' AND vid != %d", $location_vid);
+-  db_query("UPDATE {vocabulary} SET name = 'Tags', module = 'features_tags' WHERE vid = %d", $location_vid);
++  // TODO Please review the conversion of this statement to the D7 database API syntax.
++  /* db_query("DELETE FROM {taxonomy_vocabulary} WHERE module = 'features_tags' AND vid != %d", $location_vid) */
++  db_delete('taxonomy_vocabulary')
++  ->condition('module', 'features_tags')
++  ->condition('vid', $location_vid, '!=')
++  ->execute();
++  // TODO Please review the conversion of this statement to the D7 database API syntax.
++  /* db_query("UPDATE {taxonomy_vocabulary} SET name = 'Tags', module = 'features_tags' WHERE vid = %d", $location_vid) */
++  db_update('taxonomy_vocabulary')
++  ->fields(array(
++    'name' =>  'Tags',
++    'module' =>  'features_tags',
++  ))
++  ->condition('vid', $location_vid)
++  ->execute();
+   if (function_exists('taxonomy_features_rebuild')) {
+     taxonomy_features_rebuild('mn_core');
+   }
+   // Enable geo taxonomy for features tags.
+   variable_set('geotaxonomy_vocabularies', array('features_tags' => 1));
+-  return array();
++  // hook_update_N() no longer returns a $ret array. Instead, return
++  // nothing or a translated string indicating the update ran successfully.
++  // See http://drupal.org/node/224333#update_sql.
++  return t('TODO Add a descriptive string here to show in the UI.') /* array() */;
+ }
+ 
+ /**
+@@ -200,12 +269,15 @@ function mn_core_update_6005() {
+ function mn_core_update_6006() {
+   $ret = array();
+   module_disable(array('feeds_news', 'feeds_import', 'feeds_fast_news'));
+-  drupal_uninstall_module('feeds_news');
+-  drupal_uninstall_module('feeds_import');
+-  drupal_uninstall_module('feeds_fast_news');
++  drupal_uninstall_modules(array('feeds_news'));
++  drupal_uninstall_modules(array('feeds_import'));
++  drupal_uninstall_modules(array('feeds_fast_news'));
+   // Suppress Feeds' messages of replacement features.
+   drupal_get_messages('status');
+-  return $ret;
++  // hook_update_N() no longer returns a $ret array. Instead, return
++  // nothing or a translated string indicating the update ran successfully.
++  // See http://drupal.org/node/224333#update_sql.
++  return t('TODO Add a descriptive string here to show in the UI.') /* $ret */;
+ }
+ 
+ /**
+@@ -219,7 +291,10 @@ function mn_core_update_6007() {
+     'unsigned' => FALSE,
+     'default' => 0,
+   );
+-  db_add_field($ret, 'feeds_data_syndication', 'keep', $spec);
+-  db_add_index($ret, 'feeds_data_syndication', 'keep', array('keep'));
+-  return $ret;
++  db_add_field('feeds_data_syndication', 'keep', $spec);
++  db_add_index('feeds_data_syndication', 'keep', array('keep'));
++  // hook_update_N() no longer returns a $ret array. Instead, return
++  // nothing or a translated string indicating the update ran successfully.
++  // See http://drupal.org/node/224333#update_sql.
++  return t('TODO Add a descriptive string here to show in the UI.') /* $ret */;
+ }
+diff -up -r mn_core.mark.inc mn_core.mark.inc
+--- mn_core.mark.inc	2013-07-19 12:43:20.663780578 +0200
++++ mn_core.mark.inc	2013-07-19 12:46:58.673075003 +0200
+@@ -1,7 +1,7 @@
+ <?php
+ 
+ /**
+- * Implementation of hook_mark_default_marks().
++ * Implements hook_mark_default_marks().
+  */
+ function mn_core_mark_default_marks() {
+   $export = array();
+diff -up -r mn_core.module mn_core.module
+--- mn_core.module	2013-07-19 12:43:21.251784070 +0200
++++ mn_core.module	2013-07-19 12:46:59.353079041 +0200
+@@ -1,9 +1,9 @@
+ <?php
+ 
+-include_once('mn_core.features.inc');
++include_once DRUPAL_ROOT . '/' . 'mn_core.features.inc';
+ 
+ /**
+- * Implementation of hook_help().
++ * Implements hook_help().
+  */
+ function mn_core_help($path, $arg) {
+   switch ($path) {
+@@ -50,22 +50,36 @@ function mn_core_help($path, $arg) {
+ }
+ 
+ /**
+- * Implementation of hook_enable().
++ * Implements hook_enable().
+  */
+ function mn_core_enable() {
+   // Increased weight allows altering the title of 'dashboard' menu item.
+-  db_query("UPDATE {system} SET weight = 25 WHERE name = 'mn_core'");
++  // TODO Please review the conversion of this statement to the D7 database API syntax.
++  /* db_query("UPDATE {system} SET weight = 25 WHERE name = 'mn_core'") */
++  db_update('system')
++  ->fields(array(
++    'weight' =>  25,
++  ))
++  ->condition('name', 'mn_core')
++  ->execute();
+ }
+ 
+ /**
+- * Implementation of hook_cron().
++ * Implements hook_cron().
+  */
+ function mn_core_cron() {
+   // Make sure jake is enabled and caches are cleared. This toggle was
+   // introduced after various problems with uncleared caches with drush and
+   // update.php were discovered in the beta6 -> beta7 upgrade path.
+   if (variable_get('mn_core_clear_all_caches', FALSE) == TRUE) {
+-    db_query("UPDATE {system} SET status = 1 WHERE type = 'theme' and name = 'jake'");
++    // TODO Please review the conversion of this statement to the D7 database API syntax.
++    /* db_query("UPDATE {system} SET status = 1 WHERE type = 'theme' and name = 'jake'") */
++    db_update('system')
++  ->fields(array(
++    'status' =>  1,
++  ))
++  ->condition('type', 'theme' and name)
++  ->execute();
+     drupal_flush_all_caches();
+     variable_del('mn_core_clear_all_caches');
+   }
+@@ -73,14 +87,14 @@ function mn_core_cron() {
+ }
+ 
+ /**
+- * Implementation of hook_form_alter().
++ * Implements hook_form_alter().
+  *
+  * The hook_form_[form_id]_alter() syntax is not used here as it will
+  * get called prior to Feeds.
+  */
+ function mn_core_form_alter(&$form, $form_state, $form_id) {
+   if ($form_id == 'feed_node_form') {
+-    $vid = db_result(db_query("SELECT vid FROM vocabulary WHERE module = 'features_tags'"));
++    $vid = db_query("SELECT vid FROM vocabulary WHERE module = :module", array(':module' => 'features_tags'))->fetchField();
+     if ($vid) {
+       $form['taxonomy']['tags'][$vid]['#required'] = FALSE;
+       $form['taxonomy']['tags'][$vid]['#description'] = t('These tags will be automatically applied to all new stories on this feed.');
+@@ -152,7 +166,7 @@ function mn_core_form_alter(&$form, $for
+ }
+ 
+ /**
+- * Implementation of hook_openlayers_alter().
++ * Implements hook_openlayers_alter().
+  *
+  * Add js file for openlayers translation if it exists the openlayers_lang
+  * libraries directory.
+@@ -168,14 +182,14 @@ function mn_core_openlayers_alter() {
+ }
+ 
+ /**
+- * Implementation of hook_imagecache_default_presets().
++ * Implements hook_imagecache_default_presets().
+  */
+ function mn_core_imagecache_default_presets_alter($default_presets) {
+   $default_presets['designkit-image-wallpaper'] = array();
+ }
+ 
+ /**
+- * Implementation of hook_form_alter() for node_delete_confirm.
++ * Implements hook_form_alter() for node_delete_confirm().
+  */
+ function mn_core_form_node_delete_confirm_alter(&$form, $form_state) {
+   if (isset($form['nid']['#value']) && $node = node_load($form['nid']['#value'])) {
+@@ -185,6 +199,10 @@ function mn_core_form_node_delete_confir
+   }
+ }
+ 
++/**
++ * @todo Please document this function.
++ * @see http://drupal.org/node/1354
++ */
+ function mn_core_form_spaces_dashboard_editor_alter(&$form, $form_state) {
+   // Remove the dashboard selction box for the context editor form on dashboard
+   // pages.
+@@ -212,7 +230,7 @@ function mn_core_preprocess_context_bloc
+ }
+ 
+ /**
+- * Implementation of hook_form_alter() for data_node_active_form.
++ * Implements hook_form_alter() for data_node_active_form().
+  *
+  * Remove extra form item label.
+  */
+@@ -221,7 +239,7 @@ function mn_core_form_data_node_active_f
+ }
+ 
+ /**
+- * Implementation of hook_context_default_contexts_alter().
++ * Implements hook_context_default_contexts_alter().
+  */
+ function mn_core_context_default_contexts_alter(&$contexts) {
+   // Alter default spaces_dashboard context to set the layout. Custom
+@@ -235,7 +253,7 @@ function mn_core_context_default_context
+ }
+ 
+ /**
+- * Implementation of hook_openlayers_behaviors().
++ * Implements hook_openlayers_behaviors().
+  *
+  * This is a ctools plugins hook.
+  */
+@@ -265,129 +283,135 @@ function mn_core_openlayers_behaviors()
+ }
+ 
+ /**
+- * Implementation of hook_block().
++ * Implements hook_block_info().
+  */
+-function mn_core_block($op = 'list', $delta = 0) {
+-  switch ($op) {
+-    case 'list':
+-      $blocks = array();
+-      $blocks['admin']['info'] = t('MN: Admin menu');
+-      $blocks['formats']['info'] = t('MN: Alternative formats');
+-      $blocks['print']['info'] = t('MN: Print controls');
+-      $blocks['clock']['info'] = t('MN: Clock');
+-      $blocks['user']['info'] = t('MN: User controls');
+-      $blocks['bookmarklet']['info'] = t('MN: Bookmarklet help');
+-      return $blocks;
+-    case 'view':
+-      switch ($delta) {
+-        case 'user':
+-          global $user;
+-          if ($user->uid) {
+-            $links = array(
+-              'user' => array(
+-                'title' => t('Account settings'),
+-                'href' => "user/{$user->uid}/edit",
+-              ),
+-              'logout' => array(
+-                'title' => t('Log out'),
+-                'href' => 'logout',
+-              ),
+-            );
+-            return array(
+-              'subject' => check_plain($user->name),
+-              'content' => theme('links', $links, array('class' => 'menu')),
+-            );
+-          }
+-          break;
+-        case 'clock':
+-          // If dateAPI exists, use a timezone location.
+-          if (module_exists('date_api')) {
+-            $time = date_format_date(date_now(), 'custom', 'g:ia F j');
+-            $tz = str_replace('_', ' ', date_default_timezone_name());
+-          }
+-          // Otherwise fallback to a GMT offset display.
+-          else {
+-            $time = format_date(time(), 'custom', 'g:ia F j');
+-            $offset = variable_get('date_default_timezone', 0);
+-            $hours = floor(abs($offset / 3600));
+-            $minutes = str_pad(abs($offset % 3600) / 60, 2, 0, STR_PAD_LEFT);
+-            $tz = $offset >= 0 ? "+{$hours}:{$minutes} GMT" : "-{$hours}:{$minutes} GMT";
+-          }
+-          return array('content' => "<strong class='time'>{$time}</strong><small class='timezone'>{$tz}</small>");
+-        case 'print':
+-          $block = array();
+-          if (isset($_GET['print'])) {
+-            $block['content'] = "<div class='back-link'>";
+-            $block['content'] .= l(t('Back to site'), $_GET['q'], array('query' => drupal_query_string_encode($_GET, array('q', 'print'))));
+-            $block['content'] .= "</div>";
+-            $block['content'] .= drupal_get_form('mn_core_print_controls');
+-          }
+-          return $block;
+-        case 'admin':
+-          $links = array();
+-          $paths = mn_core_admin_paths();
+-          foreach (array_keys($paths) as $path) {
+-            $item = menu_get_item($path);
+-            if ($item['access']) {
+-              $class = module_exists('seed') ? seed_id_safe($item['title']) : str_replace('/', '-', $path);
+-              $links[$class] = $item;
+-            }
+-          }
+-          $output = theme('links', $links, array('class' => 'menu'));
+-          return array('subject' => t('Admin'), 'content' => $output);
+-        case 'formats':
+-          if ($view = views_get_page_view()) {
+-            // Prepare a page query string to passthru alt. format links.
+-            $query = $_GET;
+-            if (isset($query['q'])) {
+-              unset($query['q']);
+-            }
+-            if (isset($query['page'])) {
+-              unset($query['page']);
+-            }
++function mn_core_block_info() {
++  $blocks = array();
++  $blocks['admin']['info'] = t('MN: Admin menu');
++  $blocks['formats']['info'] = t('MN: Alternative formats');
++  $blocks['print']['info'] = t('MN: Print controls');
++  $blocks['clock']['info'] = t('MN: Clock');
++  $blocks['user']['info'] = t('MN: User controls');
++  $blocks['bookmarklet']['info'] = t('MN: Bookmarklet help');
++  return $blocks;
++}
+ 
+-            $links = array();
+-            $view = $view->view;
+-            foreach ($view->display as $display_id => $display) {
+-              // For each feed that is attached to current display, add link
+-              if ($display->display_plugin == 'feed') {
+-                $displays = $display->handler->get_option('displays');
+-                if (!empty($displays[$view->current_display])) {
+-                  // Clone the view and use the ->get_url() method to preserve/replace args correctly.
+-                  $feed_view = $view->clone_view();
+-                  $feed_view->set_display($display_id);
+-                  $path = $feed_view->get_url();
+-                  $feed_view->destroy();
+-
+-                  $links[$display_id] = array(
+-                    'title' => '<span class="icon"></span>' . t($display->display_title),
+-                    'href' => $path,
+-                    'html' => TRUE,
+-                    'query' => $query,
+-                  );
+-                }
+-              }
++/**
++ * Implements hook_block_view().
++ */
++function mn_core_block_view($delta) {
++  switch ($delta) {
++    case 'user':
++      global $user;
++      if ($user->uid) {
++        $links = array(
++          'user' => array(
++            'title' => t('Account settings'),
++            'href' => "user/{$user->uid}/edit",
++          ),
++          'logout' => array(
++            'title' => t('Log out'),
++            'href' => 'logout',
++          ),
++        );
++        return array(
++          'subject' => check_plain($user->name),
++          'content' => theme('links', array('links' => $links, 'attributes' => array('class' => 'menu'))),
++        );
++      }
++      break;
++    case 'clock':
++      // If dateAPI exists, use a timezone location.
++      if (module_exists('date_api')) {
++        $time = date_format_date(date_now(), 'custom', 'g:ia F j');
++        $tz = str_replace('_', ' ', date_default_timezone_name());
++      }
++      // Otherwise fallback to a GMT offset display.
++      else {
++        $time = format_date(REQUEST_TIME, 'custom', 'g:ia F j');
++        $offset = variable_get('date_default_timezone', 0);
++        $hours = floor(abs($offset / 3600));
++        $minutes = str_pad(abs($offset % 3600) / 60, 2, 0, STR_PAD_LEFT);
++        $tz = $offset >= 0 ? "+{$hours}:{$minutes} GMT" : "-{$hours}:{$minutes} GMT";
++      }
++      return array('content' => "<strong class='time'>{$time}</strong><small class='timezone'>{$tz}</small>");
++    case 'print':
++      $block = array();
++      if (isset($_GET['print'])) {
++        $block['content'] = "<div class='back-link'>";
++        $block['content'] .= l(t('Back to site'), $_GET['q'], array('query' => drupal_query_string_encode($_GET, array('q', 'print'))));
++        $block['content'] .= "</div>";
++        $block['content'] .= drupal_get_form('mn_core_print_controls');
++      }
++      return $block;
++    case 'admin':
++      $links = array();
++      $paths = mn_core_admin_paths();
++      foreach (array_keys($paths) as $path) {
++        $item = menu_get_item($path);
++        if ($item['access']) {
++          $class = module_exists('seed') ? seed_id_safe($item['title']) : str_replace('/', '-', $path);
++          $links[$class] = $item;
++        }
++      }
++      $output = theme('links', array('links' => $links, 'attributes' => array('class' => 'menu')));
++      return array('subject' => t('Admin'), 'content' => $output);
++    case 'formats':
++      if ($view = views_get_page_view()) {
++        // Prepare a page query string to passthru alt. format links.
++        $query = $_GET;
++        if (isset($query['q'])) {
++          unset($query['q']);
++        }
++        if (isset($query['page'])) {
++          unset($query['page']);
++        }
++
++        $links = array();
++        $view = $view->view;
++        foreach ($view->display as $display_id => $display) {
++          // For each feed that is attached to current display, add link
++          if ($display->display_plugin == 'feed') {
++            $displays = $display->handler->get_option('displays');
++            if (!empty($displays[$view->current_display])) {
++              // Clone the view and use the ->get_url() method to preserve/replace args correctly.
++              $feed_view = $view->clone_view();
++              $feed_view->set_display($display_id);
++              $path = $feed_view->get_url();
++              $feed_view->destroy();
++
++              $links[$display_id] = array(
++                'title' => '<span class="icon"></span>' . t($display->display_title),
++                'href' => $path,
++                'html' => TRUE,
++                'query' => $query,
++              );
+             }
+-            $links['print'] = array(
+-              'title' => '<span class="icon"></span>' . t('Print'),
+-              'href' => $_GET['q'],
+-              'html' => TRUE,
+-              'query' => $query + array('print' => 1),
+-            );
+-            $output = theme('links', $links, array('class' => 'links formats'));
+-            return array('content' => $output);
+           }
+-          break;
+-        case 'bookmarklet':
+-          $output = _mn_core_block_bookmarklet();
+-          return array('subject' => t('Bookmarklet'), 'content' => $output);
+-          break;
++        }
++        $links['print'] = array(
++          'title' => '<span class="icon"></span>' . t('Print'),
++          'href' => $_GET['q'],
++          'html' => TRUE,
++          'query' => $query + array('print' => 1),
++        );
++        $output = theme('links', array('links' => $links, 'attributes' => array('class' => 'links formats')));
++        return array('content' => $output);
+       }
+       break;
++    case 'bookmarklet':
++      $output = _mn_core_block_bookmarklet();
++      return array('subject' => t('Bookmarklet'), 'content' => $output);
++      break;
+   }
+ }
+ 
+ /**
++ * Implements hook_block().
++ */
++function mn_core_block_OLD($op = 'list', $delta = 0) { }
++
++/**
+  * Block with instructions for using the bookmarklet.
+  */
+ function _mn_core_block_bookmarklet() {
+@@ -401,24 +425,34 @@ function _mn_core_block_bookmarklet() {
+ }
+ 
+ /**
+- * Implementation of hook_perm().
++ * Implements hook_permission().
+  */
+-function mn_core_perm() {
+-  return array('administer mn');
++function mn_core_permission() {
++  return array(
++    'administer mn' => array(
++      'title' => t('administer mn'),
++      'description' => t('TODO Add a description for \'administer mn\''),
++    ),
++  );
+ }
+ 
+ /**
+- * Implementation of hook_user().
+- * Add a flag for displaying the initial MN welcome message for new users.
++ * Implements hook_user_insert().
+  */
+-function mn_core_user($op, &$edit, &$account, $category = NULL) {
+-  if ($op === 'insert') {
++function mn_core_user_insert(&$edit, $account, $category) {
++  if (TRUE) {
+     $edit['mn_welcome'] = TRUE;
+   }
+ }
+ 
+ /**
+- * Implementation of hook_data_views_handlers_alter().
++ * Implements hook_user().
++ * Add a flag for displaying the initial MN welcome message for new users.
++ */
++function mn_core_user_OLD($op, &$edit, &$account, $category = NULL) { }
++
++/**
++ * Implements hook_data_views_handlers_alter().
+  */
+ function mn_core_data_views_handlers_alter(&$handlers) {
+   $handlers['field']['mn_core_handler_field'] = 'mn_core_handler_field';
+@@ -432,12 +466,12 @@ function mn_core_data_views_handlers_alt
+  */
+ function mn_core_admin_paths() {
+   $paths = array(
+-    'admin/settings/site-information' => '',
+-    'admin/settings/date-time' => '',
+-    'admin/build/themes/settings/jake' => 'Theme settings',
++    'admin/config/site-information' => '',
++    'admin/config/date-time' => '',
++    'admin/appearance/settings/jake' => 'Theme settings',
+     'admin/user/user' => '',
+-    'admin/build/features' => '',
+-    'admin/settings/openlayers' => '',
++    'admin/structure/features' => '',
++    'admin/config/openlayers' => '',
+     'import/opml' => 'Import OPML',
+     'import/terms' => 'Automatic term extraction',
+   );
+@@ -448,7 +482,7 @@ function mn_core_admin_paths() {
+ }
+ 
+ /**
+- * Implementation of hook_menu_alter().
++ * Implements hook_menu_alter().
+  */
+ function mn_core_menu_alter(&$items) {
+   // Rename Dashboard menu item to 'Home.'
+@@ -485,7 +519,7 @@ function mn_core_menu_alter(&$items) {
+ }
+ 
+ /**
+- * Implementation of hook_spaces_dashboard_block_access_alter().
++ * Implements hook_spaces_dashboard_block_access_alter().
+  */
+ function mn_core_spaces_dashboard_block_access_alter(&$access) {
+   // Hide custom trash box from trash menu
+@@ -524,7 +558,7 @@ function mn_core_node_page_view($node, $
+ /**
+  * Print controls block.
+  */
+-function mn_core_print_controls(&$form_state) {
++function mn_core_print_controls($form, &$form_state) {
+   $form = array();
+   $form['query'] = array(
+     '#type' => 'value',
+@@ -556,11 +590,12 @@ function mn_core_print_controls_submit(&
+   $query = $form_state['values']['query'];
+   $query['title'] = $form_state['values']['title'];
+   $query['items_per_page'] = $form_state['values']['items_per_page'];
+-  drupal_goto($query['q'], drupal_query_string_encode($query, array('q')));
++  // TODO drupal_query_string_encode($query, array('q')) needs to be an array of keys and values instead of a string.
++  drupal_goto($query['q'], array('query' => drupal_query_string_encode($query, array('q'))));
+ }
+ 
+ /**
+- * Implementation of hook_views_pre_execute().
++ * Implements hook_views_pre_execute().
+  */
+ function mn_core_views_pre_execute(&$view) {
+   if (isset($_GET['print']) && $view->display_handler->display->display_plugin == 'page') {
+@@ -680,7 +715,7 @@ function mn_core_cron_log() {
+ }
+ 
+ /**
+- * Implementation of hook_theme_registry_alter().
++ * Implements hook_theme_registry_alter().
+  */
+ function mn_core_theme_registry_alter(&$theme_registry) {
+   $theme_registry['textfield']['function'] = 'mn_core_textfield';
+@@ -705,7 +740,7 @@ function mn_core_textfield($element) {
+   $extra = '';
+   $output = '';
+ 
+-  if ($element['#autocomplete_path'] && menu_valid_path(array('link_path' => $element['#autocomplete_path']))) {
++  if ($element['#autocomplete_path'] && drupal_valid_path($element['#autocomplete_path'])) {
+     drupal_add_js('misc/autocomplete.js');
+     $class[] = 'form-autocomplete';
+ 
+@@ -729,7 +764,7 @@ function mn_core_textfield($element) {
+ 
+ 
+ /**
+- * Implementation of hook_views_pre_build().
++ * Implements hook_views_pre_build().
+  */
+ function mn_core_views_pre_build(&$view) {
+   if (!module_exists('simpleshare')) {
+diff -up -r mn_core.strongarm.inc mn_core.strongarm.inc
+--- mn_core.strongarm.inc	2013-07-19 12:43:21.251784070 +0200
++++ mn_core.strongarm.inc	2013-07-19 12:46:59.557080253 +0200
+@@ -1,7 +1,7 @@
+ <?php
+ 
+ /**
+- * Implementation of hook_strongarm().
++ * Implements hook_strongarm().
+  */
+ function mn_core_strongarm() {
+   $export = array();
+diff -up -r mn_core.views.inc mn_core.views.inc
+--- mn_core.views.inc	2013-07-19 12:43:21.491785495 +0200
++++ mn_core.views.inc	2013-07-19 12:46:59.605080538 +0200
+@@ -1,7 +1,7 @@
+ <?php
+ 
+ /**
+- * Implementation of hook_views_handlers()
++ * Implements hook_views_handlers().
+  */
+ function mn_core_views_handlers() {
+   return array(
+@@ -23,7 +23,7 @@ function mn_core_views_handlers() {
+ }
+ 
+ /**
+- * Implementation of hook_views_data_alter().
++ * Implements hook_views_data_alter().
+  */
+ function mn_core_views_data_alter(&$data) {
+   $tables = data_get_all_tables();
+diff -up -r mn_core.views_default.inc mn_core.views_default.inc
+--- mn_core.views_default.inc	2013-07-19 12:43:21.495785518 +0200
++++ mn_core.views_default.inc	2013-07-19 12:47:01.717093078 +0200
+@@ -1,7 +1,7 @@
+ <?php
+ 
+ /**
+- * Implementation of hook_views_default_views().
++ * Implements hook_views_default_views().
+  */
+ function mn_core_views_default_views() {
+   $views = array();
+@@ -604,7 +604,7 @@ function mn_core_views_default_views() {
+         '1' => 0,
+       ),
+       'id' => 'name',
+-      'table' => 'term_data',
++      'table' => 'taxonomy_term_data',
+       'field' => 'name',
+       'relationship' => 'none',
+       'validate_user_argument_type' => 'uid',
+@@ -905,7 +905,7 @@ function mn_core_views_default_views() {
+         '1' => 0,
+       ),
+       'id' => 'name',
+-      'table' => 'term_data',
++      'table' => 'taxonomy_term_data',
+       'field' => 'name',
+       'relationship' => 'tid',
+       'validate_user_argument_type' => 'uid',
+@@ -1079,7 +1079,7 @@ function mn_core_views_default_views() {
+       'link_to_taxonomy' => 0,
+       'exclude' => 1,
+       'id' => 'name',
+-      'table' => 'term_data',
++      'table' => 'taxonomy_term_data',
+       'field' => 'name',
+       'relationship' => 'tid',
+       'override' => array(
+@@ -1280,7 +1280,7 @@ function mn_core_views_default_views() {
+         '1' => 0,
+       ),
+       'id' => 'name',
+-      'table' => 'term_data',
++      'table' => 'taxonomy_term_data',
+       'field' => 'name',
+       'relationship' => 'tid',
+       'validate_user_argument_type' => 'uid',
+@@ -1972,7 +1972,7 @@ function mn_core_views_default_views() {
+       'link_to_taxonomy' => 0,
+       'exclude' => 0,
+       'id' => 'name',
+-      'table' => 'term_data',
++      'table' => 'taxonomy_term_data',
+       'field' => 'name',
+       'relationship' => 'tid',
+       'override' => array(
+@@ -2082,7 +2082,7 @@ function mn_core_views_default_views() {
+       'label' => 'Relate term data to geo data.',
+       'required' => 1,
+       'id' => 'tid_geo',
+-      'table' => 'term_data',
++      'table' => 'taxonomy_term_data',
+       'field' => 'tid_geo',
+       'relationship' => 'tid',
+       'override' => array(
+@@ -2323,7 +2323,7 @@ function mn_core_views_default_views() {
+       'link_to_taxonomy' => 0,
+       'exclude' => 0,
+       'id' => 'name_1',
+-      'table' => 'term_data',
++      'table' => 'taxonomy_term_data',
+       'field' => 'name',
+       'relationship' => 'tid',
+       'override' => array(
+@@ -2411,7 +2411,7 @@ function mn_core_views_default_views() {
+       'label' => 'Relate term data to geo data.',
+       'required' => 1,
+       'id' => 'tid_geo',
+-      'table' => 'term_data',
++      'table' => 'taxonomy_term_data',
+       'field' => 'tid_geo',
+       'relationship' => 'tid',
+       'override' => array(
+@@ -2652,7 +2652,7 @@ function mn_core_views_default_views() {
+       'link_to_taxonomy' => 0,
+       'exclude' => 0,
+       'id' => 'name_1',
+-      'table' => 'term_data',
++      'table' => 'taxonomy_term_data',
+       'field' => 'name',
+       'relationship' => 'tid',
+       'override' => array(
+@@ -3283,7 +3283,7 @@ function mn_core_views_default_views() {
+       'label' => 'Relate term data to geo data.',
+       'required' => 1,
+       'id' => 'tid_geo',
+-      'table' => 'term_data',
++      'table' => 'taxonomy_term_data',
+       'field' => 'tid_geo',
+       'relationship' => 'tid',
+       'override' => array(
+diff -up -r views/mn_core_handler_field_geodata.inc views/mn_core_handler_field_geodata.inc
+--- views/mn_core_handler_field_geodata.inc	2013-07-19 12:43:23.667798415 +0200
++++ views/mn_core_handler_field_geodata.inc	2013-07-19 12:47:01.841093813 +0200
+@@ -4,11 +4,11 @@ class mn_core_handler_field_geodata exte
+ 
+   function render($values) {
+     if ($this->real_field == 'feature') {
+-      $result = db_query("SELECT td.name FROM {data_taxonomy} dt INNER JOIN {term_geo} tg ON tg.tid = dt.tid AND dt.data_table_name = '%s' AND dt.id = %d INNER JOIN {term_data} td ON td.tid = tg.tid ORDER BY tg.tid ASC LIMIT 1", 'feeds_data_syndication', $values->{$this->view->base_field});
++      $result = db_query("SELECT td.name FROM {data_taxonomy} dt INNER JOIN {term_geo} tg ON tg.tid = dt.tid AND dt.data_table_name = '%s' AND dt.id = %d INNER JOIN {taxonomy_term_data} td ON td.tid = tg.tid ORDER BY tg.tid ASC LIMIT 1", 'feeds_data_syndication', $values->{$this->view->base_field});
+     }
+     else {
+-      $result = db_query("SELECT tg.%s FROM {data_taxonomy} dt INNER JOIN {term_geo} tg ON tg.tid = dt.tid WHERE dt.data_table_name = '%s' AND dt.id = %d ORDER BY tg.tid ASC LIMIT 1", $this->real_field, 'feeds_data_syndication', $values->{$this->view->base_field});
++      $result = db_query("SELECT tg.%s FROM {data_taxonomy} dt INNER JOIN {term_geo} tg ON tg.tid = dt.tid WHERE dt.data_table_name = :dt.data_table_name AND dt.id = :dt.id ORDER BY tg.tid ASC LIMIT 1", array(':dt.data_table_name' => $this->real_field, ':dt.id' => 'feeds_data_syndication', '' => $values->{$this->view->base_field}));
+     }
+-    return db_result($result);
++    return $result->fetchField();
+   }
+ }

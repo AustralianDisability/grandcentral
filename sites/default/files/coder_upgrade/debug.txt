@@ -1,0 +1,3696 @@
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = mn_about_context_default_contexts
+hook = context_default_contexts
+inside coder_upgrade_upgrade_hook_alter
+mn_about_context_default_contexts
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = mn_about_ctools_plugin_api
+hook = ctools_plugin_api
+inside coder_upgrade_upgrade_hook_alter
+mn_about_ctools_plugin_api
+name = mn_about_node_info
+hook = node_info
+inside coder_upgrade_convert_return
+while (!empty($nodes)) coder_upgrade_convert_return
+$value ==>
+$items
+inside if ($operand)
+$operand ==>
+$items
+while (!empty($nodes)) coder_upgrade_convert_return
+$return AFTER ==>
+$items = array(
+  'book' => array(
+    'name' => t('Book page'), 
+    'module' => 'features', 
+    'description' => t('A <em>book page</em> is a page of content, organized into a collection of related entries collectively known as a <em>book</em>. A <em>book page</em> automatically displays links to adjacent pages, providing a simple navigation system for organizing and reviewing structured content.'), 
+    'has_title' => '1', 
+    'title_label' => t('Title'), 
+    'has_body' => '1', 
+    'body_label' => t('Body'), 
+    'min_word_count' => '0', 
+    'help' => '',
+  ),
+)
+$value ==>
+array(
+  'book' => array(
+    'name' => t('Book page'), 
+    'module' => 'features', 
+    'description' => t('A <em>book page</em> is a page of content, organized into a collection of related entries collectively known as a <em>book</em>. A <em>book page</em> automatically displays links to adjacent pages, providing a simple navigation system for organizing and reviewing structured content.'), 
+    'has_title' => '1', 
+    'title_label' => t('Title'), 
+    'has_body' => '1', 
+    'body_label' => t('Body'), 
+    'min_word_count' => '0', 
+    'help' => '',
+  ),
+)
+inside if ($operand)
+$operand ==>
+array(
+  'book' => array(
+    'name' => t('Book page'), 
+    'module' => 'features', 
+    'description' => t('A <em>book page</em> is a page of content, organized into a collection of related entries collectively known as a <em>book</em>. A <em>book page</em> automatically displays links to adjacent pages, providing a simple navigation system for organizing and reviewing structured content.'), 
+    'has_title' => '1', 
+    'title_label' => t('Title'), 
+    'has_body' => '1', 
+    'body_label' => t('Body'), 
+    'min_word_count' => '0', 
+    'help' => '',
+  ),
+)
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+Found the module key
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_upgrade_hook_alter
+mn_about_node_info
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = mn_about_user_default_permissions
+hook = user_default_permissions
+inside coder_upgrade_upgrade_hook_alter
+mn_about_user_default_permissions
+inside coder_upgrade_upgrade_regex_info_alter
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+coder_upgrade_convert_require
+$values ==>
+Array
+(
+    [0] => variable_get('mn_about_nid', 0)
+)
+$matches ==>
+Array
+(
+    [0] => SELECT nid FROM {node} WHERE nid = %d
+    [1] => SELECT nid FROM {node} WHERE 
+    [2] => nid = %d
+)
+$conditions ==>
+Array
+(
+    [0] => Array
+        (
+            [0] => nid = %d
+        )
+
+    [1] => Array
+        (
+            [0] => nid
+        )
+
+    [2] => Array
+        (
+            [0] => =
+        )
+
+    [3] => Array
+        (
+            [0] => 
+        )
+
+    [4] => Array
+        (
+            [0] => 
+        )
+
+    [5] => Array
+        (
+            [0] => 
+        )
+
+    [6] => Array
+        (
+            [0] => 
+        )
+
+)
+params
+Array
+(
+    [:nid] => variable_get('mn_about_nid', 0)
+)
+
+string
+array(':nid' => variable_get('mn_about_nid', 0))
+$string ==>
+array(':nid' => variable_get('mn_about_nid', 0))
+inside coder_upgrade_convert_functions
+name = mn_about_help
+hook = help
+inside coder_upgrade_upgrade_hook_alter
+mn_about_help
+name = mn_about_enable
+hook = enable
+inside coder_upgrade_upgrade_hook_alter
+mn_about_enable
+name = mn_about_disable
+hook = disable
+inside coder_upgrade_upgrade_hook_alter
+mn_about_disable
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = mn_about_strongarm
+hook = strongarm
+inside coder_upgrade_upgrade_hook_alter
+mn_about_strongarm
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = options_defaults
+name = options_form
+name = render
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = options_defaults
+name = options_form
+name = render
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = options_defaults
+name = options_form
+name = render
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = options_defaults
+name = options_form
+name = render
+inside coder_upgrade_upgrade_regex_info_alter
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = mn_boxes_update_6000
+hook = update_6000
+inside coder_upgrade_convert_update_N
+inside coder_upgrade_upgrade_hook_alter
+mn_boxes_update_6000
+inside coder_upgrade_convert_install_file_comment
+inside coder_upgrade_add_install_file_comment
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = mn_boxes_ctools_plugin_api
+hook = ctools_plugin_api
+inside coder_upgrade_upgrade_hook_alter
+mn_boxes_ctools_plugin_api
+name = mn_boxes_boxes_plugins
+hook = boxes_plugins
+inside coder_upgrade_upgrade_hook_alter
+mn_boxes_boxes_plugins
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = mn_channels_context_default_contexts
+hook = context_default_contexts
+inside coder_upgrade_upgrade_hook_alter
+mn_channels_context_default_contexts
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = mn_channels_ctools_plugin_api
+hook = ctools_plugin_api
+inside coder_upgrade_upgrade_hook_alter
+mn_channels_ctools_plugin_api
+name = mn_channels_node_info
+hook = node_info
+inside coder_upgrade_convert_return
+while (!empty($nodes)) coder_upgrade_convert_return
+$value ==>
+$items
+inside if ($operand)
+$operand ==>
+$items
+while (!empty($nodes)) coder_upgrade_convert_return
+$return AFTER ==>
+$items = array(
+  'channel' => array(
+    'name' => t('Channel'), 
+    'module' => 'features', 
+    'description' => t('A channel is a collection of articles that the world can subscribe to.'), 
+    'has_title' => '1', 
+    'title_label' => t('Title'), 
+    'has_body' => '1', 
+    'body_label' => t('Body'), 
+    'min_word_count' => '0', 
+    'help' => '',
+  ),
+)
+$value ==>
+array(
+  'channel' => array(
+    'name' => t('Channel'), 
+    'module' => 'features', 
+    'description' => t('A channel is a collection of articles that the world can subscribe to.'), 
+    'has_title' => '1', 
+    'title_label' => t('Title'), 
+    'has_body' => '1', 
+    'body_label' => t('Body'), 
+    'min_word_count' => '0', 
+    'help' => '',
+  ),
+)
+inside if ($operand)
+$operand ==>
+array(
+  'channel' => array(
+    'name' => t('Channel'), 
+    'module' => 'features', 
+    'description' => t('A channel is a collection of articles that the world can subscribe to.'), 
+    'has_title' => '1', 
+    'title_label' => t('Title'), 
+    'has_body' => '1', 
+    'body_label' => t('Body'), 
+    'min_word_count' => '0', 
+    'help' => '',
+  ),
+)
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+Found the module key
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_upgrade_hook_alter
+mn_channels_node_info
+name = mn_channels_views_api
+hook = views_api
+inside coder_upgrade_upgrade_hook_alter
+mn_channels_views_api
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = mn_channels_menu_default_menu_links
+hook = menu_default_menu_links
+inside coder_upgrade_upgrade_hook_alter
+mn_channels_menu_default_menu_links
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = mn_channels_user_default_permissions
+hook = user_default_permissions
+inside coder_upgrade_upgrade_hook_alter
+mn_channels_user_default_permissions
+inside coder_upgrade_upgrade_regex_info_alter
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+coder_upgrade_convert_require
+$values ==>
+Array
+(
+)
+$matches ==>
+Array
+(
+    [0] => SELECT nid FROM {node} WHERE type = 'channel'
+    [1] => SELECT nid FROM {node} WHERE 
+    [2] => type = 'channel'
+)
+$conditions ==>
+Array
+(
+    [0] => Array
+        (
+            [0] => type = 'channel'
+        )
+
+    [1] => Array
+        (
+            [0] => 
+        )
+
+    [2] => Array
+        (
+            [0] => 
+        )
+
+    [3] => Array
+        (
+            [0] => type
+        )
+
+    [4] => Array
+        (
+            [0] => =
+        )
+
+    [5] => Array
+        (
+            [0] => 'channel'
+        )
+
+    [6] => Array
+        (
+            [0] => 
+        )
+
+)
+params
+Array
+(
+    [:type] => 'channel'
+)
+
+string
+array(':type' => 'channel')
+$string ==>
+array(':type' => 'channel')
+params
+Array
+(
+    [query] => array('display' => '\' . urlencode($_GET[\'display\'])')
+)
+
+string
+array('query' => array('display' => '\' . urlencode($_GET[\'display\'])'))
+temp = t('News on @title', array('@title' => $node->title))
+PGPFunctionCall
+(
+    [parent] => PGPNode
+        (
+            [type-1] => 602
+        )
+
+    [type] => 601
+    [name] => Array
+        (
+            [type] => 307 (T_STRING)
+            [value] => drupal_set_title
+        )
+
+    [noparens] => 0
+    [parameters] => PGPList
+        (
+            [0] => PGPExpression
+                (
+                    [operand] => PGPFunctionCall
+                        (
+                            [parent] => PGPNode
+                                (
+                                    [type-1] => 602
+                                )
+
+                            [type] => 601
+                            [name] => Array
+                                (
+                                    [type] => 307 (T_STRING)
+                                    [value] => t
+                                )
+
+                            [noparens] => 0
+                            [parameters] => PGPList
+                                (
+                                    [0] => PGPExpression
+                                        (
+                                            [operand] => Array
+                                                (
+                                                    [type] => 315 (T_CONSTANT_ENCAPSED_STRING)
+                                                    [value] => 'News on @title'
+                                                )
+
+                                        )
+
+                                    [1] => PGPExpression
+                                        (
+                                            [operand] => PGPArray
+                                                (
+                                                    [type] => 362 (T_ARRAY)
+                                                    [multiline] => 
+                                                    [original] => 
+                                                    [preserve] => 0
+                                                    [count] => 1
+                                                    [commaCount] => 0
+                                                    [values] => PGPList
+                                                        (
+                                                            [lparens] => (
+                                                            [key] => PGPExpression
+                                                                (
+                                                                    [operand] => Array
+                                                                        (
+                                                                            [type] => 315 (T_CONSTANT_ENCAPSED_STRING)
+                                                                            [value] => '@title'
+                                                                        )
+
+                                                                )
+
+                                                            [assign] => =>
+                                                            [value] => PGPExpression
+                                                                (
+                                                                    [operand] => PGPOperand
+                                                                        (
+                                                                            [type] => 309 (T_VARIABLE)
+                                                                            [value] => $node
+                                                                            [operator2] => ->
+                                                                            [operand] => PGPOperand
+                                                                                (
+                                                                                    [type] => 307 (T_STRING)
+                                                                                    [value] => title
+                                                                                )
+
+                                                                        )
+
+                                                                )
+
+                                                        )
+
+                                                    [debug] => 
+                                                )
+
+                                        )
+
+                                )
+
+                            [parentExpression] => PGPExpression
+                                (
+                                    [type-1] => 
+                                )
+
+                            [debug] => 
+                        )
+
+                )
+
+            [1] => PGPExpression
+                (
+                    [operand] => PGPOperand
+                        (
+                            [type] => 307
+                            [value] => PASS_THROUGH
+                        )
+
+                )
+
+        )
+
+    [parentExpression] => PGPExpression
+        (
+            [type-1] => 
+        )
+
+    [debug] => 
+)
+
+params
+Array
+(
+    [items] => $items
+)
+
+string
+array('items' => $items)
+$values ==>
+Array
+(
+)
+coder_upgrade_parse_update_query_string
+$matches ==>
+Array
+(
+)
+$matches ==>
+Array
+(
+    [0] => UPDATE {feeds_data_syndication} SET keep = 0
+    [1] => feeds_data_syndication
+    [2] => keep = 0
+)
+$fields ==>
+Array
+(
+    [0] => keep = 0
+)
+$replacement_count ==>
+0
+$new ==>
+Array
+(
+    [0] => db_update('feeds_data_syndication')
+    [1] => 	->fields(array(
+    [2] => 		'keep' =>  0,
+    [3] => 	))
+    [4] => 	->execute();
+)
+coder_upgrade_insert_dbtng_statement
+$values ==>
+Array
+(
+)
+coder_upgrade_parse_update_query_string
+$matches ==>
+Array
+(
+)
+$matches ==>
+Array
+(
+)
+$sql ==>
+UPDATE {feeds_data_syndication} fs               JOIN {data_taxonomy} dt ON fs.id = dt.id                 AND dt.data_table_name = 'feeds_data_syndication'               JOIN {taxonomy_term_node} tn ON dt.tid = tn.tid               JOIN {node} n ON tn.nid = n.nid                 AND n.type = 'channel'               LEFT JOIN {votingapi_vote} v ON fs.id = v.content_id                 AND content_type = 'feeds_data_syndication'                 AND tag = 'trash'               SET fs.keep = 1               WHERE v.value IS NULL;
+coder_upgrade_insert_dbtng_statement
+inside coder_upgrade_convert_functions
+name = mn_channels_help
+hook = help
+inside coder_upgrade_upgrade_hook_alter
+mn_channels_help
+name = mn_channels_enable
+hook = enable
+inside coder_upgrade_upgrade_hook_alter
+mn_channels_enable
+name = mn_channels_node_page_view
+hook = node_page_view
+inside coder_upgrade_upgrade_hook_alter
+mn_channels_node_page_view
+name = mn_channels_context_links_alter
+hook = context_links_alter
+inside coder_upgrade_upgrade_hook_alter
+mn_channels_context_links_alter
+name = mn_channels_feeds_after_clear
+hook = feeds_after_clear
+inside coder_upgrade_upgrade_hook_alter
+mn_channels_feeds_after_clear
+name = mn_channels_data_delete_query_alter
+hook = data_delete_query_alter
+inside coder_upgrade_upgrade_hook_alter
+mn_channels_data_delete_query_alter
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = mn_channels_strongarm
+hook = strongarm
+inside coder_upgrade_upgrade_hook_alter
+mn_channels_strongarm
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = mn_channels_views_data_alter
+hook = views_data_alter
+inside coder_upgrade_upgrade_hook_alter
+mn_channels_views_data_alter
+name = mn_channels_views_handlers
+hook = views_handlers
+inside coder_upgrade_upgrade_hook_alter
+mn_channels_views_handlers
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = mn_channels_views_default_views
+hook = views_default_views
+inside coder_upgrade_upgrade_hook_alter
+mn_channels_views_default_views
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+$values ==>
+Array
+(
+    [0] => $tid
+)
+$matches ==>
+Array
+(
+    [0] => SELECT COUNT(DISTINCT dt.id) AS count FROM {node} n LEFT JOIN {taxonomy_term_node} tn ON tn.nid = n.nid LEFT JOIN {data_taxonomy} dt ON dt.tid = tn.tid INNER JOIN {feeds_data_syndication} fds ON fds.id = dt.id LEFT JOIN {votingapi_vote} vapi ON fds.id = vapi.content_id  AND vapi.content_type = 'feeds_data_syndication' WHERE n.nid = %d AND vapi.value IS NULL
+    [1] => SELECT COUNT(DISTINCT dt.id) AS count FROM {node} n LEFT JOIN {taxonomy_term_node} tn ON tn.nid = n.nid LEFT JOIN {data_taxonomy} dt ON dt.tid = tn.tid INNER JOIN {feeds_data_syndication} fds ON fds.id = dt.id LEFT JOIN {votingapi_vote} vapi ON fds.id = vapi.content_id  AND vapi.content_type = 'feeds_data_syndication' WHERE 
+    [2] => n.nid = %d AND vapi.value IS NULL
+)
+$conditions ==>
+Array
+(
+    [0] => Array
+        (
+            [0] => n.nid = %d
+        )
+
+    [1] => Array
+        (
+            [0] => n.nid
+        )
+
+    [2] => Array
+        (
+            [0] => =
+        )
+
+    [3] => Array
+        (
+            [0] => 
+        )
+
+    [4] => Array
+        (
+            [0] => 
+        )
+
+    [5] => Array
+        (
+            [0] => 
+        )
+
+    [6] => Array
+        (
+            [0] => 
+        )
+
+)
+params
+Array
+(
+    [:n.nid] => $tid
+)
+
+string
+array(':n.nid' => $tid)
+$string ==>
+array(':n.nid' => $tid)
+$values ==>
+Array
+(
+    [0] => $tid
+)
+$matches ==>
+Array
+(
+    [0] => SELECT COUNT(dt.id) AS count FROM {data_taxonomy} dt INNER JOIN {feeds_data_syndication} fds ON fds.id = dt.id LEFT JOIN {votingapi_vote} vapi ON fds.id = vapi.content_id  AND vapi.content_type = 'feeds_data_syndication' WHERE tid = %d AND vapi.value IS NULL
+    [1] => SELECT COUNT(dt.id) AS count FROM {data_taxonomy} dt INNER JOIN {feeds_data_syndication} fds ON fds.id = dt.id LEFT JOIN {votingapi_vote} vapi ON fds.id = vapi.content_id  AND vapi.content_type = 'feeds_data_syndication' WHERE 
+    [2] => tid = %d AND vapi.value IS NULL
+)
+$conditions ==>
+Array
+(
+    [0] => Array
+        (
+            [0] => tid = %d
+        )
+
+    [1] => Array
+        (
+            [0] => tid
+        )
+
+    [2] => Array
+        (
+            [0] => =
+        )
+
+    [3] => Array
+        (
+            [0] => 
+        )
+
+    [4] => Array
+        (
+            [0] => 
+        )
+
+    [5] => Array
+        (
+            [0] => 
+        )
+
+    [6] => Array
+        (
+            [0] => 
+        )
+
+)
+params
+Array
+(
+    [:tid] => $tid
+)
+
+string
+array(':tid' => $tid)
+$string ==>
+array(':tid' => $tid)
+inside coder_upgrade_convert_functions
+name = query
+name = pre_render
+name = render
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+PGPList
+(
+    [0] => PGPExpression
+        (
+            [operand] => PGPFunctionCall
+                (
+                    [parent] => PGPNode
+                        (
+                            [type-1] => 602
+                        )
+
+                    [type] => 601
+                    [name] => Array
+                        (
+                            [type] => 307 (T_STRING)
+                            [value] => drupal_get_path
+                        )
+
+                    [noparens] => 0
+                    [parameters] => PGPList
+                        (
+                            [0] => PGPExpression
+                                (
+                                    [operand] => Array
+                                        (
+                                            [type] => 315 (T_CONSTANT_ENCAPSED_STRING)
+                                            [value] => 'module'
+                                        )
+
+                                )
+
+                            [1] => PGPExpression
+                                (
+                                    [operand] => Array
+                                        (
+                                            [type] => 315 (T_CONSTANT_ENCAPSED_STRING)
+                                            [value] => 'mn_core'
+                                        )
+
+                                )
+
+                        )
+
+                    [parentExpression] => PGPExpression
+                        (
+                            [type-1] => 
+                        )
+
+                    [debug] => 
+                )
+
+            [operator] => .
+            [operand] => Array
+                (
+                    [type] => 315 (T_CONSTANT_ENCAPSED_STRING)
+                    [value] => '/behaviors/mn_core_behavior_popup.js'
+                )
+
+        )
+
+)
+
+inside coder_upgrade_convert_functions
+name = render
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+PGPList
+(
+    [0] => PGPExpression
+        (
+            [operand] => PGPFunctionCall
+                (
+                    [parent] => PGPNode
+                        (
+                            [type-1] => 602
+                        )
+
+                    [type] => 601
+                    [name] => Array
+                        (
+                            [type] => 307 (T_STRING)
+                            [value] => drupal_get_path
+                        )
+
+                    [noparens] => 0
+                    [parameters] => PGPList
+                        (
+                            [0] => PGPExpression
+                                (
+                                    [operand] => Array
+                                        (
+                                            [type] => 315 (T_CONSTANT_ENCAPSED_STRING)
+                                            [value] => 'module'
+                                        )
+
+                                )
+
+                            [1] => PGPExpression
+                                (
+                                    [operand] => Array
+                                        (
+                                            [type] => 315 (T_CONSTANT_ENCAPSED_STRING)
+                                            [value] => 'mn_core'
+                                        )
+
+                                )
+
+                        )
+
+                    [parentExpression] => PGPExpression
+                        (
+                            [type-1] => 
+                        )
+
+                    [debug] => 
+                )
+
+            [operator] => .
+            [operand] => Array
+                (
+                    [type] => 315 (T_CONSTANT_ENCAPSED_STRING)
+                    [value] => '/behaviors/mn_core_behavior_scalepoints.js'
+                )
+
+        )
+
+)
+
+inside coder_upgrade_convert_functions
+name = options_init
+name = options_form
+name = get_weights
+name = get_styles
+name = render
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = mn_core_default_box
+hook = default_box
+inside coder_upgrade_upgrade_hook_alter
+mn_core_default_box
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = mn_core_context_default_contexts
+hook = context_default_contexts
+inside coder_upgrade_upgrade_hook_alter
+mn_core_context_default_contexts
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = mn_core_data_default
+hook = data_default
+inside coder_upgrade_upgrade_hook_alter
+mn_core_data_default
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = mn_core_filter_default_formats
+hook = filter_default_formats
+inside coder_upgrade_upgrade_hook_alter
+mn_core_filter_default_formats
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = mn_core_ctools_plugin_api
+hook = ctools_plugin_api
+inside coder_upgrade_upgrade_hook_alter
+mn_core_ctools_plugin_api
+name = mn_core_imagecache_default_presets
+hook = imagecache_default_presets
+inside coder_upgrade_upgrade_hook_alter
+mn_core_imagecache_default_presets
+name = mn_core_node_info
+hook = node_info
+inside coder_upgrade_convert_return
+while (!empty($nodes)) coder_upgrade_convert_return
+$value ==>
+$items
+inside if ($operand)
+$operand ==>
+$items
+while (!empty($nodes)) coder_upgrade_convert_return
+$return AFTER ==>
+$items = array(
+  'feed' => array(
+    'name' => t('Feed'), 
+    'module' => 'features', 
+    'description' => t('A feed for aggregating RSS/Atom sources.'), 
+    'has_title' => '1', 
+    'title_label' => t('Title'), 
+    'has_body' => '0', 
+    'body_label' => '', 
+    'min_word_count' => '0', 
+    'help' => '',
+  ),
+)
+$value ==>
+array(
+  'feed' => array(
+    'name' => t('Feed'), 
+    'module' => 'features', 
+    'description' => t('A feed for aggregating RSS/Atom sources.'), 
+    'has_title' => '1', 
+    'title_label' => t('Title'), 
+    'has_body' => '0', 
+    'body_label' => '', 
+    'min_word_count' => '0', 
+    'help' => '',
+  ),
+)
+inside if ($operand)
+$operand ==>
+array(
+  'feed' => array(
+    'name' => t('Feed'), 
+    'module' => 'features', 
+    'description' => t('A feed for aggregating RSS/Atom sources.'), 
+    'has_title' => '1', 
+    'title_label' => t('Title'), 
+    'has_body' => '0', 
+    'body_label' => '', 
+    'min_word_count' => '0', 
+    'help' => '',
+  ),
+)
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+Found the module key
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_callback_node_info
+inside coder_upgrade_upgrade_hook_alter
+mn_core_node_info
+name = mn_core_views_api
+hook = views_api
+inside coder_upgrade_upgrade_hook_alter
+mn_core_views_api
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = mn_core_taxonomy_default_vocabularies
+hook = taxonomy_default_vocabularies
+inside coder_upgrade_upgrade_hook_alter
+mn_core_taxonomy_default_vocabularies
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = mn_core_user_default_permissions
+hook = user_default_permissions
+inside coder_upgrade_upgrade_hook_alter
+mn_core_user_default_permissions
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = mn_core_user_default_roles
+hook = user_default_roles
+inside coder_upgrade_upgrade_hook_alter
+mn_core_user_default_roles
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = mn_core_feeds_importer_default
+hook = feeds_importer_default
+inside coder_upgrade_upgrade_hook_alter
+mn_core_feeds_importer_default
+inside coder_upgrade_upgrade_regex_info_alter
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+coder_upgrade_convert_require
+$values ==>
+Array
+(
+)
+Array
+(
+)
+$sql ==>
+INSERT INTO {data_taxonomy}(id, data_table_name, tid) SELECT id, 'feeds_data_syndication', tid FROM {data_table_term}
+coder_upgrade_insert_dbtng_statement
+$values ==>
+Array
+(
+)
+$matches ==>
+Array
+(
+    [0] => SELECT nid, vid, title FROM {node} WHERE type = 'channel'
+    [1] => SELECT nid, vid, title FROM {node} WHERE 
+    [2] => type = 'channel'
+)
+$conditions ==>
+Array
+(
+    [0] => Array
+        (
+            [0] => type = 'channel'
+        )
+
+    [1] => Array
+        (
+            [0] => 
+        )
+
+    [2] => Array
+        (
+            [0] => 
+        )
+
+    [3] => Array
+        (
+            [0] => type
+        )
+
+    [4] => Array
+        (
+            [0] => =
+        )
+
+    [5] => Array
+        (
+            [0] => 'channel'
+        )
+
+    [6] => Array
+        (
+            [0] => 
+        )
+
+)
+params
+Array
+(
+    [:type] => 'channel'
+)
+
+string
+array(':type' => 'channel')
+$string ==>
+array(':type' => 'channel')
+$values ==>
+Array
+(
+    [0] => $edit['tid']
+    [1] => $node->nid
+)
+Array
+(
+)
+$sql ==>
+INSERT INTO {data_taxonomy}(id, data_table_name, tid) SELECT id, 'feeds_data_syndication', %d FROM {data_table_node} WHERE nid = %d
+coder_upgrade_insert_dbtng_statement
+$values ==>
+Array
+(
+    [0] => $node->nid
+    [1] => $node->vid
+    [2] => $edit['tid']
+)
+Array
+(
+)
+$sql ==>
+INSERT INTO {taxonomy_term_node}(nid, vid, tid) VALUES(%d, %d, %d)
+coder_upgrade_insert_dbtng_statement
+$values ==>
+Array
+(
+)
+$matches ==>
+Array
+(
+    [0] => SELECT pid, perm FROM {permission} WHERE rid = 2
+    [1] => SELECT pid, perm FROM {permission} WHERE 
+    [2] => rid = 2
+)
+$conditions ==>
+Array
+(
+    [0] => Array
+        (
+            [0] => rid = 2
+        )
+
+    [1] => Array
+        (
+            [0] => 
+        )
+
+    [2] => Array
+        (
+            [0] => 
+        )
+
+    [3] => Array
+        (
+            [0] => rid
+        )
+
+    [4] => Array
+        (
+            [0] => =
+        )
+
+    [5] => Array
+        (
+            [0] => 2
+        )
+
+    [6] => Array
+        (
+            [0] => 
+        )
+
+)
+params
+Array
+(
+    [:rid] => 2
+)
+
+string
+array(':rid' => 2)
+$string ==>
+array(':rid' => 2)
+$values ==>
+Array
+(
+)
+$matches ==>
+Array
+(
+    [0] => SELECT pid, perm FROM {permission} WHERE rid = 3
+    [1] => SELECT pid, perm FROM {permission} WHERE 
+    [2] => rid = 3
+)
+$conditions ==>
+Array
+(
+    [0] => Array
+        (
+            [0] => rid = 3
+        )
+
+    [1] => Array
+        (
+            [0] => 
+        )
+
+    [2] => Array
+        (
+            [0] => 
+        )
+
+    [3] => Array
+        (
+            [0] => rid
+        )
+
+    [4] => Array
+        (
+            [0] => =
+        )
+
+    [5] => Array
+        (
+            [0] => 3
+        )
+
+    [6] => Array
+        (
+            [0] => 
+        )
+
+)
+params
+Array
+(
+    [:rid] => 3
+)
+
+string
+array(':rid' => 3)
+$string ==>
+array(':rid' => 3)
+$values ==>
+Array
+(
+)
+coder_upgrade_parse_update_query_string
+$matches ==>
+Array
+(
+    [0] => UPDATE {system} SET status = 1 WHERE type = 'theme' and name = 'jake'
+    [1] => system
+    [2] => status = 1
+    [3] => type = 'theme' and name = 'jake'
+)
+$fields ==>
+Array
+(
+    [0] => status = 1
+)
+$replacement_count ==>
+0
+$new ==>
+Array
+(
+    [0] => db_update('system')
+    [1] => 	->fields(array(
+    [2] => 		'status' =>  1,
+    [3] => 	))
+    [4] => 	->condition('type', 'theme' and name)
+    [5] => 	->execute();
+)
+coder_upgrade_insert_dbtng_statement
+$values ==>
+Array
+(
+)
+coder_upgrade_parse_update_query_string
+$matches ==>
+Array
+(
+    [0] => UPDATE {system} SET weight = 25 WHERE name = 'mn_core'
+    [1] => system
+    [2] => weight = 25
+    [3] => name = 'mn_core'
+)
+$fields ==>
+Array
+(
+    [0] => weight = 25
+)
+$replacement_count ==>
+0
+$new ==>
+Array
+(
+    [0] => db_update('system')
+    [1] => 	->fields(array(
+    [2] => 		'weight' =>  25,
+    [3] => 	))
+    [4] => 	->condition('name', 'mn_core')
+    [5] => 	->execute();
+)
+coder_upgrade_insert_dbtng_statement
+$values ==>
+Array
+(
+    [0] => $location_vid
+)
+Array
+(
+)
+$sql ==>
+INSERT INTO {extractor_lookup} (tid) SELECT td.tid FROM {taxonomy_term_data} td WHERE td.vid = %d
+coder_upgrade_insert_dbtng_statement
+$values ==>
+Array
+(
+    [0] => $location_vid
+    [1] => $channels_vid
+)
+coder_upgrade_parse_update_query_string
+$matches ==>
+Array
+(
+    [0] => UPDATE {taxonomy_term_data} SET vid = %d WHERE vid = %d
+    [1] => taxonomy_term_data
+    [2] => vid = %d
+    [3] => vid = %d
+)
+$fields ==>
+Array
+(
+    [0] => vid = %d
+)
+$replacement_count ==>
+2
+$new ==>
+Array
+(
+    [0] => db_update('taxonomy_term_data')
+    [1] => 	->fields(array(
+    [2] => 		'vid' => $location_vid,
+    [3] => 	))
+    [4] => 	->condition('vid', $channels_vid)
+    [5] => 	->execute();
+)
+coder_upgrade_insert_dbtng_statement
+$values ==>
+Array
+(
+    [0] => $channels_vid
+)
+Array
+(
+    [0] => DELETE FROM {taxonomy_vocabulary} WHERE vid = %d
+    [1] => taxonomy_vocabulary
+    [2] => vid = %d
+)
+$replacement_count ==>
+1
+$new ==>
+Array
+(
+    [0] => db_delete('taxonomy_vocabulary')
+    [1] => 	->condition('vid', $channels_vid)
+    [2] => 	->execute();
+)
+coder_upgrade_insert_dbtng_statement
+$values ==>
+Array
+(
+    [0] => $location_vid
+)
+Array
+(
+    [0] => DELETE FROM {taxonomy_vocabulary} WHERE module = 'features_tags' AND vid != %d
+    [1] => taxonomy_vocabulary
+    [2] => module = 'features_tags' AND vid != %d
+)
+$replacement_count ==>
+1
+$new ==>
+Array
+(
+    [0] => db_delete('taxonomy_vocabulary')
+    [1] => 	->condition('module', 'features_tags')
+	->condition('vid', $location_vid, '!=')
+    [2] => 	->execute();
+)
+coder_upgrade_insert_dbtng_statement
+$values ==>
+Array
+(
+    [0] => $location_vid
+)
+coder_upgrade_parse_update_query_string
+$matches ==>
+Array
+(
+    [0] => UPDATE {taxonomy_vocabulary} SET name = 'Tags', module = 'features_tags' WHERE vid = %d
+    [1] => taxonomy_vocabulary
+    [2] => name = 'Tags', module = 'features_tags'
+    [3] => vid = %d
+)
+$fields ==>
+Array
+(
+    [0] => name = 'Tags'
+    [1] => module = 'features_tags'
+)
+$replacement_count ==>
+1
+$new ==>
+Array
+(
+    [0] => db_update('taxonomy_vocabulary')
+    [1] => 	->fields(array(
+    [2] => 		'name' =>  'Tags',
+    [3] => 		'module' =>  'features_tags',
+    [4] => 	))
+    [5] => 	->condition('vid', $location_vid)
+    [6] => 	->execute();
+)
+coder_upgrade_insert_dbtng_statement
+inside coder_upgrade_convert_functions
+name = mn_core_install
+hook = install
+inside coder_upgrade_convert_install
+inside coder_upgrade_upgrade_hook_alter
+mn_core_install
+name = mn_core_uninstall
+hook = uninstall
+inside coder_upgrade_convert_install
+inside coder_upgrade_upgrade_hook_alter
+mn_core_uninstall
+name = mn_core_schema
+hook = schema
+inside coder_upgrade_convert_schema
+PGPFunctionCall
+(
+    [parent] => PGPNode
+        (
+            [type-1] => 336 (T_RETURN)
+        )
+
+    [type] => 336 (T_RETURN)
+    [name] => Array
+        (
+            [type] => 336 (T_RETURN)
+            [value] => return
+        )
+
+    [noparens] => 1
+    [parameters] => PGPList
+        (
+            [0] => PGPExpression
+                (
+                    [operand] => PGPOperand
+                        (
+                            [type] => 309 (T_VARIABLE)
+                            [value] => $schema
+                        )
+
+                )
+
+        )
+
+    [debug] => 
+)
+
+inside coder_upgrade_upgrade_hook_alter
+mn_core_schema
+name = mn_core_update_6001
+hook = update_6001
+inside coder_upgrade_convert_update_N
+inside coder_upgrade_upgrade_hook_alter
+mn_core_update_6001
+name = mn_core_update_6002
+hook = update_6002
+inside coder_upgrade_convert_update_N
+inside coder_upgrade_upgrade_hook_alter
+mn_core_update_6002
+name = mn_core_update_6003
+hook = update_6003
+inside coder_upgrade_convert_update_N
+inside coder_upgrade_upgrade_hook_alter
+mn_core_update_6003
+name = mn_core_update_6004
+hook = update_6004
+inside coder_upgrade_convert_update_N
+inside coder_upgrade_upgrade_hook_alter
+mn_core_update_6004
+name = mn_core_update_6005
+hook = update_6005
+inside coder_upgrade_convert_update_N
+inside coder_upgrade_upgrade_hook_alter
+mn_core_update_6005
+name = mn_core_update_6006
+hook = update_6006
+inside coder_upgrade_convert_update_N
+inside coder_upgrade_upgrade_hook_alter
+mn_core_update_6006
+name = mn_core_update_6007
+hook = update_6007
+inside coder_upgrade_convert_update_N
+inside coder_upgrade_upgrade_hook_alter
+mn_core_update_6007
+inside coder_upgrade_convert_install_file_comment
+inside coder_upgrade_add_install_file_comment
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = mn_core_mark_default_marks
+hook = mark_default_marks
+inside coder_upgrade_upgrade_hook_alter
+mn_core_mark_default_marks
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+coder_upgrade_convert_require
+$values ==>
+Array
+(
+)
+coder_upgrade_parse_update_query_string
+$matches ==>
+Array
+(
+    [0] => UPDATE {system} SET weight = 25 WHERE name = 'mn_core'
+    [1] => system
+    [2] => weight = 25
+    [3] => name = 'mn_core'
+)
+$fields ==>
+Array
+(
+    [0] => weight = 25
+)
+$replacement_count ==>
+0
+$new ==>
+Array
+(
+    [0] => db_update('system')
+    [1] => 	->fields(array(
+    [2] => 		'weight' =>  25,
+    [3] => 	))
+    [4] => 	->condition('name', 'mn_core')
+    [5] => 	->execute();
+)
+coder_upgrade_insert_dbtng_statement
+$values ==>
+Array
+(
+)
+coder_upgrade_parse_update_query_string
+$matches ==>
+Array
+(
+    [0] => UPDATE {system} SET status = 1 WHERE type = 'theme' and name = 'jake'
+    [1] => system
+    [2] => status = 1
+    [3] => type = 'theme' and name = 'jake'
+)
+$fields ==>
+Array
+(
+    [0] => status = 1
+)
+$replacement_count ==>
+0
+$new ==>
+Array
+(
+    [0] => db_update('system')
+    [1] => 	->fields(array(
+    [2] => 		'status' =>  1,
+    [3] => 	))
+    [4] => 	->condition('type', 'theme' and name)
+    [5] => 	->execute();
+)
+coder_upgrade_insert_dbtng_statement
+$values ==>
+Array
+(
+)
+$matches ==>
+Array
+(
+    [0] => SELECT vid FROM vocabulary WHERE module = 'features_tags'
+    [1] => SELECT vid FROM vocabulary WHERE 
+    [2] => module = 'features_tags'
+)
+$conditions ==>
+Array
+(
+    [0] => Array
+        (
+            [0] => module = 'features_tags'
+        )
+
+    [1] => Array
+        (
+            [0] => 
+        )
+
+    [2] => Array
+        (
+            [0] => 
+        )
+
+    [3] => Array
+        (
+            [0] => module
+        )
+
+    [4] => Array
+        (
+            [0] => =
+        )
+
+    [5] => Array
+        (
+            [0] => 'features_tags'
+        )
+
+    [6] => Array
+        (
+            [0] => 
+        )
+
+)
+params
+Array
+(
+    [:module] => 'features_tags'
+)
+
+string
+array(':module' => 'features_tags')
+$string ==>
+array(':module' => 'features_tags')
+PGPList
+(
+    [0] => PGPExpression
+        (
+            [operand] => PGPOperand
+                (
+                    [type] => 309 (T_VARIABLE)
+                    [value] => $translation_file
+                )
+
+        )
+
+)
+
+params
+Array
+(
+    [attributes] => array('class' => 'menu')
+)
+
+string
+array('attributes' => array('class' => 'menu'))
+params
+Array
+(
+    [attributes] => array('class' => 'menu')
+    [links] => $links
+)
+
+string
+array('links' => $links, 'attributes' => array('class' => 'menu'))
+PGPExpression
+(
+    [operand] => PGPOperand
+        (
+            [type] => 307
+            [value] => REQUEST_TIME
+        )
+
+)
+
+params
+Array
+(
+    [attributes] => array('class' => 'menu')
+)
+
+string
+array('attributes' => array('class' => 'menu'))
+params
+Array
+(
+    [attributes] => array('class' => 'menu')
+    [links] => $links
+)
+
+string
+array('links' => $links, 'attributes' => array('class' => 'menu'))
+params
+Array
+(
+    [attributes] => array('class' => 'links formats')
+)
+
+string
+array('attributes' => array('class' => 'links formats'))
+params
+Array
+(
+    [attributes] => array('class' => 'links formats')
+    [links] => $links
+)
+
+string
+array('links' => $links, 'attributes' => array('class' => 'links formats'))
+params
+Array
+(
+    [query] => drupal_query_string_encode($query, array('q'))
+)
+
+string
+array('query' => drupal_query_string_encode($query, array('q')))
+temp = t($_GET['title'])
+inside coder_upgrade_convert_menu_valid_path
+PGPArray
+(
+    [type] => 362 (T_ARRAY)
+    [multiline] => 
+    [original] => 
+    [preserve] => 0
+    [count] => 1
+    [commaCount] => 0
+    [values] => PGPList
+        (
+            [lparens] => (
+            [key] => PGPExpression
+                (
+                    [operand] => Array
+                        (
+                            [type] => 315 (T_CONSTANT_ENCAPSED_STRING)
+                            [value] => 'link_path'
+                        )
+
+                )
+
+            [assign] => =>
+            [value] => PGPExpression
+                (
+                    [operand] => PGPOperand
+                        (
+                            [type] => 309 (T_VARIABLE)
+                            [value] => $element
+                            [index] => PGPExpression
+                                (
+                                    [operand] => Array
+                                        (
+                                            [type] => 315 (T_CONSTANT_ENCAPSED_STRING)
+                                            [value] => '#autocomplete_path'
+                                        )
+
+                                )
+
+                        )
+
+                )
+
+        )
+
+    [debug] => 
+)
+
+Case 1: passes variable directly
+inside coder_upgrade_callback_menu_valid_path
+PGPExpression
+(
+    [operand] => PGPOperand
+        (
+            [type] => 309 (T_VARIABLE)
+            [value] => $element
+            [index] => PGPExpression
+                (
+                    [operand] => Array
+                        (
+                            [type] => 315 (T_CONSTANT_ENCAPSED_STRING)
+                            [value] => '#autocomplete_path'
+                        )
+
+                )
+
+        )
+
+)
+
+drupal_valid_path($element['#autocomplete_path'])
+PGPList
+(
+    [0] => PGPExpression
+        (
+            [operand] => Array
+                (
+                    [type] => 315 (T_CONSTANT_ENCAPSED_STRING)
+                    [value] => 'misc/autocomplete.js'
+                )
+
+        )
+
+)
+
+inside coder_upgrade_convert_functions
+name = mn_core_help
+hook = help
+inside coder_upgrade_upgrade_hook_alter
+mn_core_help
+name = mn_core_enable
+hook = enable
+inside coder_upgrade_upgrade_hook_alter
+mn_core_enable
+name = mn_core_cron
+hook = cron
+inside coder_upgrade_upgrade_hook_alter
+mn_core_cron
+name = mn_core_form_alter
+hook = form_alter
+inside coder_upgrade_upgrade_hook_alter
+mn_core_form_alter
+name = mn_core_openlayers_alter
+hook = openlayers_alter
+inside coder_upgrade_upgrade_hook_alter
+mn_core_openlayers_alter
+name = mn_core_imagecache_default_presets_alter
+hook = imagecache_default_presets_alter
+inside coder_upgrade_upgrade_hook_alter
+mn_core_imagecache_default_presets_alter
+name = mn_core_form_node_delete_confirm_alter
+hook = form_node_delete_confirm_alter
+inside coder_upgrade_upgrade_hook_alter
+mn_core_form_node_delete_confirm_alter
+name = mn_core_form_spaces_dashboard_editor_alter
+hook = form_spaces_dashboard_editor_alter
+inside coder_upgrade_upgrade_hook_alter
+mn_core_form_spaces_dashboard_editor_alter
+name = mn_core_preprocess_context_block_editable_region
+hook = preprocess_context_block_editable_region
+inside coder_upgrade_upgrade_hook_alter
+mn_core_preprocess_context_block_editable_region
+name = mn_core_preprocess_context_block_browser
+hook = preprocess_context_block_browser
+inside coder_upgrade_upgrade_hook_alter
+mn_core_preprocess_context_block_browser
+name = mn_core_form_data_node_active_form_alter
+hook = form_data_node_active_form_alter
+inside coder_upgrade_upgrade_hook_alter
+mn_core_form_data_node_active_form_alter
+name = mn_core_context_default_contexts_alter
+hook = context_default_contexts_alter
+inside coder_upgrade_upgrade_hook_alter
+mn_core_context_default_contexts_alter
+name = mn_core_openlayers_behaviors
+hook = openlayers_behaviors
+inside coder_upgrade_upgrade_hook_alter
+mn_core_openlayers_behaviors
+name = mn_core_block
+hook = block
+inside coder_upgrade_convert_op
+coder_upgrade_callback_block
+inside coder_upgrade_callback_block
+inside coder_upgrade_callback_block
+return statement found in hook
+inside coder_upgrade_upgrade_hook_alter
+mn_core_block_OLD
+name = _mn_core_block_bookmarklet
+name = mn_core_perm
+hook = perm
+inside coder_upgrade_convert_return
+while (!empty($nodes)) coder_upgrade_convert_return
+$value ==>
+array('administer mn')
+inside if ($operand)
+$operand ==>
+array('administer mn')
+inside coder_upgrade_callback_perm
+inside coder_upgrade_upgrade_hook_alter
+mn_core_permission
+name = mn_core_user
+hook = user
+inside coder_upgrade_convert_op
+coder_upgrade_callback_user
+inside T_IF check
+inside coder_upgrade_extract_operations
+inside coder_upgrade_callback_user
+inside coder_upgrade_upgrade_hook_alter
+mn_core_user_OLD
+name = mn_core_data_views_handlers_alter
+hook = data_views_handlers_alter
+inside coder_upgrade_upgrade_hook_alter
+mn_core_data_views_handlers_alter
+name = mn_core_admin_paths
+hook = admin_paths
+inside coder_upgrade_upgrade_hook_alter
+mn_core_admin_paths
+name = mn_core_menu_alter
+hook = menu_alter
+inside coder_upgrade_upgrade_hook_alter
+mn_core_menu_alter
+name = mn_core_spaces_dashboard_block_access_alter
+hook = spaces_dashboard_block_access_alter
+inside coder_upgrade_upgrade_hook_alter
+mn_core_spaces_dashboard_block_access_alter
+name = mn_core_node_page_router
+hook = node_page_router
+inside coder_upgrade_upgrade_hook_alter
+mn_core_node_page_router
+name = mn_core_node_page_view
+hook = node_page_view
+inside coder_upgrade_upgrade_hook_alter
+mn_core_node_page_view
+name = mn_core_print_controls
+hook = print_controls
+inside coder_upgrade_upgrade_hook_alter
+mn_core_print_controls
+name = mn_core_print_controls_submit
+hook = print_controls_submit
+inside coder_upgrade_upgrade_hook_alter
+mn_core_print_controls_submit
+name = mn_core_views_pre_execute
+hook = views_pre_execute
+inside coder_upgrade_upgrade_hook_alter
+mn_core_views_pre_execute
+name = mn_core_403
+hook = 403
+inside coder_upgrade_upgrade_hook_alter
+mn_core_403
+name = mn_core_preprocess_page
+hook = preprocess_page
+inside coder_upgrade_upgrade_hook_alter
+mn_core_preprocess_page
+name = mn_core_preprocess_views_view
+hook = preprocess_views_view
+inside coder_upgrade_upgrade_hook_alter
+mn_core_preprocess_views_view
+name = mn_core_feeds_importer_default_alter
+hook = feeds_importer_default_alter
+inside coder_upgrade_upgrade_hook_alter
+mn_core_feeds_importer_default_alter
+name = mn_core_preprocess_views_view_fields
+hook = preprocess_views_view_fields
+inside coder_upgrade_upgrade_hook_alter
+mn_core_preprocess_views_view_fields
+name = mn_core_get_domain
+hook = get_domain
+inside coder_upgrade_upgrade_hook_alter
+mn_core_get_domain
+name = mn_core_cron_log
+hook = cron_log
+inside coder_upgrade_upgrade_hook_alter
+mn_core_cron_log
+name = mn_core_theme_registry_alter
+hook = theme_registry_alter
+inside coder_upgrade_upgrade_hook_alter
+mn_core_theme_registry_alter
+name = mn_core_textfield
+hook = textfield
+inside coder_upgrade_upgrade_hook_alter
+mn_core_textfield
+name = mn_core_views_pre_build
+hook = views_pre_build
+inside coder_upgrade_upgrade_hook_alter
+mn_core_views_pre_build
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = mn_core_strongarm
+hook = strongarm
+inside coder_upgrade_upgrade_hook_alter
+mn_core_strongarm
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = mn_core_views_handlers
+hook = views_handlers
+inside coder_upgrade_upgrade_hook_alter
+mn_core_views_handlers
+name = mn_core_views_data_alter
+hook = views_data_alter
+inside coder_upgrade_upgrade_hook_alter
+mn_core_views_data_alter
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = mn_core_views_default_views
+hook = views_default_views
+inside coder_upgrade_upgrade_hook_alter
+mn_core_views_default_views
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+FAILED to relate
+inside coder_upgrade_convert_functions
+name = option_definition
+name = options_form
+name = render
+name = autoformat
+name = autoformat_news_google_com
+name = autoformat_search_twitter_com
+name = autoformat_twitter_com
+name = twitter_link_filter
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+$values ==>
+Array
+(
+    [0] => 'feeds_data_syndication'
+    [1] => $values->{$this->view->base_field}
+)
+$matches ==>
+Array
+(
+)
+$sql ==>
+SELECT td.name FROM {data_taxonomy} dt INNER JOIN {term_geo} tg ON tg.tid = dt.tid AND dt.data_table_name = '%s' AND dt.id = %d INNER JOIN {taxonomy_term_data} td ON td.tid = tg.tid ORDER BY tg.tid ASC LIMIT 1
+$values ==>
+Array
+(
+    [0] => $this->real_field
+    [1] => 'feeds_data_syndication'
+    [2] => $values->{$this->view->base_field}
+)
+$matches ==>
+Array
+(
+    [0] => SELECT tg.%s FROM {data_taxonomy} dt INNER JOIN {term_geo} tg ON tg.tid = dt.tid WHERE dt.data_table_name = '%s' AND dt.id = %d ORDER BY tg.tid ASC LIMIT 1
+    [1] => SELECT tg.%s FROM {data_taxonomy} dt INNER JOIN {term_geo} tg ON tg.tid = dt.tid WHERE 
+    [2] => dt.data_table_name = '%s' AND dt.id = %d ORDER BY tg.tid ASC LIMIT 1
+)
+$conditions ==>
+Array
+(
+    [0] => Array
+        (
+            [0] => dt.data_table_name = '%s'
+            [1] => dt.id = %d
+        )
+
+    [1] => Array
+        (
+            [0] => dt.data_table_name
+            [1] => dt.id
+        )
+
+    [2] => Array
+        (
+            [0] => =
+            [1] => =
+        )
+
+    [3] => Array
+        (
+            [0] => 
+            [1] => 
+        )
+
+    [4] => Array
+        (
+            [0] => 
+            [1] => 
+        )
+
+    [5] => Array
+        (
+            [0] => 
+            [1] => 
+        )
+
+    [6] => Array
+        (
+            [0] => 
+            [1] => 
+        )
+
+)
+params
+Array
+(
+    [] => $values->{$this->view->base_field}
+)
+
+string
+array('' => $values->{$this->view->base_field})
+params
+Array
+(
+    [] => $values->{$this->view->base_field}
+    [:dt.id] => 'feeds_data_syndication'
+)
+
+string
+array(':dt.id' => 'feeds_data_syndication', '' => $values->{$this->view->base_field})
+params
+Array
+(
+    [] => $values->{$this->view->base_field}
+    [:dt.id] => 'feeds_data_syndication'
+    [:dt.data_table_name] => $this->real_field
+)
+
+string
+array(':dt.data_table_name' => $this->real_field, ':dt.id' => 'feeds_data_syndication', '' => $values->{$this->view->base_field})
+$string ==>
+array(':dt.data_table_name' => $this->real_field, ':dt.id' => 'feeds_data_syndication', '' => $values->{$this->view->base_field})
+inside coder_upgrade_convert_functions
+name = query
+name = render
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = mn_search_context_default_contexts
+hook = context_default_contexts
+inside coder_upgrade_upgrade_hook_alter
+mn_search_context_default_contexts
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = mn_search_ctools_plugin_api
+hook = ctools_plugin_api
+inside coder_upgrade_upgrade_hook_alter
+mn_search_ctools_plugin_api
+name = mn_search_views_api
+hook = views_api
+inside coder_upgrade_upgrade_hook_alter
+mn_search_views_api
+inside coder_upgrade_upgrade_regex_info_alter
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+coder_upgrade_convert_require
+PGPExpression
+(
+    [operand] => PGPOperand
+        (
+            [type] => 307
+            [value] => REQUEST_TIME
+        )
+
+)
+
+FAILED to relate
+PGPList
+(
+    [0] => PGPExpression
+        (
+            [operand] => PGPFunctionCall
+                (
+                    [parent] => PGPNode
+                        (
+                            [type-1] => 602
+                        )
+
+                    [type] => 601
+                    [name] => Array
+                        (
+                            [type] => 307 (T_STRING)
+                            [value] => drupal_get_path
+                        )
+
+                    [noparens] => 0
+                    [parameters] => PGPList
+                        (
+                            [0] => PGPExpression
+                                (
+                                    [operand] => Array
+                                        (
+                                            [type] => 315 (T_CONSTANT_ENCAPSED_STRING)
+                                            [value] => 'module'
+                                        )
+
+                                )
+
+                            [1] => PGPExpression
+                                (
+                                    [operand] => Array
+                                        (
+                                            [type] => 315 (T_CONSTANT_ENCAPSED_STRING)
+                                            [value] => 'mn_search'
+                                        )
+
+                                )
+
+                        )
+
+                    [parentExpression] => PGPExpression
+                        (
+                            [type-1] => 
+                        )
+
+                    [debug] => 
+                )
+
+            [operator] => .
+            [operand] => Array
+                (
+                    [type] => 315 (T_CONSTANT_ENCAPSED_STRING)
+                    [value] => '/mn_search.css'
+                )
+
+        )
+
+    [1] => PGPExpression
+        (
+            [operand] => Array
+                (
+                    [type] => 315 (T_CONSTANT_ENCAPSED_STRING)
+                    [value] => 'module'
+                )
+
+        )
+
+)
+
+inside coder_upgrade_convert_functions
+name = mn_search_cron
+hook = cron
+inside coder_upgrade_upgrade_hook_alter
+mn_search_cron
+name = mn_search_get_search_status
+hook = get_search_status
+inside coder_upgrade_upgrade_hook_alter
+mn_search_get_search_status
+name = mn_search_block
+hook = block
+inside coder_upgrade_convert_op
+coder_upgrade_callback_block
+inside coder_upgrade_callback_block
+inside coder_upgrade_callback_block
+return statement found in hook
+inside coder_upgrade_upgrade_hook_alter
+mn_search_block_OLD
+name = mn_search_help
+hook = help
+inside coder_upgrade_upgrade_hook_alter
+mn_search_help
+name = mn_search_menu_alter
+hook = menu_alter
+inside coder_upgrade_upgrade_hook_alter
+mn_search_menu_alter
+name = mn_search_form_views_exposed_form_alter
+hook = form_views_exposed_form_alter
+inside coder_upgrade_upgrade_hook_alter
+mn_search_form_views_exposed_form_alter
+name = mn_search_form_stored_views_form_alter
+hook = form_stored_views_form_alter
+inside coder_upgrade_upgrade_hook_alter
+mn_search_form_stored_views_form_alter
+name = mn_search_views_pre_render
+hook = views_pre_render
+inside coder_upgrade_upgrade_hook_alter
+mn_search_views_pre_render
+name = mn_search_openlayers_behaviors_info
+hook = openlayers_behaviors_info
+inside coder_upgrade_upgrade_hook_alter
+mn_search_openlayers_behaviors_info
+name = mn_search_behaviors_process_semi_fullscreen
+hook = behaviors_process_semi_fullscreen
+inside coder_upgrade_upgrade_hook_alter
+mn_search_behaviors_process_semi_fullscreen
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = mn_search_views_default_views
+hook = views_default_views
+inside coder_upgrade_upgrade_hook_alter
+mn_search_views_default_views
+inside coder_upgrade_upgrade_regex_info_alter
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+coder_upgrade_convert_require
+coder_upgrade_convert_require
+$values ==>
+Array
+(
+)
+coder_upgrade_parse_update_query_string
+$matches ==>
+Array
+(
+    [0] => UPDATE {system} SET status = 0 WHERE type = 'theme'
+    [1] => system
+    [2] => status = 0
+    [3] => type = 'theme'
+)
+$fields ==>
+Array
+(
+    [0] => status = 0
+)
+$replacement_count ==>
+0
+$new ==>
+Array
+(
+    [0] => db_update('system')
+    [1] => 	->fields(array(
+    [2] => 		'status' =>  0,
+    [3] => 	))
+    [4] => 	->condition('type', 'theme')
+    [5] => 	->execute();
+)
+coder_upgrade_insert_dbtng_statement
+$values ==>
+Array
+(
+)
+coder_upgrade_parse_update_query_string
+$matches ==>
+Array
+(
+    [0] => UPDATE {system} SET status = 1 WHERE type = 'theme' AND name = 'jake'
+    [1] => system
+    [2] => status = 1
+    [3] => type = 'theme' AND name = 'jake'
+)
+$fields ==>
+Array
+(
+    [0] => status = 1
+)
+$replacement_count ==>
+0
+$new ==>
+Array
+(
+    [0] => db_update('system')
+    [1] => 	->fields(array(
+    [2] => 		'status' =>  1,
+    [3] => 	))
+    [4] => 	->condition('type', 'theme')
+	->condition('name', 'jake')
+    [5] => 	->execute();
+)
+coder_upgrade_insert_dbtng_statement
+$values ==>
+Array
+(
+)
+coder_upgrade_parse_update_query_string
+$matches ==>
+Array
+(
+    [0] => UPDATE {block} SET region = '' WHERE theme = 'jake'
+    [1] => block
+    [2] => region = ''
+    [3] => theme = 'jake'
+)
+$fields ==>
+Array
+(
+    [0] => region = ''
+)
+$replacement_count ==>
+0
+$new ==>
+Array
+(
+    [0] => db_update('block')
+    [1] => 	->fields(array(
+    [2] => 		'region' =>  '',
+    [3] => 	))
+    [4] => 	->condition('theme', 'jake')
+    [5] => 	->execute();
+)
+coder_upgrade_insert_dbtng_statement
+params
+Array
+(
+    [rows] => $rows
+)
+
+string
+array('rows' => $rows)
+params
+Array
+(
+    [rows] => $rows
+    [header] => array()
+)
+
+string
+array('header' => array(), 'rows' => $rows)
+inside coder_upgrade_convert_functions
+name = setUp
+name = assertText
+name = assertUniqueText
+name = printDebug
+name = printObject
+name = printPage
+name = formatTable
+name = loginAdmin
+name = refreshVariables
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+coder_upgrade_convert_require
+$values ==>
+Array
+(
+)
+$matches ==>
+Array
+(
+)
+$sql ==>
+SELECT COUNT(*) FROM {feeds_source}
+$values ==>
+Array
+(
+)
+$matches ==>
+Array
+(
+)
+$sql ==>
+SELECT COUNT(*) FROM {feeds_data_syndication}
+$values ==>
+Array
+(
+)
+$matches ==>
+Array
+(
+)
+$sql ==>
+SELECT COUNT(*) FROM {feeds_data_syndication}
+$values ==>
+Array
+(
+)
+$matches ==>
+Array
+(
+)
+$sql ==>
+SELECT COUNT(*) FROM {feeds_data_syndication}
+$values ==>
+Array
+(
+)
+$matches ==>
+Array
+(
+)
+$sql ==>
+SELECT COUNT(*) FROM {data_taxonomy}
+PGPExpression
+(
+    [operand] => PGPOperand
+        (
+            [type] => 307
+            [value] => REQUEST_TIME
+        )
+
+)
+
+$values ==>
+Array
+(
+    [0] => $old_timestamp
+    [1] => $id
+)
+coder_upgrade_parse_update_query_string
+$matches ==>
+Array
+(
+    [0] => UPDATE {feeds_data_syndication} SET timestamp = %s WHERE id > %d
+    [1] => feeds_data_syndication
+    [2] => timestamp = %s
+    [3] => id > %d
+)
+$fields ==>
+Array
+(
+    [0] => timestamp = %s
+)
+$replacement_count ==>
+2
+$new ==>
+Array
+(
+    [0] => db_update('feeds_data_syndication')
+    [1] => 	->fields(array(
+    [2] => 		'timestamp' => $old_timestamp,
+    [3] => 	))
+    [4] => 	->condition('id', $id, '>')
+    [5] => 	->execute();
+)
+coder_upgrade_insert_dbtng_statement
+$values ==>
+Array
+(
+)
+coder_upgrade_parse_update_query_string
+$matches ==>
+Array
+(
+    [0] => UPDATE {job_schedule} SET next = 0 WHERE callback = 'feeds_importer_expire' AND type = 'syndication'
+    [1] => job_schedule
+    [2] => next = 0
+    [3] => callback = 'feeds_importer_expire' AND type = 'syndication'
+)
+$fields ==>
+Array
+(
+    [0] => next = 0
+)
+$replacement_count ==>
+0
+$new ==>
+Array
+(
+    [0] => db_update('job_schedule')
+    [1] => 	->fields(array(
+    [2] => 		'next' =>  0,
+    [3] => 	))
+    [4] => 	->condition('callback', 'feeds_importer_expire')
+	->condition('type', 'syndication')
+    [5] => 	->execute();
+)
+coder_upgrade_insert_dbtng_statement
+inside coder_upgrade_convert_functions
+name = getInfo
+name = testWelcomePage
+name = generateOPML
+name = importFile
+name = expireFeedItems
+name = runCron
+name = absolute
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+coder_upgrade_convert_require
+$values ==>
+Array
+(
+)
+$matches ==>
+Array
+(
+    [0] => SELECT title FROM {node} WHERE type = 'channel'
+    [1] => SELECT title FROM {node} WHERE 
+    [2] => type = 'channel'
+)
+$conditions ==>
+Array
+(
+    [0] => Array
+        (
+            [0] => type = 'channel'
+        )
+
+    [1] => Array
+        (
+            [0] => 
+        )
+
+    [2] => Array
+        (
+            [0] => 
+        )
+
+    [3] => Array
+        (
+            [0] => type
+        )
+
+    [4] => Array
+        (
+            [0] => =
+        )
+
+    [5] => Array
+        (
+            [0] => 'channel'
+        )
+
+    [6] => Array
+        (
+            [0] => 
+        )
+
+)
+params
+Array
+(
+    [:type] => 'channel'
+)
+
+string
+array(':type' => 'channel')
+$string ==>
+array(':type' => 'channel')
+$values ==>
+Array
+(
+)
+$matches ==>
+Array
+(
+    [0] => SELECT nid FROM {node} WHERE type = 'channel'
+    [1] => SELECT nid FROM {node} WHERE 
+    [2] => type = 'channel'
+)
+$conditions ==>
+Array
+(
+    [0] => Array
+        (
+            [0] => type = 'channel'
+        )
+
+    [1] => Array
+        (
+            [0] => 
+        )
+
+    [2] => Array
+        (
+            [0] => 
+        )
+
+    [3] => Array
+        (
+            [0] => type
+        )
+
+    [4] => Array
+        (
+            [0] => =
+        )
+
+    [5] => Array
+        (
+            [0] => 'channel'
+        )
+
+    [6] => Array
+        (
+            [0] => 
+        )
+
+)
+params
+Array
+(
+    [:type] => 'channel'
+)
+
+string
+array(':type' => 'channel')
+$string ==>
+array(':type' => 'channel')
+inside coder_upgrade_convert_functions
+name = getInfo
+name = setUp
+name = test
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+coder_upgrade_convert_require
+inside coder_upgrade_convert_functions
+name = getInfo
+name = setUp
+name = test
+name = createFeedNodes
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+coder_upgrade_convert_require
+$values ==>
+Array
+(
+    [0] => $term->tid
+)
+$matches ==>
+Array
+(
+    [0] => SELECT COUNT(id) FROM {data_taxonomy} WHERE tid = %d AND data_table_name = 'feeds_data_syndication'
+    [1] => SELECT COUNT(id) FROM {data_taxonomy} WHERE 
+    [2] => tid = %d AND data_table_name = 'feeds_data_syndication'
+)
+$conditions ==>
+Array
+(
+    [0] => Array
+        (
+            [0] => tid = %d
+            [1] => data_table_name = 'feeds_data_syndication'
+        )
+
+    [1] => Array
+        (
+            [0] => tid
+            [1] => 
+        )
+
+    [2] => Array
+        (
+            [0] => =
+            [1] => 
+        )
+
+    [3] => Array
+        (
+            [0] => 
+            [1] => data_table_name
+        )
+
+    [4] => Array
+        (
+            [0] => 
+            [1] => =
+        )
+
+    [5] => Array
+        (
+            [0] => 
+            [1] => 'feeds_data_syndication'
+        )
+
+    [6] => Array
+        (
+            [0] => 
+            [1] => 
+        )
+
+)
+params
+Array
+(
+    [:data_table_name] => 'feeds_data_syndication'
+)
+
+string
+array(':data_table_name' => 'feeds_data_syndication')
+params
+Array
+(
+    [:data_table_name] => 'feeds_data_syndication'
+    [:tid] => $term->tid
+)
+
+string
+array(':tid' => $term->tid, ':data_table_name' => 'feeds_data_syndication')
+$string ==>
+array(':tid' => $term->tid, ':data_table_name' => 'feeds_data_syndication')
+$values ==>
+Array
+(
+    [0] => $term->tid
+)
+$matches ==>
+Array
+(
+    [0] => SELECT COUNT(id) FROM {data_taxonomy} WHERE tid = %d AND data_table_name = 'feeds_data_syndication'
+    [1] => SELECT COUNT(id) FROM {data_taxonomy} WHERE 
+    [2] => tid = %d AND data_table_name = 'feeds_data_syndication'
+)
+$conditions ==>
+Array
+(
+    [0] => Array
+        (
+            [0] => tid = %d
+            [1] => data_table_name = 'feeds_data_syndication'
+        )
+
+    [1] => Array
+        (
+            [0] => tid
+            [1] => 
+        )
+
+    [2] => Array
+        (
+            [0] => =
+            [1] => 
+        )
+
+    [3] => Array
+        (
+            [0] => 
+            [1] => data_table_name
+        )
+
+    [4] => Array
+        (
+            [0] => 
+            [1] => =
+        )
+
+    [5] => Array
+        (
+            [0] => 
+            [1] => 'feeds_data_syndication'
+        )
+
+    [6] => Array
+        (
+            [0] => 
+            [1] => 
+        )
+
+)
+params
+Array
+(
+    [:data_table_name] => 'feeds_data_syndication'
+)
+
+string
+array(':data_table_name' => 'feeds_data_syndication')
+params
+Array
+(
+    [:data_table_name] => 'feeds_data_syndication'
+    [:tid] => $term->tid
+)
+
+string
+array(':tid' => $term->tid, ':data_table_name' => 'feeds_data_syndication')
+$string ==>
+array(':tid' => $term->tid, ':data_table_name' => 'feeds_data_syndication')
+inside coder_upgrade_convert_functions
+name = getInfo
+name = test
+name = assertLatLonForTerm
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = mn_widgets_context_default_contexts
+hook = context_default_contexts
+inside coder_upgrade_upgrade_hook_alter
+mn_widgets_context_default_contexts
+name = mn_widgets_ctools_plugin_api
+hook = ctools_plugin_api
+inside coder_upgrade_upgrade_hook_alter
+mn_widgets_ctools_plugin_api
+name = mn_widgets_views_api
+hook = views_api
+inside coder_upgrade_upgrade_hook_alter
+mn_widgets_views_api
+inside coder_upgrade_upgrade_regex_info_alter
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+coder_upgrade_convert_require
+PGPList
+(
+    [0] => PGPExpression
+        (
+            [operand] => PGPFunctionCall
+                (
+                    [parent] => PGPNode
+                        (
+                            [type-1] => 602
+                        )
+
+                    [type] => 601
+                    [name] => Array
+                        (
+                            [type] => 307 (T_STRING)
+                            [value] => drupal_get_path
+                        )
+
+                    [noparens] => 0
+                    [parameters] => PGPList
+                        (
+                            [0] => PGPExpression
+                                (
+                                    [operand] => Array
+                                        (
+                                            [type] => 315 (T_CONSTANT_ENCAPSED_STRING)
+                                            [value] => 'module'
+                                        )
+
+                                )
+
+                            [1] => PGPExpression
+                                (
+                                    [operand] => Array
+                                        (
+                                            [type] => 315 (T_CONSTANT_ENCAPSED_STRING)
+                                            [value] => 'mn_widgets'
+                                        )
+
+                                )
+
+                        )
+
+                    [parentExpression] => PGPExpression
+                        (
+                            [type-1] => 
+                        )
+
+                    [debug] => 
+                )
+
+            [operator] => .
+            [operand] => Array
+                (
+                    [type] => 315 (T_CONSTANT_ENCAPSED_STRING)
+                    [value] => '/mn_widgets.css'
+                )
+
+        )
+
+)
+
+PGPList
+(
+    [0] => PGPExpression
+        (
+            [operand] => PGPOperand
+                (
+                    [type] => 309 (T_VARIABLE)
+                    [value] => $widget_preview
+                )
+
+        )
+
+    [1] => PGPExpression
+        (
+            [operand] => Array
+                (
+                    [type] => 315 (T_CONSTANT_ENCAPSED_STRING)
+                    [value] => 'setting'
+                )
+
+        )
+
+)
+
+params
+Array
+(
+    [scope] => JS_DEFAULT
+)
+
+string
+array('scope' => JS_DEFAULT)
+params
+Array
+(
+    [scope] => JS_DEFAULT
+    [type] => 'setting'
+)
+
+string
+array('type' => 'setting', 'scope' => JS_DEFAULT)
+PGPExpression
+(
+    [operand] => PGPArray
+        (
+            [type] => 362
+            [multiline] => 0
+            [original] => 
+            [preserve] => 1
+            [count] => 2
+            [commaCount] => 1
+            [values] => PGPList
+                (
+                    [lparens] => (
+                    [key] => PGPExpression
+                        (
+                            [operand] => Array
+                                (
+                                    [type] => 315
+                                    [value] => 'type'
+                                )
+
+                        )
+
+                    [assign] => =>
+                    [value] => PGPExpression
+                        (
+                            [operand] => Array
+                                (
+                                    [type] => 315
+                                    [value] => 'setting'
+                                )
+
+                        )
+
+                    [key] => PGPExpression
+                        (
+                            [operand] => Array
+                                (
+                                    [type] => 315
+                                    [value] => 'scope'
+                                )
+
+                        )
+
+                    [assign] => =>
+                    [value] => PGPExpression
+                        (
+                            [operand] => PGPOperand
+                                (
+                                    [type] => 307
+                                    [value] => JS_DEFAULT
+                                )
+
+                        )
+
+                )
+
+            [debug] => 
+        )
+
+)
+
+PGPList
+(
+    [0] => PGPExpression
+        (
+            [operand] => PGPFunctionCall
+                (
+                    [parent] => PGPNode
+                        (
+                            [type-1] => 602
+                        )
+
+                    [type] => 601
+                    [name] => Array
+                        (
+                            [type] => 307 (T_STRING)
+                            [value] => drupal_get_path
+                        )
+
+                    [noparens] => 0
+                    [parameters] => PGPList
+                        (
+                            [0] => PGPExpression
+                                (
+                                    [operand] => Array
+                                        (
+                                            [type] => 315 (T_CONSTANT_ENCAPSED_STRING)
+                                            [value] => 'module'
+                                        )
+
+                                )
+
+                            [1] => PGPExpression
+                                (
+                                    [operand] => Array
+                                        (
+                                            [type] => 315 (T_CONSTANT_ENCAPSED_STRING)
+                                            [value] => 'mn_widgets'
+                                        )
+
+                                )
+
+                        )
+
+                    [parentExpression] => PGPExpression
+                        (
+                            [type-1] => 
+                        )
+
+                    [debug] => 
+                )
+
+            [operator] => .
+            [operand] => Array
+                (
+                    [type] => 315 (T_CONSTANT_ENCAPSED_STRING)
+                    [value] => '/mn_widgets.css'
+                )
+
+        )
+
+    [1] => PGPExpression
+        (
+            [operand] => Array
+                (
+                    [type] => 315 (T_CONSTANT_ENCAPSED_STRING)
+                    [value] => 'widget'
+                )
+
+        )
+
+)
+
+string
+array()
+params
+Array
+(
+    [type] => 'widget'
+)
+
+string
+array('type' => 'widget')
+PGPExpression
+(
+    [operand] => PGPArray
+        (
+            [type] => 362
+            [multiline] => 0
+            [original] => 
+            [preserve] => 1
+            [count] => 1
+            [commaCount] => 0
+            [values] => PGPList
+                (
+                    [lparens] => (
+                    [key] => PGPExpression
+                        (
+                            [operand] => Array
+                                (
+                                    [type] => 315
+                                    [value] => 'type'
+                                )
+
+                        )
+
+                    [assign] => =>
+                    [value] => PGPExpression
+                        (
+                            [operand] => Array
+                                (
+                                    [type] => 315
+                                    [value] => 'widget'
+                                )
+
+                        )
+
+                )
+
+            [debug] => 
+        )
+
+)
+
+inside coder_upgrade_convert_functions
+name = mn_widgets_views_query_alter
+hook = views_query_alter
+inside coder_upgrade_upgrade_hook_alter
+mn_widgets_views_query_alter
+name = mn_widgets_block
+hook = block
+inside coder_upgrade_convert_op
+coder_upgrade_callback_block
+inside coder_upgrade_callback_block
+inside coder_upgrade_callback_block
+inside coder_upgrade_upgrade_hook_alter
+mn_widgets_block_OLD
+name = mn_widgets_web_widgets_render_widget
+hook = web_widgets_render_widget
+inside coder_upgrade_upgrade_hook_alter
+mn_widgets_web_widgets_render_widget
+name = mn_widgets_openlayers_alter
+hook = openlayers_alter
+inside coder_upgrade_upgrade_hook_alter
+mn_widgets_openlayers_alter
+name = mn_widgets_theme_registry_alter
+hook = theme_registry_alter
+inside coder_upgrade_upgrade_hook_alter
+mn_widgets_theme_registry_alter
+name = template_preprocess_mn_widgets_web_widgets_iframe
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = mn_widgets_views_default_views
+hook = views_default_views
+inside coder_upgrade_upgrade_hook_alter
+mn_widgets_views_default_views
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = mn_world_ctools_plugin_api
+hook = ctools_plugin_api
+inside coder_upgrade_upgrade_hook_alter
+mn_world_ctools_plugin_api
+inside coder_upgrade_upgrade_regex_info_alter
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+coder_upgrade_convert_require
+inside coder_upgrade_convert_functions
+name = mn_world_enable
+hook = enable
+inside coder_upgrade_upgrade_hook_alter
+mn_world_enable
+name = mn_world_disable
+hook = disable
+inside coder_upgrade_upgrade_hook_alter
+mn_world_disable
+name = mn_world_openlayers_map_preprocess_alter
+hook = openlayers_map_preprocess_alter
+inside coder_upgrade_upgrade_hook_alter
+mn_world_openlayers_map_preprocess_alter
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = mn_world_openlayers_layers
+hook = openlayers_layers
+inside coder_upgrade_upgrade_hook_alter
+mn_world_openlayers_layers
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = mn_world_openlayers_presets
+hook = openlayers_presets
+inside coder_upgrade_upgrade_hook_alter
+mn_world_openlayers_presets
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = mn_world_openlayers_styles
+hook = openlayers_styles
+inside coder_upgrade_upgrade_hook_alter
+mn_world_openlayers_styles
+inside coder_upgrade_convert_return
+while (!empty($nodes)) coder_upgrade_convert_return
+$value ==>
+$items
+inside if ($operand)
+$operand ==>
+$items
+while (!empty($nodes)) coder_upgrade_convert_return
+$return AFTER ==>
+$items = array()
+$value ==>
+array()
+inside if ($operand)
+$operand ==>
+array()
+while (!empty($nodes)) coder_upgrade_convert_return
+$return AFTER ==>
+$items['stored-views/%stored_views_id/delete'] = array(
+  'page callback' => 'drupal_get_form', 
+  'page arguments' => array('stored_views_delete_confirm', 1), 
+  'access callback' => 'user_access', 
+  'access arguments' => array('manage stored views'), 
+  'type' => MENU_CALLBACK,
+)
+$value ==>
+array(
+  'page callback' => 'drupal_get_form', 
+  'page arguments' => array('stored_views_delete_confirm', 1), 
+  'access callback' => 'user_access', 
+  'access arguments' => array('manage stored views'), 
+  'type' => MENU_CALLBACK,
+)
+inside if ($operand)
+$operand ==>
+array(
+  'page callback' => 'drupal_get_form', 
+  'page arguments' => array('stored_views_delete_confirm', 1), 
+  'access callback' => 'user_access', 
+  'access arguments' => array('manage stored views'), 
+  'type' => MENU_CALLBACK,
+)
+inside coder_upgrade_upgrade_regex_info_alter
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = stored_views_schema
+hook = schema
+inside coder_upgrade_convert_schema
+PGPFunctionCall
+(
+    [parent] => PGPNode
+        (
+            [type-1] => 336 (T_RETURN)
+        )
+
+    [type] => 336 (T_RETURN)
+    [name] => Array
+        (
+            [type] => 336 (T_RETURN)
+            [value] => return
+        )
+
+    [noparens] => 1
+    [parameters] => PGPList
+        (
+            [0] => PGPExpression
+                (
+                    [operand] => PGPOperand
+                        (
+                            [type] => 309 (T_VARIABLE)
+                            [value] => $schema
+                        )
+
+                )
+
+        )
+
+    [debug] => 
+)
+
+inside coder_upgrade_upgrade_hook_alter
+stored_views_schema
+name = stored_views_install
+hook = install
+inside coder_upgrade_convert_install
+inside coder_upgrade_upgrade_hook_alter
+stored_views_install
+name = stored_views_uninstall
+hook = uninstall
+inside coder_upgrade_convert_install
+inside coder_upgrade_upgrade_hook_alter
+stored_views_uninstall
+name = stored_views_update_6001
+hook = update_6001
+inside coder_upgrade_convert_update_N
+inside coder_upgrade_upgrade_hook_alter
+stored_views_update_6001
+inside coder_upgrade_convert_install_file_comment
+inside coder_upgrade_add_install_file_comment
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+PGPExpression
+(
+    [operand] => PGPOperand
+        (
+            [type] => 307
+            [value] => REQUEST_TIME
+        )
+
+)
+
+params
+Array
+(
+    [query] => implode('&', $query)
+)
+
+string
+array('query' => implode('&', $query))
+$values ==>
+Array
+(
+    [0] => $load['view']
+    [1] => $load['path']
+    [2] => serialize($load['arguments'])
+    [3] => serialize($load['filters'])
+)
+$matches ==>
+Array
+(
+    [0] => SELECT * FROM {stored_views} WHERE view = "%s" AND path = "%s" AND arguments = "%s" AND filters = "%s"
+    [1] => SELECT * FROM {stored_views} WHERE 
+    [2] => view = "%s" AND path = "%s" AND arguments = "%s" AND filters = "%s"
+)
+$conditions ==>
+Array
+(
+    [0] => Array
+        (
+            [0] => view = "%s"
+            [1] => path = "%s"
+            [2] => arguments = "%s"
+            [3] => filters = "%s"
+        )
+
+    [1] => Array
+        (
+            [0] => view
+            [1] => path
+            [2] => arguments
+            [3] => filters
+        )
+
+    [2] => Array
+        (
+            [0] => =
+            [1] => =
+            [2] => =
+            [3] => =
+        )
+
+    [3] => Array
+        (
+            [0] => 
+            [1] => 
+            [2] => 
+            [3] => 
+        )
+
+    [4] => Array
+        (
+            [0] => 
+            [1] => 
+            [2] => 
+            [3] => 
+        )
+
+    [5] => Array
+        (
+            [0] => 
+            [1] => 
+            [2] => 
+            [3] => 
+        )
+
+    [6] => Array
+        (
+            [0] => 
+            [1] => 
+            [2] => 
+            [3] => 
+        )
+
+)
+params
+Array
+(
+    [:filters] => serialize($load['filters'])
+)
+
+string
+array(':filters' => serialize($load['filters']))
+params
+Array
+(
+    [:filters] => serialize($load['filters'])
+    [:arguments] => serialize($load['arguments'])
+)
+
+string
+array(':arguments' => serialize($load['arguments']), ':filters' => serialize($load['filters']))
+params
+Array
+(
+    [:filters] => serialize($load['filters'])
+    [:arguments] => serialize($load['arguments'])
+    [:path] => $load['path']
+)
+
+string
+array(':path' => $load['path'], ':arguments' => serialize($load['arguments']), ':filters' => serialize($load['filters']))
+params
+Array
+(
+    [:filters] => serialize($load['filters'])
+    [:arguments] => serialize($load['arguments'])
+    [:path] => $load['path']
+    [:view] => $load['view']
+)
+
+string
+array(':view' => $load['view'], ':path' => $load['path'], ':arguments' => serialize($load['arguments']), ':filters' => serialize($load['filters']))
+$string ==>
+array(':view' => $load['view'], ':path' => $load['path'], ':arguments' => serialize($load['arguments']), ':filters' => serialize($load['filters']))
+$values ==>
+Array
+(
+    [0] => $id
+)
+$matches ==>
+Array
+(
+    [0] => SELECT * FROM {stored_views} WHERE id = %d
+    [1] => SELECT * FROM {stored_views} WHERE 
+    [2] => id = %d
+)
+$conditions ==>
+Array
+(
+    [0] => Array
+        (
+            [0] => id = %d
+        )
+
+    [1] => Array
+        (
+            [0] => id
+        )
+
+    [2] => Array
+        (
+            [0] => =
+        )
+
+    [3] => Array
+        (
+            [0] => 
+        )
+
+    [4] => Array
+        (
+            [0] => 
+        )
+
+    [5] => Array
+        (
+            [0] => 
+        )
+
+    [6] => Array
+        (
+            [0] => 
+        )
+
+)
+params
+Array
+(
+    [:id] => $id
+)
+
+string
+array(':id' => $id)
+$string ==>
+array(':id' => $id)
+$values ==>
+Array
+(
+    [0] => $delete['view']
+    [1] => $delete['path']
+    [2] => serialize($delete['arguments'])
+    [3] => serialize($delete['filters'])
+)
+Array
+(
+    [0] => DELETE FROM {stored_views} WHERE view = "%s" AND path = "%s" AND arguments = "%s" AND filters = "%s"
+    [1] => stored_views
+    [2] => view = "%s" AND path = "%s" AND arguments = "%s" AND filters = "%s"
+)
+$replacement_count ==>
+4
+$new ==>
+Array
+(
+    [0] => db_delete('stored_views')
+    [1] => 	->condition('view', $delete['view'])
+	->condition('path', $delete['path'])
+	->condition('arguments', serialize($delete['arguments']))
+	->condition('filters', serialize($delete['filters']))
+    [2] => 	->execute();
+)
+coder_upgrade_insert_dbtng_statement
+inside coder_upgrade_convert_functions
+name = stored_views_menu
+hook = menu
+inside coder_upgrade_upgrade_hook_alter
+stored_views_menu
+name = stored_views_perm
+hook = perm
+inside coder_upgrade_convert_return
+while (!empty($nodes)) coder_upgrade_convert_return
+$value ==>
+array('manage stored views')
+inside if ($operand)
+$operand ==>
+array('manage stored views')
+inside coder_upgrade_callback_perm
+inside coder_upgrade_upgrade_hook_alter
+stored_views_permission
+name = stored_views_views_api
+hook = views_api
+inside coder_upgrade_upgrade_hook_alter
+stored_views_views_api
+name = stored_views_block
+hook = block
+inside coder_upgrade_convert_op
+coder_upgrade_callback_block
+inside coder_upgrade_callback_block
+inside coder_upgrade_callback_block
+inside coder_upgrade_upgrade_hook_alter
+stored_views_block_OLD
+name = stored_views_theme
+hook = theme
+inside coder_upgrade_convert_return
+while (!empty($nodes)) coder_upgrade_convert_return
+$value ==>
+array(
+  'stored_views_form' => array(
+    'arguments' => array('form' => array()),
+  ),
+)
+inside if ($operand)
+$operand ==>
+array(
+  'stored_views_form' => array(
+    'arguments' => array('form' => array()),
+  ),
+)
+inside coder_upgrade_callback_theme
+Found the arguments key
+inside coder_upgrade_upgrade_hook_alter
+stored_views_theme
+name = theme_stored_views_form
+hook = views_form
+inside coder_upgrade_upgrade_hook_alter
+theme_stored_views_form
+name = stored_views_form
+hook = form
+inside coder_upgrade_upgrade_hook_alter
+stored_views_form
+name = stored_views_form_submit
+hook = form_submit
+inside coder_upgrade_upgrade_hook_alter
+stored_views_form_submit
+name = stored_views_delete_confirm
+hook = delete_confirm
+inside coder_upgrade_upgrade_hook_alter
+stored_views_delete_confirm
+inside coder_upgrade_convert_form_callback
+name = stored_views_delete_confirm_submit
+hook = delete_confirm_submit
+inside coder_upgrade_upgrade_hook_alter
+stored_views_delete_confirm_submit
+name = stored_views_save
+hook = save
+inside coder_upgrade_upgrade_hook_alter
+stored_views_save
+name = stored_views_load
+hook = load
+inside coder_upgrade_upgrade_hook_alter
+stored_views_load
+name = stored_views_id_load
+hook = id_load
+inside coder_upgrade_upgrade_hook_alter
+stored_views_id_load
+name = stored_views_delete
+hook = delete
+inside coder_upgrade_upgrade_hook_alter
+stored_views_delete
+name = _stored_views_get_page_view
+name = _stored_views_block_save
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = stored_views_views_data
+hook = views_data
+inside coder_upgrade_upgrade_hook_alter
+stored_views_views_data
+name = stored_views_views_handlers
+hook = views_handlers
+inside coder_upgrade_upgrade_hook_alter
+stored_views_views_handlers
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = stored_views_views_default_views
+hook = views_default_views
+inside coder_upgrade_upgrade_hook_alter
+stored_views_views_default_views
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = construct
+name = option_definition
+name = options_form
+name = query
+name = render
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = query
+name = render
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = option_definition
+name = options_form
+name = query
+name = render
+inside coder_upgrade_upgrade_regex_alter
+inside coder_upgrade_convert_function_calls
+inside coder_upgrade_convert_functions
+name = construct
+name = option_definition
+name = options_form
+name = l
+name = render

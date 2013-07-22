@@ -1,0 +1,200 @@
+diff -up -r mn_widgets.features.inc mn_widgets.features.inc
+--- mn_widgets.features.inc	2013-07-19 12:43:24.039800623 +0200
++++ mn_widgets.features.inc	2013-07-19 12:47:02.685098824 +0200
+@@ -1,7 +1,7 @@
+ <?php
+ 
+ /**
+- * Implementation of hook_context_default_contexts().
++ * Implements hook_context_default_contexts().
+  */
+ function mn_widgets_context_default_contexts() {
+   $export = array();
+@@ -42,7 +42,7 @@ function mn_widgets_context_default_cont
+ }
+ 
+ /**
+- * Implementation of hook_ctools_plugin_api().
++ * Implements hook_ctools_plugin_api().
+  */
+ function mn_widgets_ctools_plugin_api() {
+   list($module, $api) = func_get_args();
+@@ -52,7 +52,7 @@ function mn_widgets_ctools_plugin_api()
+ }
+ 
+ /**
+- * Implementation of hook_views_api().
++ * Implements hook_views_api().
+  */
+ function mn_widgets_views_api() {
+   return array(
+diff -up -r mn_widgets.info mn_widgets.info
+--- mn_widgets.info	2013-07-19 12:43:24.039800623 +0200
++++ mn_widgets.info	2013-07-19 12:47:03.249102173 +0200
+@@ -1,4 +1,4 @@
+-core = "6.x"
++core = 7.x
+ dependencies[] = "context"
+ dependencies[] = "data"
+ dependencies[] = "data_taxonomy"
+@@ -14,3 +14,4 @@ features[views_api][] = "api:2"
+ name = "MN Widgets"
+ package = "Managing News"
+ project = "mn_widgets"
++
+diff -up -r mn_widgets.module mn_widgets.module
+--- mn_widgets.module	2013-07-19 12:43:24.039800623 +0200
++++ mn_widgets.module	2013-07-19 12:47:02.781099394 +0200
+@@ -1,9 +1,9 @@
+ <?php
+ 
+-include_once('mn_widgets.features.inc');
++include_once DRUPAL_ROOT . '/' . 'mn_widgets.features.inc';
+ 
+ /**
+- * Implementation of hook_views_query_alter().
++ * Implements hook_views_query_alter().
+  *
+  * Sets a context with the display plugin is 'web_widgets.'
+  */
+@@ -16,61 +16,69 @@ function mn_widgets_views_query_alter($v
+ }
+ 
+ /**
+- * Implementation of hook_block().
++ * Implements hook_block_info().
+  */
+-function mn_widgets_block($op = 'list', $delta = 0) {
+-  switch ($op) {
+-    case 'list':
+-      $blocks = array();
+-      $blocks['embed']['info'] = t('MN: Embed widget');
+-      return $blocks;
+-    case 'view':
+-      drupal_add_css(drupal_get_path('module', 'mn_widgets') . '/mn_widgets.css');
+-      switch ($delta) {
+-        case 'embed':
+-          // Prepare embed code
+-          $display_mode = '';
+-          $height = 300;
+-          if (isset($_GET['display']) && $_GET['display'] == 'views-mode-map') {
+-            $display_mode = "map/";
+-            $height = 225;
+-          }
+-
+-          $style = 'iframe';
+-          $query = $_GET;
+-          unset($query['q']);
+-          unset($query['display']);
+-
+-          $path_q = $_GET['q'];
+-          $path_q = str_replace('node', 'channel', $path_q);
+-
+-          $path = url('widget/' . $display_mode . $path_q, array('absolute' => TRUE, 'query' => $query, 'purl' => array('disabled' => TRUE)));
+-          $width = 300;
+-          $output = web_widgets_render_embed_code($style, $path, $width, $height);
+-          $output .= '<div id="mn_widgets_preview"></div>';
+-
+-          // Prepare widget preview
+-          $query['preview'] = 1;
+-          $preview_path = url('widget/' . $display_mode . $path_q, array('absolute' => TRUE, 'query' => $query, 'purl' => array('disabled' => TRUE)));
+-          $widget_preview['mn_widgets_preview'] = theme('web_widgets_' . $style, $preview_path, $width, $height);
+-          drupal_add_js($widget_preview, 'setting');
++function mn_widgets_block_info() {
++  $blocks = array();
++  $blocks['embed']['info'] = t('MN: Embed widget');
++  return $blocks;
++}
+ 
+-          return array('subject' => t('Embed'), 'content' => $output);
++/**
++ * Implements hook_block_view().
++ */
++function mn_widgets_block_view($delta) {
++  drupal_add_css(drupal_get_path('module', 'mn_widgets') . '/mn_widgets.css');
++  switch ($delta) {
++    case 'embed':
++      // Prepare embed code
++      $display_mode = '';
++      $height = 300;
++      if (isset($_GET['display']) && $_GET['display'] == 'views-mode-map') {
++        $display_mode = "map/";
++        $height = 225;
+       }
++
++      $style = 'iframe';
++      $query = $_GET;
++      unset($query['q']);
++      unset($query['display']);
++
++      $path_q = $_GET['q'];
++      $path_q = str_replace('node', 'channel', $path_q);
++
++      $path = url('widget/' . $display_mode . $path_q, array('absolute' => TRUE, 'query' => $query, 'purl' => array('disabled' => TRUE)));
++      $width = 300;
++      $output = web_widgets_render_embed_code($style, $path, $width, $height);
++      $output .= '<div id="mn_widgets_preview"></div>';
++
++      // Prepare widget preview
++      $query['preview'] = 1;
++      $preview_path = url('widget/' . $display_mode . $path_q, array('absolute' => TRUE, 'query' => $query, 'purl' => array('disabled' => TRUE)));
++      // TODO Please change this theme call to use an associative array for the $variables parameter.
++      $widget_preview['mn_widgets_preview'] = theme('web_widgets_' . $style, $preview_path, $width, $height);
++      drupal_add_js($widget_preview, array('type' => 'setting', 'scope' => JS_DEFAULT));
++
++      return array('subject' => t('Embed'), 'content' => $output);
+   }
+ }
+ 
+ /**
+- * Implementation of hook_web_widgets_render_widget().
++ * Implements hook_block().
++ */
++function mn_widgets_block_OLD($op = 'list', $delta = 0) { }
++
++/**
++ * Implements hook_web_widgets_render_widget().
+  *
+  * Adds relevent stylesheets.
+  */
+ function mn_widgets_web_widgets_render_widget() {
+-  drupal_add_css(drupal_get_path('module', 'mn_widgets') . '/mn_widgets.css', 'widget');
++  drupal_add_css(drupal_get_path('module', 'mn_widgets') . '/mn_widgets.css', array('type' => 'widget'));
+ }
+ 
+ /**
+- * Implementation of hook_openlayers_alter().
++ * Implements hook_openlayers_alter().
+  *
+  * Set the width of the map to 300 when the mn_widgets context is active.
+  */
+@@ -89,7 +97,7 @@ function mn_widgets_openlayers_alter(&$m
+ }
+ 
+ /**
+- * Implementation of hook_theme_registry_alter().
++ * Implements hook_theme_registry_alter().
+  */
+ function mn_widgets_theme_registry_alter(&$theme_registry) {
+   $path = drupal_get_path("module", "mn_widgets") . '/theme';
+diff -up -r mn_widgets.views_default.inc mn_widgets.views_default.inc
+--- mn_widgets.views_default.inc	2013-07-19 12:43:24.127801147 +0200
++++ mn_widgets.views_default.inc	2013-07-19 12:47:03.249102173 +0200
+@@ -1,7 +1,7 @@
+ <?php
+ 
+ /**
+- * Implementation of hook_views_default_views().
++ * Implements hook_views_default_views().
+  */
+ function mn_widgets_views_default_views() {
+   $views = array();
+@@ -304,7 +304,7 @@ function mn_widgets_views_default_views(
+       'add_table' => 0,
+       'require_value' => 0,
+       'id' => 'name',
+-      'table' => 'term_data',
++      'table' => 'taxonomy_term_data',
+       'field' => 'name',
+       'relationship' => 'tid',
+       'validate_user_argument_type' => 'uid',

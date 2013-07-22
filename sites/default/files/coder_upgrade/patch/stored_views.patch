@@ -1,0 +1,320 @@
+diff -up -r stored_views.info stored_views.info
+--- stored_views.info	2013-07-19 12:43:16.691756995 +0200
++++ stored_views.info	2013-07-19 12:47:04.405109038 +0200
+@@ -1,10 +1,14 @@
+ name = Stored views
+ description = Save a view and its arguments for later display.
+ dependencies[] = views
+-core = 6.x
++core = 7.x
+ ; Information added by fserver
+-core = "6.x"
++core = 7.x
+ datestamp = "1258646137"
+ project = "stored_views"
+ project status url = "http://code.developmentseed.org/fserver"
+-version = "6.x-1.0-beta2"
+\ No newline at end of file
++version = "6.x-1.0-beta2"
++files[] = views/stored_views_views_handler_field_link_delete.inc
++files[] = views/stored_views_views_handler_field_path.inc
++files[] = views/stored_views_views_handler_field_preview.inc
++files[] = views/stored_views_views_handler_field_title.inc
+diff -up -r stored_views.install stored_views.install
+--- stored_views.install	2013-07-19 12:43:16.747757327 +0200
++++ stored_views.install	2013-07-19 12:47:03.833105641 +0200
+@@ -1,8 +1,14 @@
+ <?php
++/**
++ * @file
++ * Install, update and uninstall functions for the stored_views module.
++ *
++ */
++
+ // $Id$
+ 
+ /**
+- * Implementation of hook_schema().
++ * Implements hook_schema().
+  */
+ function stored_views_schema() {
+   $schema['stored_views'] = array(
+@@ -78,19 +84,21 @@ function stored_views_schema() {
+ }
+ 
+ /**
+- * Implementation of hook_install().
++ * Implements hook_install().
+  */
+ function stored_views_install() {
+   // Create tables.
+-  drupal_install_schema('stored_views');
++  // TODO The drupal_(un)install_schema functions are called automatically in D7.
++  // drupal_install_schema('stored_views')
+ }
+ 
+ /**
+- * Implementation of hook_uninstall().
++ * Implements hook_uninstall().
+  */
+ function stored_views_uninstall() {
+   // Remove tables.
+-  drupal_uninstall_schema('stored_views');
++  // TODO The drupal_(un)install_schema functions are called automatically in D7.
++  // drupal_uninstall_schema('stored_views')
+ }
+ 
+ /**
+@@ -105,7 +113,10 @@ function stored_views_update_6001() {
+     'default' => 0,
+     'description' => 'Status (promoted, not promoted).',
+   );
+-  db_add_field($ret, 'stored_views', 'status', $spec);
+-  db_add_index($ret, 'stored_views', 'status', array('status'));
+-  return $ret;
++  db_add_field('stored_views', 'status', $spec);
++  db_add_index('stored_views', 'status', array('status'));
++  // hook_update_N() no longer returns a $ret array. Instead, return
++  // nothing or a translated string indicating the update ran successfully.
++  // See http://drupal.org/node/224333#update_sql.
++  return t('TODO Add a descriptive string here to show in the UI.') /* $ret */;
+ }
+diff -up -r stored_views.module stored_views.module
+--- stored_views.module	2013-07-19 12:43:16.903758253 +0200
++++ stored_views.module	2013-07-19 12:47:04.021106758 +0200
+@@ -1,7 +1,7 @@
+ <?php
+ 
+ /**
+- * Implementation of hook_menu().
++ * Implements hook_menu().
+  */
+ function stored_views_menu() {
+   $items = array();
+@@ -16,14 +16,19 @@ function stored_views_menu() {
+ }
+ 
+ /**
+- * Implementation of hook_perm().
++ * Implements hook_permission().
+  */
+-function stored_views_perm() {
+-  return array('manage stored views');
++function stored_views_permission() {
++  return array(
++    'manage stored views' => array(
++      'title' => t('manage stored views'),
++      'description' => t('TODO Add a description for \'manage stored views\''),
++    ),
++  );
+ }
+ 
+ /**
+- * Implementation of hook_views_api().
++ * Implements hook_views_api().
+  */
+ function stored_views_views_api() {
+   return array(
+@@ -33,29 +38,36 @@ function stored_views_views_api() {
+ }
+ 
+ /**
+- * Implementation of hook_block().
++ * Implements hook_block_info().
+  */
+-function stored_views_block($op = 'list', $delta = 0) {
+-  switch ($op) {
+-    case 'list':
+-      $blocks = array();
+-      $blocks['save']['info'] = t('Save current view block');
+-      $blocks['save']['cache'] = BLOCK_CACHE_GLOBAL;
+-      return $blocks;
+-    case 'view':
+-      if ($delta == 'save') {
+-        return _stored_views_block_save();
+-      }
++function stored_views_block_info() {
++  $blocks = array();
++  $blocks['save']['info'] = t('Save current view block');
++  $blocks['save']['cache'] = BLOCK_CACHE_GLOBAL;
++  return $blocks;
++}
++
++/**
++ * Implements hook_block_view().
++ */
++function stored_views_block_view($delta) {
++  if ($delta == 'save') {
++    return _stored_views_block_save();
+   }
+ }
+ 
+ /**
+- * Implementation of hook_theme().
++ * Implements hook_block().
++ */
++function stored_views_block_OLD($op = 'list', $delta = 0) { }
++
++/**
++ * Implements hook_theme().
+  */
+ function stored_views_theme() {
+   return array(
+     'stored_views_form' => array(
+-      'arguments' => array('form' => array()),
++      'render element' => 'form',
+     ),
+   );
+ }
+@@ -63,14 +75,15 @@ function stored_views_theme() {
+ /**
+  * Theme function for stored_views_form().
+  */
+-function theme_stored_views_form($form) {
+-  return drupal_render($form);
++function theme_stored_views_form($variables) {
++  $form = $variables['form'];
++  return drupal_render_children($form);
+ }
+ 
+ /**
+  * Create a save form.
+  */
+-function stored_views_form($form_state) {
++function stored_views_form($form, $form_state) {
+   $form = array();
+   $page_view = _stored_views_get_page_view();
+   if ($stored = stored_views_load($page_view)) {
+@@ -93,7 +106,7 @@ function stored_views_form($form_state)
+       '#value' => t('Add'),
+     );
+   }
+-  $form['#redirect'] = FALSE;
++  $form_state['#redirect'] = FALSE;
+   return $form;
+ }
+ 
+@@ -103,7 +116,7 @@ function stored_views_form($form_state)
+ function stored_views_form_submit($form, &$form_state) {
+   if ($form['#save']) {
+     $save = $form['#save'];
+-    $save['created'] = time();
++    $save['created'] = REQUEST_TIME;
+     $save['status'] = $form_state['values']['status'];
+     stored_views_save($save);
+   }
+@@ -119,13 +132,14 @@ function stored_views_form_submit($form,
+       $query[] = "$k=$v";
+     }
+   }
+-  drupal_goto($_GET['q'], implode('&', $query));
++  // TODO implode('&', $query) needs to be an array of keys and values instead of a string.
++  drupal_goto($_GET['q'], array('query' => implode('&', $query)));
+ }
+ 
+ /**
+  * Stored view delete confirmation form.
+  */
+-function stored_views_delete_confirm($form_state, $stored_view) {
++function stored_views_delete_confirm($form, $form_state, $stored_view) {
+   $form = array('stored_view' => array(
+       '#type' => 'value',
+       '#value' => $stored_view,
+@@ -181,15 +195,19 @@ function stored_views_save($save) {
+  *     'filters' => 'the=views&fil=ters',
+  *   )
+  */
+-function stored_views_load($load) {
+-  $load = db_fetch_array(db_query('SELECT * FROM {stored_views} WHERE view = "%s" AND path = "%s" AND arguments = "%s" AND filters = "%s"',
+-    $load['view'], $load['path'], serialize($load['arguments']), serialize($load['filters'])));
+-  if ($load) {
+-    $load['arguments'] = unserialize($load['arguments']);
+-    $load['filters'] = unserialize($load['filters']);
+-    return $load;
++function stored_views_load($loads) {
++  foreach ($loads as $nid => &$load) {
++    $load = db_fetch_array(db_query('SELECT * FROM {stored_views} WHERE view = :view AND path = :path AND arguments = :arguments AND filters = :filters', array(':view' => $load['view'], ':path' => $load['path'], ':arguments' => serialize($load['arguments']), ':filters' => serialize($load['filters']))));
++    if ($load) {
++      $load['arguments'] = unserialize($load['arguments']);
++      $load['filters'] = unserialize($load['filters']);
++      return $load;
++    }
++    $node_additions = FALSE;
++    foreach ($node_additions as $property => &$value) {
++      $load->$property = $value;
++    }
+   }
+-  return FALSE;
+ }
+ 
+ /**
+@@ -200,7 +218,7 @@ function stored_views_load($load) {
+  */
+ function stored_views_id_load($id) {
+   if (is_numeric($id)) {
+-    $load = db_fetch_array(db_query('SELECT * FROM {stored_views} WHERE id = %d', $id));
++    $load = db_fetch_array(db_query('SELECT * FROM {stored_views} WHERE id = :id', array(':id' => $id)));
+     if ($load) {
+       $load['arguments'] = unserialize($load['arguments']);
+       $load['filters'] = unserialize($load['filters']);
+@@ -223,8 +241,14 @@ function stored_views_id_load($id) {
+  *   )
+  */
+ function stored_views_delete($delete) {
+-  db_query('DELETE FROM {stored_views} WHERE view = "%s" AND path = "%s" AND arguments = "%s" AND filters = "%s"',
+-    $delete['view'], $delete['path'], serialize($delete['arguments']), serialize($delete['filters']));
++  // TODO Please review the conversion of this statement to the D7 database API syntax.
++  /* db_query('DELETE FROM {stored_views} WHERE view = "%s" AND path = "%s" AND arguments = "%s" AND filters = "%s"', $delete['view'], $delete['path'], serialize($delete['arguments']), serialize($delete['filters'])) */
++  db_delete('stored_views')
++  ->condition('view', $delete['view'])
++  ->condition('path', $delete['path'])
++  ->condition('arguments', serialize($delete['arguments']))
++  ->condition('filters', serialize($delete['filters']))
++  ->execute();
+ }
+ 
+ /**
+diff -up -r views/stored_views.views.inc views/stored_views.views.inc
+--- views/stored_views.views.inc	2013-07-19 12:43:16.987758752 +0200
++++ views/stored_views.views.inc	2013-07-19 12:47:04.105107256 +0200
+@@ -1,7 +1,7 @@
+ <?php
+ 
+ /**
+- * Implementation of hook_views_data().
++ * Implements hook_views_data().
+  */
+ function stored_views_views_data() {
+   $data = array();
+@@ -123,7 +123,7 @@ function stored_views_views_data() {
+ }
+ 
+ /**
+- * Implementation of hook_views_handlers().
++ * Implements hook_views_handlers().
+  */
+ function stored_views_views_handlers() {
+   return array(
+diff -up -r views/stored_views.views_default.inc views/stored_views.views_default.inc
+--- views/stored_views.views_default.inc	2013-07-19 12:43:16.987758752 +0200
++++ views/stored_views.views_default.inc	2013-07-19 12:47:04.221107944 +0200
+@@ -1,7 +1,7 @@
+ <?php
+ 
+ /**
+- * Implementation of hook_views_default_views().
++ * Implements hook_views_default_views().
+  */
+ function stored_views_views_default_views() {
+   $views = array();
+diff -up -r views/stored_views_views_handler_field_title.inc views/stored_views_views_handler_field_title.inc
+--- views/stored_views_views_handler_field_title.inc	2013-07-19 12:43:17.291760557 +0200
++++ views/stored_views_views_handler_field_title.inc	2013-07-19 12:47:04.405109038 +0200
+@@ -64,6 +64,7 @@ class stored_views_views_handler_field_t
+       $options['attributes']['title'] = strip_tags($options['attributes']['title']);
+     }
+ 
++    // TODO The second parameter to this function call should be an array.
+     return '<a href="' . check_url(url($path, $options)) . '"' . drupal_attributes($options['attributes']) . '>' . ($options['html'] ? $text : check_plain($text)) . '</a>';
+   }
+ 

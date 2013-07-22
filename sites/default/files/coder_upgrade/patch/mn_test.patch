@@ -1,0 +1,252 @@
+diff -up -r mn_test.info mn_test.info
+--- mn_test.info	2013-07-19 12:43:16.363755047 +0200
++++ mn_test.info	2013-07-19 12:47:02.593098278 +0200
+@@ -3,5 +3,10 @@ name = "Managing News test"
+ description = "Provides a framework for unit and functional testing for Managing News."
+ package = Development
+ version = VERSION
+-core = "6.x"
+-dependencies[] = simpletest
+\ No newline at end of file
++core = 7.x
++dependencies[] = simpletest
++files[] = mn_web_test_case.php
++files[] = tests/mn_basic.test
++files[] = tests/mn_channels.test
++files[] = tests/mn_feeds.test
++files[] = tests/mn_tags.test
+diff -up -r mn_web_test_case.php mn_web_test_case.php
+--- mn_web_test_case.php	2013-07-19 12:43:16.487755783 +0200
++++ mn_web_test_case.php	2013-07-19 12:47:02.365096924 +0200
+@@ -1,7 +1,7 @@
+ <?php
+ 
+ //require_once drupal_get_path('module', 'mn_test');
+-require_once drupal_get_path('module', 'simpletest') . '/drupal_web_test_case.php';
++require_once DRUPAL_ROOT . '/' . drupal_get_path('module', 'simpletest') . '/drupal_web_test_case.php';
+ 
+ /**
+  * Test case for typical Drupal tests.
+@@ -36,7 +36,7 @@ class MnWebTestCase extends DrupalWebTes
+     $profile = $this->install_profile;
+ 
+     // include_once DRUPAL_ROOT . '/includes/install.inc';
+-    include_once './includes/install.inc';
++    include_once DRUPAL_ROOT . '/' . './includes/install.inc';
+     drupal_install_system();
+ 
+     // Add the specified modules to the list of modules in the default profile.
+@@ -78,7 +78,7 @@ class MnWebTestCase extends DrupalWebTes
+     // drupal_save_session(FALSE);
+     // $user = user_load(1);
+     session_save_session(FALSE);
+-    $user = user_load(array('uid' => 1));
++    $user = user_load(1);
+ 
+     // Restore necessary variables.
+     variable_set('install_profile', $this->install_profile);
+@@ -93,9 +93,31 @@ class MnWebTestCase extends DrupalWebTes
+     variable_set('comment_book', 0);
+ 
+     _managingnews_system_theme_data();
+-    db_query("UPDATE {system} SET status = 0 WHERE type = 'theme'");
+-    db_query("UPDATE {system} SET status = 1 WHERE type = 'theme' AND name = 'jake'");
+-    db_query("UPDATE {blocks} SET region = '' WHERE theme = 'jake'");
++    // TODO Please review the conversion of this statement to the D7 database API syntax.
++    /* db_query("UPDATE {system} SET status = 0 WHERE type = 'theme'") */
++    db_update('system')
++  ->fields(array(
++    'status' =>  0,
++  ))
++  ->condition('type', 'theme')
++  ->execute();
++    // TODO Please review the conversion of this statement to the D7 database API syntax.
++    /* db_query("UPDATE {system} SET status = 1 WHERE type = 'theme' AND name = 'jake'") */
++    db_update('system')
++  ->fields(array(
++    'status' =>  1,
++  ))
++  ->condition('type', 'theme')
++  ->condition('name', 'jake')
++  ->execute();
++    // TODO Please review the conversion of this statement to the D7 database API syntax.
++    /* db_query("UPDATE {block} SET region = '' WHERE theme = 'jake'") */
++    db_update('block')
++  ->fields(array(
++    'region' =>  '',
++  ))
++  ->condition('theme', 'jake')
++  ->execute();
+     variable_set('theme_default', 'jake');
+ 
+     // Use temporary files directory with the same prefix as database.
+@@ -103,9 +125,9 @@ class MnWebTestCase extends DrupalWebTes
+     variable_set('file_directory_path', file_directory_path() . '/' . $db_prefix);
+     $directory = file_directory_path();
+     // Create the files directory.
+-    file_check_directory($directory, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS);
++    file_prepare_directory($directory, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS);
+ 
+-    set_time_limit($this->timeLimit);
++    drupal_set_time_limit($this->timeLimit);
+   }
+ 
+   /**
+@@ -164,7 +186,7 @@ class MnWebTestCase extends DrupalWebTes
+       );
+     }
+     if (!empty($rows)) {
+-      return theme('table', array(), $rows);
++      return theme('table', array('header' => array(), 'rows' => $rows));
+     }
+     else {
+       return 'No properties';
+diff -up -r tests/mn_basic.test tests/mn_basic.test
+--- tests/mn_basic.test	2013-07-19 12:43:16.575756307 +0200
++++ tests/mn_basic.test	2013-07-19 12:47:02.465097518 +0200
+@@ -1,7 +1,7 @@
+ <?php
+ // $Id: mn_basic.test,v 1.1.2.6 2010/10/09 21:01:28 diggersf Exp $
+ 
+-require_once drupal_get_path('module', 'mn_test') . '/mn_web_test_case.php';
++require_once DRUPAL_ROOT . '/' . drupal_get_path('module', 'mn_test') . '/mn_web_test_case.php';
+ 
+ class MnBasicTestCase extends MnWebTestCase {
+   /**
+@@ -22,7 +22,7 @@ class MnBasicTestCase extends MnWebTestC
+     $file = $this->generateOPML();
+     $this->importFile('opml', $file);
+     $this->assertText('Created 1 feed node.');
+-    $count = db_result(db_query("SELECT COUNT(*) FROM {feeds_source}"));
++    $count = db_query("SELECT COUNT(*) FROM {feeds_source}")->fetchField();
+     $this->assertEqual($count, 3, 'Found correct number of items.');
+ 
+     // Import a feed and then delete all items from it.
+@@ -35,7 +35,7 @@ class MnBasicTestCase extends MnWebTestC
+     $this->drupalPost('node/3/import', array(), 'Import');
+     $this->assertText('Created 10 items.');
+     $this->expireFeedItems(15);
+-    $count = db_result(db_query("SELECT COUNT(*) FROM {feeds_data_syndication}"));
++    $count = db_query("SELECT COUNT(*) FROM {feeds_data_syndication}")->fetchField();
+     $this->assertEqual($count, 5, 'Deleted 5 expired feed items.');
+ 
+     // Creates a channel and then deletes all items except for those in the newly created channel.
+@@ -45,7 +45,7 @@ class MnBasicTestCase extends MnWebTestC
+     $this->drupalPost('node/add/channel', $edit, t('Save'));
+     $this->assertText('Channel Drupal has been created.');
+     $this->drupalPost('node/3/delete-items', array(), 'Delete');
+-    $count = db_result(db_query("SELECT COUNT(*) FROM {feeds_data_syndication}"));
++    $count = db_query("SELECT COUNT(*) FROM {feeds_data_syndication}")->fetchField();
+     $this->assertEqual($count, 3, 'Deleted all items except those included in a channel.');
+ 
+     // Moves a channel item to the trash and then expires it.
+@@ -54,11 +54,11 @@ class MnBasicTestCase extends MnWebTestC
+     $this->drupalPost($this->getURL(), array(), 'Remove');
+     $this->assertText('Removed');
+     $this->expireFeedItems(10);
+-    $count = db_result(db_query("SELECT COUNT(*) FROM {feeds_data_syndication}"));
++    $count = db_query("SELECT COUNT(*) FROM {feeds_data_syndication}")->fetchField();
+     $this->assertEqual($count, 2, 'Removed expired channel item that was marked for deletion');
+ 
+     // Tests to see if auto tagging is working correctly.
+-    $count = db_result(db_query("SELECT COUNT(*) FROM {data_taxonomy}"));
++    $count = db_query("SELECT COUNT(*) FROM {data_taxonomy}")->fetchField();
+     $this->assertEqual($count, 14, 'Feed items auto tagged correctly.');
+   }
+ 
+@@ -98,13 +98,28 @@ class MnBasicTestCase extends MnWebTestC
+   }
+ 
+   function expireFeedItems($id) {
+-    $old_timestamp = time() - (300 * 24 * 60 * 60);
++    $old_timestamp = REQUEST_TIME - (300 * 24 * 60 * 60);
+ 
+     // Sets timestamp column for 5 of the feed items to a date more than 12 weeks from current time.
+-    db_query("UPDATE {feeds_data_syndication} SET timestamp = %s WHERE id > %d", $old_timestamp, $id);
++    // TODO Please review the conversion of this statement to the D7 database API syntax.
++    /* db_query("UPDATE {feeds_data_syndication} SET timestamp = %s WHERE id > %d", $old_timestamp, $id) */
++    db_update('feeds_data_syndication')
++  ->fields(array(
++    'timestamp' => $old_timestamp,
++  ))
++  ->condition('id', $id, '>')
++  ->execute();
+ 
+     // Schedules feeds_importer_expire to run during next cron then runs cron.
+-    db_query("UPDATE {job_schedule} SET next = 0 WHERE callback = 'feeds_importer_expire' AND type = 'syndication'");
++    // TODO Please review the conversion of this statement to the D7 database API syntax.
++    /* db_query("UPDATE {job_schedule} SET next = 0 WHERE callback = 'feeds_importer_expire' AND type = 'syndication'") */
++    db_update('job_schedule')
++  ->fields(array(
++    'next' =>  0,
++  ))
++  ->condition('callback', 'feeds_importer_expire')
++  ->condition('type', 'syndication')
++  ->execute();
+     $this->runCron();
+   }
+ 
+diff -up -r tests/mn_channels.test tests/mn_channels.test
+--- tests/mn_channels.test	2013-07-19 12:43:16.579756330 +0200
++++ tests/mn_channels.test	2013-07-19 12:47:02.493097684 +0200
+@@ -1,7 +1,7 @@
+ <?php
+ // $Id: mn_channels.test,v 1.1.2.2 2010/10/28 03:04:43 diggersf Exp $
+ 
+-require_once drupal_get_path('module', 'mn_test') . '/mn_web_test_case.php';
++require_once DRUPAL_ROOT . '/' . drupal_get_path('module', 'mn_test') . '/mn_web_test_case.php';
+ 
+ class MNChannelsTestCase extends MnWebTestCase {
+   /**
+@@ -25,9 +25,9 @@ class MNChannelsTestCase extends MnWebTe
+ 
+   public function test() {
+     // Determine if the Example channel is configured correctly.
+-    $channel_title = db_result(db_query("SELECT title FROM {node} WHERE type = 'channel'"));
++    $channel_title = db_query("SELECT title FROM {node} WHERE type = :type", array(':type' => 'channel'))->fetchField();
+     $this->assertEqual($channel_title, 'Example channel', 'Found example channel.');
+-    $nid = db_result(db_query("SELECT nid FROM {node} WHERE type = 'channel'"));
++    $nid = db_query("SELECT nid FROM {node} WHERE type = :type", array(':type' => 'channel'))->fetchField();
+     $node = node_load($nid);
+     $this->assertEqual(current($node->taxonomy)->name, 'example tag', 'Example tag found on example channel.');
+   }
+diff -up -r tests/mn_feeds.test tests/mn_feeds.test
+--- tests/mn_feeds.test	2013-07-19 12:43:16.631756638 +0200
++++ tests/mn_feeds.test	2013-07-19 12:47:02.525097874 +0200
+@@ -1,7 +1,7 @@
+ <?php
+ // $Id: mn_feeds.test,v 1.1.2.1 2010/10/10 03:35:20 diggersf Exp $
+ 
+-require_once drupal_get_path('module', 'mn_test') . '/mn_web_test_case.php';
++require_once DRUPAL_ROOT . '/' . drupal_get_path('module', 'mn_test') . '/mn_web_test_case.php';
+ 
+ class MNFeedsTestCase extends MnWebTestCase {
+   /**
+diff -up -r tests/mn_tags.test tests/mn_tags.test
+--- tests/mn_tags.test	2013-07-19 12:43:16.687756972 +0200
++++ tests/mn_tags.test	2013-07-19 12:47:02.589098254 +0200
+@@ -1,7 +1,7 @@
+ <?php
+ // $Id: mn_tags.test,v 1.1.2.1 2010/10/10 03:35:20 diggersf Exp $
+ 
+-require_once(dirname(__FILE__) . '/mn_feeds.test');
++require_once DRUPAL_ROOT . '/' . dirname(__FILE__) . '/mn_feeds.test';
+ 
+ class MNTagsTestCase extends MNFeedsTestCase {
+   /**
+@@ -32,13 +32,13 @@ class MNTagsTestCase extends MNFeedsTest
+     // Ensure that feed items have inherited terms from their feed nodes.
+     $matches = taxonomy_get_term_by_name('USGS');
+     $term = $matches[0];
+-    $count = db_result(db_query("SELECT COUNT(id) FROM {data_taxonomy} WHERE tid = %d AND data_table_name = 'feeds_data_syndication'", $term->tid));
++    $count = db_query("SELECT COUNT(id) FROM {data_taxonomy} WHERE tid = :tid AND data_table_name = :data_table_name", array(':tid' => $term->tid, ':data_table_name' => 'feeds_data_syndication'))->fetchField();
+     $this->assertEqual($count, 25, t('Feed items inherited the term USGS from the Earthquake feed node.'));
+ 
+     // Ensure that categories are being parsed from the feed.
+     $matches = taxonomy_get_term_by_name('drupalcon cph');
+     $term = $matches[0];
+-    $count = db_result(db_query("SELECT COUNT(id) FROM {data_taxonomy} WHERE tid = %d AND data_table_name = 'feeds_data_syndication'", $term->tid));
++    $count = db_query("SELECT COUNT(id) FROM {data_taxonomy} WHERE tid = :tid AND data_table_name = :data_table_name", array(':tid' => $term->tid, ':data_table_name' => 'feeds_data_syndication'))->fetchField();
+     error_log($count);
+     $this->assertEqual($count, 3, t('Feed items were tagged with terms parsed from RSS categories.'));
+ 

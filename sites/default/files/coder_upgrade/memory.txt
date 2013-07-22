@@ -1,0 +1,5789 @@
+
+
+
+====================
+initial
+Peak: 11,796,480 bytes
+Curr: 11,796,480 bytes
+
+
+
+====================
+load upgrade code
+Peak: 13,107,200 bytes
+Curr: 13,107,200 bytes
+
+
+
+====================
+load parser code
+Peak: 14,942,208 bytes
+Curr: 14,942,208 bytes
+
+
+
+====================
+create reader for file mn_about.context.inc
+Peak: 24,117,248 bytes
+Curr: 23,592,960 bytes
+
+
+
+====================
+build specific grammar
+Peak: 24,117,248 bytes
+Curr: 23,855,104 bytes
+
+
+
+====================
+reset reader
+Peak: 24,117,248 bytes
+Curr: 23,855,104 bytes
+
+
+
+====================
+create reader for file mn_about.features.inc
+Peak: 24,117,248 bytes
+Curr: 23,855,104 bytes
+
+
+
+====================
+build specific grammar
+Peak: 24,117,248 bytes
+Curr: 23,855,104 bytes
+
+
+
+====================
+reset reader
+Peak: 24,117,248 bytes
+Curr: 23,855,104 bytes
+
+
+
+====================
+create reader for file mn_about.features.user_permission.inc
+Peak: 24,117,248 bytes
+Curr: 23,855,104 bytes
+
+
+
+====================
+build specific grammar
+Peak: 24,117,248 bytes
+Curr: 23,855,104 bytes
+
+
+
+====================
+reset reader
+Peak: 24,117,248 bytes
+Curr: 23,855,104 bytes
+
+
+
+====================
+create reader for file mn_about.module
+Peak: 24,117,248 bytes
+Curr: 23,855,104 bytes
+
+
+
+====================
+build specific grammar
+Peak: 24,117,248 bytes
+Curr: 23,855,104 bytes
+
+
+
+====================
+reset reader
+Peak: 24,117,248 bytes
+Curr: 23,855,104 bytes
+
+
+
+====================
+create reader for file mn_about.strongarm.inc
+Peak: 24,117,248 bytes
+Curr: 23,855,104 bytes
+
+
+
+====================
+build specific grammar
+Peak: 24,117,248 bytes
+Curr: 23,855,104 bytes
+
+
+
+====================
+reset reader
+Peak: 24,117,248 bytes
+Curr: 23,855,104 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_about/mn_about.context.inc
+Peak: 24,117,248 bytes
+Curr: 23,855,104 bytes
+
+
+
+====================
+set snippet
+Peak: 24,117,248 bytes
+Curr: 23,855,104 bytes
+
+
+
+====================
+add token names
+Peak: 24,117,248 bytes
+Curr: 23,855,104 bytes
+
+
+
+====================
+build grammar
+Peak: 24,117,248 bytes
+Curr: 24,117,248 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 24,117,248 bytes
+Curr: 24,117,248 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 24,117,248 bytes
+Curr: 24,117,248 bytes
+
+
+
+====================
+apply file conversions
+Peak: 24,117,248 bytes
+Curr: 24,117,248 bytes
+
+
+
+====================
+create writer
+Peak: 24,117,248 bytes
+Curr: 24,117,248 bytes
+
+
+
+====================
+writer->toString
+Peak: 24,117,248 bytes
+Curr: 24,117,248 bytes
+
+
+
+====================
+reset reader
+Peak: 24,117,248 bytes
+Curr: 24,117,248 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_about/mn_about.features.inc
+Peak: 24,117,248 bytes
+Curr: 24,117,248 bytes
+
+
+
+====================
+set snippet
+Peak: 24,117,248 bytes
+Curr: 24,117,248 bytes
+
+
+
+====================
+add token names
+Peak: 24,117,248 bytes
+Curr: 24,117,248 bytes
+
+
+
+====================
+build grammar
+Peak: 24,117,248 bytes
+Curr: 24,117,248 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 24,117,248 bytes
+Curr: 24,117,248 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 24,117,248 bytes
+Curr: 24,117,248 bytes
+
+
+
+====================
+apply file conversions
+Peak: 24,117,248 bytes
+Curr: 24,117,248 bytes
+
+
+
+====================
+create writer
+Peak: 24,117,248 bytes
+Curr: 24,117,248 bytes
+
+
+
+====================
+writer->toString
+Peak: 24,117,248 bytes
+Curr: 24,117,248 bytes
+
+
+
+====================
+reset reader
+Peak: 24,117,248 bytes
+Curr: 24,117,248 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_about/mn_about.features.user_permission.inc
+Peak: 24,117,248 bytes
+Curr: 24,117,248 bytes
+
+
+
+====================
+set snippet
+Peak: 24,117,248 bytes
+Curr: 24,117,248 bytes
+
+
+
+====================
+add token names
+Peak: 24,117,248 bytes
+Curr: 24,117,248 bytes
+
+
+
+====================
+build grammar
+Peak: 24,117,248 bytes
+Curr: 24,117,248 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 24,117,248 bytes
+Curr: 24,117,248 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 24,117,248 bytes
+Curr: 24,117,248 bytes
+
+
+
+====================
+apply file conversions
+Peak: 24,117,248 bytes
+Curr: 24,117,248 bytes
+
+
+
+====================
+create writer
+Peak: 24,117,248 bytes
+Curr: 24,117,248 bytes
+
+
+
+====================
+writer->toString
+Peak: 24,117,248 bytes
+Curr: 24,117,248 bytes
+
+
+
+====================
+reset reader
+Peak: 24,117,248 bytes
+Curr: 24,117,248 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_about/mn_about.module
+Peak: 24,117,248 bytes
+Curr: 24,117,248 bytes
+
+
+
+====================
+set snippet
+Peak: 24,117,248 bytes
+Curr: 24,117,248 bytes
+
+
+
+====================
+add token names
+Peak: 24,117,248 bytes
+Curr: 24,117,248 bytes
+
+
+
+====================
+build grammar
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+apply file conversions
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+create writer
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+writer->toString
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+reset reader
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_about/mn_about.strongarm.inc
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+set snippet
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+add token names
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+build grammar
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+apply file conversions
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+create writer
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+writer->toString
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+reset reader
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+create reader for file mn_boxes_channel.inc
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+build specific grammar
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+reset reader
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+create reader for file mn_boxes_default.inc
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+build specific grammar
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+reset reader
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+create reader for file mn_boxes_feed.inc
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+build specific grammar
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+reset reader
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+create reader for file mn_boxes_search.inc
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+build specific grammar
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+reset reader
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+create reader for file mn_boxes.module
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+build specific grammar
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+reset reader
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_boxes/boxes/mn_boxes_channel.inc
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+set snippet
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+add token names
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+build grammar
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+apply file conversions
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+create writer
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+writer->toString
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+reset reader
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_boxes/boxes/mn_boxes_default.inc
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+set snippet
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+add token names
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+build grammar
+Peak: 24,903,680 bytes
+Curr: 24,903,680 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 24,903,680 bytes
+Curr: 24,903,680 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 24,903,680 bytes
+Curr: 24,903,680 bytes
+
+
+
+====================
+apply file conversions
+Peak: 24,903,680 bytes
+Curr: 24,903,680 bytes
+
+
+
+====================
+create writer
+Peak: 24,903,680 bytes
+Curr: 24,903,680 bytes
+
+
+
+====================
+writer->toString
+Peak: 24,903,680 bytes
+Curr: 24,903,680 bytes
+
+
+
+====================
+reset reader
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_boxes/boxes/mn_boxes_feed.inc
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+set snippet
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+add token names
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+build grammar
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+apply file conversions
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+create writer
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+writer->toString
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+reset reader
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_boxes/boxes/mn_boxes_search.inc
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+set snippet
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+add token names
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+build grammar
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+apply file conversions
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+create writer
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+writer->toString
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+reset reader
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_boxes/mn_boxes.install
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+set snippet
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+add token names
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+build grammar
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+apply file conversions
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+apply install file conversions
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+create writer
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+writer->toString
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+reset reader
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_boxes/mn_boxes.module
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+set snippet
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+add token names
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+build grammar
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+apply file conversions
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+create writer
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+writer->toString
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+reset reader
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+create reader for file mn_channels.context.inc
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+build specific grammar
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+reset reader
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+create reader for file mn_channels.features.inc
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+build specific grammar
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+reset reader
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+create reader for file mn_channels.features.menu_links.inc
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+build specific grammar
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+reset reader
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+create reader for file mn_channels.features.user_permission.inc
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+build specific grammar
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+reset reader
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+create reader for file mn_channels.module
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+build specific grammar
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+reset reader
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+create reader for file mn_channels.strongarm.inc
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+build specific grammar
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+reset reader
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+create reader for file mn_channels.views.inc
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+build specific grammar
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+reset reader
+Peak: 24,903,680 bytes
+Curr: 24,641,536 bytes
+
+
+
+====================
+create reader for file mn_channels.views_default.inc
+Peak: 24,903,680 bytes
+Curr: 24,903,680 bytes
+
+
+
+====================
+build specific grammar
+Peak: 39,583,744 bytes
+Curr: 39,321,600 bytes
+
+
+
+====================
+reset reader
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+create reader for file mn_channels_views_handler_field_item_count.inc
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+build specific grammar
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+reset reader
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_channels/mn_channels.context.inc
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+set snippet
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+add token names
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+build grammar
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+apply file conversions
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+create writer
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+writer->toString
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+reset reader
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_channels/mn_channels.features.inc
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+set snippet
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+add token names
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+build grammar
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+apply file conversions
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+create writer
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+writer->toString
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+reset reader
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_channels/mn_channels.features.menu_links.inc
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+set snippet
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+add token names
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+build grammar
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+apply file conversions
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+create writer
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+writer->toString
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+reset reader
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_channels/mn_channels.features.user_permission.inc
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+set snippet
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+add token names
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+build grammar
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+apply file conversions
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+create writer
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+writer->toString
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+reset reader
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_channels/mn_channels.module
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+set snippet
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+add token names
+Peak: 39,583,744 bytes
+Curr: 25,165,824 bytes
+
+
+
+====================
+build grammar
+Peak: 39,583,744 bytes
+Curr: 25,690,112 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 39,583,744 bytes
+Curr: 25,690,112 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 39,583,744 bytes
+Curr: 25,690,112 bytes
+
+
+
+====================
+apply file conversions
+Peak: 39,583,744 bytes
+Curr: 25,690,112 bytes
+
+
+
+====================
+create writer
+Peak: 39,583,744 bytes
+Curr: 25,690,112 bytes
+
+
+
+====================
+writer->toString
+Peak: 39,583,744 bytes
+Curr: 25,690,112 bytes
+
+
+
+====================
+reset reader
+Peak: 39,583,744 bytes
+Curr: 25,690,112 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_channels/mn_channels.strongarm.inc
+Peak: 39,583,744 bytes
+Curr: 25,690,112 bytes
+
+
+
+====================
+set snippet
+Peak: 39,583,744 bytes
+Curr: 25,690,112 bytes
+
+
+
+====================
+add token names
+Peak: 39,583,744 bytes
+Curr: 25,690,112 bytes
+
+
+
+====================
+build grammar
+Peak: 39,583,744 bytes
+Curr: 25,690,112 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 39,583,744 bytes
+Curr: 25,690,112 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 39,583,744 bytes
+Curr: 25,690,112 bytes
+
+
+
+====================
+apply file conversions
+Peak: 39,583,744 bytes
+Curr: 25,690,112 bytes
+
+
+
+====================
+create writer
+Peak: 39,583,744 bytes
+Curr: 25,690,112 bytes
+
+
+
+====================
+writer->toString
+Peak: 39,583,744 bytes
+Curr: 25,690,112 bytes
+
+
+
+====================
+reset reader
+Peak: 39,583,744 bytes
+Curr: 25,690,112 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_channels/mn_channels.views.inc
+Peak: 39,583,744 bytes
+Curr: 25,690,112 bytes
+
+
+
+====================
+set snippet
+Peak: 39,583,744 bytes
+Curr: 25,690,112 bytes
+
+
+
+====================
+add token names
+Peak: 39,583,744 bytes
+Curr: 25,690,112 bytes
+
+
+
+====================
+build grammar
+Peak: 39,583,744 bytes
+Curr: 25,690,112 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 39,583,744 bytes
+Curr: 25,690,112 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 39,583,744 bytes
+Curr: 25,690,112 bytes
+
+
+
+====================
+apply file conversions
+Peak: 39,583,744 bytes
+Curr: 25,690,112 bytes
+
+
+
+====================
+create writer
+Peak: 39,583,744 bytes
+Curr: 25,690,112 bytes
+
+
+
+====================
+writer->toString
+Peak: 39,583,744 bytes
+Curr: 25,690,112 bytes
+
+
+
+====================
+reset reader
+Peak: 39,583,744 bytes
+Curr: 25,690,112 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_channels/mn_channels.views_default.inc
+Peak: 39,583,744 bytes
+Curr: 26,214,400 bytes
+
+
+
+====================
+set snippet
+Peak: 40,108,032 bytes
+Curr: 40,108,032 bytes
+
+
+
+====================
+add token names
+Peak: 40,632,320 bytes
+Curr: 40,632,320 bytes
+
+
+
+====================
+build grammar
+Peak: 56,360,960 bytes
+Curr: 56,360,960 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 56,360,960 bytes
+Curr: 56,360,960 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 56,360,960 bytes
+Curr: 56,360,960 bytes
+
+
+
+====================
+apply file conversions
+Peak: 56,360,960 bytes
+Curr: 56,360,960 bytes
+
+
+
+====================
+create writer
+Peak: 56,360,960 bytes
+Curr: 56,360,960 bytes
+
+
+
+====================
+writer->toString
+Peak: 57,147,392 bytes
+Curr: 56,623,104 bytes
+
+
+
+====================
+reset reader
+Peak: 57,147,392 bytes
+Curr: 41,680,896 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_channels/views/mn_channels_views_handler_field_item_count.inc
+Peak: 57,147,392 bytes
+Curr: 41,418,752 bytes
+
+
+
+====================
+set snippet
+Peak: 57,147,392 bytes
+Curr: 41,418,752 bytes
+
+
+
+====================
+add token names
+Peak: 57,147,392 bytes
+Curr: 41,418,752 bytes
+
+
+
+====================
+build grammar
+Peak: 57,147,392 bytes
+Curr: 41,418,752 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 57,147,392 bytes
+Curr: 41,418,752 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 57,147,392 bytes
+Curr: 41,418,752 bytes
+
+
+
+====================
+apply file conversions
+Peak: 57,147,392 bytes
+Curr: 41,418,752 bytes
+
+
+
+====================
+create writer
+Peak: 57,147,392 bytes
+Curr: 41,418,752 bytes
+
+
+
+====================
+writer->toString
+Peak: 57,147,392 bytes
+Curr: 41,418,752 bytes
+
+
+
+====================
+reset reader
+Peak: 57,147,392 bytes
+Curr: 39,845,888 bytes
+
+
+
+====================
+create reader for file mn_core_behavior_popup.inc
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+build specific grammar
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+reset reader
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+create reader for file mn_core_behavior_scalepoints.inc
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+build specific grammar
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+reset reader
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+create reader for file mn_core.box.inc
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+build specific grammar
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+reset reader
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+create reader for file mn_core.context.inc
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+build specific grammar
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+reset reader
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+create reader for file mn_core.data_default.inc
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+build specific grammar
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+reset reader
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+create reader for file mn_core.features.filter.inc
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+build specific grammar
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+reset reader
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+create reader for file mn_core.features.inc
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+build specific grammar
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+reset reader
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+create reader for file mn_core.features.taxonomy.inc
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+build specific grammar
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+reset reader
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+create reader for file mn_core.features.user_permission.inc
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+build specific grammar
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+reset reader
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+create reader for file mn_core.features.user_role.inc
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+build specific grammar
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+reset reader
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+create reader for file mn_core.feeds_importer_default.inc
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+build specific grammar
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+reset reader
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+create reader for file mn_core.mark.inc
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+build specific grammar
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+reset reader
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+create reader for file mn_core.module
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+build specific grammar
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+reset reader
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+create reader for file mn_core.strongarm.inc
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+build specific grammar
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+reset reader
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+create reader for file mn_core.views.inc
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+build specific grammar
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+reset reader
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+create reader for file mn_core.views_default.inc
+Peak: 57,147,392 bytes
+Curr: 39,583,744 bytes
+
+
+
+====================
+build specific grammar
+Peak: 57,147,392 bytes
+Curr: 44,302,336 bytes
+
+
+
+====================
+reset reader
+Peak: 57,147,392 bytes
+Curr: 39,845,888 bytes
+
+
+
+====================
+create reader for file mn_core_handler_field.inc
+Peak: 57,147,392 bytes
+Curr: 39,845,888 bytes
+
+
+
+====================
+build specific grammar
+Peak: 57,147,392 bytes
+Curr: 39,845,888 bytes
+
+
+
+====================
+reset reader
+Peak: 57,147,392 bytes
+Curr: 39,845,888 bytes
+
+
+
+====================
+create reader for file mn_core_handler_field_geodata.inc
+Peak: 57,147,392 bytes
+Curr: 39,845,888 bytes
+
+
+
+====================
+build specific grammar
+Peak: 57,147,392 bytes
+Curr: 39,845,888 bytes
+
+
+
+====================
+reset reader
+Peak: 57,147,392 bytes
+Curr: 39,845,888 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_core/behaviors/mn_core_behavior_popup.inc
+Peak: 57,147,392 bytes
+Curr: 39,845,888 bytes
+
+
+
+====================
+set snippet
+Peak: 57,147,392 bytes
+Curr: 39,845,888 bytes
+
+
+
+====================
+add token names
+Peak: 57,147,392 bytes
+Curr: 39,845,888 bytes
+
+
+
+====================
+build grammar
+Peak: 57,147,392 bytes
+Curr: 39,845,888 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 57,147,392 bytes
+Curr: 39,845,888 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 57,147,392 bytes
+Curr: 39,845,888 bytes
+
+
+
+====================
+apply file conversions
+Peak: 57,147,392 bytes
+Curr: 39,845,888 bytes
+
+
+
+====================
+create writer
+Peak: 57,147,392 bytes
+Curr: 39,845,888 bytes
+
+
+
+====================
+writer->toString
+Peak: 57,147,392 bytes
+Curr: 39,845,888 bytes
+
+
+
+====================
+reset reader
+Peak: 57,147,392 bytes
+Curr: 39,845,888 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_core/behaviors/mn_core_behavior_scalepoints.inc
+Peak: 57,147,392 bytes
+Curr: 39,845,888 bytes
+
+
+
+====================
+set snippet
+Peak: 57,147,392 bytes
+Curr: 39,845,888 bytes
+
+
+
+====================
+add token names
+Peak: 57,147,392 bytes
+Curr: 39,845,888 bytes
+
+
+
+====================
+build grammar
+Peak: 57,147,392 bytes
+Curr: 39,845,888 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 57,147,392 bytes
+Curr: 39,845,888 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 57,147,392 bytes
+Curr: 39,845,888 bytes
+
+
+
+====================
+apply file conversions
+Peak: 57,147,392 bytes
+Curr: 39,845,888 bytes
+
+
+
+====================
+create writer
+Peak: 57,147,392 bytes
+Curr: 39,845,888 bytes
+
+
+
+====================
+writer->toString
+Peak: 57,147,392 bytes
+Curr: 39,845,888 bytes
+
+
+
+====================
+reset reader
+Peak: 57,147,392 bytes
+Curr: 39,059,456 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_core/mn_core.box.inc
+Peak: 57,147,392 bytes
+Curr: 39,059,456 bytes
+
+
+
+====================
+set snippet
+Peak: 57,147,392 bytes
+Curr: 39,059,456 bytes
+
+
+
+====================
+add token names
+Peak: 57,147,392 bytes
+Curr: 39,059,456 bytes
+
+
+
+====================
+build grammar
+Peak: 57,147,392 bytes
+Curr: 39,059,456 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 57,147,392 bytes
+Curr: 39,059,456 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 57,147,392 bytes
+Curr: 39,059,456 bytes
+
+
+
+====================
+apply file conversions
+Peak: 57,147,392 bytes
+Curr: 39,059,456 bytes
+
+
+
+====================
+create writer
+Peak: 57,147,392 bytes
+Curr: 39,059,456 bytes
+
+
+
+====================
+writer->toString
+Peak: 57,147,392 bytes
+Curr: 39,059,456 bytes
+
+
+
+====================
+reset reader
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_core/mn_core.context.inc
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+set snippet
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+add token names
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+build grammar
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+apply file conversions
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+create writer
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+writer->toString
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+reset reader
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_core/mn_core.data_default.inc
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+set snippet
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+add token names
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+build grammar
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+apply file conversions
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+create writer
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+writer->toString
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+reset reader
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_core/mn_core.features.filter.inc
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+set snippet
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+add token names
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+build grammar
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+apply file conversions
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+create writer
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+writer->toString
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+reset reader
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_core/mn_core.features.inc
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+set snippet
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+add token names
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+build grammar
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+apply file conversions
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+create writer
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+writer->toString
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+reset reader
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_core/mn_core.features.taxonomy.inc
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+set snippet
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+add token names
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+build grammar
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+apply file conversions
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+create writer
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+writer->toString
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+reset reader
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_core/mn_core.features.user_permission.inc
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+set snippet
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+add token names
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+build grammar
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+apply file conversions
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+create writer
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+writer->toString
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+reset reader
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_core/mn_core.features.user_role.inc
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+set snippet
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+add token names
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+build grammar
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+apply file conversions
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+create writer
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+writer->toString
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+reset reader
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_core/mn_core.feeds_importer_default.inc
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+set snippet
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+add token names
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+build grammar
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+apply file conversions
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+create writer
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+writer->toString
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+reset reader
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_core/mn_core.install
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+set snippet
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+add token names
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+build grammar
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+apply file conversions
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+apply install file conversions
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+create writer
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+writer->toString
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+reset reader
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_core/mn_core.mark.inc
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+set snippet
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+add token names
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+build grammar
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+apply file conversions
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+create writer
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+writer->toString
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+reset reader
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_core/mn_core.module
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+set snippet
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+add token names
+Peak: 57,147,392 bytes
+Curr: 38,010,880 bytes
+
+
+
+====================
+build grammar
+Peak: 57,147,392 bytes
+Curr: 37,748,736 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 57,147,392 bytes
+Curr: 37,748,736 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 57,147,392 bytes
+Curr: 37,748,736 bytes
+
+
+
+====================
+apply file conversions
+Peak: 57,147,392 bytes
+Curr: 37,748,736 bytes
+
+
+
+====================
+create writer
+Peak: 57,147,392 bytes
+Curr: 37,748,736 bytes
+
+
+
+====================
+writer->toString
+Peak: 57,147,392 bytes
+Curr: 37,748,736 bytes
+
+
+
+====================
+reset reader
+Peak: 57,147,392 bytes
+Curr: 37,748,736 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_core/mn_core.strongarm.inc
+Peak: 57,147,392 bytes
+Curr: 37,748,736 bytes
+
+
+
+====================
+set snippet
+Peak: 57,147,392 bytes
+Curr: 37,748,736 bytes
+
+
+
+====================
+add token names
+Peak: 57,147,392 bytes
+Curr: 37,748,736 bytes
+
+
+
+====================
+build grammar
+Peak: 57,147,392 bytes
+Curr: 37,748,736 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 57,147,392 bytes
+Curr: 37,748,736 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 57,147,392 bytes
+Curr: 37,748,736 bytes
+
+
+
+====================
+apply file conversions
+Peak: 57,147,392 bytes
+Curr: 37,748,736 bytes
+
+
+
+====================
+create writer
+Peak: 57,147,392 bytes
+Curr: 37,748,736 bytes
+
+
+
+====================
+writer->toString
+Peak: 57,147,392 bytes
+Curr: 37,748,736 bytes
+
+
+
+====================
+reset reader
+Peak: 57,147,392 bytes
+Curr: 37,748,736 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_core/mn_core.views.inc
+Peak: 57,147,392 bytes
+Curr: 37,748,736 bytes
+
+
+
+====================
+set snippet
+Peak: 57,147,392 bytes
+Curr: 37,748,736 bytes
+
+
+
+====================
+add token names
+Peak: 57,147,392 bytes
+Curr: 37,748,736 bytes
+
+
+
+====================
+build grammar
+Peak: 57,147,392 bytes
+Curr: 37,748,736 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 57,147,392 bytes
+Curr: 37,748,736 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 57,147,392 bytes
+Curr: 37,748,736 bytes
+
+
+
+====================
+apply file conversions
+Peak: 57,147,392 bytes
+Curr: 37,748,736 bytes
+
+
+
+====================
+create writer
+Peak: 57,147,392 bytes
+Curr: 37,748,736 bytes
+
+
+
+====================
+writer->toString
+Peak: 57,147,392 bytes
+Curr: 37,748,736 bytes
+
+
+
+====================
+reset reader
+Peak: 57,147,392 bytes
+Curr: 37,748,736 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_core/mn_core.views_default.inc
+Peak: 57,147,392 bytes
+Curr: 37,748,736 bytes
+
+
+
+====================
+set snippet
+Peak: 57,147,392 bytes
+Curr: 44,564,480 bytes
+
+
+
+====================
+add token names
+Peak: 57,147,392 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+build grammar
+Peak: 57,409,536 bytes
+Curr: 57,409,536 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 57,409,536 bytes
+Curr: 57,409,536 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 57,409,536 bytes
+Curr: 57,409,536 bytes
+
+
+
+====================
+apply file conversions
+Peak: 57,409,536 bytes
+Curr: 57,409,536 bytes
+
+
+
+====================
+create writer
+Peak: 57,409,536 bytes
+Curr: 57,409,536 bytes
+
+
+
+====================
+writer->toString
+Peak: 58,195,968 bytes
+Curr: 57,671,680 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 46,661,632 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_core/views/mn_core_handler_field.inc
+Peak: 58,195,968 bytes
+Curr: 46,399,488 bytes
+
+
+
+====================
+set snippet
+Peak: 58,195,968 bytes
+Curr: 46,137,344 bytes
+
+
+
+====================
+add token names
+Peak: 58,195,968 bytes
+Curr: 46,137,344 bytes
+
+
+
+====================
+build grammar
+Peak: 58,195,968 bytes
+Curr: 46,137,344 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 58,195,968 bytes
+Curr: 46,137,344 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 58,195,968 bytes
+Curr: 46,137,344 bytes
+
+
+
+====================
+apply file conversions
+Peak: 58,195,968 bytes
+Curr: 46,137,344 bytes
+
+
+
+====================
+create writer
+Peak: 58,195,968 bytes
+Curr: 46,137,344 bytes
+
+
+
+====================
+writer->toString
+Peak: 58,195,968 bytes
+Curr: 46,137,344 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_core/views/mn_core_handler_field_geodata.inc
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+set snippet
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+add token names
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+build grammar
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+apply file conversions
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+create writer
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+writer->toString
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+create reader for file mn_search.context.inc
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+build specific grammar
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+create reader for file mn_search.features.inc
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+build specific grammar
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+create reader for file mn_search.module
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+build specific grammar
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+create reader for file mn_search.views_default.inc
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+build specific grammar
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_search/mn_search.context.inc
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+set snippet
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+add token names
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+build grammar
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+apply file conversions
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+create writer
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+writer->toString
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_search/mn_search.features.inc
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+set snippet
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+add token names
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+build grammar
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+apply file conversions
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+create writer
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+writer->toString
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_search/mn_search.module
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+set snippet
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+add token names
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+build grammar
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+apply file conversions
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+create writer
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+writer->toString
+Peak: 58,195,968 bytes
+Curr: 45,088,768 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 44,040,192 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_search/mn_search.views_default.inc
+Peak: 58,195,968 bytes
+Curr: 44,040,192 bytes
+
+
+
+====================
+set snippet
+Peak: 58,195,968 bytes
+Curr: 44,040,192 bytes
+
+
+
+====================
+add token names
+Peak: 58,195,968 bytes
+Curr: 44,040,192 bytes
+
+
+
+====================
+build grammar
+Peak: 58,195,968 bytes
+Curr: 44,040,192 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 58,195,968 bytes
+Curr: 44,040,192 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 58,195,968 bytes
+Curr: 44,040,192 bytes
+
+
+
+====================
+apply file conversions
+Peak: 58,195,968 bytes
+Curr: 44,040,192 bytes
+
+
+
+====================
+create writer
+Peak: 58,195,968 bytes
+Curr: 44,040,192 bytes
+
+
+
+====================
+writer->toString
+Peak: 58,195,968 bytes
+Curr: 44,040,192 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 43,778,048 bytes
+
+
+
+====================
+create reader for file mn_test.module
+Peak: 58,195,968 bytes
+Curr: 43,778,048 bytes
+
+
+
+====================
+build specific grammar
+Peak: 58,195,968 bytes
+Curr: 43,778,048 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 43,778,048 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_test/mn_test.module
+Peak: 58,195,968 bytes
+Curr: 43,778,048 bytes
+
+
+
+====================
+set snippet
+Peak: 58,195,968 bytes
+Curr: 43,778,048 bytes
+
+
+
+====================
+add token names
+Peak: 58,195,968 bytes
+Curr: 43,778,048 bytes
+
+
+
+====================
+build grammar
+Peak: 58,195,968 bytes
+Curr: 43,778,048 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 58,195,968 bytes
+Curr: 43,778,048 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 58,195,968 bytes
+Curr: 43,778,048 bytes
+
+
+
+====================
+apply file conversions
+Peak: 58,195,968 bytes
+Curr: 43,778,048 bytes
+
+
+
+====================
+create writer
+Peak: 58,195,968 bytes
+Curr: 43,778,048 bytes
+
+
+
+====================
+writer->toString
+Peak: 58,195,968 bytes
+Curr: 43,778,048 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 43,778,048 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_test/mn_web_test_case.php
+Peak: 58,195,968 bytes
+Curr: 43,778,048 bytes
+
+
+
+====================
+set snippet
+Peak: 58,195,968 bytes
+Curr: 43,778,048 bytes
+
+
+
+====================
+add token names
+Peak: 58,195,968 bytes
+Curr: 43,778,048 bytes
+
+
+
+====================
+build grammar
+Peak: 58,195,968 bytes
+Curr: 43,778,048 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 58,195,968 bytes
+Curr: 43,778,048 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 58,195,968 bytes
+Curr: 43,778,048 bytes
+
+
+
+====================
+apply file conversions
+Peak: 58,195,968 bytes
+Curr: 43,778,048 bytes
+
+
+
+====================
+create writer
+Peak: 58,195,968 bytes
+Curr: 43,778,048 bytes
+
+
+
+====================
+writer->toString
+Peak: 58,195,968 bytes
+Curr: 43,778,048 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_test/tests/mn_basic.test
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+set snippet
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+add token names
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+build grammar
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+apply file conversions
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+create writer
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+writer->toString
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_test/tests/mn_channels.test
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+set snippet
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+add token names
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+build grammar
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+apply file conversions
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+create writer
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+writer->toString
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_test/tests/mn_feeds.test
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+set snippet
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+add token names
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+build grammar
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+apply file conversions
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+create writer
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+writer->toString
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_test/tests/mn_tags.test
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+set snippet
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+add token names
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+build grammar
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+apply file conversions
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+create writer
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+writer->toString
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+create reader for file mn_widgets.features.inc
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+build specific grammar
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+create reader for file mn_widgets.module
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+build specific grammar
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+create reader for file mn_widgets.views_default.inc
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+build specific grammar
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_widgets/mn_widgets.features.inc
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+set snippet
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+add token names
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+build grammar
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+apply file conversions
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+create writer
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+writer->toString
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_widgets/mn_widgets.module
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+set snippet
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+add token names
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+build grammar
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+apply file conversions
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+create writer
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+writer->toString
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_widgets/mn_widgets.views_default.inc
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+set snippet
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+add token names
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+build grammar
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+apply file conversions
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+create writer
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+writer->toString
+Peak: 58,195,968 bytes
+Curr: 43,515,904 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 42,467,328 bytes
+
+
+
+====================
+create reader for file mn_world.features.inc
+Peak: 58,195,968 bytes
+Curr: 42,467,328 bytes
+
+
+
+====================
+build specific grammar
+Peak: 58,195,968 bytes
+Curr: 42,467,328 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 42,467,328 bytes
+
+
+
+====================
+create reader for file mn_world.module
+Peak: 58,195,968 bytes
+Curr: 42,467,328 bytes
+
+
+
+====================
+build specific grammar
+Peak: 58,195,968 bytes
+Curr: 42,467,328 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 42,467,328 bytes
+
+
+
+====================
+create reader for file mn_world.openlayers_layers.inc
+Peak: 58,195,968 bytes
+Curr: 42,467,328 bytes
+
+
+
+====================
+build specific grammar
+Peak: 58,195,968 bytes
+Curr: 42,467,328 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 42,467,328 bytes
+
+
+
+====================
+create reader for file mn_world.openlayers_presets.inc
+Peak: 58,195,968 bytes
+Curr: 42,467,328 bytes
+
+
+
+====================
+build specific grammar
+Peak: 58,195,968 bytes
+Curr: 42,467,328 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 42,467,328 bytes
+
+
+
+====================
+create reader for file mn_world.openlayers_styles.inc
+Peak: 58,195,968 bytes
+Curr: 42,467,328 bytes
+
+
+
+====================
+build specific grammar
+Peak: 58,195,968 bytes
+Curr: 42,467,328 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 42,467,328 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_world/mn_world.features.inc
+Peak: 58,195,968 bytes
+Curr: 42,467,328 bytes
+
+
+
+====================
+set snippet
+Peak: 58,195,968 bytes
+Curr: 42,467,328 bytes
+
+
+
+====================
+add token names
+Peak: 58,195,968 bytes
+Curr: 42,467,328 bytes
+
+
+
+====================
+build grammar
+Peak: 58,195,968 bytes
+Curr: 42,467,328 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 58,195,968 bytes
+Curr: 42,467,328 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 58,195,968 bytes
+Curr: 42,467,328 bytes
+
+
+
+====================
+apply file conversions
+Peak: 58,195,968 bytes
+Curr: 42,467,328 bytes
+
+
+
+====================
+create writer
+Peak: 58,195,968 bytes
+Curr: 42,467,328 bytes
+
+
+
+====================
+writer->toString
+Peak: 58,195,968 bytes
+Curr: 42,467,328 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 42,467,328 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_world/mn_world.module
+Peak: 58,195,968 bytes
+Curr: 42,467,328 bytes
+
+
+
+====================
+set snippet
+Peak: 58,195,968 bytes
+Curr: 42,467,328 bytes
+
+
+
+====================
+add token names
+Peak: 58,195,968 bytes
+Curr: 42,467,328 bytes
+
+
+
+====================
+build grammar
+Peak: 58,195,968 bytes
+Curr: 42,467,328 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 58,195,968 bytes
+Curr: 42,467,328 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 58,195,968 bytes
+Curr: 42,467,328 bytes
+
+
+
+====================
+apply file conversions
+Peak: 58,195,968 bytes
+Curr: 42,467,328 bytes
+
+
+
+====================
+create writer
+Peak: 58,195,968 bytes
+Curr: 42,467,328 bytes
+
+
+
+====================
+writer->toString
+Peak: 58,195,968 bytes
+Curr: 42,467,328 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 42,205,184 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_world/mn_world.openlayers_layers.inc
+Peak: 58,195,968 bytes
+Curr: 42,205,184 bytes
+
+
+
+====================
+set snippet
+Peak: 58,195,968 bytes
+Curr: 42,205,184 bytes
+
+
+
+====================
+add token names
+Peak: 58,195,968 bytes
+Curr: 42,205,184 bytes
+
+
+
+====================
+build grammar
+Peak: 58,195,968 bytes
+Curr: 42,205,184 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 58,195,968 bytes
+Curr: 42,205,184 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 58,195,968 bytes
+Curr: 42,205,184 bytes
+
+
+
+====================
+apply file conversions
+Peak: 58,195,968 bytes
+Curr: 42,205,184 bytes
+
+
+
+====================
+create writer
+Peak: 58,195,968 bytes
+Curr: 42,205,184 bytes
+
+
+
+====================
+writer->toString
+Peak: 58,195,968 bytes
+Curr: 42,205,184 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 42,205,184 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_world/mn_world.openlayers_presets.inc
+Peak: 58,195,968 bytes
+Curr: 42,205,184 bytes
+
+
+
+====================
+set snippet
+Peak: 58,195,968 bytes
+Curr: 42,205,184 bytes
+
+
+
+====================
+add token names
+Peak: 58,195,968 bytes
+Curr: 42,205,184 bytes
+
+
+
+====================
+build grammar
+Peak: 58,195,968 bytes
+Curr: 42,205,184 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 58,195,968 bytes
+Curr: 42,205,184 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 58,195,968 bytes
+Curr: 42,205,184 bytes
+
+
+
+====================
+apply file conversions
+Peak: 58,195,968 bytes
+Curr: 42,205,184 bytes
+
+
+
+====================
+create writer
+Peak: 58,195,968 bytes
+Curr: 42,205,184 bytes
+
+
+
+====================
+writer->toString
+Peak: 58,195,968 bytes
+Curr: 42,205,184 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/mn_world/mn_world.openlayers_styles.inc
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+set snippet
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+add token names
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+build grammar
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+apply file conversions
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+create writer
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+writer->toString
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+create reader for file stored_views.module
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+build specific grammar
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+create reader for file stored_views.views.inc
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+build specific grammar
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+create reader for file stored_views.views_default.inc
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+build specific grammar
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+create reader for file stored_views_views_handler_field_link_delete.inc
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+build specific grammar
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+create reader for file stored_views_views_handler_field_path.inc
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+build specific grammar
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+create reader for file stored_views_views_handler_field_preview.inc
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+build specific grammar
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+create reader for file stored_views_views_handler_field_title.inc
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+build specific grammar
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/stored_views/stored_views.install
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+set snippet
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+add token names
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+build grammar
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+apply file conversions
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+apply install file conversions
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+create writer
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+writer->toString
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/stored_views/stored_views.module
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+set snippet
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+add token names
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+build grammar
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+apply file conversions
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+create writer
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+writer->toString
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/stored_views/views/stored_views.views.inc
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+set snippet
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+add token names
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+build grammar
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+apply file conversions
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+create writer
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+writer->toString
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/stored_views/views/stored_views.views_default.inc
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+set snippet
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+add token names
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+build grammar
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+apply file conversions
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+create writer
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+writer->toString
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/stored_views/views/stored_views_views_handler_field_link_delete.inc
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+set snippet
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+add token names
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+build grammar
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+apply file conversions
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+create writer
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+writer->toString
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/stored_views/views/stored_views_views_handler_field_path.inc
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+set snippet
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+add token names
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+build grammar
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+apply file conversions
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+create writer
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+writer->toString
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/stored_views/views/stored_views_views_handler_field_preview.inc
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+set snippet
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+add token names
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+build grammar
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+apply file conversions
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+create writer
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+writer->toString
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+create reader for file /var/www/grandcentral/sites/default/files/coder_upgrade/new/stored_views/views/stored_views_views_handler_field_title.inc
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+set snippet
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+add token names
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+build grammar
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+apply function call conversions
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+apply hook function conversions
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+apply file conversions
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+create writer
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+writer->toString
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes
+
+
+
+====================
+reset reader
+Peak: 58,195,968 bytes
+Curr: 41,943,040 bytes

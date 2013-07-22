@@ -1,0 +1,103 @@
+diff -up -r mn_world.features.inc mn_world.features.inc
+--- mn_world.features.inc	2013-07-19 12:43:24.611804021 +0200
++++ mn_world.features.inc	2013-07-19 12:47:03.309102529 +0200
+@@ -1,7 +1,7 @@
+ <?php
+ 
+ /**
+- * Implementation of hook_ctools_plugin_api().
++ * Implements hook_ctools_plugin_api().
+  */
+ function mn_world_ctools_plugin_api() {
+   list($module, $api) = func_get_args();
+diff -up -r mn_world.info mn_world.info
+--- mn_world.info	2013-07-19 12:43:24.627804116 +0200
++++ mn_world.info	2013-07-19 12:47:03.713104928 +0200
+@@ -1,4 +1,4 @@
+-core = "6.x"
++core = 7.x
+ dependencies[] = "mapbox"
+ dependencies[] = "mn_core"
+ dependencies[] = "openlayers"
+@@ -22,3 +22,4 @@ features[openlayers_styles][] = "mn_red"
+ name = "MN World"
+ package = "Managing News"
+ project = "mn_world"
++
+diff -up -r mn_world.module mn_world.module
+--- mn_world.module	2013-07-19 12:43:24.675804401 +0200
++++ mn_world.module	2013-07-19 12:47:03.353102791 +0200
+@@ -1,16 +1,16 @@
+ <?php
+ 
+-include_once('mn_world.features.inc');
++include_once DRUPAL_ROOT . '/' . 'mn_world.features.inc';
+ 
+ /**
+- * Implementation of hook_enable().
++ * Implements hook_enable().
+  *
+  * @todo: move this to a features_rebuild() callback.
+  */
+ function mn_world_enable() {
+   $file = 'mn_world.csv';
+   $path = file_directory_path() . '/locations';
+-  if (file_check_directory($path, TRUE)) {
++  if (file_prepare_directory($path, TRUE)) {
+     $filepath = "{$path}/{$file}";
+ 
+     // Copy locations csv to file directory, avoid using shell_exec() for
+@@ -55,7 +55,7 @@ function mn_world_enable() {
+ }
+ 
+ /**
+- * Implementation of hook_disable().
++ * Implements hook_disable().
+  *
+  * @todo: move this to a features_rebuild() callback.
+  */
+@@ -66,7 +66,7 @@ function mn_world_disable() {
+ }
+ 
+ /**
+- * Implementation of hook_mn_openlayers_map_alter().
++ * Implements hook_mn_openlayers_map_alter().
+  */
+ function mn_world_openlayers_map_preprocess_alter(&$map) {
+   // Ensure that default map preset has interface icons in the admin pages.
+diff -up -r mn_world.openlayers_layers.inc mn_world.openlayers_layers.inc
+--- mn_world.openlayers_layers.inc	2013-07-19 12:43:24.679804424 +0200
++++ mn_world.openlayers_layers.inc	2013-07-19 12:47:03.517103764 +0200
+@@ -1,7 +1,7 @@
+ <?php
+ 
+ /**
+- * Implementation of hook_openlayers_layers().
++ * Implements hook_openlayers_layers().
+  */
+ function mn_world_openlayers_layers() {
+   $export = array();
+diff -up -r mn_world.openlayers_presets.inc mn_world.openlayers_presets.inc
+--- mn_world.openlayers_presets.inc	2013-07-19 12:43:24.843805397 +0200
++++ mn_world.openlayers_presets.inc	2013-07-19 12:47:03.673104691 +0200
+@@ -1,7 +1,7 @@
+ <?php
+ 
+ /**
+- * Implementation of hook_openlayers_presets().
++ * Implements hook_openlayers_presets().
+  */
+ function mn_world_openlayers_presets() {
+   $export = array();
+diff -up -r mn_world.openlayers_styles.inc mn_world.openlayers_styles.inc
+--- mn_world.openlayers_styles.inc	2013-07-19 12:43:25.003806347 +0200
++++ mn_world.openlayers_styles.inc	2013-07-19 12:47:03.713104928 +0200
+@@ -1,7 +1,7 @@
+ <?php
+ 
+ /**
+- * Implementation of hook_openlayers_styles().
++ * Implements hook_openlayers_styles().
+  */
+ function mn_world_openlayers_styles() {
+   $export = array();

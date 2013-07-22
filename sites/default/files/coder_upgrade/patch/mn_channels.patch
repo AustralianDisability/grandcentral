@@ -1,0 +1,342 @@
+diff -up -r mn_channels.context.inc mn_channels.context.inc
+--- mn_channels.context.inc	2013-07-19 12:43:17.427761365 +0200
++++ mn_channels.context.inc	2013-07-19 12:46:55.213054459 +0200
+@@ -1,7 +1,7 @@
+ <?php
+ 
+ /**
+- * Implementation of hook_context_default_contexts().
++ * Implements hook_context_default_contexts().
+  */
+ function mn_channels_context_default_contexts() {
+   $export = array();
+diff -up -r mn_channels.features.inc mn_channels.features.inc
+--- mn_channels.features.inc	2013-07-19 12:43:17.487761722 +0200
++++ mn_channels.features.inc	2013-07-19 12:46:55.245054649 +0200
+@@ -1,7 +1,7 @@
+ <?php
+ 
+ /**
+- * Implementation of hook_ctools_plugin_api().
++ * Implements hook_ctools_plugin_api().
+  */
+ function mn_channels_ctools_plugin_api() {
+   list($module, $api) = func_get_args();
+@@ -14,13 +14,13 @@ function mn_channels_ctools_plugin_api()
+ }
+ 
+ /**
+- * Implementation of hook_node_info().
++ * Implements hook_node_info().
+  */
+ function mn_channels_node_info() {
+   $items = array(
+     'channel' => array(
+       'name' => t('Channel'),
+-      'module' => 'features',
++      'base' => 'features',
+       'description' => t('A channel is a collection of articles that the world can subscribe to.'),
+       'has_title' => '1',
+       'title_label' => t('Title'),
+@@ -34,7 +34,7 @@ function mn_channels_node_info() {
+ }
+ 
+ /**
+- * Implementation of hook_views_api().
++ * Implements hook_views_api().
+  */
+ function mn_channels_views_api() {
+   return array(
+diff -up -r mn_channels.features.menu_links.inc mn_channels.features.menu_links.inc
+--- mn_channels.features.menu_links.inc	2013-07-19 12:43:17.507761840 +0200
++++ mn_channels.features.menu_links.inc	2013-07-19 12:46:55.261054744 +0200
+@@ -1,7 +1,7 @@
+ <?php
+ 
+ /**
+- * Implementation of hook_menu_default_menu_links().
++ * Implements hook_menu_default_menu_links().
+  */
+ function mn_channels_menu_default_menu_links() {
+   $menu_links = array();
+diff -up -r mn_channels.features.user_permission.inc mn_channels.features.user_permission.inc
+--- mn_channels.features.user_permission.inc	2013-07-19 12:43:17.519761912 +0200
++++ mn_channels.features.user_permission.inc	2013-07-19 12:46:55.281054863 +0200
+@@ -1,7 +1,7 @@
+ <?php
+ 
+ /**
+- * Implementation of hook_user_default_permissions().
++ * Implements hook_user_default_permissions().
+  */
+ function mn_channels_user_default_permissions() {
+   $permissions = array();
+diff -up -r mn_channels.info mn_channels.info
+--- mn_channels.info	2013-07-19 12:43:17.543762053 +0200
++++ mn_channels.info	2013-07-19 12:46:57.449067736 +0200
+@@ -1,4 +1,4 @@
+-core = "6.x"
++core = 7.x
+ dependencies[] = "context"
+ dependencies[] = "data_taxonomy"
+ dependencies[] = "features"
+@@ -32,3 +32,5 @@ features[views_api][] = "api:2"
+ name = "MN Channels"
+ package = "Managing News"
+ project = "mn_channels"
++
++files[] = views/mn_channels_views_handler_field_item_count.inc
+diff -up -r mn_channels.module mn_channels.module
+--- mn_channels.module	2013-07-19 12:43:17.631762577 +0200
++++ mn_channels.module	2013-07-19 12:46:55.377055433 +0200
+@@ -1,9 +1,9 @@
+ <?php
+ 
+-include_once('mn_channels.features.inc');
++include_once DRUPAL_ROOT . '/' . 'mn_channels.features.inc';
+ 
+ /**
+- * Implementation of hook_help().
++ * Implements hook_help().
+  */
+ function mn_channels_help($path, $arg) {
+   switch ($path) {
+@@ -22,11 +22,11 @@ function mn_channels_help($path, $arg) {
+ }
+ 
+ /**
+- * Implementation of hook_enable().
++ * Implements hook_enable().
+  */
+ function mn_channels_enable() {
+   // Create an example channel.
+-  $nid = db_result(db_query_range("SELECT nid FROM {node} WHERE type = 'channel'", 0, 1));
++  $nid = db_query_range("SELECT nid FROM {node} WHERE type = :type", array(':type' => 'channel'))->fetchField();
+   if (!$nid) {
+     global $user;
+     $node = new stdClass();
+@@ -39,7 +39,7 @@ function mn_channels_enable() {
+       'vid' => 1,
+       'name' => 'example tag',
+     );
+-    taxonomy_save_term($example_term);
++    taxonomy_term_save($term /* TODO Term object replaces array $example_term */);
+     $node->taxonomy[] = $example_term['tid'];
+ 
+     node_save($node);
+@@ -55,13 +55,13 @@ function mn_channels_enable() {
+  */
+ function mn_channels_node_page_view($node, $cid = NULL) {
+   if (isset($_GET['display']) && $_GET['display'] != 'default') {
+-    drupal_goto('channel/' . $node->nid, 'display=' . urlencode($_GET['display']));
++    drupal_goto('channel/' . $node->nid, array('query' => array('display' => '\' . urlencode($_GET[\'display\'])')));
+   }
+   $terms = array();
+   foreach ($node->taxonomy as $term) {
+     $terms[$term->tid] = $term->name;
+   }
+-  drupal_set_title(t('News on @title', array('@title' => $node->title)));
++  drupal_set_title(t('News on @title', array('@title' => $node->title)), PASS_THROUGH);
+   if ($plugin = context_get_plugin('condition', 'node')) {
+     $plugin->execute($node, 'view');
+   }
+@@ -77,14 +77,14 @@ function mn_channels_node_page_view($nod
+       t('Tag one or more articles with %terms to add them to this channel.', array('%terms' => implode(", ", $terms))),
+       t('!edit to change the tags that add an article to a channel.', array('!edit' => l(t('Edit the channel'), 'node/' . $node->nid . '/edit'))),
+     );
+-    $output .= theme('item_list', $items);
++    $output .= theme('item_list', array('items' => $items));
+   }
+   $output .= '</div>';
+   return $output;
+ }
+ 
+ /**
+- * Implementation of hook_context_links_alter().
++ * Implements hook_context_links_alter().
+  * Yank out the channel link from where it does not belong.
+  */
+ function mn_channels_context_links_alter(&$links) {
+@@ -94,7 +94,7 @@ function mn_channels_context_links_alter
+ }
+ 
+ /**
+- * Implementation of hook_feeds_after_clear().
++ * Implements hook_feeds_after_clear().
+  */
+ function mn_channels_feeds_after_clear($importer, $source) {
+   if ($importer->id == 'syndication') {
+@@ -104,7 +104,7 @@ function mn_channels_feeds_after_clear($
+ }
+ 
+ /**
+- * Implementation of hook_data_delete_query_alter().
++ * Implements hook_data_delete_query_alter().
+  *
+  * Exempt items from deletion that are in channels.
+  */
+@@ -115,20 +115,28 @@ function mn_channels_data_delete_query_a
+     // items if it ran the query right after setting keep to 0 but before we get
+     // to set the keep flag to 1 for selected items.
+     if (lock_acquire('mn_core_reset_keep')) {
+-      db_query("UPDATE {feeds_data_syndication} SET keep = 0");
++      // TODO Please review the conversion of this statement to the D7 database API syntax.
++      /* db_query("UPDATE {feeds_data_syndication} SET keep = 0") */
++      db_update('feeds_data_syndication')
++  ->fields(array(
++    'keep' =>  0,
++  ))
++  ->execute();
+       lock_release('mn_core_reset_keep');
+     }
+-    db_query("UPDATE {feeds_data_syndication} fs
+-              JOIN {data_taxonomy} dt ON fs.id = dt.id
+-                AND dt.data_table_name = 'feeds_data_syndication'
+-              JOIN {term_node} tn ON dt.tid = tn.tid
+-              JOIN {node} n ON tn.nid = n.nid
+-                AND n.type = 'channel'
+-              LEFT JOIN {votingapi_vote} v ON fs.id = v.content_id
+-                AND content_type = 'feeds_data_syndication'
+-                AND tag = 'trash'
+-              SET fs.keep = 1
+-              WHERE v.value IS NULL;");
++    // TODO Please convert this statement to the D7 database API syntax.
++    /* db_query("UPDATE {feeds_data_syndication} fs
++     JOIN {data_taxonomy} dt ON fs.id = dt.id
++     AND dt.data_table_name = 'feeds_data_syndication'
++     JOIN {taxonomy_term_node} tn ON dt.tid = tn.tid
++     JOIN {node} n ON tn.nid = n.nid
++     AND n.type = 'channel'
++     LEFT JOIN {votingapi_vote} v ON fs.id = v.content_id
++     AND content_type = 'feeds_data_syndication'
++     AND tag = 'trash'
++     SET fs.keep = 1
++     WHERE v.value IS NULL;") */
++    NULL;
+ 
+     $query->addWhere('feeds_data_syndication.keep = 0');
+   }
+diff -up -r mn_channels.strongarm.inc mn_channels.strongarm.inc
+--- mn_channels.strongarm.inc	2013-07-19 12:43:17.631762577 +0200
++++ mn_channels.strongarm.inc	2013-07-19 12:46:55.397055553 +0200
+@@ -1,7 +1,7 @@
+ <?php
+ 
+ /**
+- * Implementation of hook_strongarm().
++ * Implements hook_strongarm().
+  */
+ function mn_channels_strongarm() {
+   $export = array();
+diff -up -r mn_channels.views.inc mn_channels.views.inc
+--- mn_channels.views.inc	2013-07-19 12:43:17.663762767 +0200
++++ mn_channels.views.inc	2013-07-19 12:46:55.409055623 +0200
+@@ -6,7 +6,7 @@
+  */
+ 
+ /**
+- * Implementation of hook_views_data_alter().
++ * Implements hook_views_data_alter().
+  */
+ function mn_channels_views_data_alter(&$data) {
+   $data['data_taxonomy']['item_count_unmarked'] = array(
+@@ -19,7 +19,7 @@ function mn_channels_views_data_alter(&$
+ }
+ 
+ /**
+- * Implementation of hook_views_handlers().
++ * Implements hook_views_handlers().
+  */
+ function mn_channels_views_handlers() {
+   return array(
+diff -up -r mn_channels.views_default.inc mn_channels.views_default.inc
+--- mn_channels.views_default.inc	2013-07-19 12:43:17.663762767 +0200
++++ mn_channels.views_default.inc	2013-07-19 12:46:57.413067523 +0200
+@@ -1,7 +1,7 @@
+ <?php
+ 
+ /**
+- * Implementation of hook_views_default_views().
++ * Implements hook_views_default_views().
+  */
+ function mn_channels_views_default_views() {
+   $views = array();
+@@ -1159,7 +1159,7 @@ function mn_channels_views_default_views
+       'link_to_taxonomy' => 0,
+       'exclude' => 0,
+       'id' => 'name',
+-      'table' => 'term_data',
++      'table' => 'taxonomy_term_data',
+       'field' => 'name',
+       'relationship' => 'tid',
+       'override' => array(
+@@ -1914,7 +1914,7 @@ function mn_channels_views_default_views
+       'link_to_taxonomy' => 0,
+       'exclude' => 0,
+       'id' => 'name',
+-      'table' => 'term_data',
++      'table' => 'taxonomy_term_data',
+       'field' => 'name',
+       'relationship' => 'tid',
+       'override' => array(
+@@ -2173,7 +2173,7 @@ function mn_channels_views_default_views
+       'label' => 'Relate term data to geo data.',
+       'required' => 1,
+       'id' => 'tid_geo',
+-      'table' => 'term_data',
++      'table' => 'taxonomy_term_data',
+       'field' => 'tid_geo',
+       'relationship' => 'tid',
+       'override' => array(
+@@ -2436,7 +2436,7 @@ function mn_channels_views_default_views
+       'link_to_taxonomy' => 0,
+       'exclude' => 0,
+       'id' => 'name',
+-      'table' => 'term_data',
++      'table' => 'taxonomy_term_data',
+       'field' => 'name',
+       'relationship' => 'tid',
+       'override' => array(
+@@ -2593,7 +2593,7 @@ function mn_channels_views_default_views
+       'label' => 'Relate term data to geo data.',
+       'required' => 1,
+       'id' => 'tid_geo',
+-      'table' => 'term_data',
++      'table' => 'taxonomy_term_data',
+       'field' => 'tid_geo',
+       'relationship' => 'tid',
+       'override' => array(
+@@ -2856,7 +2856,7 @@ function mn_channels_views_default_views
+       'link_to_taxonomy' => 0,
+       'exclude' => 0,
+       'id' => 'name',
+-      'table' => 'term_data',
++      'table' => 'taxonomy_term_data',
+       'field' => 'name',
+       'relationship' => 'tid',
+       'override' => array(
+@@ -3171,7 +3171,7 @@ function mn_channels_views_default_views
+       'label' => 'Relate term data to geo data.',
+       'required' => 1,
+       'id' => 'tid_geo',
+-      'table' => 'term_data',
++      'table' => 'taxonomy_term_data',
+       'field' => 'tid_geo',
+       'relationship' => 'tid',
+       'override' => array(
+diff -up -r views/mn_channels_views_handler_field_item_count.inc views/mn_channels_views_handler_field_item_count.inc
+--- views/mn_channels_views_handler_field_item_count.inc	2013-07-19 12:43:19.819775567 +0200
++++ views/mn_channels_views_handler_field_item_count.inc	2013-07-19 12:46:57.445067713 +0200
+@@ -16,10 +16,10 @@ class mn_channels_views_handler_field_it
+       if (!empty($row->{$this->view->base_field})) {
+         $tid = $row->{$this->view->base_field};
+         if ($this->view->base_table == 'node') {
+-          $this->items[$tid] = db_result(db_query("SELECT COUNT(DISTINCT dt.id) AS count FROM {node} n LEFT JOIN {term_node} tn ON tn.nid = n.nid LEFT JOIN {data_taxonomy} dt ON dt.tid = tn.tid INNER JOIN {feeds_data_syndication} fds ON fds.id = dt.id LEFT JOIN {votingapi_vote} vapi ON fds.id = vapi.content_id  AND vapi.content_type = 'feeds_data_syndication' WHERE n.nid = %d AND vapi.value IS NULL", $tid));
++          $this->items[$tid] = db_query("SELECT COUNT(DISTINCT dt.id) AS count FROM {node} n LEFT JOIN {taxonomy_term_node} tn ON tn.nid = n.nid LEFT JOIN {data_taxonomy} dt ON dt.tid = tn.tid INNER JOIN {feeds_data_syndication} fds ON fds.id = dt.id LEFT JOIN {votingapi_vote} vapi ON fds.id = vapi.content_id  AND vapi.content_type = 'feeds_data_syndication' WHERE n.nid = :n.nid AND vapi.value IS NULL", array(':n.nid' => $tid))->fetchField();
+         }
+         else {
+-          $this->items[$tid] = db_result(db_query("SELECT COUNT(dt.id) AS count FROM {data_taxonomy} dt INNER JOIN {feeds_data_syndication} fds ON fds.id = dt.id LEFT JOIN {votingapi_vote} vapi ON fds.id = vapi.content_id  AND vapi.content_type = 'feeds_data_syndication' WHERE tid = %d AND vapi.value IS NULL", $tid));
++          $this->items[$tid] = db_query("SELECT COUNT(dt.id) AS count FROM {data_taxonomy} dt INNER JOIN {feeds_data_syndication} fds ON fds.id = dt.id LEFT JOIN {votingapi_vote} vapi ON fds.id = vapi.content_id  AND vapi.content_type = 'feeds_data_syndication' WHERE tid = :tid AND vapi.value IS NULL", array(':tid' => $tid))->fetchField();
+         }
+       }
+     }
