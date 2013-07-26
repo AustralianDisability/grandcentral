@@ -2,31 +2,31 @@
 
 
 <div id='left'><div class='navbar clear-block'>
-  <?php if (!empty($context_links)): ?>
-    <div class='context-links clear-block'><?php print $context_links ?></div>
+  <?php if (!empty($page['context_links'])): ?>
+    <div class='context-links clearfix'><?php print render($page['context_links']); ?></div>
   <?php endif; ?>
-  <?php print $left ?>
+  <?php print render($page['sidebar_first']) ?>
 </div></div>
 
-<div id='canvas' class='clear-block'>
+<div id='canvas' class='clearfix'>
 
   <?php include 'page.title.inc'; ?>
 
-  <?php if ($show_messages && $messages): ?>
-    <div class='growl'><?php print $messages; ?></div>
+  <?php if ($show_messages && $page['messages']): ?>
+    <div class='growl'><?php print render($page['messages']); ?></div>
   <?php endif; ?>
 
   <div id='main'>
-    <div id='content' class='page-content clear-block'>
-      <div id='content-wrapper'><?php print $content ?></div>
-      <div id='content-region-wrapper'><?php print $content_region ?></div>
+    <div id='content' class='page-content clearfix'>
+      <div id='content-wrapper'><?php print render($page['content']) ?></div>
+      <div id='content-region-wrapper'><?php print render($page['content_region']); ?></div>
     </div>
   </div>
 
-  <?php if ($right): ?>
-    <div id='right'><div class='sidebar clear-block'>
-      <?php print $mission_block ?>
-      <?php print $right ?>
+  <?php if ($page['sidebar_second']): ?>
+    <div id='right'><div class='sidebar clearfix'>
+      <?php print render($page['highlighted']); ?>
+      <?php print render($page['sidebar_second']) ?>
     </div></div>
   <?php endif; ?>
 

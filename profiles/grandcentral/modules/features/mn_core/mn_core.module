@@ -4,8 +4,8 @@
  * GrandCentral core module
  * Based on ManagingNews by Seed Development
  */
-
-include_once dirname(__FILE__) . '/mn_core.features.inc';
+$file = drupal_get_path('module', 'mn_core') . '/mn_core.features.inc';
+require_once DRUPAL_ROOT . '/' . $file;
 
 /**
  * Implements hook_help().
@@ -32,6 +32,7 @@ function mn_core_help($path, $arg) {
       }
       $output .= "<ul>{$actions}</ul>";
       return $output;
+
     case 'feeds':
       $output = "<p>";
       $output .= t("<em>Feeds</em> shows the latest news items retrieved from the site's feeds. You can switch the display between articles, condensed list, and map display modes using the icons at the top right.");
@@ -50,8 +51,10 @@ function mn_core_help($path, $arg) {
         $output .= "<ul>{$actions}</ul>";
       }
       return $output;
+
     case 'import/opml':
       return '<p>' . t('Import feeds from other aggregators via !opml format.', array('!opml' => l(t('OPML'), 'http://en.wikipedia.org/wiki/OPML'))) . '</p>';
+
     case 'import/terms':
       return '<p>' . t('Terms imported through this form will be used for automatic term extraction. Every incoming item will be automatically tagged with a term from this import if it occurs in the item\'s title or description.') . '</p>';
   }
@@ -62,8 +65,6 @@ function mn_core_help($path, $arg) {
  */
 function mn_core_enable() {
   // Increased weight allows altering the title of 'dashboard' menu item.
-  // TODO Please review the conversion of this statement to the D7 database API syntax.
-  /* db_query("UPDATE {system} SET weight = 25 WHERE name = 'mn_core'") */
   db_update('system')
   ->fields(array(
     'weight' =>  25,
@@ -80,14 +81,15 @@ function mn_core_cron() {
   // introduced after various problems with uncleared caches with drush and
   // update.php were discovered in the beta6 -> beta7 upgrade path.
   if (variable_get('mn_core_clear_all_caches', FALSE) == TRUE) {
-    // TODO Please review the conversion of this statement to the D7 database API syntax.
-    /* db_query("UPDATE {system} SET status = 1 WHERE type = 'theme' and name = 'jake'") */
     db_update('system')
-  ->fields(array(
-    'status' =>  1,
-  ))
-  ->condition('type', 'theme' and name)
-  ->execute();
+    ->fields(
+      array(
+        'status' =>  1,
+      )
+    )
+    ->condition('type', 'theme')
+    ->condition('name', 'jake')
+    ->execute();
     drupal_flush_all_caches();
     variable_del('mn_core_clear_all_caches');
   }

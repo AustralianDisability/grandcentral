@@ -9,18 +9,16 @@
 </head>
 
 <body <?php print drupal_attributes($attr) ?>>
+<?php if (!empty($page['admin'])) print render($page['admin']) ?>
 
-<?php if (!empty($admin)) print $admin ?>
-
-<?php if ($header): ?><div id="header" class='clear-block'><?php print $header; ?></div><?php endif; ?>
+<?php if ($page['header']): ?><div id="header" class='clear-block'><?php print render($page['header']); ?></div><?php endif; ?>
 
 <div id='branding' class='clear-block'>
   <?php if ($admin_link): ?><div class="admin-link"><?php print $admin_link; ?></div><?php endif; ?>
   <?php if ($site_name): ?><h1 class='site-name'><?php print $site_name ?></h1><?php endif; ?>
   <?php if ($site_slogan): ?><div class='site-slogan'><?php print $site_slogan ?></div><?php endif; ?>
   <div class="help-link"><?php if ($help_link) print $help_link; ?></div>
-
-  <?php if (isset($primary_links)) : ?>
-    <?php print theme('links', $primary_links, array('class' => 'links primary-links')) ?>
+  <?php if (isset($main_menu)) : ?>
+    <?php print theme('links', $main_menu, array('class' => 'links main-menu')) ?>
   <?php endif; ?>
 </div>

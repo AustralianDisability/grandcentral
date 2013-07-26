@@ -1,0 +1,4 @@
+<?php
+
+$file = drupal_get_path('module', 'mn_topics') . '/mn_topics.features.inc';
+require_once DRUPAL_ROOT . '/' . $file;

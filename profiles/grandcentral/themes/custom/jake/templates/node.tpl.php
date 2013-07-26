@@ -11,17 +11,17 @@
   <?php endif; ?>
 
   <?php if (!empty($submitted)): ?>
-    <div class='<?php print $hook ?>-submitted clear-block'><?php print $submitted ?></div>
+    <div class='<?php print $hook ?>-submitted clearfix'><?php print $submitted ?></div>
   <?php endif; ?>
 
   <?php if (!empty($content)): ?>
-    <div class='<?php print $hook ?>-content clear-block <?php if (!empty($is_prose)) print 'prose' ?>'>
+    <div class='<?php print $hook ?>-content clearfix <?php if (!empty($is_prose)) print 'prose' ?>'>
       <?php print $content ?>
     </div>
   <?php endif; ?>
 
   <?php if (!empty($links)): ?>
-    <div class='<?php print $hook ?>-links clear-block'><?php print $links ?></div>
+    <div class='<?php print $hook ?>-links clearfix'><?php print $links ?></div>
   <?php endif; ?>
 </div>
 

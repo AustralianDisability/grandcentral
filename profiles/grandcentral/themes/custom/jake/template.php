@@ -32,17 +32,19 @@ function jake_preprocess_help(&$vars) {
  * Preprocessor for theme('page').
  */
 function jake_preprocess_page(&$vars) {
+
   // Help link
   if (!empty($vars['help'])) {
-    $vars['help_link'] = l('?', $_GET['q'], array('fragment' => 'help', 'attributes' => array('class' => 'help-link')));
+    $vars['help_link'] = l('?', $_GET['q'], array('fragment' => 'help', 'attributes' => array('class' => array('help-link'))));
   }
   // Admin link
   if (user_access('administer mn')) {
-    $vars['admin_link'] = l(t('Admin'), 'admin/settings/site-information', array('attributes' => array('class' => 'admin-link')));
+    //$vars['admin_link'] = l(t('Admin'), 'admin/config/system/site-information', array('attributes' => array('class' => array('admin-link'))));
+    $vars['admin_link'] = l(t('Admin'), 'admin', array('attributes' => array('class' => array('admin-link'))));
   }
 
   // Add body class for layout.
-  $vars['attr']['class'] .= !empty($vars['template_files']) ? ' '. end($vars['template_files']) : '';
+  $vars['attr']['class'] .= !empty($vars['template_files']) ? ' ' . end($vars['template_files']) : '';
 
   $header_blocks = block_list('header');
   if (!empty($header_blocks)) {
@@ -53,12 +55,14 @@ function jake_preprocess_page(&$vars) {
   $vars['site_name'] = theme('site_name');
 
   // Display mission in a block
+  // No longer needed in D7 with the new hightlighed block
+  /*
   $vars['mission_block'] = '';
   if (!empty($vars['mission']) && drupal_is_front_page()) {
     $mission_block = new stdClass();
     $mission_block->content = $vars['mission'];
     $vars['mission_block'] = theme('block', $mission_block);
-  }
+  }*/
 
   // Don't show title on dashboard == frontpage.
   $context = context_get('context');
@@ -231,7 +235,7 @@ function jake_status_messages($display = NULL) {
     $class .= !empty($autoclose[$type]) || !isset($autoclose[$type]) ? ' autoclose' : '';
     $first = FALSE;
 
-    $output .= "<div class='messages clear-block $type $class'>";
+    $output .= "<div class='messages clearfix $type $class'>";
     $output .= l(t('Close'), $_GET['q'], array('fragment' => 'close', 'attributes' => array('class' => 'close')));
     $output .= "<div class='message-content'>";
     if (count($messages) > 1) {

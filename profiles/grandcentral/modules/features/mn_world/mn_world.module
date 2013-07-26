@@ -1,6 +1,7 @@
 <?php
 
-include_once dirname(__FILE__) . '/mn_world.features.inc';
+$file = drupal_get_path('module', 'mn_world') . '/mn_world.features.inc';
+require_once DRUPAL_ROOT . '/' . $file;
 
 /**
  * Implements hook_enable().
@@ -9,7 +10,8 @@ include_once dirname(__FILE__) . '/mn_world.features.inc';
  */
 function mn_world_enable() {
   $file = 'mn_world.csv';
-  $path = file_directory_path() . '/locations';
+  //$path = file_directory_path() . '/locations';
+  $path = file_build_uri('locations');
   if (file_prepare_directory($path, TRUE)) {
     $filepath = "{$path}/{$file}";
 

@@ -182,12 +182,12 @@ table tr.region td { background:#f8f8f8; }
 
 /* Hide tabledrag markers */
 table tr.draggable span.tabledrag-changed { display:none; }
- 
+
 /* Stripe administrative tables */
 .page-admin table tr.even, .page-admin table tr.even td {
   background: #f9f9f9;
 }
-               
+
 /**
  * Forms ==============================================================
  */
@@ -487,7 +487,7 @@ body.page-admin div.vertical-tabs .vertical-tabs-panes .vertical-tabs-pane field
 .filter-wrapper {
   font-size:11px;
   margin-top:-10px;
-  border-top:none; 
+  border-top:none;
   }
 
 .filter-wrapper .fieldset-content,
@@ -522,14 +522,14 @@ body.page-admin div.vertical-tabs .vertical-tabs-panes .vertical-tabs-pane field
 
 .column-main {
   float:left;
-  width:65%;
+  /*width:65%;*/
   }
 
   .column-main .column-wrapper { padding-right:10px; }
 
 .column-side {
   float:right;
-  width:34.99%;
+  /*width:34.99%;*/
   }
 
   .column-side .column-wrapper { padding-left:10px; }

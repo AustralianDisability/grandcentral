@@ -27,7 +27,8 @@ function mn_core_install() {
  */
 function mn_core_schema() {
   // Install data tables.
-  include_once dirname(__FILE__) . '/mn_core.data_default.inc';
+  $file = drupal_get_path('module', 'mn_core') . '/mn_core.data_default.inc';
+  require_once DRUPAL_ROOT . '/' . $file;
   $tables = mn_core_data_default();
   $schema = array();
   foreach ($tables as $name => $table) {
@@ -88,23 +89,38 @@ function mn_core_update_6002() {
     'help' => 'Articles with these tags will appear in this channel.',
   );
 
-  taxonomy_vocabulary_save($vocabulary /* TODO Vocabulary object replaces array $data */);
+  /* Vocabulary object replaces array $data */
+  taxonomy_vocabulary_save($vocabulary);
 
-  variable_set('mn_core_tags_vocab', $data['vid']);
+  variable_set('mn_core_tags_vocab', $vocabulary->vid);
   if (db_table_exists('data_table_node') && module_exists('data_taxonomy')) {
     $result = db_query("SELECT nid, vid, title FROM {node} WHERE type = :type", array(':type' => 'channel'));
-    while ($node = db_fetch_object($result)) {
-      $edit = array(
+
+    foreach($result as $node){
+      $term = array(
         'name' => strtolower($node->title),
-        'vid' => $data['vid'],
+        'vid' => $vocabulary->vid,
       );
+
       taxonomy_term_save($term /* TODO Term object replaces array $edit */);
-      // TODO Please convert this statement to the D7 database API syntax.
-      /* db_query("INSERT INTO {data_taxonomy}(id, data_table_name, tid) SELECT id, 'feeds_data_syndication', %d FROM {data_table_node} WHERE nid = %d", $edit['tid'], $node->nid) */
-      NULL;
-      // TODO Please convert this statement to the D7 database API syntax.
-      /* db_query("INSERT INTO {taxonomy_term_node}(nid, vid, tid) VALUES(%d, %d, %d)", $node->nid, $node->vid, $edit['tid']) */
-      NULL;
+      $id = db_query('SELECT id FROM data_table_node WHERE nid = :nid', array(':nid' => $node->nid))->fetchField(0);
+      db_insert('data_taxonomy')
+      ->fields(
+        array(
+          'id' => $id,
+          'data_table_name' => 'feeds_data_syndication',
+          'tid' => $term['tid']
+        )
+      )->execute();
+
+      db_insert('taxonomy_term_node')
+      ->fields(
+        array(
+          'nid' => $node->nid,
+          'vid' => $node->vid,
+          'tid' => $term['tid']
+          )
+        )->execute();
     }
   }
   if (module_exists('data_node')) {

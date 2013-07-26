@@ -233,7 +233,7 @@ function rubik_preprocess_button(&$vars) {
 function rubik_preprocess_help(&$vars) {
   $vars['hook'] = 'help';
   $vars['attr']['id'] = 'help-text';
-  $class = 'path-admin-help clear-block toggleable';
+  $class = 'path-admin-help clearfix toggleable';
   $vars['attr']['class'] = isset($vars['attr']['class']) ? "{$vars['attr']['class']} $class" : $class;
   $help = menu_get_active_help();
   if (($test = strip_tags($help)) && !empty($help)) {
@@ -409,9 +409,9 @@ function rubik_admin_block_content($vars) {
 
   $output = '';
   if (!empty($content)) {
-  
+
     foreach ($content as $k => $item) {
-    
+
       //-- Safety check for invalid clients of the function
       if (empty($content[$k]['localized_options']['attributes']['class'])) {
         $content[$k]['localized_options']['attributes']['class'] = array();
@@ -419,7 +419,7 @@ function rubik_admin_block_content($vars) {
       if (!is_array($content[$k]['localized_options']['attributes']['class'])) {
         $content[$k]['localized_options']['attributes']['class'] = array($content[$k]['localized_options']['attributes']['class']);
       }
-    
+
       $content[$k]['title'] = "<span class='icon'></span>" . filter_xss_admin($item['title']);
       $content[$k]['localized_options']['html'] = TRUE;
       if (!empty($content[$k]['localized_options']['attributes']['class'])) {
@@ -468,7 +468,7 @@ function rubik_admin_drilldown_menu_item_link($link) {
 function rubik_preprocess_textfield(&$vars) {
   if ($vars['element']['#size'] >= 30 && empty($vars['element']['#field_prefix']) && empty($vars['element']['#field_suffix'])) {
     $vars['element']['#size'] = '';
-    if (!isset($vars['element']['#attributes']['class']) 
+    if (!isset($vars['element']['#attributes']['class'])
       || !is_array($vars['element']['#attributes']['class'])) {
        $vars['element']['#attributes']['class'] = array();
     }

@@ -7,12 +7,14 @@
 class ExtractorTermProcessor extends FeedsTermProcessor {
   /**
    * Mark every imported term as lookup term.
+   * FeedsProcessor::map(FeedsSource $source, FeedsParserResult $result, $target_item = NULL)
+   * was: map(FeedsImportBatch $batch, $target_item = NULL)
    */
-  public function map(FeedsImportBatch $batch, $target_item = NULL) {
+  public function map(FeedsSource $source, FeedsParserResult $result, $target_item = NULL) {
     if (!$target_item) {
       $target_item = array();
     }
     $target_item['extractor_lookup'] = TRUE;
-    return parent::map($batch, $target_item);
+    return parent::map($source, $target_item);
   }
 }

@@ -89,15 +89,15 @@ function mn_core_strongarm() {
   $strongarm->value = array(
     'features_tags' => 1,
   );
-
   $export['geotaxonomy_vocabularies'] = $strongarm;
+
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'menu_primary_links_source';
+  $strongarm->name = 'menu_main_menu_source';
   $strongarm->value = 'features';
+  $export['menu_main_menu_source'] = $strongarm;
 
-  $export['menu_primary_links_source'] = $strongarm;
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;

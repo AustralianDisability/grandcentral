@@ -1,10 +1,10 @@
 <?php include 'page.header.inc'; ?>
 
 <div id='left'><div class='navbar clear-block'>
-  <?php if (!empty($context_links)): ?>
-    <div class='context-links clear-block'><?php print $context_links ?></div>
+  <?php if (!empty($page['context_links'])): ?>
+    <div class='context-links clear-block'><?php print render($page['context_links']) ?></div>
   <?php endif; ?>
-  <?php if (!empty($left)) print $left ?>
+  <?php if (!empty($page['left'])) print render($page['left']) ?>
 </div></div>
 
 <div id='canvas' class='clear-block'>
@@ -17,8 +17,9 @@
 
   <div id='main'>
     <div id='content' class='page-content clear-block'>
-      <div id='content-wrapper'><?php print $content ?></div>
-      <div id='content-region-wrapper'><?php print $content_region ?></div>
+      <h2> Temp :: layout-sidebar.template</h2>
+      <div id='content-wrapper'><?php print render($page['content']) ?></div>
+      <div id='content-region-wrapper'><?php print render($page['content_region']) ?></div>
     </div>
   </div>
 
