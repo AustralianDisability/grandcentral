@@ -1,6 +1,7 @@
 <?php
 
-include_once DRUPAL_ROOT . '/' . 'mn_channels.features.inc';
+$file = drupal_get_path('module', 'mn_channels') . '/mn_channels.features.inc';
+require_once DRUPAL_ROOT . '/' . $file;
 
 /**
  * Implements hook_help().

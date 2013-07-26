@@ -1,7 +1,8 @@
 <?php
 // $Id: ExtractorSyndicationParser.inc,v 1.3 2010/09/08 03:04:08 alexb Exp $
 
-require_once DRUPAL_ROOT . '/' . 'extractor.feeds.inc';
+$file = drupal_get_path('module', 'extractor') . '/extractor.feeds.inc';
+require_once DRUPAL_ROOT . '/' . $file;
 
 /**
  * Extend common syndication parser and add term extraction.
