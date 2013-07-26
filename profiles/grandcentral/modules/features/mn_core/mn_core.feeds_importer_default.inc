@@ -21,7 +21,7 @@ function mn_core_feeds_importer_default() {
       'config' => array(),
     ),
     'processor' => array(
-      'plugin_key' => 'FeedsFeedNodeProcessor',
+      'plugin_key' => 'FeedsNodeProcessor',
       'config' => array(
         'content_type' => 'feed',
         'update_existing' => 0,

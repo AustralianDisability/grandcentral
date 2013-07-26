@@ -13,20 +13,23 @@ class mn_boxes_feed extends mn_boxes_default {
   /**
    * Implementation of boxes_content::options_form().
    */
-  public function options_form() {
+  public function options_form(&$form_state) {
     // TODO Please convert this statement to the D7 database API syntax.
-    $result = db_query(db_rewrite_sql("SELECT nid, title FROM {node} WHERE type = 'feed' ORDER BY title"));
+
+    $result = db_query("SELECT nid, title FROM {node} WHERE type = 'feed' ORDER BY title");
     $feeds = array(0 => '<' . t('All feeds') . '>');
-    while ($row = db_fetch_array($result)) {
+
+    foreach($result as $row){
       $feeds[$row['nid']] = $row['title'];
     }
+
     $form['feed'] = array(
       '#type' => 'select',
       '#title' => t('Feed'),
       '#options' => $feeds,
       '#default_value' => $this->options['feed'],
     );
-    $form += parent::options_form();
+    $form += parent::options_form($form_state);
     return $form;
   }
 

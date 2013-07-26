@@ -14,7 +14,7 @@ abstract class mn_boxes_default extends boxes_box {
   /**
    * Implementation of boxes_content::options_form().
    */
-  public function options_form() {
+  public function options_form(&$form_state) {
     if (filter_access($this->options['format'])) {
       $form['display_type'] = array(
         '#type' => 'radios',
