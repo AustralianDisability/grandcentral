@@ -120,8 +120,7 @@ function jake_views_render_field(&$field, $skip = TRUE) {
     foreach ($field as $k => $f) {
       $output .= jake_views_render_field($field[$k]);
     }
-  }
-  else if (is_object($field)) {
+  } else if (is_object($field)) {
     // Skip rendered fields
     if (empty($field->rendered) || !$skip) {
       if (!empty($field->content)) {
@@ -134,6 +133,7 @@ function jake_views_render_field(&$field, $skip = TRUE) {
       $field->rendered = TRUE;
     }
   }
+  var_dump($output);
   return $output;
 }
 

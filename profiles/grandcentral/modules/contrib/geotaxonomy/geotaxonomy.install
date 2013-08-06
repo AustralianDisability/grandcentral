@@ -91,14 +91,16 @@ function geotaxonomy_schema() {
   return $schema;
 }
 
+// Not needed anymore in Drupal 7
 function geotaxonomy_install() {
   // Create tables.
-  drupal_install_schema('geotaxonomy');
+  //drupal_install_schema('geotaxonomy');
 }
 
+// Not needed anymore in Drupal 7
 function geotaxonomy_uninstall() {
   // Remove tables.
-  drupal_uninstall_schema('geotaxonomy');
+  //drupal_uninstall_schema('geotaxonomy');
 }
 
 function geotaxonomy_update_1() {

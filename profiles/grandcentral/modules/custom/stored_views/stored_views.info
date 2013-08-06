@@ -1,6 +1,7 @@
 name = Stored views
 description = Save a view and its arguments for later display.
 dependencies[] = views
+package = "Grand Central"
 core = 7.x
 ; Information added by fserver
 core = 7.x

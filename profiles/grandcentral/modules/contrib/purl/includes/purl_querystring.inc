@@ -29,7 +29,6 @@ class purl_querystring implements purl_processor {
    */
   public function detect($q) {
     return drupal_http_build_query(drupal_get_query_parameters($_GET, array('q', 'sort', 'order', 'page', 'pass')));
-    //return drupal_query_string_encode($_GET, array('q', 'sort', 'order', 'page', 'pass'));
   }
 
   public function description() {
@@ -82,7 +81,8 @@ class purl_querystring implements purl_processor {
       $qs = array();
       parse_str($options['query'], $qs);
       $qs[$element->value] = $element->id;
-      $options['query'] = drupal_query_string_encode($qs);
+      $options['query'] = drupal_http_build_query(drupal_get_query_parameters($_GET, array('q')));
+      //$options['query'] = drupal_query_string_encode($qs);
     }
   }
 }
