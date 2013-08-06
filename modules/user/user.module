@@ -3060,20 +3060,23 @@ function user_role_change_permissions($rid, array $permissions = array()) {
  *
  * @see user_role_change_permissions()
  * @see user_role_revoke_permissions()
+ * @see https://drupal.org/node/737816
  */
 function user_role_grant_permissions($rid, array $permissions = array()) {
   $modules = user_permission_get_modules();
   // Grant new permissions for the role.
   foreach ($permissions as $name) {
-    db_merge('role_permission')
-      ->key(array(
-        'rid' => $rid,
-        'permission' => $name,
-      ))
-      ->fields(array(
-        'module' => $modules[$name],
-      ))
-      ->execute();
+    if (isset($modules[$name])) {
+      db_merge('role_permission')
+        ->key(array(
+          'rid' => $rid,
+          'permission' => $name,
+        ))
+        ->fields(array(
+          'module' => $modules[$name],
+        ))
+        ->execute();
+    }
   }
 
   // Clear the user access cache.
