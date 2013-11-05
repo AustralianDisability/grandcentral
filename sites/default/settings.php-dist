@@ -215,9 +215,9 @@ $databases = array (
   array (
     'default' => 
     array (
-      'database' => 'grandcentral',
-      'username' => 'grandcentral',
-      'password' => 'mnewsmnews',
+      'database' => '',
+      'username' => '',
+      'password' => '',
       'host' => 'localhost',
       'port' => '',
       'driver' => 'mysql',
